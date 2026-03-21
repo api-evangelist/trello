@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trello.com/schemas/trello/board.json",
+  "title": "Trello Board",
+  "description": "A Trello board is the primary organizational unit containing lists and cards. Boards belong to organizations (workspaces) and have members with varying permission levels.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the board.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the board.",
+      "minLength": 1,
+      "maxLength": 16384
+    },
+    "desc": {
+      "type": "string",
+      "description": "The description of the board.",
+      "maxLength": 16384
+    },
+    "descData": {
+      "type": ["object", "null"],
+      "description": "Additional structured description data."
+    },
+    "closed": {
+      "type": "boolean",
+      "description": "Whether the board is closed (archived)."
+    },
+    "idMemberCreator": {
+      "type": "string",
+      "description": "The ID of the member who created the board.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "idOrganization": {
+      "type": ["string", "null"],
+      "description": "The ID of the organization (workspace) the board belongs to.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "pinned": {
+      "type": "boolean",
+      "description": "Whether the board is pinned."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The full URL of the board on trello.com."
+    },
+    "shortUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The short URL of the board."
+    },
+    "shortLink": {
+      "type": "string",
+      "description": "The short link identifier for the board."
+    },
+    "starred": {
+      "type": "boolean",
+      "description": "Whether the authenticated member has starred the board."
+    },
+    "dateLastActivity": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time of the last activity on the board."
+    },
+    "dateLastView": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time the authenticated member last viewed the board."
+    },
+    "prefs": {
+      "$ref": "#/$defs/BoardPrefs"
+    },
+    "labelNames": {
+      "$ref": "#/$defs/LabelNames"
+    },
+    "memberships": {
+      "type": "array",
+      "description": "The board's membership records.",
+      "items": {
+        "$ref": "#/$defs/Membership"
+      }
+    }
+  },
+  "$defs": {
+    "BoardPrefs": {
+      "type": "object",
+      "description": "Board preferences and configuration settings.",
+      "properties": {
+        "permissionLevel": {
+          "type": "string",
+          "description": "The visibility/permission level of the board.",
+          "enum": ["org", "private", "public"]
+        },
+        "hideVotes": {
+          "type": "boolean",
+          "description": "Whether votes are hidden until voting is complete."
+        },
+        "voting": {
+          "type": "string",
+          "description": "Who can vote on cards on the board.",
+          "enum": ["disabled", "members", "observers", "org", "public"]
+        },
+        "comments": {
+          "type": "string",
+          "description": "Who can comment on cards on the board.",
+          "enum": ["disabled", "members", "observers", "org", "public"]
+        },
+        "selfJoin": {
+          "type": "boolean",
+          "description": "Whether workspace members can join the board themselves."
+        },
+        "cardCovers": {
+          "type": "boolean",
+          "description": "Whether card cover images are enabled."
+        },
+        "cardAging": {
+          "type": "string",
+          "description": "The card aging style applied to the board.",
+          "enum": ["pirate", "regular"]
+        },
+        "calendarFeedEnabled": {
+          "type": "boolean",
+          "description": "Whether the calendar feed is enabled."
+        },
+        "background": {
+          "type": "string",
+          "description": "The background identifier (color name or image ID)."
+        },
+        "backgroundColor": {
+          "type": ["string", "null"],
+          "description": "The background color hex code."
+        },
+        "backgroundImage": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "The URL of the background image."
+        },
+        "backgroundTile": {
+          "type": "boolean",
+          "description": "Whether the background image is tiled."
+        },
+        "backgroundBrightness": {
+          "type": "string",
+          "description": "The brightness level of the background.",
+          "enum": ["dark", "light", "unknown"]
+        }
+      }
+    },
+    "LabelNames": {
+      "type": "object",
+      "description": "The names assigned to each label color on the board.",
+      "properties": {
+        "green": {
+          "type": "string",
+          "description": "Name for the green label."
+        },
+        "yellow": {
+          "type": "string",
+          "description": "Name for the yellow label."
+        },
+        "orange": {
+          "type": "string",
+          "description": "Name for the orange label."
+        },
+        "red": {
+          "type": "string",
+          "description": "Name for the red label."
+        },
+        "purple": {
+          "type": "string",
+          "description": "Name for the purple label."
+        },
+        "blue": {
+          "type": "string",
+          "description": "Name for the blue label."
+        },
+        "sky": {
+          "type": "string",
+          "description": "Name for the sky label."
+        },
+        "lime": {
+          "type": "string",
+          "description": "Name for the lime label."
+        },
+        "pink": {
+          "type": "string",
+          "description": "Name for the pink label."
+        },
+        "black": {
+          "type": "string",
+          "description": "Name for the black label."
+        }
+      }
+    },
+    "Membership": {
+      "type": "object",
+      "description": "A membership record linking a member to the board with a specific role.",
+      "required": ["id", "idMember", "memberType"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the membership.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "idMember": {
+          "type": "string",
+          "description": "The ID of the member.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "memberType": {
+          "type": "string",
+          "description": "The role of the member on the board.",
+          "enum": ["admin", "normal", "observer"]
+        },
+        "unconfirmed": {
+          "type": "boolean",
+          "description": "Whether the membership invitation is unconfirmed."
+        },
+        "deactivated": {
+          "type": "boolean",
+          "description": "Whether the membership is deactivated."
+        }
+      }
+    }
+  }
+}

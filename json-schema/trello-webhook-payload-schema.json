@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trello.com/schemas/trello/webhook-payload.json",
+  "title": "Trello Webhook Payload",
+  "description": "The JSON payload delivered to a webhook callback URL when an action occurs on the watched Trello model. Contains the triggering action and the current state of the model.",
+  "type": "object",
+  "required": ["action", "model"],
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/Action"
+    },
+    "model": {
+      "type": "object",
+      "description": "The current state of the watched model (board, card, list, member, or organization) after the action occurred."
+    }
+  },
+  "$defs": {
+    "Action": {
+      "type": "object",
+      "description": "Represents the event that triggered the webhook callback.",
+      "required": ["id", "type", "date", "data"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the action.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "idMemberCreator": {
+          "type": "string",
+          "description": "The ID of the member who performed the action.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of action that was performed.",
+          "enum": [
+            "addAttachmentToCard",
+            "addChecklistToCard",
+            "addLabelToCard",
+            "addMemberToBoard",
+            "addMemberToCard",
+            "commentCard",
+            "convertToCardFromCheckItem",
+            "copyBoard",
+            "copyCard",
+            "copyChecklist",
+            "createBoard",
+            "createCard",
+            "createChecklist",
+            "createLabel",
+            "createList",
+            "createOrganization",
+            "deleteAttachmentFromCard",
+            "deleteBoardInvitation",
+            "deleteCard",
+            "deleteCheckItem",
+            "deleteComment",
+            "deleteLabel",
+            "deleteOrganizationInvitation",
+            "disablePlugin",
+            "disablePowerUp",
+            "emailCard",
+            "enablePlugin",
+            "enablePowerUp",
+            "makeAdminOfBoard",
+            "makeAdminOfOrganization",
+            "makeNormalMemberOfBoard",
+            "makeNormalMemberOfOrganization",
+            "makeObserverOfBoard",
+            "memberJoinedTrello",
+            "moveCardFromBoard",
+            "moveCardToBoard",
+            "moveListFromBoard",
+            "moveListToBoard",
+            "removeChecklistFromCard",
+            "removeLabelFromCard",
+            "removeMemberFromBoard",
+            "removeMemberFromCard",
+            "removeMemberFromOrganization",
+            "unconfirmedBoardInvitation",
+            "unconfirmedOrganizationInvitation",
+            "updateBoard",
+            "updateCard",
+            "updateCheckItem",
+            "updateCheckItemStateOnCard",
+            "updateChecklist",
+            "updateComment",
+            "updateCustomFieldItem",
+            "updateLabel",
+            "updateList",
+            "updateMember",
+            "updateOrganization",
+            "voteOnCard"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The ISO 8601 date and time the action was performed."
+        },
+        "data": {
+          "$ref": "#/$defs/ActionData"
+        },
+        "display": {
+          "type": "object",
+          "description": "Display information for rendering the action in a UI.",
+          "properties": {
+            "translationKey": {
+              "type": "string",
+              "description": "The translation key for the action display text."
+            },
+            "entities": {
+              "type": "object",
+              "description": "Entity references used in the display template."
+            }
+          }
+        },
+        "memberCreator": {
+          "$ref": "#/$defs/MemberRef"
+        }
+      }
+    },
+    "ActionData": {
+      "type": "object",
+      "description": "Context data about the action, including references to the objects involved and previous values for update actions.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text content of the action, such as comment text."
+        },
+        "board": {
+          "$ref": "#/$defs/BoardRef"
+        },
+        "card": {
+          "$ref": "#/$defs/CardRef"
+        },
+        "list": {
+          "$ref": "#/$defs/ListRef"
+        },
+        "listBefore": {
+          "$ref": "#/$defs/ListRef"
+        },
+        "listAfter": {
+          "$ref": "#/$defs/ListRef"
+        },
+        "member": {
+          "$ref": "#/$defs/MemberRef"
+        },
+        "checklist": {
+          "type": "object",
+          "description": "Reference to the checklist involved in the action.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The checklist ID."
+            },
+            "name": {
+              "type": "string",
+              "description": "The checklist name."
+            }
+          }
+        },
+        "checkItem": {
+          "type": "object",
+          "description": "Reference to the check item involved in the action.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The check item ID."
+            },
+            "name": {
+              "type": "string",
+              "description": "The check item name."
+            },
+            "state": {
+              "type": "string",
+              "description": "The completion state.",
+              "enum": ["complete", "incomplete"]
+            }
+          }
+        },
+        "label": {
+          "type": "object",
+          "description": "Reference to the label involved in the action.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The label ID."
+            },
+            "name": {
+              "type": "string",
+              "description": "The label name."
+            },
+            "color": {
+              "type": "string",
+              "description": "The label color."
+            }
+          }
+        },
+        "attachment": {
+          "type": "object",
+          "description": "Reference to the attachment involved in the action.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The attachment ID."
+            },
+            "name": {
+              "type": "string",
+              "description": "The attachment name."
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "The attachment URL."
+            }
+          }
+        },
+        "organization": {
+          "type": "object",
+          "description": "Reference to the organization involved in the action.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The organization ID."
+            },
+            "name": {
+              "type": "string",
+              "description": "The organization name."
+            }
+          }
+        },
+        "old": {
+          "type": "object",
+          "description": "Previous values of fields that were changed in an update action."
+        }
+      }
+    },
+    "BoardRef": {
+      "type": "object",
+      "description": "A reference to a board within action data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The board ID.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The board name."
+        },
+        "shortLink": {
+          "type": "string",
+          "description": "The board short link."
+        }
+      }
+    },
+    "CardRef": {
+      "type": "object",
+      "description": "A reference to a card within action data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The card ID.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The card name."
+        },
+        "idShort": {
+          "type": "integer",
+          "description": "The card's short numeric identifier."
+        },
+        "shortLink": {
+          "type": "string",
+          "description": "The card short link."
+        },
+        "idList": {
+          "type": "string",
+          "description": "The ID of the list the card is in."
+        },
+        "closed": {
+          "type": "boolean",
+          "description": "Whether the card is archived."
+        },
+        "desc": {
+          "type": "string",
+          "description": "The card description."
+        },
+        "due": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "The card due date."
+        },
+        "pos": {
+          "type": "number",
+          "description": "The card position."
+        }
+      }
+    },
+    "ListRef": {
+      "type": "object",
+      "description": "A reference to a list within action data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The list ID.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The list name."
+        }
+      }
+    },
+    "MemberRef": {
+      "type": "object",
+      "description": "A reference to a member within action data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The member ID.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "username": {
+          "type": "string",
+          "description": "The member username."
+        },
+        "fullName": {
+          "type": "string",
+          "description": "The member full name."
+        },
+        "initials": {
+          "type": "string",
+          "description": "The member initials."
+        },
+        "avatarHash": {
+          "type": ["string", "null"],
+          "description": "The hash of the member's avatar."
+        },
+        "avatarUrl": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "The URL of the member's avatar."
+        }
+      }
+    }
+  }
+}

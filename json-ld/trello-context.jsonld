@@ -1,0 +1,288 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "trello": "https://api.trello.com/1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Board": {
+      "@id": "trello:Board",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "shortUrl": {
+          "@id": "trello:shortUrl",
+          "@type": "@id"
+        },
+        "closed": "trello:closed",
+        "pinned": "trello:pinned",
+        "starred": "trello:starred",
+        "dateLastActivity": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        },
+        "dateLastView": {
+          "@id": "trello:dateLastView",
+          "@type": "xsd:dateTime"
+        },
+        "idOrganization": "trello:idOrganization",
+        "idMemberCreator": "dcterms:creator",
+        "members": {
+          "@id": "schema:member",
+          "@container": "@set"
+        },
+        "lists": {
+          "@id": "trello:lists",
+          "@container": "@set"
+        },
+        "labels": {
+          "@id": "trello:labels",
+          "@container": "@set"
+        },
+        "prefs": "trello:prefs"
+      }
+    },
+
+    "Card": {
+      "@id": "trello:Card",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "shortUrl": {
+          "@id": "trello:shortUrl",
+          "@type": "@id"
+        },
+        "closed": "trello:closed",
+        "due": {
+          "@id": "trello:due",
+          "@type": "xsd:dateTime"
+        },
+        "dueComplete": "trello:dueComplete",
+        "start": {
+          "@id": "trello:start",
+          "@type": "xsd:dateTime"
+        },
+        "dateLastActivity": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        },
+        "pos": "trello:pos",
+        "idBoard": "trello:idBoard",
+        "idList": "trello:idList",
+        "idShort": "trello:idShort",
+        "subscribed": "trello:subscribed",
+        "members": {
+          "@id": "schema:member",
+          "@container": "@set"
+        },
+        "labels": {
+          "@id": "trello:labels",
+          "@container": "@set"
+        },
+        "checklists": {
+          "@id": "trello:checklists",
+          "@container": "@set"
+        },
+        "attachments": {
+          "@id": "trello:attachments",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "List": {
+      "@id": "trello:List",
+      "@context": {
+        "name": "schema:name",
+        "closed": "trello:closed",
+        "pos": "trello:pos",
+        "idBoard": "trello:idBoard",
+        "subscribed": "trello:subscribed",
+        "cards": {
+          "@id": "trello:cards",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Label": {
+      "@id": "trello:Label",
+      "@context": {
+        "name": "schema:name",
+        "color": "trello:color",
+        "idBoard": "trello:idBoard"
+      }
+    },
+
+    "Member": {
+      "@id": "trello:Member",
+      "@context": {
+        "username": "schema:alternateName",
+        "fullName": "schema:name",
+        "bio": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "avatarUrl": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "initials": "trello:initials",
+        "confirmed": "trello:confirmed",
+        "memberType": "trello:memberType",
+        "status": "trello:status",
+        "organizations": {
+          "@id": "schema:memberOf",
+          "@container": "@set"
+        },
+        "boards": {
+          "@id": "trello:boards",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Organization": {
+      "@id": "trello:Organization",
+      "@context": {
+        "name": "schema:alternateName",
+        "displayName": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "website": {
+          "@id": "schema:sameAs",
+          "@type": "@id"
+        },
+        "members": {
+          "@id": "schema:member",
+          "@container": "@set"
+        },
+        "boards": {
+          "@id": "trello:boards",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Checklist": {
+      "@id": "trello:Checklist",
+      "@context": {
+        "name": "schema:name",
+        "pos": "trello:pos",
+        "idBoard": "trello:idBoard",
+        "idCard": "trello:idCard",
+        "checkItems": {
+          "@id": "trello:checkItems",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "CheckItem": {
+      "@id": "trello:CheckItem",
+      "@context": {
+        "name": "schema:name",
+        "state": "trello:state",
+        "pos": "trello:pos",
+        "due": {
+          "@id": "trello:due",
+          "@type": "xsd:dateTime"
+        },
+        "idMember": "trello:idMember"
+      }
+    },
+
+    "Attachment": {
+      "@id": "trello:Attachment",
+      "@context": {
+        "name": "schema:name",
+        "url": {
+          "@id": "schema:contentUrl",
+          "@type": "@id"
+        },
+        "mimeType": "schema:encodingFormat",
+        "bytes": "schema:contentSize",
+        "date": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "isUpload": "trello:isUpload",
+        "idMember": "trello:idMember"
+      }
+    },
+
+    "Webhook": {
+      "@id": "trello:Webhook",
+      "@context": {
+        "description": "schema:description",
+        "callbackURL": {
+          "@id": "trello:callbackURL",
+          "@type": "@id"
+        },
+        "idModel": "trello:idModel",
+        "active": "trello:active",
+        "consecutiveFailures": "trello:consecutiveFailures",
+        "firstConsecutiveFailDate": {
+          "@id": "trello:firstConsecutiveFailDate",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Action": {
+      "@id": "trello:Action",
+      "@context": {
+        "type": "trello:actionType",
+        "date": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "idMemberCreator": "dcterms:creator",
+        "data": "trello:actionData",
+        "memberCreator": "trello:memberCreator"
+      }
+    },
+
+    "CustomField": {
+      "@id": "trello:CustomField",
+      "@context": {
+        "name": "schema:name",
+        "type": "trello:fieldType",
+        "pos": "trello:pos",
+        "idModel": "trello:idModel",
+        "options": {
+          "@id": "trello:options",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Notification": {
+      "@id": "trello:Notification",
+      "@context": {
+        "type": "trello:notificationType",
+        "date": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "unread": "trello:unread",
+        "data": "trello:notificationData",
+        "idMemberCreator": "dcterms:creator",
+        "memberCreator": "trello:memberCreator"
+      }
+    }
+  }
+}

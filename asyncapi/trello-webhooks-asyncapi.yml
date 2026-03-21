@@ -1,0 +1,558 @@
+asyncapi: 2.6.0
+info:
+  title: Trello Webhooks Events
+  description: >-
+    The Trello Webhooks API delivers real-time notifications when changes
+    occur on Trello models such as boards, lists, cards, and members.
+    Rather than polling the REST API for updates, webhooks push event data
+    to a specified callback URL via HTTP POST requests containing JSON
+    payloads. Each webhook is scoped to a single model and fires for all
+    action types on that model. Webhook requests include an HMAC-SHA1
+    signature in the X-Trello-Webhook header for verification, computed
+    by concatenating the request body with the callback URL and hashing
+    with the application secret.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  externalDocs:
+    description: Trello Webhooks Documentation
+    url: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+servers:
+  trello:
+    url: 'https://api.trello.com/1'
+    protocol: https
+    description: >-
+      Trello API server that manages webhook registrations. Webhook
+      callbacks are sent from Trello servers to your registered callback URL.
+    security:
+      - apiKeyToken: []
+channels:
+  /webhook:
+    description: >-
+      Callback endpoint that receives webhook events from Trello via HTTP POST
+      when any action occurs on the watched model. The callback URL must return
+      a 200 status code on HEAD requests for webhook creation and on POST
+      requests to acknowledge delivery.
+    publish:
+      operationId: receiveWebhookEvent
+      summary: Receive a Trello webhook event
+      description: >-
+        Trello sends an HTTP POST request to the registered callback URL
+        whenever an action occurs on the watched model. The payload contains
+        the action that triggered the webhook and the current state of the
+        model. Webhook callbacks cannot be filtered by action type; all
+        actions on the model are delivered and must be filtered by the
+        consumer.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/BoardEvent'
+          - $ref: '#/components/messages/CardEvent'
+          - $ref: '#/components/messages/ListEvent'
+          - $ref: '#/components/messages/MemberEvent'
+          - $ref: '#/components/messages/ChecklistEvent'
+          - $ref: '#/components/messages/OrganizationEvent'
+          - $ref: '#/components/messages/LabelEvent'
+          - $ref: '#/components/messages/CommentEvent'
+          - $ref: '#/components/messages/AttachmentEvent'
+          - $ref: '#/components/messages/CustomFieldEvent'
+components:
+  securitySchemes:
+    apiKeyToken:
+      type: httpApiKey
+      in: query
+      name: key
+      description: >-
+        Trello API key and token used for webhook management. The HMAC-SHA1
+        signature in the X-Trello-Webhook header should be validated using
+        your application secret to verify the authenticity of incoming
+        webhook callbacks.
+  messages:
+    BoardEvent:
+      name: BoardEvent
+      title: Board Event
+      summary: >-
+        An action that occurred on a board, such as creating, updating,
+        closing, or deleting a board.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: >-
+              HMAC-SHA1 signature for verifying the webhook payload. Computed
+              by concatenating the raw request body with the callback URL and
+              hashing with base64-encoded HMAC-SHA1 using the application
+              secret as the key.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+        - name: updateBoard
+          summary: Board name was updated
+          payload:
+            action:
+              id: '5a1234567890abcdef123456'
+              idMemberCreator: '5a9876543210fedcba654321'
+              type: updateBoard
+              date: '2026-03-20T12:00:00.000Z'
+              data:
+                board:
+                  id: '5a1111111111111111111111'
+                  name: Updated Board Name
+                  shortLink: aBcDeFgH
+                old:
+                  name: Old Board Name
+            model:
+              id: '5a1111111111111111111111'
+              name: Updated Board Name
+              closed: false
+    CardEvent:
+      name: CardEvent
+      title: Card Event
+      summary: >-
+        An action that occurred on a card, such as creating, updating, moving,
+        archiving, or deleting a card.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+        - name: createCard
+          summary: A new card was created
+          payload:
+            action:
+              id: '5a2234567890abcdef123456'
+              idMemberCreator: '5a9876543210fedcba654321'
+              type: createCard
+              date: '2026-03-20T12:05:00.000Z'
+              data:
+                board:
+                  id: '5a1111111111111111111111'
+                  name: My Board
+                  shortLink: aBcDeFgH
+                list:
+                  id: '5a2222222222222222222222'
+                  name: To Do
+                card:
+                  id: '5a3333333333333333333333'
+                  name: New Task
+                  idShort: 42
+                  shortLink: xYzWvU12
+            model:
+              id: '5a1111111111111111111111'
+              name: My Board
+    ListEvent:
+      name: ListEvent
+      title: List Event
+      summary: >-
+        An action that occurred on a list, such as creating, renaming,
+        archiving, or moving a list.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    MemberEvent:
+      name: MemberEvent
+      title: Member Event
+      summary: >-
+        An action involving a member, such as adding or removing a member
+        from a board or card.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    ChecklistEvent:
+      name: ChecklistEvent
+      title: Checklist Event
+      summary: >-
+        An action involving a checklist or check item, such as creating a
+        checklist, adding a check item, or completing a check item.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    OrganizationEvent:
+      name: OrganizationEvent
+      title: Organization Event
+      summary: >-
+        An action that occurred on an organization (workspace), such as
+        updating settings or managing members.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    LabelEvent:
+      name: LabelEvent
+      title: Label Event
+      summary: >-
+        An action involving a label, such as creating, updating, or deleting
+        a label, or adding or removing a label from a card.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    CommentEvent:
+      name: CommentEvent
+      title: Comment Event
+      summary: >-
+        An action involving a comment on a card, such as adding, updating,
+        or deleting a comment.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    AttachmentEvent:
+      name: AttachmentEvent
+      title: Attachment Event
+      summary: >-
+        An action involving an attachment, such as adding or removing an
+        attachment from a card.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+    CustomFieldEvent:
+      name: CustomFieldEvent
+      title: Custom Field Event
+      summary: >-
+        An action involving custom fields, such as creating a custom field
+        definition or setting a custom field value on a card.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          X-Trello-Webhook:
+            type: string
+            description: HMAC-SHA1 signature for verification.
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+  schemas:
+    WebhookPayload:
+      type: object
+      description: >-
+        The top-level payload delivered to a webhook callback URL. Contains
+        the action that triggered the webhook and the current state of the
+        watched model.
+      required:
+        - action
+        - model
+      properties:
+        action:
+          $ref: '#/components/schemas/WebhookAction'
+        model:
+          type: object
+          description: >-
+            The current state of the model that the webhook is watching. The
+            structure depends on the model type (board, card, list, member,
+            or organization).
+    WebhookAction:
+      type: object
+      description: >-
+        Represents the action (event) that triggered the webhook callback.
+      required:
+        - id
+        - type
+        - date
+        - data
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the action.
+        idMemberCreator:
+          type: string
+          description: The ID of the member who performed the action.
+        type:
+          type: string
+          description: >-
+            The type of action that was performed. Common types include
+            addAttachmentToCard, addChecklistToCard, addLabelToCard,
+            addMemberToBoard, addMemberToCard, commentCard, convertToCardFromCheckItem,
+            copyCard, createBoard, createCard, createChecklist, createLabel,
+            createList, deleteAttachmentFromCard, deleteCard, deleteCheckItem,
+            deleteComment, deleteLabel, moveCardFromBoard, moveCardToBoard,
+            moveListFromBoard, moveListToBoard, removeChecklistFromCard,
+            removeLabelFromCard, removeMemberFromBoard, removeMemberFromCard,
+            updateBoard, updateCard, updateCheckItem, updateCheckItemStateOnCard,
+            updateChecklist, updateComment, updateCustomFieldItem, updateLabel,
+            updateList, and updateMember.
+          enum:
+            - addAttachmentToCard
+            - addChecklistToCard
+            - addLabelToCard
+            - addMemberToBoard
+            - addMemberToCard
+            - commentCard
+            - convertToCardFromCheckItem
+            - copyBoard
+            - copyCard
+            - copyChecklist
+            - createBoard
+            - createCard
+            - createChecklist
+            - createLabel
+            - createList
+            - createOrganization
+            - deleteAttachmentFromCard
+            - deleteBoardInvitation
+            - deleteCard
+            - deleteCheckItem
+            - deleteComment
+            - deleteLabel
+            - deleteOrganizationInvitation
+            - disablePlugin
+            - disablePowerUp
+            - emailCard
+            - enablePlugin
+            - enablePowerUp
+            - makeAdminOfBoard
+            - makeAdminOfOrganization
+            - makeNormalMemberOfBoard
+            - makeNormalMemberOfOrganization
+            - makeObserverOfBoard
+            - memberJoinedTrello
+            - moveCardFromBoard
+            - moveCardToBoard
+            - moveListFromBoard
+            - moveListToBoard
+            - removeChecklistFromCard
+            - removeLabelFromCard
+            - removeMemberFromBoard
+            - removeMemberFromCard
+            - removeMemberFromOrganization
+            - unconfirmedBoardInvitation
+            - unconfirmedOrganizationInvitation
+            - updateBoard
+            - updateCard
+            - updateCheckItem
+            - updateCheckItemStateOnCard
+            - updateChecklist
+            - updateComment
+            - updateCustomFieldItem
+            - updateLabel
+            - updateList
+            - updateMember
+            - updateOrganization
+            - voteOnCard
+        date:
+          type: string
+          format: date-time
+          description: The date and time the action was performed.
+        data:
+          type: object
+          description: >-
+            Context data about the action, including references to the
+            objects involved.
+          properties:
+            text:
+              type: string
+              description: Text content of the action, such as comment text.
+            board:
+              type: object
+              description: The board involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                shortLink:
+                  type: string
+            card:
+              type: object
+              description: The card involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                idShort:
+                  type: integer
+                shortLink:
+                  type: string
+                idList:
+                  type: string
+                closed:
+                  type: boolean
+                desc:
+                  type: string
+                due:
+                  type: string
+                  format: date-time
+                pos:
+                  type: number
+            list:
+              type: object
+              description: The list involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            listBefore:
+              type: object
+              description: >-
+                The list a card was moved from (present on card move actions).
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            listAfter:
+              type: object
+              description: >-
+                The list a card was moved to (present on card move actions).
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            member:
+              type: object
+              description: The member involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            checklist:
+              type: object
+              description: The checklist involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            checkItem:
+              type: object
+              description: The check item involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                state:
+                  type: string
+                  enum:
+                    - complete
+                    - incomplete
+            label:
+              type: object
+              description: The label involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                color:
+                  type: string
+            attachment:
+              type: object
+              description: The attachment involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+            customField:
+              type: object
+              description: The custom field involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                type:
+                  type: string
+            customFieldItem:
+              type: object
+              description: The custom field value that was changed.
+              properties:
+                id:
+                  type: string
+                idCustomField:
+                  type: string
+                idModel:
+                  type: string
+                value:
+                  type: object
+            organization:
+              type: object
+              description: The organization involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            old:
+              type: object
+              description: >-
+                The previous values of fields that were changed in an update
+                action.
+        display:
+          type: object
+          description: Display information for rendering the action.
+          properties:
+            translationKey:
+              type: string
+            entities:
+              type: object
+        memberCreator:
+          type: object
+          description: The member who performed the action.
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            fullName:
+              type: string
+            initials:
+              type: string
+            avatarHash:
+              type: string
+            avatarUrl:
+              type: string
+              format: uri

@@ -1,0 +1,301 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trello.com/schemas/trello/card.json",
+  "title": "Trello Card",
+  "description": "A Trello card is the fundamental unit of work on a board. Cards live within lists and can have members, labels, checklists, attachments, due dates, and comments.",
+  "type": "object",
+  "required": ["id", "idList"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the card.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name (title) of the card.",
+      "maxLength": 16384
+    },
+    "desc": {
+      "type": "string",
+      "description": "The description of the card, supporting Markdown formatting.",
+      "maxLength": 16384
+    },
+    "closed": {
+      "type": "boolean",
+      "description": "Whether the card is archived."
+    },
+    "idBoard": {
+      "type": "string",
+      "description": "The ID of the board the card is on.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "idList": {
+      "type": "string",
+      "description": "The ID of the list the card is in.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "idShort": {
+      "type": "integer",
+      "description": "The short numeric identifier for the card within its board.",
+      "minimum": 1
+    },
+    "idMembers": {
+      "type": "array",
+      "description": "The IDs of members assigned to the card.",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-fA-F]{24}$"
+      }
+    },
+    "idLabels": {
+      "type": "array",
+      "description": "The IDs of labels applied to the card.",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-fA-F]{24}$"
+      }
+    },
+    "idChecklists": {
+      "type": "array",
+      "description": "The IDs of checklists on the card.",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-fA-F]{24}$"
+      }
+    },
+    "idAttachmentCover": {
+      "type": ["string", "null"],
+      "description": "The ID of the attachment used as the card cover image.",
+      "pattern": "^[0-9a-fA-F]{24}$"
+    },
+    "pos": {
+      "type": "number",
+      "description": "The position of the card in its list."
+    },
+    "due": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The due date for the card."
+    },
+    "dueComplete": {
+      "type": "boolean",
+      "description": "Whether the due date has been marked as complete."
+    },
+    "start": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The start date for the card."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The full URL of the card."
+    },
+    "shortUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The short URL of the card."
+    },
+    "shortLink": {
+      "type": "string",
+      "description": "The short link identifier for the card."
+    },
+    "subscribed": {
+      "type": "boolean",
+      "description": "Whether the authenticated member is subscribed to the card."
+    },
+    "dateLastActivity": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time of the last activity on the card."
+    },
+    "cover": {
+      "$ref": "#/$defs/CardCover"
+    },
+    "labels": {
+      "type": "array",
+      "description": "The full label objects applied to the card.",
+      "items": {
+        "$ref": "#/$defs/Label"
+      }
+    },
+    "badges": {
+      "$ref": "#/$defs/CardBadges"
+    },
+    "customFieldItems": {
+      "type": "array",
+      "description": "Custom field values set on the card.",
+      "items": {
+        "$ref": "#/$defs/CustomFieldItem"
+      }
+    }
+  },
+  "$defs": {
+    "CardCover": {
+      "type": "object",
+      "description": "The card's cover image or color settings.",
+      "properties": {
+        "idAttachment": {
+          "type": ["string", "null"],
+          "description": "The ID of the attachment used as the cover."
+        },
+        "color": {
+          "type": ["string", "null"],
+          "description": "The cover color."
+        },
+        "idUploadedBackground": {
+          "type": ["string", "null"],
+          "description": "The ID of an uploaded background used as the cover."
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the cover display.",
+          "enum": ["normal", "full"]
+        },
+        "brightness": {
+          "type": "string",
+          "description": "The brightness of the cover.",
+          "enum": ["dark", "light"]
+        },
+        "idPlugin": {
+          "type": ["string", "null"],
+          "description": "The ID of the plugin providing the cover."
+        }
+      }
+    },
+    "CardBadges": {
+      "type": "object",
+      "description": "Badge counts and indicators displayed on the card front.",
+      "properties": {
+        "votes": {
+          "type": "integer",
+          "description": "Number of votes on the card.",
+          "minimum": 0
+        },
+        "attachments": {
+          "type": "integer",
+          "description": "Number of attachments on the card.",
+          "minimum": 0
+        },
+        "comments": {
+          "type": "integer",
+          "description": "Number of comments on the card.",
+          "minimum": 0
+        },
+        "checkItems": {
+          "type": "integer",
+          "description": "Total number of check items across all checklists.",
+          "minimum": 0
+        },
+        "checkItemsChecked": {
+          "type": "integer",
+          "description": "Number of completed check items.",
+          "minimum": 0
+        },
+        "description": {
+          "type": "boolean",
+          "description": "Whether the card has a description."
+        },
+        "due": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "The due date displayed on the badge."
+        },
+        "dueComplete": {
+          "type": "boolean",
+          "description": "Whether the due date is complete."
+        },
+        "subscribed": {
+          "type": "boolean",
+          "description": "Whether the member is subscribed."
+        },
+        "start": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "The start date for the card."
+        }
+      }
+    },
+    "Label": {
+      "type": "object",
+      "description": "A color-coded label applied to a card for categorization.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the label.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "idBoard": {
+          "type": "string",
+          "description": "The ID of the board the label belongs to.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the label."
+        },
+        "color": {
+          "type": ["string", "null"],
+          "description": "The color of the label.",
+          "enum": ["yellow", "purple", "blue", "red", "green", "orange", "black", "sky", "pink", "lime", null]
+        }
+      }
+    },
+    "CustomFieldItem": {
+      "type": "object",
+      "description": "A custom field value set on a card.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the custom field item.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "idCustomField": {
+          "type": "string",
+          "description": "The ID of the custom field definition.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "idModel": {
+          "type": "string",
+          "description": "The ID of the card this value is set on.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        },
+        "modelType": {
+          "type": "string",
+          "description": "The type of model (always 'card').",
+          "const": "card"
+        },
+        "value": {
+          "type": "object",
+          "description": "The value of the custom field, with a key matching the field type.",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "Value for text-type custom fields."
+            },
+            "number": {
+              "type": "string",
+              "description": "Value for number-type custom fields (string representation)."
+            },
+            "date": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Value for date-type custom fields."
+            },
+            "checked": {
+              "type": "string",
+              "description": "Value for checkbox-type custom fields ('true' or 'false').",
+              "enum": ["true", "false"]
+            }
+          }
+        },
+        "idValue": {
+          "type": "string",
+          "description": "The ID of the selected option for list-type custom fields.",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        }
+      }
+    }
+  }
+}
