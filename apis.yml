@@ -1,5 +1,6 @@
 aid: trello
-url: https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
 modified: '2026-03-20'
 apis:
   - aid: trello:rest-api
@@ -12,7 +13,8 @@ apis:
       - Collaboration
       - Task Management
       - Atlassian
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.trello.com
     humanURL: https://developer.atlassian.com/cloud/trello/rest/
     properties:
@@ -34,11 +36,14 @@ apis:
       - Events
       - Notifications
       - Real-Time
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.trello.com
-    humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+    humanURL: 
+      https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
     properties:
-      - url: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+      - url: 
+          https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
         type: Documentation
       - url: asyncapi/trello-webhooks-asyncapi.yml
         type: AsyncAPI
@@ -57,7 +62,8 @@ apis:
       - Plugins
       - Integrations
       - Customization
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://developer.atlassian.com/cloud/trello/power-ups/
     properties:
@@ -80,3 +86,6 @@ common:
     url: json-schema/trello-card-schema.json
   - type: JSONSchema
     url: json-schema/trello-webhook-payload-schema.json
+description: >-
+  Trello is a web-based, kanban-style, list-making application that allows users to
+  organize tasks, projects, and workflows using boards, lists, and cards.
