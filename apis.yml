@@ -1,20 +1,18 @@
 aid: trello
-url: 
-  https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
 modified: '2026-03-20'
 apis:
   - aid: trello:rest-api
     name: Trello REST API
     tags:
-      - Project Management
-      - Kanban
+      - Atlassian
       - Boards
       - Cards
       - Collaboration
+      - Kanban
+      - Project Management
       - Task Management
-      - Atlassian
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.trello.com
     humanURL: https://developer.atlassian.com/cloud/trello/rest/
     properties:
@@ -32,18 +30,15 @@ apis:
   - aid: trello:webhooks-api
     name: Trello Webhooks API
     tags:
-      - Webhooks
       - Events
       - Notifications
       - Real-Time
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Webhooks
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.trello.com
-    humanURL: 
-      https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+    humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
     properties:
-      - url: 
-          https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+      - url: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
         type: Documentation
       - url: asyncapi/trello-webhooks-asyncapi.yml
         type: AsyncAPI
@@ -58,12 +53,11 @@ apis:
   - aid: trello:power-ups
     name: Trello Power-Ups
     tags:
-      - Extensions
-      - Plugins
-      - Integrations
       - Customization
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Extensions
+      - Integrations
+      - Plugins
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://developer.atlassian.com/cloud/trello/power-ups/
     properties:

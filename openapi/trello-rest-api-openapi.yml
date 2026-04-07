@@ -42,10 +42,6 @@ tags:
     description: >-
       Operations for creating, retrieving, updating, and deleting custom field
       definitions and their values on boards and cards.
-  - name: Enterprises
-    description: >-
-      Operations for managing Trello Enterprise accounts, including members,
-      organizations, and enterprise-level settings.
   - name: Labels
     description: >-
       Operations for creating, retrieving, updating, and deleting labels on
@@ -4057,7 +4053,7 @@ components:
             - sky
             - pink
             - lime
-            - null
+            - 
     Member:
       type: object
       description: >-
