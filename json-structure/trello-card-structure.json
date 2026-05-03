@@ -1,0 +1,22 @@
+{
+  "title": "Trello Card Structure",
+  "description": "JSON Structure for a Trello card object",
+  "type": "object",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Card ID (24-char hex)" },
+    { "name": "name", "type": "string", "required": true, "description": "Card name/title" },
+    { "name": "desc", "type": "string", "required": false, "description": "Card description (Markdown)" },
+    { "name": "closed", "type": "boolean", "required": false, "description": "Whether card is archived" },
+    { "name": "idBoard", "type": "string", "required": true, "description": "Parent board ID" },
+    { "name": "idList", "type": "string", "required": true, "description": "Parent list ID" },
+    { "name": "idMembers", "type": "array", "required": false, "description": "Assigned member IDs" },
+    { "name": "idLabels", "type": "array", "required": false, "description": "Applied label IDs" },
+    { "name": "due", "type": "date-time", "required": false, "description": "Due date" },
+    { "name": "dueComplete", "type": "boolean", "required": false, "description": "Whether due date is marked complete" },
+    { "name": "pos", "type": "number", "required": false, "description": "Position within the list" },
+    { "name": "url", "type": "uri", "required": false, "description": "Card URL" },
+    { "name": "shortUrl", "type": "uri", "required": false, "description": "Short URL" },
+    { "name": "subscribed", "type": "boolean", "required": false, "description": "Whether current member is subscribed" },
+    { "name": "dateLastActivity", "type": "date-time", "required": false, "description": "Last activity timestamp" }
+  ]
+}

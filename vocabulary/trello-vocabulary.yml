@@ -1,0 +1,145 @@
+vocabulary:
+  name: Trello Vocabulary
+  description: >-
+    Domain vocabulary for the Trello project management platform covering
+    kanban methodology, board organization, task management, and team
+    collaboration concepts.
+  version: 1.0.0
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Collaboration
+    - Kanban
+    - Project Management
+    - Task Management
+
+terms:
+  - term: Board
+    definition: >-
+      The primary organizational unit in Trello, representing a project,
+      team, or workflow. Each board contains lists and cards.
+    related:
+      - List
+      - Card
+      - Workspace
+
+  - term: List
+    definition: >-
+      A vertical column on a Trello board representing a workflow stage
+      or category. Lists contain cards and can be reordered.
+    related:
+      - Board
+      - Card
+      - Kanban
+
+  - term: Card
+    definition: >-
+      The fundamental unit of work in Trello, representing a task, item,
+      or idea. Cards can have descriptions, due dates, labels, checklists,
+      attachments, comments, and assigned members.
+    related:
+      - List
+      - Checklist
+      - Label
+
+  - term: Kanban
+    definition: >-
+      A visual workflow management method using boards, lists, and cards
+      to track work through different stages from backlog to completion.
+    related:
+      - Board
+      - List
+      - Card
+
+  - term: Label
+    definition: >-
+      A colored tag applied to cards to categorize or highlight them
+      by type, priority, or team. Labels are configured per-board.
+    related:
+      - Card
+
+  - term: Checklist
+    definition: >-
+      A list of checkable items within a card for tracking subtasks
+      and multi-step workflows.
+    related:
+      - Card
+
+  - term: Member
+    definition: >-
+      A Trello user who can be assigned to boards, cards, and organizations.
+      Members have profile information including username, full name, and avatar.
+    related:
+      - Board
+      - Card
+
+  - term: Workspace
+    definition: >-
+      An organizational container (formerly called Organization or Team) that
+      groups boards, members, and settings for a team or company.
+    related:
+      - Board
+      - Member
+
+  - term: Power-Up
+    definition: >-
+      An extension or integration that adds custom functionality to Trello
+      boards, such as calendar views, custom fields, or third-party integrations.
+    related:
+      - Board
+      - Integration
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback that delivers real-time notifications to a URL when
+      changes occur on a Trello model (board, list, card, or member).
+    related:
+      - API
+      - Real-Time
+
+  - term: Action
+    definition: >-
+      A logged event representing a change made to a Trello resource, such
+      as creating a card, moving a card, or adding a comment.
+    related:
+      - Audit
+      - Card
+
+  - term: Reaction
+    definition: >-
+      An emoji reaction that members can add to comments or actions on
+      Trello cards to express feedback without a full comment.
+    related:
+      - Card
+      - Comment
+
+  - term: Due Date
+    definition: >-
+      A deadline assigned to a card indicating when the task should be
+      completed. Cards with past due dates appear with a red indicator.
+    related:
+      - Card
+
+  - term: Archive
+    definition: >-
+      The act of hiding (closing) a card or list from the board view
+      without permanently deleting it. Archived items can be restored.
+    related:
+      - Card
+      - List
+
+  - term: API Key
+    definition: >-
+      A unique identifier used to authenticate API requests to the Trello API,
+      combined with a Token for authorization.
+    related:
+      - Token
+      - Authentication
+
+  - term: Token
+    definition: >-
+      An OAuth authorization token granting API access to a specific Trello
+      member's data. Combined with an API Key for all API requests.
+    related:
+      - API Key
+      - OAuth

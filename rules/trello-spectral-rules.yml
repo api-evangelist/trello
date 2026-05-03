@@ -1,0 +1,101 @@
+rules:
+  trello-operation-id-camel-case:
+    description: Operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  trello-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 /()+&-]*$"
+
+  trello-security-defined:
+    description: All operations must define security requirements
+    message: "Operation must define security requirements"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: security
+      function: defined
+
+  trello-response-200-get:
+    description: All GET operations must define a 200 response
+    message: "GET operation must define a 200 success response"
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: defined
+
+  trello-tag-defined:
+    description: All operations must have at least one tag
+    message: "Operation must include at least one tag"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: defined
+
+  trello-api-key-auth:
+    description: Trello uses API key and token query parameter authentication
+    message: "Trello auth uses apiKey and token query parameters"
+    severity: info
+    given: "$.components.securitySchemes"
+    then:
+      function: defined
+
+  trello-path-kebab-case:
+    description: API paths should use kebab-case
+    message: "Path should use kebab-case"
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9][a-z0-9-]*(/[a-z0-9][a-z0-9-]*|/\\{[a-zA-Z][a-zA-Z0-9]*\\})*)+$"
+
+  trello-response-400-defined:
+    description: Operations with request bodies should define a 400 response
+    message: "POST/PUT/PATCH operation should define 400 Bad Request"
+    severity: warn
+    given: "$.paths[*][post,put,patch]"
+    then:
+      field: responses.400
+      function: defined
+
+  trello-delete-response:
+    description: DELETE operations should return 200 or 204
+    message: "DELETE operation should define a success response"
+    severity: warn
+    given: "$.paths[*].delete"
+    then:
+      function: defined
+
+  trello-post-request-body:
+    description: POST operations that create resources should define a request body
+    message: "POST operation should include a requestBody"
+    severity: warn
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: defined
+
+  trello-no-query-strings-in-path:
+    description: Query string parameters must not appear in path definitions
+    message: "Path must not contain query strings"
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"

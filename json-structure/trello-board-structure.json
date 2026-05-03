@@ -1,0 +1,17 @@
+{
+  "title": "Trello Board Structure",
+  "description": "JSON Structure for a Trello board object",
+  "type": "object",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Board ID (24-char hex)" },
+    { "name": "name", "type": "string", "required": true, "description": "Board name" },
+    { "name": "desc", "type": "string", "required": false, "description": "Board description" },
+    { "name": "closed", "type": "boolean", "required": false, "description": "Whether board is archived" },
+    { "name": "idOrganization", "type": "string", "required": false, "description": "Workspace ID" },
+    { "name": "idMemberCreator", "type": "string", "required": false, "description": "Creator member ID" },
+    { "name": "url", "type": "uri", "required": false, "description": "Board URL" },
+    { "name": "shortUrl", "type": "uri", "required": false, "description": "Short URL" },
+    { "name": "prefs", "type": "object", "required": false, "description": "Board preferences (background, visibility, etc.)" },
+    { "name": "labelNames", "type": "object", "required": false, "description": "Label color to name mapping" }
+  ]
+}

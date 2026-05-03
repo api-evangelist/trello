@@ -1,6 +1,6 @@
 aid: trello
 url: https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
-modified: '2026-03-20'
+modified: '2026-05-03'
 apis:
   - aid: trello:rest-api
     name: Trello REST API
@@ -80,6 +80,16 @@ common:
     url: json-schema/trello-card-schema.json
   - type: JSONSchema
     url: json-schema/trello-webhook-payload-schema.json
+  - type: JSONStructure
+    url: json-structure/trello-board-structure.json
+  - type: JSONStructure
+    url: json-structure/trello-card-structure.json
+  - type: SpectralRules
+    url: rules/trello-spectral-rules.yml
+  - type: NaftikoCapabilities
+    url: capabilities/project-management.yaml
+  - type: Vocabulary
+    url: vocabulary/trello-vocabulary.yml
 description: >-
   Trello is a web-based, kanban-style, list-making application that allows users to
   organize tasks, projects, and workflows using boards, lists, and cards.
