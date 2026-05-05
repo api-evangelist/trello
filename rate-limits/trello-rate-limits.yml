@@ -1,0 +1,40 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Trello
+providerId: trello
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Kanban
+description: Trello REST API rate limits per API key + token combo.
+sources:
+  - https://trello.com/pricing
+  - https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Per API key
+    scope: api_key
+    metric: requests_per_10s
+    limit: 300
+    timeFrame: 10 seconds
+  - name: Per token
+    scope: token
+    metric: requests_per_10s
+    limit: 100
+    timeFrame: 10 seconds
+  - name: Search
+    scope: key+token
+    metric: requests_per_minute
+    limit: 50
+    timeFrame: minute
+  - name: Webhooks
+    scope: callback
+    metric: events_per_minute
+    limit: 600
+    timeFrame: minute

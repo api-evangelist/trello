@@ -1,0 +1,100 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Trello
+providerId: trello
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Project Management
+  - Kanban
+description: Trello per-user-per-month pricing across Free / Standard / Premium / Enterprise.
+sources:
+  - https://trello.com/pricing
+plans:
+  - id: trello-free
+    name: Free
+    type: freemium
+    description: Up to 10 boards per workspace.
+    entries:
+      - label: Boards/workspace
+        name: boards
+        type: quota
+        metric: board
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Unlimited cards
+      - name: Inbox
+      - name: Unlimited Power-Ups per board
+      - name: 2FA
+  - id: trello-standard
+    name: Standard
+    type: paid
+    description: $5/user/month annual.
+    entries:
+      - label: Per user (annual)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '5.00'
+        userMultiplied: true
+    elements:
+      - name: Unlimited boards
+      - name: AI quick capture
+      - name: Planner with full access
+      - name: Card mirroring
+      - name: Custom Fields
+      - name: Advanced checklists
+  - id: trello-premium
+    name: Premium
+    type: paid
+    description: $10/user/month annual.
+    entries:
+      - label: Per user (annual)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '10.00'
+        userMultiplied: true
+    elements:
+      - name: AI enhancements
+      - name: Calendar/Timeline/Table/Dashboard/Map views
+      - name: Workspace templates
+      - name: Admin and security
+      - name: Observers
+      - name: Simple data export
+  - id: trello-enterprise
+    name: Enterprise
+    type: enterprise
+    description: $17.50/user/month annual.
+    entries:
+      - label: Per user (annual)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '17.50'
+        userMultiplied: true
+    elements:
+      - name: Unlimited Workspaces
+      - name: Org-wide permissions
+      - name: Power-Up administration
+      - name: 24/7 Enterprise Admin support
+      - name: Free SSO with Atlassian Guard

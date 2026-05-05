@@ -1,0 +1,54 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Trello
+providerId: trello
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Kanban / Project Management
+description: FOCUS-aligned FinOps for Trello.
+sources:
+  - https://trello.com/pricing
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Trello
+serviceCategory: Kanban / Project Management
+billingModel:
+  pricingCategory: Per-User Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+focusColumns:
+  ServiceName: Trello
+  ServiceCategory: Kanban / Project Management
+  ProviderName: Trello
+  PublisherName: Trello
+  BillingCurrency: USD
+meters:
+  - name: user_seats
+    unit: seat-month
+    aggregation: max
+    dimensions:
+      - plan
+  - name: boards
+    unit: board-month
+    aggregation: max
+  - name: automation_runs
+    unit: run
+    aggregation: sum
+principles:
+  - name: Visibility
+    description: Track Trello consumption monthly.
+  - name: Allocation
+    description: Tag usage to teams/cost centers.
+  - name: Optimization
+    description: Right-size; reclaim unused entitlements.
+  - name: Accountability
+    description: Set spend alerts; quarterly review.
