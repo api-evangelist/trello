@@ -64,7 +64,7 @@ apis:
       a client library with utilities and helpers for interacting with the Trello interface, managing
       authorization, and accessing the REST API from within the Power-Up context.
 common:
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/trello-context.jsonld
   - type: JSONSchema
     url: json-schema/trello-board-schema.json
