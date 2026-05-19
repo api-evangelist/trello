@@ -1,0 +1,210 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trello REST API — Webhooks
+  description: 'Trello REST API — Webhooks. 4 operations. Lead operation: Create a Webhook. Self-contained Naftiko capability
+    covering one Trello business surface.'
+  tags:
+  - Trello
+  - Webhooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLO_API_KEY: TRELLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-webhooks
+    baseUri: https://api.trello.com/1
+    description: Trello REST API — Webhooks business capability. Self-contained, no shared references.
+    resources:
+    - name: webhooks
+      path: /webhooks
+      operations:
+      - name: createwebhook
+        method: POST
+        description: Create a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: callbackURL
+          in: query
+          type: string
+          description: A valid URL that will receive webhook callbacks via HTTP POST.
+          required: true
+        - name: idModel
+          in: query
+          type: string
+          description: The ID of the model to watch for changes.
+          required: true
+        - name: description
+          in: query
+          type: string
+          description: A description for the webhook.
+        - name: active
+          in: query
+          type: boolean
+          description: Whether the webhook is active.
+    - name: webhooks-id
+      path: /webhooks/{id}
+      operations:
+      - name: getwebhook
+        method: GET
+        description: Get a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatewebhook
+        method: PUT
+        description: Update a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: callbackURL
+          in: query
+          type: string
+          description: The new callback URL for the webhook.
+        - name: idModel
+          in: query
+          type: string
+          description: The new model ID to watch.
+        - name: description
+          in: query
+          type: string
+          description: The new description for the webhook.
+        - name: active
+          in: query
+          type: boolean
+          description: Whether the webhook is active.
+      - name: deletewebhook
+        method: DELETE
+        description: Delete a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.TRELLO_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: rest-webhooks-rest
+    port: 8080
+    description: REST adapter for Trello REST API — Webhooks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/webhooks
+      name: webhooks
+      description: REST surface for webhooks.
+      operations:
+      - method: POST
+        name: createwebhook
+        description: Create a Webhook
+        call: rest-webhooks.createwebhook
+        with:
+          callbackURL: rest.callbackURL
+          idModel: rest.idModel
+          description: rest.description
+          active: rest.active
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhooks/{id}
+      name: webhooks-id
+      description: REST surface for webhooks-id.
+      operations:
+      - method: GET
+        name: getwebhook
+        description: Get a Webhook
+        call: rest-webhooks.getwebhook
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatewebhook
+        description: Update a Webhook
+        call: rest-webhooks.updatewebhook
+        with:
+          callbackURL: rest.callbackURL
+          idModel: rest.idModel
+          description: rest.description
+          active: rest.active
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletewebhook
+        description: Delete a Webhook
+        call: rest-webhooks.deletewebhook
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trello REST API — Webhooks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-webhook
+      description: Create a Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-webhooks.createwebhook
+      with:
+        callbackURL: tools.callbackURL
+        idModel: tools.idModel
+        description: tools.description
+        active: tools.active
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-webhook
+      description: Get a Webhook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-webhooks.getwebhook
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-webhook
+      description: Update a Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-webhooks.updatewebhook
+      with:
+        callbackURL: tools.callbackURL
+        idModel: tools.idModel
+        description: tools.description
+        active: tools.active
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-webhook
+      description: Delete a Webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-webhooks.deletewebhook
+      outputParameters:
+      - type: object
+        mapping: $.

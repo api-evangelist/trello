@@ -1,0 +1,372 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trello REST API — Organizations
+  description: 'Trello REST API — Organizations. 8 operations. Lead operation: Create an Organization. Self-contained Naftiko
+    capability covering one Trello business surface.'
+  tags:
+  - Trello
+  - Organizations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLO_API_KEY: TRELLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-organizations
+    baseUri: https://api.trello.com/1
+    description: Trello REST API — Organizations business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations
+      path: /organizations
+      operations:
+      - name: createorganization
+        method: POST
+        description: Create an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: displayName
+          in: query
+          type: string
+          description: The display name for the organization.
+          required: true
+        - name: desc
+          in: query
+          type: string
+          description: A description for the organization.
+        - name: name
+          in: query
+          type: string
+          description: A short name (URL-friendly) for the organization.
+        - name: website
+          in: query
+          type: string
+          description: A URL for the organization's website.
+    - name: organizations-id
+      path: /organizations/{id}
+      operations:
+      - name: getorganization
+        method: GET
+        description: Get an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateorganization
+        method: PUT
+        description: Update an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: The new short name for the organization.
+        - name: displayName
+          in: query
+          type: string
+          description: The new display name for the organization.
+        - name: desc
+          in: query
+          type: string
+          description: The new description for the organization.
+        - name: website
+          in: query
+          type: string
+          description: The new website URL for the organization.
+      - name: deleteorganization
+        method: DELETE
+        description: Delete an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-id-boards
+      path: /organizations/{id}/boards
+      operations:
+      - name: getorganizationboards
+        method: GET
+        description: Get Boards in an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Filter boards by status.
+        - name: fields
+          in: query
+          type: string
+          description: A comma-separated list of board fields to return.
+    - name: organizations-id-members
+      path: /organizations/{id}/members
+      operations:
+      - name: getorganizationmembers
+        method: GET
+        description: Get Members of an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-id-members-idMember
+      path: /organizations/{id}/members/{idMember}
+      operations:
+      - name: updateorganizationmember
+        method: PUT
+        description: Update a Member of an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idMember
+          in: path
+          type: string
+          description: The ID of the member to update.
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: The new membership type.
+          required: true
+      - name: removeorganizationmember
+        method: DELETE
+        description: Remove a Member from an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idMember
+          in: path
+          type: string
+          description: The ID of the member to remove.
+          required: true
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.TRELLO_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: rest-organizations-rest
+    port: 8080
+    description: REST adapter for Trello REST API — Organizations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations
+      name: organizations
+      description: REST surface for organizations.
+      operations:
+      - method: POST
+        name: createorganization
+        description: Create an Organization
+        call: rest-organizations.createorganization
+        with:
+          displayName: rest.displayName
+          desc: rest.desc
+          name: rest.name
+          website: rest.website
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}
+      name: organizations-id
+      description: REST surface for organizations-id.
+      operations:
+      - method: GET
+        name: getorganization
+        description: Get an Organization
+        call: rest-organizations.getorganization
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganization
+        description: Update an Organization
+        call: rest-organizations.updateorganization
+        with:
+          name: rest.name
+          displayName: rest.displayName
+          desc: rest.desc
+          website: rest.website
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorganization
+        description: Delete an Organization
+        call: rest-organizations.deleteorganization
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/boards
+      name: organizations-id-boards
+      description: REST surface for organizations-id-boards.
+      operations:
+      - method: GET
+        name: getorganizationboards
+        description: Get Boards in an Organization
+        call: rest-organizations.getorganizationboards
+        with:
+          filter: rest.filter
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/members
+      name: organizations-id-members
+      description: REST surface for organizations-id-members.
+      operations:
+      - method: GET
+        name: getorganizationmembers
+        description: Get Members of an Organization
+        call: rest-organizations.getorganizationmembers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/members/{idmember}
+      name: organizations-id-members-idmember
+      description: REST surface for organizations-id-members-idMember.
+      operations:
+      - method: PUT
+        name: updateorganizationmember
+        description: Update a Member of an Organization
+        call: rest-organizations.updateorganizationmember
+        with:
+          idMember: rest.idMember
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removeorganizationmember
+        description: Remove a Member from an Organization
+        call: rest-organizations.removeorganizationmember
+        with:
+          idMember: rest.idMember
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-organizations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trello REST API — Organizations. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-organization
+      description: Create an Organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-organizations.createorganization
+      with:
+        displayName: tools.displayName
+        desc: tools.desc
+        name: tools.name
+        website: tools.website
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-organization
+      description: Get an Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-organizations.getorganization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-organization
+      description: Update an Organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-organizations.updateorganization
+      with:
+        name: tools.name
+        displayName: tools.displayName
+        desc: tools.desc
+        website: tools.website
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-organization
+      description: Delete an Organization
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-organizations.deleteorganization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-boards-organization
+      description: Get Boards in an Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-organizations.getorganizationboards
+      with:
+        filter: tools.filter
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-members-organization
+      description: Get Members of an Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-organizations.getorganizationmembers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-member-organization
+      description: Update a Member of an Organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-organizations.updateorganizationmember
+      with:
+        idMember: tools.idMember
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-member-organization
+      description: Remove a Member from an Organization
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-organizations.removeorganizationmember
+      with:
+        idMember: tools.idMember
+      outputParameters:
+      - type: object
+        mapping: $.

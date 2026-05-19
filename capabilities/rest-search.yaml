@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trello REST API — Search
+  description: 'Trello REST API — Search. 2 operations. Lead operation: Search Trello. Self-contained Naftiko capability covering
+    one Trello business surface.'
+  tags:
+  - Trello
+  - Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLO_API_KEY: TRELLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-search
+    baseUri: https://api.trello.com/1
+    description: Trello REST API — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: search
+      path: /search
+      operations:
+      - name: search
+        method: GET
+        description: Search Trello
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: The search query string.
+          required: true
+        - name: idBoards
+          in: query
+          type: string
+          description: A comma-separated list of board IDs to limit the search to.
+        - name: idOrganizations
+          in: query
+          type: string
+          description: A comma-separated list of organization IDs to limit the search to.
+        - name: idCards
+          in: query
+          type: string
+          description: A comma-separated list of card IDs to limit the search to.
+        - name: modelTypes
+          in: query
+          type: string
+          description: A comma-separated list of model types to return. Valid values are actions, boards, cards, members,
+            and organizations.
+        - name: board_fields
+          in: query
+          type: string
+          description: Board fields to return.
+        - name: boards_limit
+          in: query
+          type: integer
+          description: Maximum number of boards to return.
+        - name: card_fields
+          in: query
+          type: string
+          description: Card fields to return.
+        - name: cards_limit
+          in: query
+          type: integer
+          description: Maximum number of cards to return.
+        - name: cards_page
+          in: query
+          type: integer
+          description: Page number of card results.
+        - name: partial
+          in: query
+          type: boolean
+          description: Whether to return partial matches.
+    - name: search-members
+      path: /search/members
+      operations:
+      - name: searchmembers
+        method: GET
+        description: Search Members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: The search query string.
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of members to return.
+        - name: idBoard
+          in: query
+          type: string
+          description: The ID of a board to limit the search to.
+        - name: idOrganization
+          in: query
+          type: string
+          description: The ID of an organization to limit the search to.
+        - name: onlyOrgMembers
+          in: query
+          type: boolean
+          description: Whether to limit results to members of the given organization.
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.TRELLO_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: rest-search-rest
+    port: 8080
+    description: REST adapter for Trello REST API — Search. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/search
+      name: search
+      description: REST surface for search.
+      operations:
+      - method: GET
+        name: search
+        description: Search Trello
+        call: rest-search.search
+        with:
+          query: rest.query
+          idBoards: rest.idBoards
+          idOrganizations: rest.idOrganizations
+          idCards: rest.idCards
+          modelTypes: rest.modelTypes
+          board_fields: rest.board_fields
+          boards_limit: rest.boards_limit
+          card_fields: rest.card_fields
+          cards_limit: rest.cards_limit
+          cards_page: rest.cards_page
+          partial: rest.partial
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search/members
+      name: search-members
+      description: REST surface for search-members.
+      operations:
+      - method: GET
+        name: searchmembers
+        description: Search Members
+        call: rest-search.searchmembers
+        with:
+          query: rest.query
+          limit: rest.limit
+          idBoard: rest.idBoard
+          idOrganization: rest.idOrganization
+          onlyOrgMembers: rest.onlyOrgMembers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trello REST API — Search. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: search-trello
+      description: Search Trello
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-search.search
+      with:
+        query: tools.query
+        idBoards: tools.idBoards
+        idOrganizations: tools.idOrganizations
+        idCards: tools.idCards
+        modelTypes: tools.modelTypes
+        board_fields: tools.board_fields
+        boards_limit: tools.boards_limit
+        card_fields: tools.card_fields
+        cards_limit: tools.cards_limit
+        cards_page: tools.cards_page
+        partial: tools.partial
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-members
+      description: Search Members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-search.searchmembers
+      with:
+        query: tools.query
+        limit: tools.limit
+        idBoard: tools.idBoard
+        idOrganization: tools.idOrganization
+        onlyOrgMembers: tools.onlyOrgMembers
+      outputParameters:
+      - type: object
+        mapping: $.

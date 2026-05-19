@@ -1,0 +1,386 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trello REST API — Lists
+  description: 'Trello REST API — Lists. 8 operations. Lead operation: Create a List. Self-contained Naftiko capability covering
+    one Trello business surface.'
+  tags:
+  - Trello
+  - Lists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLO_API_KEY: TRELLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-lists
+    baseUri: https://api.trello.com/1
+    description: Trello REST API — Lists business capability. Self-contained, no shared references.
+    resources:
+    - name: lists
+      path: /lists
+      operations:
+      - name: createlist
+        method: POST
+        description: Create a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: The name for the new list.
+          required: true
+        - name: idBoard
+          in: query
+          type: string
+          description: The ID of the board the list should be created on.
+          required: true
+        - name: idListSource
+          in: query
+          type: string
+          description: The ID of a list to copy into the new list.
+        - name: pos
+          in: query
+          type: string
+          description: The position of the list on the board.
+    - name: lists-id
+      path: /lists/{id}
+      operations:
+      - name: getlist
+        method: GET
+        description: Get a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fields
+          in: query
+          type: string
+          description: A comma-separated list of list fields to return.
+      - name: updatelist
+        method: PUT
+        description: Update a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: The new name for the list.
+        - name: closed
+          in: query
+          type: boolean
+          description: Whether the list is closed (archived).
+        - name: idBoard
+          in: query
+          type: string
+          description: The ID of the board to move the list to.
+        - name: pos
+          in: query
+          type: string
+          description: The new position of the list.
+        - name: subscribed
+          in: query
+          type: boolean
+          description: Whether the authenticated member is subscribed to the list.
+    - name: lists-id-actions
+      path: /lists/{id}/actions
+      operations:
+      - name: getlistactions
+        method: GET
+        description: Get Actions on a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: A comma-separated list of action types to filter by.
+    - name: lists-id-archiveAllCards
+      path: /lists/{id}/archiveAllCards
+      operations:
+      - name: archivealllistcards
+        method: POST
+        description: Archive All Cards in a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lists-id-board
+      path: /lists/{id}/board
+      operations:
+      - name: getlistboard
+        method: GET
+        description: Get the Board for a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lists-id-cards
+      path: /lists/{id}/cards
+      operations:
+      - name: getlistcards
+        method: GET
+        description: Get Cards in a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lists-id-moveAllCards
+      path: /lists/{id}/moveAllCards
+      operations:
+      - name: movealllistcards
+        method: POST
+        description: Move All Cards in a List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idBoard
+          in: query
+          type: string
+          description: The ID of the destination board.
+          required: true
+        - name: idList
+          in: query
+          type: string
+          description: The ID of the destination list.
+          required: true
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.TRELLO_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: rest-lists-rest
+    port: 8080
+    description: REST adapter for Trello REST API — Lists. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/lists
+      name: lists
+      description: REST surface for lists.
+      operations:
+      - method: POST
+        name: createlist
+        description: Create a List
+        call: rest-lists.createlist
+        with:
+          name: rest.name
+          idBoard: rest.idBoard
+          idListSource: rest.idListSource
+          pos: rest.pos
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists/{id}
+      name: lists-id
+      description: REST surface for lists-id.
+      operations:
+      - method: GET
+        name: getlist
+        description: Get a List
+        call: rest-lists.getlist
+        with:
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatelist
+        description: Update a List
+        call: rest-lists.updatelist
+        with:
+          name: rest.name
+          closed: rest.closed
+          idBoard: rest.idBoard
+          pos: rest.pos
+          subscribed: rest.subscribed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists/{id}/actions
+      name: lists-id-actions
+      description: REST surface for lists-id-actions.
+      operations:
+      - method: GET
+        name: getlistactions
+        description: Get Actions on a List
+        call: rest-lists.getlistactions
+        with:
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists/{id}/archiveallcards
+      name: lists-id-archiveallcards
+      description: REST surface for lists-id-archiveAllCards.
+      operations:
+      - method: POST
+        name: archivealllistcards
+        description: Archive All Cards in a List
+        call: rest-lists.archivealllistcards
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists/{id}/board
+      name: lists-id-board
+      description: REST surface for lists-id-board.
+      operations:
+      - method: GET
+        name: getlistboard
+        description: Get the Board for a List
+        call: rest-lists.getlistboard
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists/{id}/cards
+      name: lists-id-cards
+      description: REST surface for lists-id-cards.
+      operations:
+      - method: GET
+        name: getlistcards
+        description: Get Cards in a List
+        call: rest-lists.getlistcards
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists/{id}/moveallcards
+      name: lists-id-moveallcards
+      description: REST surface for lists-id-moveAllCards.
+      operations:
+      - method: POST
+        name: movealllistcards
+        description: Move All Cards in a List
+        call: rest-lists.movealllistcards
+        with:
+          idBoard: rest.idBoard
+          idList: rest.idList
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-lists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trello REST API — Lists. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-list
+      description: Create a List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-lists.createlist
+      with:
+        name: tools.name
+        idBoard: tools.idBoard
+        idListSource: tools.idListSource
+        pos: tools.pos
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list
+      description: Get a List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-lists.getlist
+      with:
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-list
+      description: Update a List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-lists.updatelist
+      with:
+        name: tools.name
+        closed: tools.closed
+        idBoard: tools.idBoard
+        pos: tools.pos
+        subscribed: tools.subscribed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-actions-list
+      description: Get Actions on a List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-lists.getlistactions
+      with:
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: archive-all-cards-list
+      description: Archive All Cards in a List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-lists.archivealllistcards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-board-list
+      description: Get the Board for a List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-lists.getlistboard
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cards-list
+      description: Get Cards in a List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-lists.getlistcards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: move-all-cards-list
+      description: Move All Cards in a List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-lists.movealllistcards
+      with:
+        idBoard: tools.idBoard
+        idList: tools.idList
+      outputParameters:
+      - type: object
+        mapping: $.

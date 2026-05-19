@@ -1,0 +1,226 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trello REST API — Tokens
+  description: 'Trello REST API — Tokens. 4 operations. Lead operation: Get a Token. Self-contained Naftiko capability covering
+    one Trello business surface.'
+  tags:
+  - Trello
+  - Tokens
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLO_API_KEY: TRELLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-tokens
+    baseUri: https://api.trello.com/1
+    description: Trello REST API — Tokens business capability. Self-contained, no shared references.
+    resources:
+    - name: tokens-token
+      path: /tokens/{token}
+      operations:
+      - name: gettoken
+        method: GET
+        description: Get a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          description: The API token to retrieve information about.
+          required: true
+        - name: fields
+          in: query
+          type: string
+          description: A comma-separated list of token fields to return.
+        - name: webhooks
+          in: query
+          type: boolean
+          description: Whether to include webhooks associated with the token.
+      - name: deletetoken
+        method: DELETE
+        description: Delete a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          description: The API token to delete.
+          required: true
+    - name: tokens-token-webhooks
+      path: /tokens/{token}/webhooks
+      operations:
+      - name: gettokenwebhooks
+        method: GET
+        description: Get Webhooks for a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          description: The API token.
+          required: true
+      - name: createtokenwebhook
+        method: POST
+        description: Create a Webhook for a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          description: The API token.
+          required: true
+        - name: callbackURL
+          in: query
+          type: string
+          description: A valid URL that will receive webhook callbacks via HTTP POST.
+          required: true
+        - name: idModel
+          in: query
+          type: string
+          description: The ID of the model to watch for changes.
+          required: true
+        - name: description
+          in: query
+          type: string
+          description: A description for the webhook.
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.TRELLO_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: rest-tokens-rest
+    port: 8080
+    description: REST adapter for Trello REST API — Tokens. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tokens/{token}
+      name: tokens-token
+      description: REST surface for tokens-token.
+      operations:
+      - method: GET
+        name: gettoken
+        description: Get a Token
+        call: rest-tokens.gettoken
+        with:
+          token: rest.token
+          fields: rest.fields
+          webhooks: rest.webhooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetoken
+        description: Delete a Token
+        call: rest-tokens.deletetoken
+        with:
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tokens/{token}/webhooks
+      name: tokens-token-webhooks
+      description: REST surface for tokens-token-webhooks.
+      operations:
+      - method: GET
+        name: gettokenwebhooks
+        description: Get Webhooks for a Token
+        call: rest-tokens.gettokenwebhooks
+        with:
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtokenwebhook
+        description: Create a Webhook for a Token
+        call: rest-tokens.createtokenwebhook
+        with:
+          token: rest.token
+          callbackURL: rest.callbackURL
+          idModel: rest.idModel
+          description: rest.description
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-tokens-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trello REST API — Tokens. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-token
+      description: Get a Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-tokens.gettoken
+      with:
+        token: tools.token
+        fields: tools.fields
+        webhooks: tools.webhooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-token
+      description: Delete a Token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-tokens.deletetoken
+      with:
+        token: tools.token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-webhooks-token
+      description: Get Webhooks for a Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-tokens.gettokenwebhooks
+      with:
+        token: tools.token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-webhook-token
+      description: Create a Webhook for a Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-tokens.createtokenwebhook
+      with:
+        token: tools.token
+        callbackURL: tools.callbackURL
+        idModel: tools.idModel
+        description: tools.description
+      outputParameters:
+      - type: object
+        mapping: $.

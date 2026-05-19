@@ -1,0 +1,407 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trello REST API — Checklists
+  description: 'Trello REST API — Checklists. 8 operations. Lead operation: Create a Checklist. Self-contained Naftiko capability
+    covering one Trello business surface.'
+  tags:
+  - Trello
+  - Checklists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLO_API_KEY: TRELLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-checklists
+    baseUri: https://api.trello.com/1
+    description: Trello REST API — Checklists business capability. Self-contained, no shared references.
+    resources:
+    - name: checklists
+      path: /checklists
+      operations:
+      - name: createchecklist
+        method: POST
+        description: Create a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idCard
+          in: query
+          type: string
+          description: The ID of the card the checklist should be on.
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: The name of the checklist.
+        - name: pos
+          in: query
+          type: string
+          description: The position of the checklist on the card.
+        - name: idChecklistSource
+          in: query
+          type: string
+          description: The ID of a source checklist to copy.
+    - name: checklists-id
+      path: /checklists/{id}
+      operations:
+      - name: getchecklist
+        method: GET
+        description: Get a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cards
+          in: query
+          type: string
+          description: Filter cards to include.
+        - name: checkItems
+          in: query
+          type: string
+          description: Whether to include check items.
+        - name: checkItem_fields
+          in: query
+          type: string
+          description: A comma-separated list of check item fields to return.
+        - name: fields
+          in: query
+          type: string
+          description: A comma-separated list of checklist fields to return.
+      - name: updatechecklist
+        method: PUT
+        description: Update a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: The new name for the checklist.
+        - name: pos
+          in: query
+          type: string
+          description: The new position for the checklist.
+      - name: deletechecklist
+        method: DELETE
+        description: Delete a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: checklists-id-checkItems
+      path: /checklists/{id}/checkItems
+      operations:
+      - name: getchecklistcheckitems
+        method: GET
+        description: Get Check Items on a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: Filter check items by state.
+        - name: fields
+          in: query
+          type: string
+          description: A comma-separated list of check item fields to return.
+      - name: createcheckitem
+        method: POST
+        description: Create a Check Item on a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: The name of the check item.
+          required: true
+        - name: pos
+          in: query
+          type: string
+          description: The position of the check item in the checklist.
+        - name: checked
+          in: query
+          type: boolean
+          description: Whether the check item is initially checked.
+        - name: due
+          in: query
+          type: string
+          description: A due date for the check item.
+        - name: idMember
+          in: query
+          type: string
+          description: The ID of a member to assign to the check item.
+    - name: checklists-id-checkItems-idCheckItem
+      path: /checklists/{id}/checkItems/{idCheckItem}
+      operations:
+      - name: getcheckitem
+        method: GET
+        description: Get a Check Item on a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idCheckItem
+          in: path
+          type: string
+          description: The ID of the check item.
+          required: true
+      - name: deletecheckitem
+        method: DELETE
+        description: Delete a Check Item from a Checklist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idCheckItem
+          in: path
+          type: string
+          description: The ID of the check item to delete.
+          required: true
+    authentication:
+      type: apikey
+      key: key
+      value: '{{env.TRELLO_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: rest-checklists-rest
+    port: 8080
+    description: REST adapter for Trello REST API — Checklists. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/checklists
+      name: checklists
+      description: REST surface for checklists.
+      operations:
+      - method: POST
+        name: createchecklist
+        description: Create a Checklist
+        call: rest-checklists.createchecklist
+        with:
+          idCard: rest.idCard
+          name: rest.name
+          pos: rest.pos
+          idChecklistSource: rest.idChecklistSource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/checklists/{id}
+      name: checklists-id
+      description: REST surface for checklists-id.
+      operations:
+      - method: GET
+        name: getchecklist
+        description: Get a Checklist
+        call: rest-checklists.getchecklist
+        with:
+          cards: rest.cards
+          checkItems: rest.checkItems
+          checkItem_fields: rest.checkItem_fields
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatechecklist
+        description: Update a Checklist
+        call: rest-checklists.updatechecklist
+        with:
+          name: rest.name
+          pos: rest.pos
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletechecklist
+        description: Delete a Checklist
+        call: rest-checklists.deletechecklist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/checklists/{id}/checkitems
+      name: checklists-id-checkitems
+      description: REST surface for checklists-id-checkItems.
+      operations:
+      - method: GET
+        name: getchecklistcheckitems
+        description: Get Check Items on a Checklist
+        call: rest-checklists.getchecklistcheckitems
+        with:
+          filter: rest.filter
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcheckitem
+        description: Create a Check Item on a Checklist
+        call: rest-checklists.createcheckitem
+        with:
+          name: rest.name
+          pos: rest.pos
+          checked: rest.checked
+          due: rest.due
+          idMember: rest.idMember
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/checklists/{id}/checkitems/{idcheckitem}
+      name: checklists-id-checkitems-idcheckitem
+      description: REST surface for checklists-id-checkItems-idCheckItem.
+      operations:
+      - method: GET
+        name: getcheckitem
+        description: Get a Check Item on a Checklist
+        call: rest-checklists.getcheckitem
+        with:
+          idCheckItem: rest.idCheckItem
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecheckitem
+        description: Delete a Check Item from a Checklist
+        call: rest-checklists.deletecheckitem
+        with:
+          idCheckItem: rest.idCheckItem
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-checklists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trello REST API — Checklists. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-checklist
+      description: Create a Checklist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-checklists.createchecklist
+      with:
+        idCard: tools.idCard
+        name: tools.name
+        pos: tools.pos
+        idChecklistSource: tools.idChecklistSource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-checklist
+      description: Get a Checklist
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-checklists.getchecklist
+      with:
+        cards: tools.cards
+        checkItems: tools.checkItems
+        checkItem_fields: tools.checkItem_fields
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-checklist
+      description: Update a Checklist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-checklists.updatechecklist
+      with:
+        name: tools.name
+        pos: tools.pos
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-checklist
+      description: Delete a Checklist
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-checklists.deletechecklist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-check-items-checklist
+      description: Get Check Items on a Checklist
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-checklists.getchecklistcheckitems
+      with:
+        filter: tools.filter
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-check-item-checklist
+      description: Create a Check Item on a Checklist
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: rest-checklists.createcheckitem
+      with:
+        name: tools.name
+        pos: tools.pos
+        checked: tools.checked
+        due: tools.due
+        idMember: tools.idMember
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-check-item-checklist
+      description: Get a Check Item on a Checklist
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-checklists.getcheckitem
+      with:
+        idCheckItem: tools.idCheckItem
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-check-item-checklist
+      description: Delete a Check Item from a Checklist
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-checklists.deletecheckitem
+      with:
+        idCheckItem: tools.idCheckItem
+      outputParameters:
+      - type: object
+        mapping: $.
