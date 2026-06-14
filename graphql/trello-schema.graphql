@@ -1,0 +1,1412 @@
+"""
+Trello GraphQL Schema
+Conceptual schema mapping the Trello REST API (https://api.trello.com/1/) domain model.
+Source: https://developer.atlassian.com/cloud/trello/rest/
+"""
+
+# ─────────────────────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────────────────────
+
+"""ISO 8601 date-time string."""
+scalar DateTime
+
+"""Trello floating-point position value used for ordering."""
+scalar Pos
+
+"""Hex color string, e.g. #026AA7."""
+scalar HexColor
+
+# ─────────────────────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────────────────────
+
+enum MemberType {
+  ADMIN
+  NORMAL
+  OBSERVER
+}
+
+enum BoardPermissionLevel {
+  ORG
+  PRIVATE
+  PUBLIC
+}
+
+enum CardFilter {
+  ALL
+  CLOSED
+  NONE
+  OPEN
+  VISIBLE
+}
+
+enum CardAging {
+  PIRATE
+  REGULAR
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+enum ActionType {
+  ADD_ATTACHMENT_TO_CARD
+  ADD_CHECKLIST_TO_CARD
+  ADD_LABEL_TO_CARD
+  ADD_MEMBER_TO_BOARD
+  ADD_MEMBER_TO_CARD
+  ADD_MEMBER_TO_ORGANIZATION
+  COMMENT_CARD
+  CONVERT_TO_CARD_FROM_CHECK_ITEM
+  COPY_BOARD
+  COPY_CARD
+  COPY_CHECKLIST
+  CREATE_BOARD
+  CREATE_CARD
+  CREATE_CHECKLIST
+  CREATE_LABEL
+  CREATE_LIST
+  CREATE_ORGANIZATION
+  DELETE_ATTACHMENT_FROM_CARD
+  DELETE_BOARD_INVITATION
+  DELETE_CARD
+  DELETE_CHECK_ITEM
+  DELETE_LABEL
+  DELETE_ORGANIZATION_INVITATION
+  DISABLE_PLUGIN
+  DISABLE_POWER_UP
+  EMAIL_CARD
+  ENABLE_PLUGIN
+  ENABLE_POWER_UP
+  MAKE_ADMIN_OF_BOARD
+  MAKE_NORMAL_MEMBER_OF_BOARD
+  MOVE_CARD_FROM_BOARD
+  MOVE_CARD_TO_BOARD
+  MOVE_LIST_FROM_BOARD
+  MOVE_LIST_TO_BOARD
+  REMOVE_LABEL_FROM_CARD
+  REMOVE_MEMBER_FROM_BOARD
+  REMOVE_MEMBER_FROM_CARD
+  REMOVE_MEMBER_FROM_ORGANIZATION
+  UNCONFIRMED_BOARD_INVITATION
+  UNCONFIRMED_ORGANIZATION_INVITATION
+  UPDATE_BOARD
+  UPDATE_CARD
+  UPDATE_CHECK_ITEM
+  UPDATE_CHECKLIST
+  UPDATE_CUSTOM_FIELD_ITEM
+  UPDATE_LABEL
+  UPDATE_LIST
+  UPDATE_MEMBER
+  UPDATE_ORGANIZATION
+  VOTE_ON_CARD
+}
+
+enum NotificationGroup {
+  ADDED_TO_BOARD
+  ADDED_TO_CARD
+  ADDED_TO_ORGANIZATION
+  CARD_DUE_SOON
+  CHANGE_CARD
+  CLOSE_BOARD
+  COMMENT_CARD
+  CREATED_CARD
+  DECLINED_INVITATION_TO_BOARD
+  DECLINED_INVITATION_TO_ORGANIZATION
+  MENTION_ON_CARD
+  NEW_INVITATION
+  REMOVED_FROM_BOARD
+  REMOVED_FROM_CARD
+  REMOVED_FROM_ORGANIZATION
+  UNCONFIRMED_INVITATION
+  UPDATE_CHECK_ITEM_STATE_ON_CARD
+}
+
+enum CheckItemState {
+  COMPLETE
+  INCOMPLETE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  FREE
+  TRIALING
+}
+
+enum CustomFieldType {
+  CHECKBOX
+  DATE
+  LIST
+  NUMBER
+  TEXT
+}
+
+enum PowerUpCapabilityType {
+  ATTACHMENT_SECTIONS
+  ATTACHMENT_THUMBNAIL
+  BOARD_BUTTONS
+  CARD_BADGES
+  CARD_BUTTONS
+  CARD_DETAIL_BADGES
+  CARD_FROM_URL
+  FORMAT_URL
+  LIST_ACTIONS
+  LIST_SORTERS
+  SHOW_SETTINGS
+  SHOW_AUTHORIZATION
+}
+
+enum LabelColor {
+  BLACK
+  BLUE
+  GREEN
+  LIME
+  ORANGE
+  PINK
+  PURPLE
+  RED
+  SKY
+  YELLOW
+}
+
+enum Export_Format {
+  CSV
+  JSON
+}
+
+# ─────────────────────────────────────────────────────────────
+# Core Types
+# ─────────────────────────────────────────────────────────────
+
+"""A Trello board — the top-level organizational unit."""
+type Board {
+  id: ID!
+  name: String!
+  desc: String
+  descData: String
+  closed: Boolean!
+  idOrganization: ID
+  organization: Organization
+  pinned: Boolean
+  url: String!
+  shortUrl: String!
+  prefs: BoardPreferences
+  labelNames: LabelNames
+  starred: Boolean
+  memberships: [BoardMembership!]
+  members: [Member!]
+  lists(filter: CardFilter): [List!]
+  cards(filter: CardFilter): [Card!]
+  labels: [Label!]
+  powerUps: [BoardPlugin!]
+  actions(filter: [ActionType], limit: Int, since: DateTime, before: DateTime): [Action!]
+  customFields: [CustomField!]
+  backgrounds: [BoardBackground!]
+  stars: [BoardStar!]
+  plugins: [BoardPlugin!]
+  templates: [Template!]
+  subscribed: Boolean
+  dateLastActivity: DateTime
+  dateLastView: DateTime
+  shortLink: String!
+  idTags: [String!]
+  enterpriseOwned: Boolean
+}
+
+"""Label name map keyed by color."""
+type LabelNames {
+  black: String
+  blue: String
+  green: String
+  lime: String
+  orange: String
+  pink: String
+  purple: String
+  red: String
+  sky: String
+  yellow: String
+}
+
+"""Preferences and settings for a Board."""
+type BoardPreferences {
+  permissionLevel: BoardPermissionLevel!
+  hideVotes: Boolean
+  voting: String
+  comments: String
+  invitations: String
+  selfJoin: Boolean
+  cardCovers: Boolean
+  cardAging: CardAging
+  calendarFeedEnabled: Boolean
+  background: String
+  backgroundImage: String
+  backgroundImageScaled: [ScaledImage!]
+  backgroundTile: Boolean
+  backgroundBrightness: String
+  backgroundColor: HexColor
+  backgroundBottomColor: HexColor
+  backgroundTopColor: HexColor
+  canBePublic: Boolean
+  canBeEnterprise: Boolean
+  canBeOrg: Boolean
+  canBePrivate: Boolean
+  canInvite: Boolean
+  isTemplate: Boolean
+}
+
+"""A star (shortcut bookmark) a member has placed on a board."""
+type BoardStar {
+  id: ID!
+  idBoard: ID!
+  board: Board
+  idMember: ID!
+  member: Member
+  pos: Pos!
+}
+
+"""A Power-Up plugin attached to a specific board."""
+type BoardPlugin {
+  id: ID!
+  idBoard: ID!
+  board: Board
+  idPlugin: ID!
+  powerUp: PowerUp
+  dateFirstInstalled: DateTime
+  dateLastUsed: DateTime
+  moniker: String
+}
+
+"""A membership record linking a Member to a Board."""
+type BoardMembership {
+  id: ID!
+  idBoard: ID!
+  board: Board
+  idMember: ID!
+  member: Member
+  memberType: MemberType!
+  unconfirmed: Boolean
+  deactivated: Boolean
+}
+
+"""A background image or color configuration for a Board."""
+type BoardBackground {
+  id: ID!
+  type: String
+  image: String
+  imageScaled: [ScaledImage!]
+  tile: Boolean
+  brightness: String
+  color: HexColor
+  bottomColor: HexColor
+  topColor: HexColor
+}
+
+"""A scaled variant of a background or cover image."""
+type ScaledImage {
+  width: Int!
+  height: Int!
+  url: String!
+}
+
+# ─────────────────────────────────────────────────────────────
+# List
+# ─────────────────────────────────────────────────────────────
+
+"""An ordered column within a Board that holds Cards."""
+type List {
+  id: ID!
+  name: String!
+  closed: Boolean!
+  idBoard: ID!
+  board: Board
+  pos: Pos!
+  subscribed: Boolean
+  softLimit: Int
+  cards(filter: CardFilter): [Card!]
+  actions(filter: [ActionType], limit: Int): [Action!]
+  prefs: ListPreferences
+}
+
+"""Preferences for a specific List."""
+type ListPreferences {
+  permissionLevel: String
+}
+
+# ─────────────────────────────────────────────────────────────
+# Card
+# ─────────────────────────────────────────────────────────────
+
+"""A card representing a single task or item within a List."""
+type Card {
+  id: ID!
+  name: String!
+  desc: String
+  descData: String
+  closed: Boolean!
+  idBoard: ID!
+  board: Board
+  idList: ID!
+  list: List
+  idMembers: [ID!]
+  members: [Member!]
+  idLabels: [ID!]
+  labels: [Label!]
+  manualCoverAttachment: Boolean
+  cover: CoverImage
+  attachments(filter: String): [Attachment!]
+  checklists: [Checklist!]
+  customFieldItems: [CustomFieldItem!]
+  actions(filter: [ActionType], limit: Int): [CardAction!]
+  pos: Pos!
+  url: String!
+  shortUrl: String!
+  shortLink: String!
+  subscribed: Boolean
+  due: DateTime
+  dueComplete: Boolean
+  dueReminder: Int
+  start: DateTime
+  dateLastActivity: DateTime
+  idAttachmentCover: ID
+  idChecklists: [ID!]
+  idShort: Int
+  idMembersVoted: [ID!]
+  votes: Int
+  badges: CardBadges
+  isTemplate: Boolean
+  cardRole: String
+  coordinates: Coordinates
+  locationName: String
+  address: String
+}
+
+"""Aggregated badge counts displayed on a Card."""
+type CardBadges {
+  attachments: Int
+  checkItems: Int
+  checkItemsChecked: Int
+  checkItemsEarliestDue: DateTime
+  comments: Int
+  description: Boolean
+  due: DateTime
+  dueComplete: Boolean
+  fogbugz: String
+  location: Boolean
+  subscribed: Boolean
+  viewingMemberVoted: Boolean
+  votes: Int
+}
+
+"""Geographic coordinates attached to a Card."""
+type Coordinates {
+  latitude: Float
+  longitude: Float
+}
+
+"""An action record on a Card (comment, move, member change, etc.)."""
+type CardAction {
+  id: ID!
+  idMemberCreator: ID!
+  creator: Member
+  type: ActionType!
+  date: DateTime!
+  data: ActionData
+  limits: ActionLimits
+  reactions: [Reaction!]
+  card: Card
+  board: Board
+  list: List
+}
+
+"""Free-form data payload attached to an Action."""
+type ActionData {
+  text: String
+  textData: String
+  old: String
+  board: Board
+  boardSource: Board
+  boardTarget: Board
+  card: Card
+  cardSource: Card
+  list: List
+  listBefore: List
+  listAfter: List
+  member: Member
+  memberCreator: Member
+  organization: Organization
+  attachment: Attachment
+  checklist: Checklist
+  checkItem: CheckItem
+  label: Label
+  plugin: PowerUp
+  powerUp: PowerUp
+  customField: CustomField
+  customFieldItem: CustomFieldItem
+}
+
+"""Rate-limit metadata for an Action."""
+type ActionLimits {
+  reactions: LimitStatus
+}
+
+"""A rate limit status object."""
+type LimitStatus {
+  status: String
+  disableAt: Int
+  warnAt: Int
+}
+
+# ─────────────────────────────────────────────────────────────
+# Checklist and CheckItem
+# ─────────────────────────────────────────────────────────────
+
+"""A checklist attached to a Card."""
+type Checklist {
+  id: ID!
+  name: String!
+  idBoard: ID!
+  board: Board
+  idCard: ID!
+  card: Card
+  pos: Pos!
+  checkItems: [CheckItem!]
+}
+
+"""An individual item within a Checklist."""
+type CheckItem {
+  id: ID!
+  name: String!
+  nameData: String
+  idChecklist: ID!
+  checklist: Checklist
+  state: CheckItemState!
+  pos: Pos!
+  due: DateTime
+  dueReminder: Int
+  idMember: ID
+  member: Member
+}
+
+# ─────────────────────────────────────────────────────────────
+# Attachment and Cover
+# ─────────────────────────────────────────────────────────────
+
+"""A file or URL attachment on a Card."""
+type Attachment {
+  id: ID!
+  name: String!
+  url: String!
+  pos: Pos!
+  bytes: Int
+  date: DateTime
+  edgeColor: HexColor
+  idMember: ID!
+  member: Member
+  isUpload: Boolean
+  mimeType: String
+  previews: [AttachmentPreview!]
+  fileName: String
+}
+
+"""A scaled preview of an uploaded attachment."""
+type AttachmentPreview {
+  id: ID!
+  url: String!
+  width: Int!
+  height: Int!
+  bytes: Int
+  scaled: Boolean
+}
+
+"""Cover image configuration for a Card."""
+type CoverImage {
+  color: LabelColor
+  idAttachment: ID
+  attachment: Attachment
+  size: String
+  brightness: String
+  idUploadedBackground: ID
+  sharedSourceUrl: String
+  idPlugin: ID
+}
+
+# ─────────────────────────────────────────────────────────────
+# Custom Fields
+# ─────────────────────────────────────────────────────────────
+
+"""A custom field definition on a Board."""
+type CustomField {
+  id: ID!
+  idModel: ID!
+  modelType: String!
+  fieldGroup: String
+  display: CustomFieldDisplay
+  name: String!
+  pos: Pos!
+  type: CustomFieldType!
+  options: [CustomFieldOption!]
+  isSuggestedField: Boolean
+}
+
+"""Display configuration for a CustomField."""
+type CustomFieldDisplay {
+  cardFront: Boolean!
+}
+
+"""An option in a list-type CustomField."""
+type CustomFieldOption {
+  id: ID!
+  idCustomField: ID!
+  value: CustomFieldOptionValue!
+  color: LabelColor
+  pos: Pos!
+}
+
+"""Value payload for a CustomFieldOption."""
+type CustomFieldOptionValue {
+  text: String
+}
+
+"""The value of a CustomField on a specific Card."""
+type CustomFieldItem {
+  id: ID!
+  idCustomField: ID!
+  customField: CustomField
+  idModel: ID!
+  modelType: String!
+  value: CustomFieldItemValue
+  idValue: ID
+}
+
+"""The actual value stored in a CustomFieldItem."""
+type CustomFieldItemValue {
+  text: String
+  number: String
+  date: DateTime
+  checked: Boolean
+}
+
+# ─────────────────────────────────────────────────────────────
+# Label
+# ─────────────────────────────────────────────────────────────
+
+"""A colored label that can be applied to Cards on a Board."""
+type Label {
+  id: ID!
+  idBoard: ID!
+  board: Board
+  name: String
+  color: LabelColor
+  uses: Int
+}
+
+# ─────────────────────────────────────────────────────────────
+# Member and Profile
+# ─────────────────────────────────────────────────────────────
+
+"""A Trello user account."""
+type Member {
+  id: ID!
+  username: String!
+  fullName: String!
+  initials: String!
+  email: String
+  avatarHash: String
+  avatarUrl: String
+  bio: String
+  bioData: String
+  confirmed: Boolean
+  memberType: MemberType
+  products: [Int!]
+  status: String
+  url: String!
+  idBoards: [ID!]
+  boards: [Board!]
+  idOrganizations: [ID!]
+  organizations: [Organization!]
+  idBoardsPinned: [ID!]
+  boardStars: [BoardStar!]
+  idEnterprise: ID
+  loginTypes: [String!]
+  marketingOptIn: MarketingOptIn
+  messagesDismissed: [String!]
+  oneTimeMessagesDismissed: [String!]
+  prefs: MemberPreferences
+  profile: MemberProfile
+  tokens: [Token!]
+  notifications(read: Boolean, limit: Int): [Notification!]
+  actions(filter: [ActionType], limit: Int): [Action!]
+}
+
+"""Detailed profile information for a Member."""
+type MemberProfile {
+  id: ID!
+  member: Member!
+  fullName: String
+  avatarUrl: String
+  bio: String
+  website: String
+  location: String
+  gravatar: String
+}
+
+"""Marketing opt-in preferences for a Member."""
+type MarketingOptIn {
+  optedIn: Boolean
+  date: DateTime
+}
+
+"""User preferences for a Member."""
+type MemberPreferences {
+  privacy: MemberPrivacyPreferences
+  sendSummaries: Boolean
+  minutesBetweenSummaries: Int
+  minutesBeforeDeadlineToNotify: Int
+  colorBlind: Boolean
+  locale: String
+  timezoneInfo: TimezoneInfo
+  twoFactor: TwoFactor
+}
+
+"""Privacy settings for a Member."""
+type MemberPrivacyPreferences {
+  fullName: String
+  avatar: String
+}
+
+"""Timezone metadata for a Member."""
+type TimezoneInfo {
+  offsetCurrent: Int
+  timezoneCurrent: String
+  offsetNext: Int
+  dateNext: DateTime
+  timezoneNext: String
+}
+
+"""Two-factor authentication status for a Member."""
+type TwoFactor {
+  enabled: Boolean
+  needsNewBackupCodes: Boolean
+}
+
+"""A custom field defined on a Member (enterprise)."""
+type MemberField {
+  id: ID!
+  name: String!
+  type: String!
+  value: String
+}
+
+# ─────────────────────────────────────────────────────────────
+# Organization (Workspace)
+# ─────────────────────────────────────────────────────────────
+
+"""A Trello Workspace (formerly Organization) grouping boards and members."""
+type Organization {
+  id: ID!
+  name: String!
+  displayName: String!
+  desc: String
+  descData: String
+  url: String!
+  website: String
+  logoHash: String
+  logoUrl: String
+  products: [Int!]
+  powerUps: [Int!]
+  idBoards: [ID!]
+  boards: [Board!]
+  members: [Member!]
+  memberships: [OrganizationMembership!]
+  prefs: OrganizationPreferences
+  premiumFeatures: [String!]
+  tags: [String!]
+  dateLastActivity: DateTime
+  limits: OrganizationLimits
+  memberType: String
+  credits: [OrganizationCredit!]
+  subscription: Subscription
+  enterprise: EnterpriseAdmin
+}
+
+"""A membership record linking a Member to an Organization."""
+type OrganizationMembership {
+  id: ID!
+  idOrganization: ID!
+  organization: Organization
+  idMember: ID!
+  member: Member
+  memberType: MemberType!
+  unconfirmed: Boolean
+  deactivated: Boolean
+}
+
+"""Preferences for an Organization/Workspace."""
+type OrganizationPreferences {
+  permissionLevel: String
+  orgInviteRestrict: String
+  externalMembersDisabled: Boolean
+  associatedDomain: String
+  googleAppsVersion: Int
+  boardVisibilityRestrict: BoardVisibilityRestrict
+  orgInviteEmail: String
+}
+
+"""Board visibility restrictions for an Organization."""
+type BoardVisibilityRestrict {
+  private: String
+  org: String
+  public: String
+}
+
+"""Usage limits for an Organization."""
+type OrganizationLimits {
+  orgs: OrganizationLimit
+  boards: OrganizationLimit
+  labels: OrganizationLimit
+}
+
+"""A single limit category."""
+type OrganizationLimit {
+  status: String
+  disableAt: Int
+  warnAt: Int
+}
+
+"""A credit or promotional balance on an Organization."""
+type OrganizationCredit {
+  id: ID!
+  idOrganization: ID!
+  type: String
+  count: Int
+  memberType: MemberType
+  dateExpired: DateTime
+}
+
+# ─────────────────────────────────────────────────────────────
+# Action and Reaction
+# ─────────────────────────────────────────────────────────────
+
+"""A generic action record capturing changes to any Trello entity."""
+type Action {
+  id: ID!
+  idMemberCreator: ID!
+  creator: Member
+  type: ActionType!
+  date: DateTime!
+  data: ActionData
+  limits: ActionLimits
+  reactions: [Reaction!]
+  memberCreator: Member
+}
+
+"""An emoji reaction attached to an Action (comment)."""
+type Reaction {
+  id: ID!
+  idAction: ID!
+  action: Action
+  idMember: ID!
+  member: Member
+  emoji: Emoji!
+}
+
+"""An emoji descriptor used in Reactions."""
+type Emoji {
+  unified: String!
+  native: String!
+  name: String!
+  skinVariation: String
+  shortName: String!
+}
+
+# ─────────────────────────────────────────────────────────────
+# Notification
+# ─────────────────────────────────────────────────────────────
+
+"""A notification delivered to a Member about activity on Trello."""
+type Notification {
+  id: ID!
+  idMember: ID!
+  member: Member
+  idAction: ID
+  action: Action
+  type: NotificationGroup!
+  date: DateTime!
+  read: Boolean!
+  data: NotificationData
+}
+
+"""Data payload for a Notification."""
+type NotificationData {
+  board: Board
+  card: Card
+  list: List
+  member: Member
+  organization: Organization
+  text: String
+}
+
+# ─────────────────────────────────────────────────────────────
+# Search
+# ─────────────────────────────────────────────────────────────
+
+"""Input parameters for a Trello search."""
+input SearchInput {
+  query: String!
+  idBoards: [ID!]
+  idOrganizations: [ID!]
+  modelTypes: [String!]
+  boardFields: [String!]
+  boardsLimit: Int
+  cardFields: [String!]
+  cardsLimit: Int
+  cardsPage: Int
+  cardBoard: Boolean
+  cardList: Boolean
+  cardMembers: Boolean
+  cardStickers: Boolean
+  cardAttachments: Boolean
+  memberFields: [String!]
+  membersLimit: Int
+  organizationFields: [String!]
+  organizationsLimit: Int
+  partial: Boolean
+}
+
+"""The result set returned by a Trello search."""
+type SearchResult {
+  options: SearchOptions
+  boards: [Board!]
+  cards: [Card!]
+  members: [Member!]
+  organizations: [Organization!]
+}
+
+"""Options echoed back in a SearchResult."""
+type SearchOptions {
+  terms: [SearchTerm!]
+  modifiers: [String!]
+  modelTypes: [String!]
+  partial: Boolean
+}
+
+"""A parsed search term from a query."""
+type SearchTerm {
+  text: String!
+  expansion: [String!]
+}
+
+# ─────────────────────────────────────────────────────────────
+# Template
+# ─────────────────────────────────────────────────────────────
+
+"""A pre-built board template from the Trello template gallery."""
+type Template {
+  id: ID!
+  name: String!
+  desc: String
+  url: String!
+  shortUrl: String!
+  prefs: BoardPreferences
+  idOrganization: ID
+  organization: Organization
+  idMemberCreator: ID!
+  creator: Member
+  categories: [TemplateCategory!]
+  lists: [List!]
+  cards: [Card!]
+  views: [String!]
+  dateLastActivity: DateTime
+}
+
+"""A category grouping Templates in the gallery."""
+type TemplateCategory {
+  id: ID!
+  name: String!
+  templates: [Template!]
+}
+
+# ─────────────────────────────────────────────────────────────
+# Enterprise Admin
+# ─────────────────────────────────────────────────────────────
+
+"""Enterprise-level administration entity."""
+type EnterpriseAdmin {
+  id: ID!
+  name: String!
+  displayName: String!
+  prefs: EnterprisePreferences
+  idAdmins: [ID!]
+  admins: [Member!]
+  idOrganizations: [ID!]
+  organizations: [Organization!]
+  idMembers: [ID!]
+  members: [Member!]
+  memberFields: [MemberField!]
+  products: [Int!]
+  licenses: EnterpriseLicenses
+  dateLastActivity: DateTime
+}
+
+"""Preferences for an EnterpriseAdmin entity."""
+type EnterprisePreferences {
+  ssoOnly: Boolean
+  allowSamlLogin: Boolean
+  isRealEnterprise: Boolean
+  attachmentRestrictions: [String!]
+}
+
+"""License usage for an Enterprise."""
+type EnterpriseLicenses {
+  maxMembers: Int
+  totalMembers: Int
+  ownedMembers: Int
+}
+
+# ─────────────────────────────────────────────────────────────
+# Workspace (Alias type for Organization)
+# ─────────────────────────────────────────────────────────────
+
+"""
+Workspace is the current Trello branding for what was formerly called Organization.
+This type surfaces the same fields under the new name.
+"""
+type Workspace {
+  id: ID!
+  name: String!
+  displayName: String!
+  desc: String
+  url: String!
+  boards: [Board!]
+  members: [Member!]
+  memberships: [OrganizationMembership!]
+  subscription: Subscription
+}
+
+# ─────────────────────────────────────────────────────────────
+# Subscription
+# ─────────────────────────────────────────────────────────────
+
+"""A billing subscription for a Workspace or Member."""
+type Subscription {
+  id: ID!
+  idOrganization: ID
+  organization: Organization
+  idMember: ID
+  member: Member
+  status: SubscriptionStatus!
+  plan: SubscriptionPlan
+  dateStart: DateTime
+  dateEnd: DateTime
+  nextBillingDate: DateTime
+  quantity: Int
+  trialEnd: DateTime
+}
+
+"""Details about a subscription plan tier."""
+type SubscriptionPlan {
+  id: ID!
+  name: String!
+  price: Float
+  currency: String
+  interval: String
+  features: [String!]
+}
+
+# ─────────────────────────────────────────────────────────────
+# Tokens and Keys
+# ─────────────────────────────────────────────────────────────
+
+"""An OAuth token authorizing access to Trello on behalf of a Member."""
+type Token {
+  id: ID!
+  identifier: String!
+  idMember: ID!
+  member: Member
+  dateCreated: DateTime!
+  dateExpires: DateTime
+  permissions: [TokenPermission!]
+  webhooks: [Webhook!]
+}
+
+"""A permission entry scoped to a specific model for a Token."""
+type TokenPermission {
+  id: ID!
+  idModel: ID!
+  modelType: String!
+  read: Boolean!
+  write: Boolean!
+}
+
+"""A developer API key identifying a Trello application."""
+type APIKey {
+  id: ID!
+  key: String!
+  secret: String
+  description: String
+  allowedOrigins: [String!]
+  idMember: ID!
+  member: Member
+}
+
+"""A client-side token issued to a Power-Up for authentication."""
+type ClientToken {
+  value: String!
+  idPowerUp: ID!
+  powerUp: PowerUp
+  idMember: ID!
+  member: Member
+  dateCreated: DateTime!
+  dateExpires: DateTime
+}
+
+# ─────────────────────────────────────────────────────────────
+# Webhooks
+# ─────────────────────────────────────────────────────────────
+
+"""A webhook subscription delivering event payloads to a callback URL."""
+type Webhook {
+  id: ID!
+  description: String
+  idModel: ID!
+  callbackURL: String!
+  active: Boolean!
+  consecutiveFailures: Int
+  firstConsecutiveFailDate: DateTime
+}
+
+# ─────────────────────────────────────────────────────────────
+# Power-Ups
+# ─────────────────────────────────────────────────────────────
+
+"""A Trello Power-Up extending board functionality."""
+type PowerUp {
+  id: ID!
+  name: String!
+  description: String
+  author: String
+  icon: PowerUpIcon
+  capabilities: [PowerUpCapability!]
+  iframes: [PowerUpIframe!]
+  tags: [String!]
+  public: Boolean
+  moderatedState: String
+  privacyUrl: String
+  supportEmail: String
+  url: String!
+  listing: [PowerUpListing!]
+  compliance: PowerUpCompliance
+}
+
+"""Icon metadata for a PowerUp."""
+type PowerUpIcon {
+  url: String!
+}
+
+"""A declared capability of a PowerUp."""
+type PowerUpCapability {
+  id: ID!
+  type: PowerUpCapabilityType!
+  idPowerUp: ID!
+  powerUp: PowerUp
+  options: String
+}
+
+"""An iframe endpoint registered by a PowerUp."""
+type PowerUpIframe {
+  id: ID!
+  idPowerUp: ID!
+  powerUp: PowerUp
+  type: String!
+  url: String!
+}
+
+"""Localized listing text for a PowerUp."""
+type PowerUpListing {
+  idPlugin: ID!
+  locale: String!
+  name: String!
+  description: String
+  overview: String
+}
+
+"""Compliance and privacy metadata for a PowerUp."""
+type PowerUpCompliance {
+  lastReviewed: DateTime
+  isCompliant: Boolean
+  notes: String
+}
+
+# ─────────────────────────────────────────────────────────────
+# Permissions
+# ─────────────────────────────────────────────────────────────
+
+"""A general permission record (used in enterprise and admin contexts)."""
+type Permission {
+  id: ID!
+  modelId: ID!
+  modelType: String!
+  idMember: ID
+  member: Member
+  idOrganization: ID
+  organization: Organization
+  read: Boolean!
+  write: Boolean!
+}
+
+"""An access key record associating a developer key with a member."""
+type AccessKey {
+  id: ID!
+  key: String!
+  idMember: ID!
+  member: Member
+  label: String
+  allowedOrigins: [String!]
+}
+
+# ─────────────────────────────────────────────────────────────
+# Sorting
+# ─────────────────────────────────────────────────────────────
+
+"""A sort specification for list queries."""
+type Sort {
+  field: String!
+  direction: SortDirection!
+}
+
+"""A named sorting preset."""
+type Sorting {
+  id: ID!
+  name: String!
+  sort: [Sort!]!
+}
+
+# ─────────────────────────────────────────────────────────────
+# Import / Export / Report
+# ─────────────────────────────────────────────────────────────
+
+"""An export job for a Board or Workspace."""
+type Export {
+  id: ID!
+  idModel: ID!
+  modelType: String!
+  format: Export_Format!
+  status: String!
+  url: String
+  dateStarted: DateTime
+  dateFinished: DateTime
+  size: Int
+}
+
+"""An import job for bulk data ingestion."""
+type Import {
+  id: ID!
+  idOrganization: ID!
+  organization: Organization
+  status: String!
+  dateStarted: DateTime
+  dateFinished: DateTime
+  errors: [String!]
+  source: String
+}
+
+"""A generated report for a Board or Workspace."""
+type Report {
+  id: ID!
+  idModel: ID!
+  modelType: String!
+  name: String!
+  dateGenerated: DateTime!
+  url: String
+  format: String
+  filters: [String!]
+}
+
+# ─────────────────────────────────────────────────────────────
+# Root Types
+# ─────────────────────────────────────────────────────────────
+
+type Query {
+  """Fetch a Board by ID."""
+  board(id: ID!): Board
+
+  """List boards for the authenticated member."""
+  boards(filter: CardFilter, fields: [String!]): [Board!]
+
+  """Fetch a List by ID."""
+  list(id: ID!): List
+
+  """Fetch a Card by ID."""
+  card(id: ID!): Card
+
+  """Fetch a Member by ID or username."""
+  member(id: ID!): Member
+
+  """Fetch the currently authenticated Member."""
+  me: Member
+
+  """Fetch an Organization/Workspace by ID or name."""
+  organization(id: ID!): Organization
+
+  """Fetch an Action by ID."""
+  action(id: ID!): Action
+
+  """Fetch a Checklist by ID."""
+  checklist(id: ID!): Checklist
+
+  """Fetch a Label by ID."""
+  label(id: ID!): Label
+
+  """Fetch a CustomField by ID."""
+  customField(id: ID!): CustomField
+
+  """Fetch a Webhook by ID."""
+  webhook(id: ID!): Webhook
+
+  """Fetch a Token by ID."""
+  token(id: ID!): Token
+
+  """Fetch a PowerUp by ID."""
+  powerUp(id: ID!): PowerUp
+
+  """Fetch a Template by ID."""
+  template(id: ID!): Template
+
+  """List TemplateCategories."""
+  templateCategories: [TemplateCategory!]
+
+  """Run a search across Trello."""
+  search(input: SearchInput!): SearchResult
+
+  """Fetch an EnterpriseAdmin by ID."""
+  enterprise(id: ID!): EnterpriseAdmin
+
+  """List notifications for the authenticated member."""
+  notifications(read: Boolean, limit: Int): [Notification!]
+
+  """List webhooks for a given token."""
+  webhooks(idToken: ID!): [Webhook!]
+
+  """List exports for a board or organization."""
+  exports(idModel: ID!, modelType: String!): [Export!]
+
+  """List reports for a board or organization."""
+  reports(idModel: ID!, modelType: String!): [Report!]
+}
+
+type Mutation {
+  """Create a new Board."""
+  createBoard(name: String!, idOrganization: ID, defaultLists: Boolean, defaultLabels: Boolean): Board
+
+  """Update an existing Board."""
+  updateBoard(id: ID!, name: String, desc: String, closed: Boolean): Board
+
+  """Delete (close) a Board."""
+  deleteBoard(id: ID!): Boolean
+
+  """Create a new List on a Board."""
+  createList(name: String!, idBoard: ID!, pos: Pos): List
+
+  """Update a List."""
+  updateList(id: ID!, name: String, closed: Boolean, pos: Pos): List
+
+  """Create a new Card."""
+  createCard(name: String!, idList: ID!, desc: String, pos: Pos, due: DateTime, idMembers: [ID!], idLabels: [ID!]): Card
+
+  """Update a Card."""
+  updateCard(id: ID!, name: String, desc: String, closed: Boolean, idList: ID, pos: Pos, due: DateTime, dueComplete: Boolean): Card
+
+  """Delete a Card."""
+  deleteCard(id: ID!): Boolean
+
+  """Add a Comment to a Card."""
+  addComment(idCard: ID!, text: String!): CardAction
+
+  """Delete a Comment on a Card."""
+  deleteComment(idCard: ID!, idAction: ID!): Boolean
+
+  """Create a Checklist on a Card."""
+  createChecklist(idCard: ID!, name: String!, pos: Pos): Checklist
+
+  """Delete a Checklist."""
+  deleteChecklist(id: ID!): Boolean
+
+  """Create a CheckItem on a Checklist."""
+  createCheckItem(idChecklist: ID!, name: String!, pos: Pos): CheckItem
+
+  """Update a CheckItem state."""
+  updateCheckItem(idCard: ID!, idChecklist: ID!, id: ID!, state: CheckItemState, name: String): CheckItem
+
+  """Delete a CheckItem."""
+  deleteCheckItem(idChecklist: ID!, id: ID!): Boolean
+
+  """Create a Label on a Board."""
+  createLabel(name: String!, color: LabelColor!, idBoard: ID!): Label
+
+  """Update a Label."""
+  updateLabel(id: ID!, name: String, color: LabelColor): Label
+
+  """Delete a Label."""
+  deleteLabel(id: ID!): Boolean
+
+  """Attach a file or URL to a Card."""
+  createAttachment(idCard: ID!, url: String, name: String, mimeType: String): Attachment
+
+  """Delete an Attachment."""
+  deleteAttachment(idCard: ID!, id: ID!): Boolean
+
+  """Create a Webhook."""
+  createWebhook(idModel: ID!, callbackURL: String!, description: String): Webhook
+
+  """Update a Webhook."""
+  updateWebhook(id: ID!, active: Boolean, callbackURL: String, description: String): Webhook
+
+  """Delete a Webhook."""
+  deleteWebhook(id: ID!): Boolean
+
+  """Add a Member to a Board."""
+  addMemberToBoard(idBoard: ID!, idMember: ID!, type: MemberType!): BoardMembership
+
+  """Remove a Member from a Board."""
+  removeMemberFromBoard(idBoard: ID!, idMember: ID!): Boolean
+
+  """Add a Member to a Card."""
+  addMemberToCard(idCard: ID!, idMember: ID!): Card
+
+  """Remove a Member from a Card."""
+  removeMemberFromCard(idCard: ID!, idMember: ID!): Card
+
+  """Star a Board for the authenticated member."""
+  starBoard(idBoard: ID!): BoardStar
+
+  """Unstar a Board."""
+  unstarBoard(idBoard: ID!): Boolean
+
+  """React to an Action with an emoji."""
+  addReaction(idAction: ID!, unified: String!, native: String!, name: String!, shortName: String!): Reaction
+
+  """Remove a Reaction from an Action."""
+  deleteReaction(idAction: ID!, id: ID!): Boolean
+
+  """Install a Power-Up on a Board."""
+  installPowerUp(idBoard: ID!, idPlugin: ID!): BoardPlugin
+
+  """Uninstall a Power-Up from a Board."""
+  uninstallPowerUp(idBoard: ID!, idPlugin: ID!): Boolean
+
+  """Update a CustomField value on a Card."""
+  setCustomFieldItem(idCard: ID!, idCustomField: ID!, value: String): CustomFieldItem
+
+  """Export a Board or Workspace."""
+  createExport(idModel: ID!, modelType: String!, format: Export_Format!): Export
+
+  """Mark a Notification as read."""
+  markNotificationRead(id: ID!): Notification
+
+  """Mark all Notifications as read."""
+  markAllNotificationsRead: Boolean
+}
