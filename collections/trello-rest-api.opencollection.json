@@ -1,0 +1,3271 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single action by its identifier. Actions represent events that have occurred on Trello objects."
+        },
+        {
+          "info": {
+            "name": "Update an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/actions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "The new text for the comment action."
+              }
+            ]
+          },
+          "docs": "Updates the text of a comment action. Only comment actions can be updated."
+        },
+        {
+          "info": {
+            "name": "Delete an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/actions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Deletes a comment action. Only comment actions can be deleted."
+        },
+        {
+          "info": {
+            "name": "Get a specific field of an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/:field",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "path",
+                "description": "The field to retrieve from the action."
+              }
+            ]
+          },
+          "docs": "Retrieves a single field value from an action."
+        },
+        {
+          "info": {
+            "name": "Get the Board for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/board",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the board associated with a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Card for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/card",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the card associated with a given action."
+        },
+        {
+          "info": {
+            "name": "Get the List for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/list",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the list associated with a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Member of an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/member",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the member who was the subject of a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Member Creator of an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/memberCreator",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the member who created a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Organization for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/organization",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the organization (workspace) associated with a given action."
+        },
+        {
+          "info": {
+            "name": "List Reactions for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/reactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all emoji reactions on a given action."
+        },
+        {
+          "info": {
+            "name": "Create a Reaction for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/actions/:id/reactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an emoji reaction to an action."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Boards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/boards",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the new board."
+              },
+              {
+                "name": "defaultLabels",
+                "value": "",
+                "type": "query",
+                "description": "Whether to apply the default set of labels to the board."
+              },
+              {
+                "name": "defaultLists",
+                "value": "",
+                "type": "query",
+                "description": "Whether to add the default set of lists to the board."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "A description for the board."
+              },
+              {
+                "name": "idOrganization",
+                "value": "",
+                "type": "query",
+                "description": "The ID or name of the organization (workspace) the board should belong to."
+              },
+              {
+                "name": "idBoardSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a board to copy into the new board."
+              },
+              {
+                "name": "prefs_permissionLevel",
+                "value": "",
+                "type": "query",
+                "description": "The permissions level of the board."
+              },
+              {
+                "name": "prefs_voting",
+                "value": "",
+                "type": "query",
+                "description": "Who can vote on the board."
+              },
+              {
+                "name": "prefs_comments",
+                "value": "",
+                "type": "query",
+                "description": "Who can comment on cards on the board."
+              },
+              {
+                "name": "prefs_background",
+                "value": "",
+                "type": "query",
+                "description": "The background color or image for the board."
+              },
+              {
+                "name": "prefs_cardAging",
+                "value": "",
+                "type": "query",
+                "description": "The style of card aging to apply to the board."
+              },
+              {
+                "name": "prefs_selfJoin",
+                "value": "",
+                "type": "query",
+                "description": "Whether workspace members can join the board themselves."
+              }
+            ]
+          },
+          "docs": "Creates a new Trello board with the specified name and optional settings such as description, organization, permission level, and initial configuration."
+        },
+        {
+          "info": {
+            "name": "Get a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to include."
+              },
+              {
+                "name": "boardStars",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include board stars."
+              },
+              {
+                "name": "cards",
+                "value": "",
+                "type": "query",
+                "description": "Filter cards to include."
+              },
+              {
+                "name": "card_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card fields to include."
+              },
+              {
+                "name": "checklists",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include checklists."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board fields to include."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include labels."
+              },
+              {
+                "name": "lists",
+                "value": "",
+                "type": "query",
+                "description": "Filter lists to include."
+              },
+              {
+                "name": "members",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include members."
+              },
+              {
+                "name": "memberships",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include memberships."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the organization."
+              }
+            ]
+          },
+          "docs": "Retrieves a single board by its identifier, including its fields and optionally nested resources."
+        },
+        {
+          "info": {
+            "name": "Update a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/boards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the board."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the board."
+              },
+              {
+                "name": "closed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the board is closed (archived)."
+              },
+              {
+                "name": "subscribed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the authenticated member is subscribed to the board."
+              },
+              {
+                "name": "idOrganization",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the organization to move the board to."
+              },
+              {
+                "name": "prefs/permissionLevel",
+                "value": "",
+                "type": "query",
+                "description": "The permission level for the board."
+              },
+              {
+                "name": "prefs/selfJoin",
+                "value": "",
+                "type": "query",
+                "description": "Whether workspace members can join the board themselves."
+              },
+              {
+                "name": "prefs/cardCovers",
+                "value": "",
+                "type": "query",
+                "description": "Whether card covers are enabled."
+              },
+              {
+                "name": "prefs/hideVotes",
+                "value": "",
+                "type": "query",
+                "description": "Whether votes are hidden until voting is complete."
+              },
+              {
+                "name": "prefs/background",
+                "value": "",
+                "type": "query",
+                "description": "The background for the board."
+              },
+              {
+                "name": "prefs/cardAging",
+                "value": "",
+                "type": "query",
+                "description": "The card aging style."
+              },
+              {
+                "name": "labelNames/green",
+                "value": "",
+                "type": "query",
+                "description": "Name for the green label."
+              },
+              {
+                "name": "labelNames/yellow",
+                "value": "",
+                "type": "query",
+                "description": "Name for the yellow label."
+              },
+              {
+                "name": "labelNames/orange",
+                "value": "",
+                "type": "query",
+                "description": "Name for the orange label."
+              },
+              {
+                "name": "labelNames/red",
+                "value": "",
+                "type": "query",
+                "description": "Name for the red label."
+              },
+              {
+                "name": "labelNames/purple",
+                "value": "",
+                "type": "query",
+                "description": "Name for the purple label."
+              },
+              {
+                "name": "labelNames/blue",
+                "value": "",
+                "type": "query",
+                "description": "Name for the blue label."
+              }
+            ]
+          },
+          "docs": "Updates a board's fields, including name, description, preferences, and organizational settings."
+        },
+        {
+          "info": {
+            "name": "Delete a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/boards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a board. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get Actions for a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to filter by."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of actions to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of actions (activity events) associated with a board."
+        },
+        {
+          "info": {
+            "name": "Get Cards on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/cards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all cards on a board, with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Get Filtered Cards on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/cards/:filter",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "path",
+                "description": "The filter to apply to the cards."
+              }
+            ]
+          },
+          "docs": "Retrieves cards on a board filtered by status."
+        },
+        {
+          "info": {
+            "name": "Get Checklists on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/checklists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all checklists on a board."
+        },
+        {
+          "info": {
+            "name": "Get Labels on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/labels",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of label fields to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of labels to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all labels defined on a board."
+        },
+        {
+          "info": {
+            "name": "Create a Label on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/boards/:id/labels",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the label."
+              },
+              {
+                "name": "color",
+                "value": "",
+                "type": "query",
+                "description": "The color for the label."
+              }
+            ]
+          },
+          "docs": "Creates a new label on a board."
+        },
+        {
+          "info": {
+            "name": "Get Lists on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/lists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "cards",
+                "value": "",
+                "type": "query",
+                "description": "Filter cards within lists."
+              },
+              {
+                "name": "card_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card fields to return."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter lists by status."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of list fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all lists on a board, with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create a List on a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/boards/:id/lists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the new list."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the list on the board."
+              }
+            ]
+          },
+          "docs": "Creates a new list on the specified board."
+        },
+        {
+          "info": {
+            "name": "Get Members of a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the members associated with a board."
+        },
+        {
+          "info": {
+            "name": "Invite a Member to a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/boards/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email address of the member to invite."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of membership."
+              }
+            ]
+          },
+          "docs": "Invites a member to a board via email."
+        },
+        {
+          "info": {
+            "name": "Update a Board Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/boards/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to update."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The new membership type."
+              }
+            ]
+          },
+          "docs": "Updates the membership type for a member on a board."
+        },
+        {
+          "info": {
+            "name": "Remove a Member from a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/boards/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to remove."
+              }
+            ]
+          },
+          "docs": "Removes a member from a board."
+        },
+        {
+          "info": {
+            "name": "Get Memberships of a Board",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/boards/:id/memberships",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter memberships by type."
+              }
+            ]
+          },
+          "docs": "Retrieves the membership records for a board, including membership type and member references."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the card."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The description for the card."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the card in the list."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "The due date for the card."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date for the card."
+              },
+              {
+                "name": "dueComplete",
+                "value": "",
+                "type": "query",
+                "description": "Whether the due date is complete."
+              },
+              {
+                "name": "idList",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the list the card should be created in."
+              },
+              {
+                "name": "idMembers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of member IDs to add to the card."
+              },
+              {
+                "name": "idLabels",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label IDs to add to the card."
+              },
+              {
+                "name": "urlSource",
+                "value": "",
+                "type": "query",
+                "description": "A URL to attach to the card."
+              },
+              {
+                "name": "idCardSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a card to copy into the new card."
+              }
+            ]
+          },
+          "docs": "Creates a new card on the specified list."
+        },
+        {
+          "info": {
+            "name": "Get a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card fields to return."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to include."
+              },
+              {
+                "name": "attachments",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include attachments."
+              },
+              {
+                "name": "members",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include members."
+              },
+              {
+                "name": "checkItemStates",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include check item states."
+              },
+              {
+                "name": "checklists",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include checklists."
+              }
+            ]
+          },
+          "docs": "Retrieves a single card by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the card."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the card."
+              },
+              {
+                "name": "closed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the card is archived."
+              },
+              {
+                "name": "idMembers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of member IDs."
+              },
+              {
+                "name": "idLabels",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label IDs."
+              },
+              {
+                "name": "idList",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the list to move the card to."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board to move the card to."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The new position of the card."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "The new due date for the card."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date for the card."
+              },
+              {
+                "name": "dueComplete",
+                "value": "",
+                "type": "query",
+                "description": "Whether the due date is complete."
+              },
+              {
+                "name": "subscribed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the authenticated member is subscribed to the card."
+              },
+              {
+                "name": "cover",
+                "value": "",
+                "type": "query",
+                "description": "JSON string for the card cover."
+              }
+            ]
+          },
+          "docs": "Updates the fields of a card, including name, description, position, due date, list assignment, and more."
+        },
+        {
+          "info": {
+            "name": "Delete a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a card. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get Actions on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to filter by."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of actions (activity events) on a card."
+        },
+        {
+          "info": {
+            "name": "Add a Comment to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/actions/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "The comment text."
+              }
+            ]
+          },
+          "docs": "Adds a new comment to a card."
+        },
+        {
+          "info": {
+            "name": "Get Attachments on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of attachment fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all attachments on a card."
+        },
+        {
+          "info": {
+            "name": "Create an Attachment on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the attachment."
+              },
+              {
+                "name": "mimeType",
+                "value": "",
+                "type": "query",
+                "description": "The MIME type of the attachment."
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "A URL to attach to the card."
+              }
+            ]
+          },
+          "docs": "Adds a new attachment to a card, either from a URL or a file upload."
+        },
+        {
+          "info": {
+            "name": "Get Checklists on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/checklists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all checklists on a card."
+        },
+        {
+          "info": {
+            "name": "Create a Checklist on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/checklists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the checklist."
+              },
+              {
+                "name": "idChecklistSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a checklist to copy into the new checklist."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the checklist on the card."
+              }
+            ]
+          },
+          "docs": "Creates a new checklist on the specified card."
+        },
+        {
+          "info": {
+            "name": "Add a Label to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/labels",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the label to add."
+              }
+            ]
+          },
+          "docs": "Adds an existing label to a card."
+        },
+        {
+          "info": {
+            "name": "Remove a Label from a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/cards/:id/labels/:idLabel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idLabel",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the label to remove."
+              }
+            ]
+          },
+          "docs": "Removes a label from a card."
+        },
+        {
+          "info": {
+            "name": "Add a Member to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member to add."
+              }
+            ]
+          },
+          "docs": "Adds a member to a card."
+        },
+        {
+          "info": {
+            "name": "Remove a Member from a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/cards/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to remove."
+              }
+            ]
+          },
+          "docs": "Removes a member from a card."
+        },
+        {
+          "info": {
+            "name": "Get Stickers on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/stickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all stickers on a card."
+        },
+        {
+          "info": {
+            "name": "Add a Sticker to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/stickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "image",
+                "value": "",
+                "type": "query",
+                "description": "The sticker image identifier."
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "The top position of the sticker as a percentage."
+              },
+              {
+                "name": "left",
+                "value": "",
+                "type": "query",
+                "description": "The left position of the sticker as a percentage."
+              },
+              {
+                "name": "zIndex",
+                "value": "",
+                "type": "query",
+                "description": "The z-index of the sticker."
+              },
+              {
+                "name": "rotate",
+                "value": "",
+                "type": "query",
+                "description": "The rotation of the sticker in degrees."
+              }
+            ]
+          },
+          "docs": "Adds a sticker to a card."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Checklists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/checklists",
+            "params": [
+              {
+                "name": "idCard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the card the checklist should be on."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the checklist."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the checklist on the card."
+              },
+              {
+                "name": "idChecklistSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a source checklist to copy."
+              }
+            ]
+          },
+          "docs": "Creates a new checklist, optionally on a specific card."
+        },
+        {
+          "info": {
+            "name": "Get a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/checklists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "cards",
+                "value": "",
+                "type": "query",
+                "description": "Filter cards to include."
+              },
+              {
+                "name": "checkItems",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include check items."
+              },
+              {
+                "name": "checkItem_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of check item fields to return."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of checklist fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a single checklist by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/checklists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the checklist."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The new position for the checklist."
+              }
+            ]
+          },
+          "docs": "Updates a checklist's name or position."
+        },
+        {
+          "info": {
+            "name": "Delete a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/checklists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a checklist."
+        },
+        {
+          "info": {
+            "name": "Get Check Items on a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter check items by state."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of check item fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all check items on a checklist."
+        },
+        {
+          "info": {
+            "name": "Create a Check Item on a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the check item."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the check item in the checklist."
+              },
+              {
+                "name": "checked",
+                "value": "",
+                "type": "query",
+                "description": "Whether the check item is initially checked."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "A due date for the check item."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a member to assign to the check item."
+              }
+            ]
+          },
+          "docs": "Creates a new check item on a checklist."
+        },
+        {
+          "info": {
+            "name": "Get a Check Item on a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems/:idCheckItem",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idCheckItem",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the check item."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific check item on a checklist."
+        },
+        {
+          "info": {
+            "name": "Delete a Check Item from a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems/:idCheckItem",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idCheckItem",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the check item to delete."
+              }
+            ]
+          },
+          "docs": "Removes a check item from a checklist."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "CustomFields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/customFields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom field definition on a board."
+        },
+        {
+          "info": {
+            "name": "Get a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/customFields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a custom field definition by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/customFields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a custom field definition."
+        },
+        {
+          "info": {
+            "name": "Delete a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/customFields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a custom field definition and removes its values from all cards on the board."
+        },
+        {
+          "info": {
+            "name": "Get Custom Field Items on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/customFieldItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the custom field values set on a specific card."
+        },
+        {
+          "info": {
+            "name": "Set a Custom Field Value on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/cards/:idCard/customField/:idCustomField/item",
+            "params": [
+              {
+                "name": "idCard",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the card."
+              },
+              {
+                "name": "idCustomField",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the custom field."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets or updates the value of a custom field on a card."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/labels",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the label."
+              },
+              {
+                "name": "color",
+                "value": "",
+                "type": "query",
+                "description": "The color for the label."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board the label belongs to."
+              }
+            ]
+          },
+          "docs": "Creates a new label."
+        },
+        {
+          "info": {
+            "name": "Get a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single label by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the label."
+              },
+              {
+                "name": "color",
+                "value": "",
+                "type": "query",
+                "description": "The new color for the label."
+              }
+            ]
+          },
+          "docs": "Updates a label's name and/or color."
+        },
+        {
+          "info": {
+            "name": "Delete a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a label."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/lists",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the new list."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board the list should be created on."
+              },
+              {
+                "name": "idListSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a list to copy into the new list."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the list on the board."
+              }
+            ]
+          },
+          "docs": "Creates a new list on the specified board."
+        },
+        {
+          "info": {
+            "name": "Get a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of list fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a single list by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the list."
+              },
+              {
+                "name": "closed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the list is closed (archived)."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board to move the list to."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The new position of the list."
+              },
+              {
+                "name": "subscribed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the authenticated member is subscribed to the list."
+              }
+            ]
+          },
+          "docs": "Updates a list's name, position, closed status, or board assignment."
+        },
+        {
+          "info": {
+            "name": "Get Actions on a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id/actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to filter by."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of actions associated with a list."
+        },
+        {
+          "info": {
+            "name": "Get the Board for a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id/board",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the board that a list belongs to."
+        },
+        {
+          "info": {
+            "name": "Get Cards in a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id/cards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all cards in a list."
+        },
+        {
+          "info": {
+            "name": "Archive All Cards in a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/lists/:id/archiveAllCards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Archives all cards in a list."
+        },
+        {
+          "info": {
+            "name": "Move All Cards in a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/lists/:id/moveAllCards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the destination board."
+              },
+              {
+                "name": "idList",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the destination list."
+              }
+            ]
+          },
+          "docs": "Moves all cards in a list to a different list on the same or a different board."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to include."
+              },
+              {
+                "name": "boards",
+                "value": "",
+                "type": "query",
+                "description": "Filter boards to include."
+              },
+              {
+                "name": "organizations",
+                "value": "",
+                "type": "query",
+                "description": "Filter organizations to include."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of member fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a member by their identifier or username."
+        },
+        {
+          "info": {
+            "name": "Update a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fullName",
+                "value": "",
+                "type": "query",
+                "description": "The new full name for the member."
+              },
+              {
+                "name": "initials",
+                "value": "",
+                "type": "query",
+                "description": "The new initials for the member."
+              },
+              {
+                "name": "bio",
+                "value": "",
+                "type": "query",
+                "description": "The new bio for the member."
+              }
+            ]
+          },
+          "docs": "Updates a member's profile fields such as full name, initials, and bio."
+        },
+        {
+          "info": {
+            "name": "Get Boards for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/boards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter boards by status."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board fields to return."
+              },
+              {
+                "name": "lists",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include lists."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the organization."
+              }
+            ]
+          },
+          "docs": "Retrieves all boards that a member has access to."
+        },
+        {
+          "info": {
+            "name": "Get Cards for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/cards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter cards by status."
+              }
+            ]
+          },
+          "docs": "Retrieves all cards assigned to a member."
+        },
+        {
+          "info": {
+            "name": "Get Organizations for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/organizations",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter organizations."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of organization fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all organizations (workspaces) that a member belongs to."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Notifications for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/notifications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "entities",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include entities."
+              },
+              {
+                "name": "display",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include display information."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of notification types to filter by."
+              },
+              {
+                "name": "read_filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by read status."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notifications to return."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Return notifications created before this notification ID."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Return notifications created after this notification ID."
+              }
+            ]
+          },
+          "docs": "Retrieves notifications for a member."
+        },
+        {
+          "info": {
+            "name": "Get a Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single notification by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "unread",
+                "value": "",
+                "type": "query",
+                "description": "Whether the notification is unread."
+              }
+            ]
+          },
+          "docs": "Updates a notification's read status."
+        },
+        {
+          "info": {
+            "name": "Mark All Notifications as Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/notifications/all/read"
+          },
+          "docs": "Marks all of the authenticated member's notifications as read."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/organizations",
+            "params": [
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "The display name for the organization."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "A description for the organization."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A short name (URL-friendly) for the organization."
+              },
+              {
+                "name": "website",
+                "value": "",
+                "type": "query",
+                "description": "A URL for the organization's website."
+              }
+            ]
+          },
+          "docs": "Creates a new Trello organization (workspace)."
+        },
+        {
+          "info": {
+            "name": "Get an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single organization (workspace) by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new short name for the organization."
+              },
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "The new display name for the organization."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the organization."
+              },
+              {
+                "name": "website",
+                "value": "",
+                "type": "query",
+                "description": "The new website URL for the organization."
+              }
+            ]
+          },
+          "docs": "Updates an organization's fields such as name, description, and website."
+        },
+        {
+          "info": {
+            "name": "Delete an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes an organization (workspace) and all its boards."
+        },
+        {
+          "info": {
+            "name": "Get Boards in an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/organizations/:id/boards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter boards by status."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all boards in an organization."
+        },
+        {
+          "info": {
+            "name": "Get Members of an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/organizations/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all members of an organization."
+        },
+        {
+          "info": {
+            "name": "Update a Member of an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/organizations/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to update."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The new membership type."
+              }
+            ]
+          },
+          "docs": "Updates the membership type for a member in an organization."
+        },
+        {
+          "info": {
+            "name": "Remove a Member from an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/organizations/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to remove."
+              }
+            ]
+          },
+          "docs": "Removes a member from an organization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/plugins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a Power-Up plugin by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/plugins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Updates a Power-Up plugin's information."
+        },
+        {
+          "info": {
+            "name": "Create a Listing for a Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/plugins/:id/listings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new marketplace listing for a Power-Up plugin."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Trello",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "idBoards",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board IDs to limit the search to."
+              },
+              {
+                "name": "idOrganizations",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of organization IDs to limit the search to."
+              },
+              {
+                "name": "idCards",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card IDs to limit the search to."
+              },
+              {
+                "name": "modelTypes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of model types to return. Valid values are actions, boards, cards, members, and organizations."
+              },
+              {
+                "name": "board_fields",
+                "value": "",
+                "type": "query",
+                "description": "Board fields to return."
+              },
+              {
+                "name": "boards_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of boards to return."
+              },
+              {
+                "name": "card_fields",
+                "value": "",
+                "type": "query",
+                "description": "Card fields to return."
+              },
+              {
+                "name": "cards_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of cards to return."
+              },
+              {
+                "name": "cards_page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of card results."
+              },
+              {
+                "name": "partial",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return partial matches."
+              }
+            ]
+          },
+          "docs": "Searches for Trello objects matching the provided query string across boards, cards, members, and organizations."
+        },
+        {
+          "info": {
+            "name": "Search Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/search/members",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of members to return."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a board to limit the search to."
+              },
+              {
+                "name": "idOrganization",
+                "value": "",
+                "type": "query",
+                "description": "The ID of an organization to limit the search to."
+              },
+              {
+                "name": "onlyOrgMembers",
+                "value": "",
+                "type": "query",
+                "description": "Whether to limit results to members of the given organization."
+              }
+            ]
+          },
+          "docs": "Searches for Trello members matching the provided query string."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/tokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token to retrieve information about."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of token fields to return."
+              },
+              {
+                "name": "webhooks",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include webhooks associated with the token."
+              }
+            ]
+          },
+          "docs": "Retrieves information about an API token."
+        },
+        {
+          "info": {
+            "name": "Delete a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/tokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token to delete."
+              }
+            ]
+          },
+          "docs": "Revokes and deletes an API token. This will also remove any webhooks associated with the token."
+        },
+        {
+          "info": {
+            "name": "Get Webhooks for a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/tokens/:token/webhooks",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token."
+              }
+            ]
+          },
+          "docs": "Retrieves all webhooks associated with a token."
+        },
+        {
+          "info": {
+            "name": "Create a Webhook for a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/tokens/:token/webhooks",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token."
+              },
+              {
+                "name": "callbackURL",
+                "value": "",
+                "type": "query",
+                "description": "A valid URL that will receive webhook callbacks via HTTP POST."
+              },
+              {
+                "name": "idModel",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the model to watch for changes."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "A description for the webhook."
+              }
+            ]
+          },
+          "docs": "Creates a new webhook for a token. Trello will make an HTTP HEAD request to the callback URL to verify it before creating the webhook."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/webhooks",
+            "params": [
+              {
+                "name": "callbackURL",
+                "value": "",
+                "type": "query",
+                "description": "A valid URL that will receive webhook callbacks via HTTP POST."
+              },
+              {
+                "name": "idModel",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the model to watch for changes."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "A description for the webhook."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Whether the webhook is active."
+              }
+            ]
+          },
+          "docs": "Creates a new webhook. Trello will make an HTTP HEAD request to the callback URL to verify it returns a 200 status code before creating the webhook."
+        },
+        {
+          "info": {
+            "name": "Get a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a webhook by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "callbackURL",
+                "value": "",
+                "type": "query",
+                "description": "The new callback URL for the webhook."
+              },
+              {
+                "name": "idModel",
+                "value": "",
+                "type": "query",
+                "description": "The new model ID to watch."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the webhook."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Whether the webhook is active."
+              }
+            ]
+          },
+          "docs": "Updates a webhook's callback URL, model, description, or active status."
+        },
+        {
+          "info": {
+            "name": "Delete a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

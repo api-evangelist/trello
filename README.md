@@ -1,76 +1,90 @@
-# Trello
+# trello (trello)
 
-Trello is a visual collaboration and project management platform, now part of Atlassian, that organizes work into boards, lists, and cards. The developer platform provides REST APIs, webhooks, and a Power-Up framework for building integrations and extending Trello functionality.
+Trello is a web-based, kanban-style, list-making application that allows users to organize tasks, projects, and workflows using boards, lists, and cards.
 
-**Website:** [https://trello.com](https://trello.com)  
-**API Docs:** [https://developer.atlassian.com/cloud/trello/rest/](https://developer.atlassian.com/cloud/trello/rest/)  
-**Developer Portal:** [https://developer.atlassian.com/cloud/trello/](https://developer.atlassian.com/cloud/trello/)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml)
+
+## Timestamps
+
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Trello REST API
-The Trello REST API provides programmatic access to boards, lists, cards, members, labels, checklists, and other resources. Authentication uses API key and token query parameters.
 
+The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+
+- **Human URL:** [https://developer.atlassian.com/cloud/trello/rest/](https://developer.atlassian.com/cloud/trello/rest/)
 - **Base URL:** `https://api.trello.com`
-- **Authentication:** API Key + Token (query params)
-- **OpenAPI:** [openapi/trello-rest-api-openapi.yml](openapi/trello-rest-api-openapi.yml)
+
+#### Tags
+
+- Atlassian
+- Boards
+- Cards
+- Collaboration
+- Kanban
+- Project Management
+- Task Management
+
+#### Properties
+
+- [Documentation](https://developer.atlassian.com/cloud/trello/rest/)
+- [OpenAPI](openapi/trello-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/trello-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/trello-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Trello Webhooks API
-Real-time notifications when Trello models change, delivered via HTTP POST to a callback URL. Webhook requests are signed with HMAC-SHA1.
 
-- **AsyncAPI:** [asyncapi/trello-webhooks-asyncapi.yml](asyncapi/trello-webhooks-asyncapi.yml)
+The Trello Webhooks API allows developers to receive real-time notifications when changes occur on Trello models such as boards, lists, and cards. Rather than polling the REST API for updates, webhooks push event data to a specified callback URL via HTTP POST requests containing JSON payloads. Webhook requests are signed with HMAC-SHA1 for verification, and webhooks are scoped to the permissions of the token used to create them.
+
+- **Human URL:** [https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/](https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/)
+- **Base URL:** `https://api.trello.com`
+
+#### Tags
+
+- Events
+- Notifications
+- Real-Time
+- Webhooks
+
+#### Properties
+
+- [Documentation](https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/)
+- [AsyncAPI](asyncapi/trello-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- [Postman Collection](collections/trello-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/trello-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Trello Power-Ups
-Framework for extending Trello boards with custom fields, buttons, badges, and third-party integrations.
 
-- **Docs:** [https://developer.atlassian.com/cloud/trello/power-ups/](https://developer.atlassian.com/cloud/trello/power-ups/)
+Trello Power-Ups are a framework for extending and integrating with the Trello platform. Power-Ups allow developers to add custom functionality to Trello boards, including custom fields, board buttons, card buttons, card badges, and card detail sections. The Power-Up framework provides a client library with utilities and helpers for interacting with the Trello interface, managing authorization, and accessing the REST API from within the Power-Up context.
 
-## Artifacts
+- **Human URL:** [https://developer.atlassian.com/cloud/trello/power-ups/](https://developer.atlassian.com/cloud/trello/power-ups/)
+- **Base URL:** `https://api.example.com`
 
-| Type | File |
-|---|---|
-| OpenAPI | [openapi/trello-rest-api-openapi.yml](openapi/trello-rest-api-openapi.yml) |
-| AsyncAPI | [asyncapi/trello-webhooks-asyncapi.yml](asyncapi/trello-webhooks-asyncapi.yml) |
-| JSON Schema (Board) | [json-schema/trello-board-schema.json](json-schema/trello-board-schema.json) |
-| JSON Schema (Card) | [json-schema/trello-card-schema.json](json-schema/trello-card-schema.json) |
-| JSON Schema (Webhook Payload) | [json-schema/trello-webhook-payload-schema.json](json-schema/trello-webhook-payload-schema.json) |
-| JSON Structure (Board) | [json-structure/trello-board-structure.json](json-structure/trello-board-structure.json) |
-| JSON Structure (Card) | [json-structure/trello-card-structure.json](json-structure/trello-card-structure.json) |
-| JSON-LD Context | [json-ld/trello-context.jsonld](json-ld/trello-context.jsonld) |
-| Spectral Rules | [rules/trello-spectral-rules.yml](rules/trello-spectral-rules.yml) |
-| Vocabulary | [vocabulary/trello-vocabulary.yml](vocabulary/trello-vocabulary.yml) |
+#### Tags
 
-## Capabilities
+- Customization
+- Extensions
+- Integrations
+- Plugins
 
-### Shared Definitions
+#### Properties
 
-| File | Description |
-|---|---|
-| [capabilities/shared/trello-rest-api.yaml](capabilities/shared/trello-rest-api.yaml) | Full Trello REST API consumed definition (boards, cards, lists, members, search, webhooks) |
-
-### Workflow Capabilities
-
-| File | Description |
-|---|---|
-| [capabilities/project-management.yaml](capabilities/project-management.yaml) | Unified project management capability for teams (boards, cards, lists, members, search) |
-
-## Examples
-
-- [examples/trello-get-board-cards-example.json](examples/trello-get-board-cards-example.json)
+- [Documentation](https://developer.atlassian.com/cloud/trello/power-ups/)
+- [Postman Collection](collections/trello-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/trello-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
-- [Developer Portal](https://developer.atlassian.com/cloud/trello/)
-- [Documentation](https://developer.atlassian.com/cloud/trello/rest/)
-- [Privacy Policy](https://www.atlassian.com/legal/privacy-policy)
-- [Terms of Service](https://www.atlassian.com/legal/cloud-terms-of-service)
-- [Support](https://support.atlassian.com/trello/)
-
-## Maintainers
-
-**FN:** Kin Lane  
-**Email:** kin@apievangelist.com
-
-## Tags
-
-Atlassian, Boards, Cards, Collaboration, Kanban, Project Management, Task Management
+- [GitHub Organization](https://github.com/trello)
+- [LinkedIn](https://www.linkedin.com/company/atlassian)
+- [JSON-LD](json-ld/trello-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [JSON Schema](json-schema/trello-board-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/trello-card-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/trello-webhook-payload-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Structure](json-structure/trello-board-structure.json)
+- [JSON Structure](json-structure/trello-card-structure.json)
+- [Spectral Rules](rules/trello-spectral-rules.yml)
+- [Vocabulary](vocabulary/trello-vocabulary.yml)
+- [Features](undefined)
