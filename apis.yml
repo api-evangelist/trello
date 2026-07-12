@@ -69,6 +69,14 @@ apis:
     utilities and helpers for interacting with the Trello interface, managing authorization,
     and accessing the REST API from within the Power-Up context.
 common:
+- type: TrustCenter
+  url: security/trello-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/trello-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/trello-domain-security.yml
+- type: Authentication
+  url: authentication/trello-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/trello
 - type: LinkedIn

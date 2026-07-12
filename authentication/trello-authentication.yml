@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/trello-rest-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: key
+  description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+  sources:
+  - openapi/trello-rest-api-openapi.yml
+- name: apiToken
+  type: apiKey
+  in: query
+  parameter: token
+  description: A user token that grants access to Trello resources. Obtained by authorizing
+    via the /1/authorize route or OAuth 1.0.
+  sources:
+  - openapi/trello-rest-api-openapi.yml
