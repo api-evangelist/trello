@@ -1,101 +1,183 @@
+# trello — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on trello.com
+#   - path-params-casing: snake @ 90% (n=101)
+#   - query-params-casing: snake @ 69% (n=201)
+#   - operationid-casing: camel @ 99% (n=101)
+#   - schema-names-casing: pascal @ 100% (n=20)
+#   - schema-properties-casing: snake @ 61% (n=168)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - operation-documents-401: 100% adherence
+#   - operation-documents-404: 88% adherence
+#   - pagination params observed: ['limit']
+#   - merge: kept 11 existing, added 9 measured, upgraded 0
+#   - added: servers-https-only, servers-expected-domain, path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, operation-documents-401, operation-documents-404, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   trello-operation-id-camel-case:
     description: Operation IDs must use camelCase
-    message: "Operation ID '{{value}}' must use camelCase"
+    message: Operation ID '{{value}}' must use camelCase
     severity: warn
-    given: "$.paths[*][*].operationId"
+    given: $.paths[*][*].operationId
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
+        match: ^[a-z][a-zA-Z0-9]*$
   trello-summary-title-case:
     description: Operation summaries must use Title Case
-    message: "Summary '{{value}}' should use Title Case"
+    message: Summary '{{value}}' should use Title Case
     severity: warn
-    given: "$.paths[*][*].summary"
+    given: $.paths[*][*].summary
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][a-zA-Z0-9 /()+&-]*$"
-
+        match: ^[A-Z][a-zA-Z0-9 /()+&-]*$
   trello-security-defined:
     description: All operations must define security requirements
-    message: "Operation must define security requirements"
+    message: Operation must define security requirements
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: security
       function: defined
-
   trello-response-200-get:
     description: All GET operations must define a 200 response
-    message: "GET operation must define a 200 success response"
+    message: GET operation must define a 200 success response
     severity: error
-    given: "$.paths[*].get"
+    given: $.paths[*].get
     then:
       field: responses.200
       function: defined
-
   trello-tag-defined:
     description: All operations must have at least one tag
-    message: "Operation must include at least one tag"
+    message: Operation must include at least one tag
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: defined
-
   trello-api-key-auth:
     description: Trello uses API key and token query parameter authentication
-    message: "Trello auth uses apiKey and token query parameters"
+    message: Trello auth uses apiKey and token query parameters
     severity: info
-    given: "$.components.securitySchemes"
+    given: $.components.securitySchemes
     then:
       function: defined
-
   trello-path-kebab-case:
     description: API paths should use kebab-case
-    message: "Path should use kebab-case"
+    message: Path should use kebab-case
     severity: warn
-    given: "$.paths[*]~"
+    given: $.paths[*]~
     then:
       function: pattern
       functionOptions:
-        match: "^(/[a-z0-9][a-z0-9-]*(/[a-z0-9][a-z0-9-]*|/\\{[a-zA-Z][a-zA-Z0-9]*\\})*)+$"
-
+        match: ^(/[a-z0-9][a-z0-9-]*(/[a-z0-9][a-z0-9-]*|/\{[a-zA-Z][a-zA-Z0-9]*\})*)+$
   trello-response-400-defined:
     description: Operations with request bodies should define a 400 response
-    message: "POST/PUT/PATCH operation should define 400 Bad Request"
+    message: POST/PUT/PATCH operation should define 400 Bad Request
     severity: warn
-    given: "$.paths[*][post,put,patch]"
+    given: $.paths[*][post,put,patch]
     then:
       field: responses.400
       function: defined
-
   trello-delete-response:
     description: DELETE operations should return 200 or 204
-    message: "DELETE operation should define a success response"
+    message: DELETE operation should define a success response
     severity: warn
-    given: "$.paths[*].delete"
+    given: $.paths[*].delete
     then:
       function: defined
-
   trello-post-request-body:
     description: POST operations that create resources should define a request body
-    message: "POST operation should include a requestBody"
+    message: POST operation should include a requestBody
     severity: warn
-    given: "$.paths[*].post"
+    given: $.paths[*].post
     then:
       field: requestBody
       function: defined
-
   trello-no-query-strings-in-path:
     description: Query string parameters must not appear in path definitions
-    message: "Path must not contain query strings"
+    message: Path must not contain query strings
     severity: error
-    given: "$.paths[*]~"
+    given: $.paths[*]~
     then:
       function: pattern
       functionOptions:
-        notMatch: "\\?"
+        notMatch: \?
+  servers-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  servers-expected-domain:
+    description: Server URLs should be on the trello.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: trello\.com
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  operation-documents-401:
+    description: Operations should document a 401 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '401'
+      function: truthy
+  operation-documents-404:
+    description: Operations should document a 404 response (documented on 88% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '404'
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
