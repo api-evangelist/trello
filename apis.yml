@@ -69,6 +69,8 @@ apis:
     utilities and helpers for interacting with the Trello interface, managing authorization,
     and accessing the REST API from within the Power-Up context.
 common:
+- type: AgenticAccess
+  url: agentic-access/trello-agentic-access.yml
 - type: TrustCenter
   url: security/trello-trust-center.yml
 - type: VulnerabilityDisclosure
