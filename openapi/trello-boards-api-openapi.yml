@@ -1,0 +1,1290 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Boards API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Boards
+  description: Operations for creating, retrieving, updating, and deleting boards, as well as managing board memberships, lists, cards, labels, and other board-level resources.
+paths:
+  /boards:
+    post:
+      operationId: createBoard
+      summary: Create a Board
+      description: Creates a new Trello board with the specified name and optional settings such as description, organization, permission level, and initial configuration.
+      tags:
+      - Boards
+      parameters:
+      - name: name
+        in: query
+        required: true
+        description: The name for the new board.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: defaultLabels
+        in: query
+        description: Whether to apply the default set of labels to the board.
+        schema:
+          type: boolean
+          default: true
+      - name: defaultLists
+        in: query
+        description: Whether to add the default set of lists to the board.
+        schema:
+          type: boolean
+          default: true
+      - name: desc
+        in: query
+        description: A description for the board.
+        schema:
+          type: string
+          maxLength: 16384
+      - name: idOrganization
+        in: query
+        description: The ID or name of the organization (workspace) the board should belong to.
+        schema:
+          type: string
+      - name: idBoardSource
+        in: query
+        description: The ID of a board to copy into the new board.
+        schema:
+          type: string
+      - name: prefs_permissionLevel
+        in: query
+        description: The permissions level of the board.
+        schema:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+          default: private
+      - name: prefs_voting
+        in: query
+        description: Who can vote on the board.
+        schema:
+          type: string
+          enum:
+          - disabled
+          - members
+          - observers
+          - org
+          - public
+          default: disabled
+      - name: prefs_comments
+        in: query
+        description: Who can comment on cards on the board.
+        schema:
+          type: string
+          enum:
+          - disabled
+          - members
+          - observers
+          - org
+          - public
+          default: members
+      - name: prefs_background
+        in: query
+        description: The background color or image for the board.
+        schema:
+          type: string
+          default: blue
+      - name: prefs_cardAging
+        in: query
+        description: The style of card aging to apply to the board.
+        schema:
+          type: string
+          enum:
+          - pirate
+          - regular
+          default: regular
+      - name: prefs_selfJoin
+        in: query
+        description: Whether workspace members can join the board themselves.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successfully created the board.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Board'
+        '400':
+          description: Bad request. Missing required parameters.
+        '401':
+          description: Unauthorized.
+  /boards/{id}:
+    get:
+      operationId: getBoard
+      summary: Get a Board
+      description: Retrieves a single board by its identifier, including its fields and optionally nested resources.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: actions
+        in: query
+        description: A comma-separated list of action types to include.
+        schema:
+          type: string
+      - name: boardStars
+        in: query
+        description: Whether to include board stars.
+        schema:
+          type: string
+          enum:
+          - mine
+          - none
+      - name: cards
+        in: query
+        description: Filter cards to include.
+        schema:
+          type: string
+          enum:
+          - all
+          - closed
+          - none
+          - open
+          - visible
+          default: none
+      - name: card_fields
+        in: query
+        description: A comma-separated list of card fields to include.
+        schema:
+          type: string
+      - name: checklists
+        in: query
+        description: Whether to include checklists.
+        schema:
+          type: string
+          enum:
+          - all
+          - none
+          default: none
+      - name: fields
+        in: query
+        description: A comma-separated list of board fields to include.
+        schema:
+          type: string
+          default: name,desc,descData,closed,idOrganization,pinned,url,shortUrl,prefs,labelNames
+      - name: labels
+        in: query
+        description: Whether to include labels.
+        schema:
+          type: string
+          enum:
+          - all
+          - none
+      - name: lists
+        in: query
+        description: Filter lists to include.
+        schema:
+          type: string
+          enum:
+          - all
+          - closed
+          - none
+          - open
+          default: none
+      - name: members
+        in: query
+        description: Whether to include members.
+        schema:
+          type: string
+          enum:
+          - admins
+          - all
+          - none
+          - normal
+          - owners
+          default: none
+      - name: memberships
+        in: query
+        description: Whether to include memberships.
+        schema:
+          type: string
+      - name: organization
+        in: query
+        description: Whether to include the organization.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully retrieved the board.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Board'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+    put:
+      operationId: updateBoard
+      summary: Update a Board
+      description: Updates a board's fields, including name, description, preferences, and organizational settings.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        description: The new name for the board.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: desc
+        in: query
+        description: The new description for the board.
+        schema:
+          type: string
+          maxLength: 16384
+      - name: closed
+        in: query
+        description: Whether the board is closed (archived).
+        schema:
+          type: boolean
+      - name: subscribed
+        in: query
+        description: Whether the authenticated member is subscribed to the board.
+        schema:
+          type: boolean
+      - name: idOrganization
+        in: query
+        description: The ID of the organization to move the board to.
+        schema:
+          type: string
+      - name: prefs/permissionLevel
+        in: query
+        description: The permission level for the board.
+        schema:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+      - name: prefs/selfJoin
+        in: query
+        description: Whether workspace members can join the board themselves.
+        schema:
+          type: boolean
+      - name: prefs/cardCovers
+        in: query
+        description: Whether card covers are enabled.
+        schema:
+          type: boolean
+      - name: prefs/hideVotes
+        in: query
+        description: Whether votes are hidden until voting is complete.
+        schema:
+          type: boolean
+      - name: prefs/background
+        in: query
+        description: The background for the board.
+        schema:
+          type: string
+      - name: prefs/cardAging
+        in: query
+        description: The card aging style.
+        schema:
+          type: string
+          enum:
+          - pirate
+          - regular
+      - name: labelNames/green
+        in: query
+        description: Name for the green label.
+        schema:
+          type: string
+      - name: labelNames/yellow
+        in: query
+        description: Name for the yellow label.
+        schema:
+          type: string
+      - name: labelNames/orange
+        in: query
+        description: Name for the orange label.
+        schema:
+          type: string
+      - name: labelNames/red
+        in: query
+        description: Name for the red label.
+        schema:
+          type: string
+      - name: labelNames/purple
+        in: query
+        description: Name for the purple label.
+        schema:
+          type: string
+      - name: labelNames/blue
+        in: query
+        description: Name for the blue label.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully updated the board.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Board'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+    delete:
+      operationId: deleteBoard
+      summary: Delete a Board
+      description: Permanently deletes a board. This action cannot be undone.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully deleted the board.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/actions:
+    get:
+      operationId: getBoardActions
+      summary: Get Actions for a Board
+      description: Retrieves a list of actions (activity events) associated with a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: filter
+        in: query
+        description: A comma-separated list of action types to filter by.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of actions to return.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 1000
+          default: 50
+      responses:
+        '200':
+          description: Successfully retrieved board actions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Action'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/cards:
+    get:
+      operationId: getBoardCards
+      summary: Get Cards on a Board
+      description: Retrieves all cards on a board, with optional filtering.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: fields
+        in: query
+        description: A comma-separated list of card fields to return.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved board cards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Card'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/cards/{filter}:
+    get:
+      operationId: getBoardCardsFilter
+      summary: Get Filtered Cards on a Board
+      description: Retrieves cards on a board filtered by status.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: filter
+        in: path
+        required: true
+        description: The filter to apply to the cards.
+        schema:
+          type: string
+          enum:
+          - all
+          - closed
+          - none
+          - open
+          - visible
+      responses:
+        '200':
+          description: Successfully retrieved filtered board cards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Card'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/checklists:
+    get:
+      operationId: getBoardChecklists
+      summary: Get Checklists on a Board
+      description: Retrieves all checklists on a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved board checklists.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Checklist'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/labels:
+    get:
+      operationId: getBoardLabels
+      summary: Get Labels on a Board
+      description: Retrieves all labels defined on a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: fields
+        in: query
+        description: A comma-separated list of label fields to return.
+        schema:
+          type: string
+          default: all
+      - name: limit
+        in: query
+        description: Maximum number of labels to return.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 1000
+          default: 50
+      responses:
+        '200':
+          description: Successfully retrieved board labels.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Label'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+    post:
+      operationId: createBoardLabel
+      summary: Create a Label on a Board
+      description: Creates a new label on a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        required: true
+        description: The name for the label.
+        schema:
+          type: string
+      - name: color
+        in: query
+        required: true
+        description: The color for the label.
+        schema:
+          type: string
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - 'null'
+      responses:
+        '200':
+          description: Successfully created the label.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+        '400':
+          description: Bad request. Missing required parameters.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/lists:
+    get:
+      operationId: getBoardLists
+      summary: Get Lists on a Board
+      description: Retrieves all lists on a board, with optional filtering.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: cards
+        in: query
+        description: Filter cards within lists.
+        schema:
+          type: string
+          enum:
+          - all
+          - closed
+          - none
+          - open
+          default: none
+      - name: card_fields
+        in: query
+        description: A comma-separated list of card fields to return.
+        schema:
+          type: string
+          default: all
+      - name: filter
+        in: query
+        description: Filter lists by status.
+        schema:
+          type: string
+          enum:
+          - all
+          - closed
+          - none
+          - open
+          default: open
+      - name: fields
+        in: query
+        description: A comma-separated list of list fields to return.
+        schema:
+          type: string
+          default: all
+      responses:
+        '200':
+          description: Successfully retrieved board lists.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrelloList'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+    post:
+      operationId: createBoardList
+      summary: Create a List on a Board
+      description: Creates a new list on the specified board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        required: true
+        description: The name for the new list.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: pos
+        in: query
+        description: The position of the list on the board.
+        schema:
+          type: string
+          default: top
+      responses:
+        '200':
+          description: Successfully created the list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrelloList'
+        '400':
+          description: Bad request. Missing required parameters.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/members:
+    get:
+      operationId: getBoardMembers
+      summary: Get Members of a Board
+      description: Retrieves the members associated with a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved board members.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+    put:
+      operationId: inviteBoardMember
+      summary: Invite a Member to a Board
+      description: Invites a member to a board via email.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: email
+        in: query
+        required: true
+        description: The email address of the member to invite.
+        schema:
+          type: string
+          format: email
+      - name: type
+        in: query
+        description: The type of membership.
+        schema:
+          type: string
+          enum:
+          - admin
+          - normal
+          - observer
+          default: normal
+      responses:
+        '200':
+          description: Successfully invited the member.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+  /boards/{id}/members/{idMember}:
+    put:
+      operationId: updateBoardMember
+      summary: Update a Board Member
+      description: Updates the membership type for a member on a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: idMember
+        in: path
+        required: true
+        description: The ID of the member to update.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: true
+        description: The new membership type.
+        schema:
+          type: string
+          enum:
+          - admin
+          - normal
+          - observer
+      responses:
+        '200':
+          description: Successfully updated the board member.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board or member not found.
+    delete:
+      operationId: removeBoardMember
+      summary: Remove a Member from a Board
+      description: Removes a member from a board.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: idMember
+        in: path
+        required: true
+        description: The ID of the member to remove.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully removed the member.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board or member not found.
+  /boards/{id}/memberships:
+    get:
+      operationId: getBoardMemberships
+      summary: Get Memberships of a Board
+      description: Retrieves the membership records for a board, including membership type and member references.
+      tags:
+      - Boards
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: filter
+        in: query
+        description: Filter memberships by type.
+        schema:
+          type: string
+          default: all
+      responses:
+        '200':
+          description: Successfully retrieved board memberships.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Board not found.
+components:
+  schemas:
+    CheckItem:
+      type: object
+      description: Represents a single item in a checklist that can be checked or unchecked.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the check item.
+        name:
+          type: string
+          description: The name of the check item.
+        state:
+          type: string
+          description: The completion state of the check item.
+          enum:
+          - complete
+          - incomplete
+        idChecklist:
+          type: string
+          description: The ID of the checklist the check item belongs to.
+        pos:
+          type: number
+          description: The position of the check item in the checklist.
+        due:
+          type: string
+          format: date-time
+          description: The due date for the check item.
+        idMember:
+          type: string
+          description: The ID of the member assigned to the check item.
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
+    Card:
+      type: object
+      description: Represents a Trello card, which is the fundamental unit of work on a board. Cards live within lists and can have members, labels, checklists, attachments, due dates, and comments.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the card.
+        name:
+          type: string
+          description: The name (title) of the card.
+        desc:
+          type: string
+          description: The description of the card in Markdown.
+        closed:
+          type: boolean
+          description: Whether the card is archived.
+        idBoard:
+          type: string
+          description: The ID of the board the card is on.
+        idList:
+          type: string
+          description: The ID of the list the card is in.
+        idShort:
+          type: integer
+          description: The short numeric identifier for the card within its board.
+        idMembers:
+          type: array
+          description: The IDs of members assigned to the card.
+          items:
+            type: string
+        idLabels:
+          type: array
+          description: The IDs of labels on the card.
+          items:
+            type: string
+        idChecklists:
+          type: array
+          description: The IDs of checklists on the card.
+          items:
+            type: string
+        idAttachmentCover:
+          type: string
+          description: The ID of the attachment used as the card cover.
+        pos:
+          type: number
+          description: The position of the card in its list.
+        due:
+          type: string
+          format: date-time
+          description: The due date for the card.
+        dueComplete:
+          type: boolean
+          description: Whether the due date has been marked as complete.
+        start:
+          type: string
+          format: date-time
+          description: The start date for the card.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the card.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the card.
+        shortLink:
+          type: string
+          description: The short link identifier for the card.
+        subscribed:
+          type: boolean
+          description: Whether the authenticated member is subscribed to the card.
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the card.
+        cover:
+          type: object
+          description: The card's cover image settings.
+          properties:
+            idAttachment:
+              type: string
+            color:
+              type: string
+            idUploadedBackground:
+              type: string
+            size:
+              type: string
+              enum:
+              - normal
+              - full
+            brightness:
+              type: string
+            idPlugin:
+              type: string
+        labels:
+          type: array
+          description: The labels on the card.
+          items:
+            $ref: '#/components/schemas/Label'
+        badges:
+          type: object
+          description: Badge counts and indicators for the card.
+          properties:
+            votes:
+              type: integer
+            attachments:
+              type: integer
+            comments:
+              type: integer
+            checkItems:
+              type: integer
+            checkItemsChecked:
+              type: integer
+            description:
+              type: boolean
+            due:
+              type: string
+              format: date-time
+            dueComplete:
+              type: boolean
+            subscribed:
+              type: boolean
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the member.
+        username:
+          type: string
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
+          type: array
+          description: The IDs of organizations the member belongs to.
+          items:
+            type: string
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+    TrelloList:
+      type: object
+      description: Represents a list on a Trello board. Lists are vertical columns that contain cards and represent stages in a workflow.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the list.
+        name:
+          type: string
+          description: The name of the list.
+        closed:
+          type: boolean
+          description: Whether the list is closed (archived).
+        idBoard:
+          type: string
+          description: The ID of the board the list belongs to.
+        pos:
+          type: number
+          description: The position of the list on the board.
+        subscribed:
+          type: boolean
+          description: Whether the authenticated member is subscribed to the list.
+        softLimit:
+          type: string
+          description: A soft limit for the number of cards in the list.
+    Board:
+      type: object
+      description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the board.
+        name:
+          type: string
+          description: The name of the board.
+        desc:
+          type: string
+          description: The description of the board.
+        descData:
+          type: object
+          description: Additional description data.
+        closed:
+          type: boolean
+          description: Whether the board is closed (archived).
+        idMemberCreator:
+          type: string
+          description: The ID of the member who created the board.
+        idOrganization:
+          type: string
+          description: The ID of the organization the board belongs to.
+        pinned:
+          type: boolean
+          description: Whether the board is pinned.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the board.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the board.
+        shortLink:
+          type: string
+          description: The short link identifier for the board.
+        prefs:
+          type: object
+          description: Board preferences and settings.
+          properties:
+            permissionLevel:
+              type: string
+              enum:
+              - org
+              - private
+              - public
+            hideVotes:
+              type: boolean
+            voting:
+              type: string
+            comments:
+              type: string
+            selfJoin:
+              type: boolean
+            cardCovers:
+              type: boolean
+            cardAging:
+              type: string
+              enum:
+              - pirate
+              - regular
+            background:
+              type: string
+            backgroundColor:
+              type: string
+            backgroundImage:
+              type: string
+            backgroundTile:
+              type: boolean
+            backgroundBrightness:
+              type: string
+        labelNames:
+          type: object
+          description: The names assigned to each label color on the board.
+          properties:
+            green:
+              type: string
+            yellow:
+              type: string
+            orange:
+              type: string
+            red:
+              type: string
+            purple:
+              type: string
+            blue:
+              type: string
+            sky:
+              type: string
+            lime:
+              type: string
+            pink:
+              type: string
+            black:
+              type: string
+        starred:
+          type: boolean
+          description: Whether the authenticated member has starred the board.
+        memberships:
+          type: array
+          description: The board's membership records.
+          items:
+            $ref: '#/components/schemas/Membership'
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the board.
+        dateLastView:
+          type: string
+          format: date-time
+          description: The date and time the authenticated member last viewed the board.
+    Action:
+      type: object
+      description: Represents an activity event that occurred on a Trello object, such as creating a card, adding a comment, or moving a card between lists.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the action.
+        idMemberCreator:
+          type: string
+          description: The ID of the member who performed the action.
+        type:
+          type: string
+          description: The type of action that was performed.
+        date:
+          type: string
+          format: date-time
+          description: The date and time the action was performed.
+        data:
+          type: object
+          description: Context data about the action, including references to the objects involved.
+          properties:
+            text:
+              type: string
+              description: The text content of the action, if applicable.
+            board:
+              type: object
+              description: Reference to the board involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                shortLink:
+                  type: string
+            card:
+              type: object
+              description: Reference to the card involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                idShort:
+                  type: integer
+                shortLink:
+                  type: string
+            list:
+              type: object
+              description: Reference to the list involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            old:
+              type: object
+              description: The previous values of fields that were changed.
+        display:
+          type: object
+          description: Display information for rendering the action.
+        memberCreator:
+          $ref: '#/components/schemas/Member'
+    Label:
+      type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the label.
+        idBoard:
+          type: string
+          description: The ID of the board the label belongs to.
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
+    Checklist:
+      type: object
+      description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the checklist.
+        name:
+          type: string
+          description: The name of the checklist.
+        idBoard:
+          type: string
+          description: The ID of the board the checklist belongs to.
+        idCard:
+          type: string
+          description: The ID of the card the checklist is on.
+        pos:
+          type: number
+          description: The position of the checklist on the card.
+        checkItems:
+          type: array
+          description: The check items in the checklist.
+          items:
+            $ref: '#/components/schemas/CheckItem'
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

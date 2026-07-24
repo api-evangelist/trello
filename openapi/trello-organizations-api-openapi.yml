@@ -1,0 +1,498 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Organizations API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Organizations
+  description: Operations for creating, retrieving, updating, and deleting Trello workspaces (organizations), including managing workspace members and settings.
+paths:
+  /organizations:
+    post:
+      operationId: createOrganization
+      summary: Create an Organization
+      description: Creates a new Trello organization (workspace).
+      tags:
+      - Organizations
+      parameters:
+      - name: displayName
+        in: query
+        required: true
+        description: The display name for the organization.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: desc
+        in: query
+        description: A description for the organization.
+        schema:
+          type: string
+          maxLength: 16384
+      - name: name
+        in: query
+        description: A short name (URL-friendly) for the organization.
+        schema:
+          type: string
+      - name: website
+        in: query
+        description: A URL for the organization's website.
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: Successfully created the organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /organizations/{id}:
+    get:
+      operationId: getOrganization
+      summary: Get an Organization
+      description: Retrieves a single organization (workspace) by its identifier.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization not found.
+    put:
+      operationId: updateOrganization
+      summary: Update an Organization
+      description: Updates an organization's fields such as name, description, and website.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        description: The new short name for the organization.
+        schema:
+          type: string
+      - name: displayName
+        in: query
+        description: The new display name for the organization.
+        schema:
+          type: string
+      - name: desc
+        in: query
+        description: The new description for the organization.
+        schema:
+          type: string
+          maxLength: 16384
+      - name: website
+        in: query
+        description: The new website URL for the organization.
+        schema:
+          type: string
+          format: uri
+      responses:
+        '200':
+          description: Successfully updated the organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization not found.
+    delete:
+      operationId: deleteOrganization
+      summary: Delete an Organization
+      description: Permanently deletes an organization (workspace) and all its boards.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully deleted the organization.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization not found.
+  /organizations/{id}/boards:
+    get:
+      operationId: getOrganizationBoards
+      summary: Get Boards in an Organization
+      description: Retrieves all boards in an organization.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: filter
+        in: query
+        description: Filter boards by status.
+        schema:
+          type: string
+          default: all
+      - name: fields
+        in: query
+        description: A comma-separated list of board fields to return.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved organization boards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Board'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization not found.
+  /organizations/{id}/members:
+    get:
+      operationId: getOrganizationMembers
+      summary: Get Members of an Organization
+      description: Retrieves all members of an organization.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved organization members.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization not found.
+  /organizations/{id}/members/{idMember}:
+    put:
+      operationId: updateOrganizationMember
+      summary: Update a Member of an Organization
+      description: Updates the membership type for a member in an organization.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: idMember
+        in: path
+        required: true
+        description: The ID of the member to update.
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: true
+        description: The new membership type.
+        schema:
+          type: string
+          enum:
+          - admin
+          - normal
+      responses:
+        '200':
+          description: Successfully updated the member.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization or member not found.
+    delete:
+      operationId: removeOrganizationMember
+      summary: Remove a Member from an Organization
+      description: Removes a member from an organization.
+      tags:
+      - Organizations
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: idMember
+        in: path
+        required: true
+        description: The ID of the member to remove.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully removed the member.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Organization or member not found.
+components:
+  schemas:
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the member.
+        username:
+          type: string
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
+          type: array
+          description: The IDs of organizations the member belongs to.
+          items:
+            type: string
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+    Organization:
+      type: object
+      description: Represents a Trello organization (workspace), which is a group of members who share boards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the organization.
+        name:
+          type: string
+          description: The short name (URL-friendly slug) of the organization.
+        displayName:
+          type: string
+          description: The display name of the organization.
+        desc:
+          type: string
+          description: The description of the organization.
+        url:
+          type: string
+          format: uri
+          description: The URL of the organization.
+        website:
+          type: string
+          format: uri
+          description: The website of the organization.
+        logoHash:
+          type: string
+          description: The hash of the organization's logo.
+        products:
+          type: array
+          description: The product IDs associated with the organization.
+          items:
+            type: integer
+        idBoards:
+          type: array
+          description: The IDs of boards in the organization.
+          items:
+            type: string
+        memberships:
+          type: array
+          description: The membership records for the organization.
+          items:
+            $ref: '#/components/schemas/Membership'
+    Board:
+      type: object
+      description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the board.
+        name:
+          type: string
+          description: The name of the board.
+        desc:
+          type: string
+          description: The description of the board.
+        descData:
+          type: object
+          description: Additional description data.
+        closed:
+          type: boolean
+          description: Whether the board is closed (archived).
+        idMemberCreator:
+          type: string
+          description: The ID of the member who created the board.
+        idOrganization:
+          type: string
+          description: The ID of the organization the board belongs to.
+        pinned:
+          type: boolean
+          description: Whether the board is pinned.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the board.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the board.
+        shortLink:
+          type: string
+          description: The short link identifier for the board.
+        prefs:
+          type: object
+          description: Board preferences and settings.
+          properties:
+            permissionLevel:
+              type: string
+              enum:
+              - org
+              - private
+              - public
+            hideVotes:
+              type: boolean
+            voting:
+              type: string
+            comments:
+              type: string
+            selfJoin:
+              type: boolean
+            cardCovers:
+              type: boolean
+            cardAging:
+              type: string
+              enum:
+              - pirate
+              - regular
+            background:
+              type: string
+            backgroundColor:
+              type: string
+            backgroundImage:
+              type: string
+            backgroundTile:
+              type: boolean
+            backgroundBrightness:
+              type: string
+        labelNames:
+          type: object
+          description: The names assigned to each label color on the board.
+          properties:
+            green:
+              type: string
+            yellow:
+              type: string
+            orange:
+              type: string
+            red:
+              type: string
+            purple:
+              type: string
+            blue:
+              type: string
+            sky:
+              type: string
+            lime:
+              type: string
+            pink:
+              type: string
+            black:
+              type: string
+        starred:
+          type: boolean
+          description: Whether the authenticated member has starred the board.
+        memberships:
+          type: array
+          description: The board's membership records.
+          items:
+            $ref: '#/components/schemas/Membership'
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the board.
+        dateLastView:
+          type: string
+          format: date-time
+          description: The date and time the authenticated member last viewed the board.
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

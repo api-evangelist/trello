@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Webhooks API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Webhooks
+  description: Operations for creating, retrieving, updating, and deleting webhooks that deliver real-time notifications when Trello models change.
+paths:
+  /webhooks:
+    post:
+      operationId: createWebhook
+      summary: Create a Webhook
+      description: Creates a new webhook. Trello will make an HTTP HEAD request to the callback URL to verify it returns a 200 status code before creating the webhook.
+      tags:
+      - Webhooks
+      parameters:
+      - name: callbackURL
+        in: query
+        required: true
+        description: A valid URL that will receive webhook callbacks via HTTP POST.
+        schema:
+          type: string
+          format: uri
+      - name: idModel
+        in: query
+        required: true
+        description: The ID of the model to watch for changes.
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: A description for the webhook.
+        schema:
+          type: string
+          maxLength: 16384
+      - name: active
+        in: query
+        description: Whether the webhook is active.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Successfully created the webhook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Bad request. Callback URL did not return 200 on HEAD request.
+        '401':
+          description: Unauthorized.
+  /webhooks/{id}:
+    get:
+      operationId: getWebhook
+      summary: Get a Webhook
+      description: Retrieves a webhook by its identifier.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the webhook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Webhook not found.
+    put:
+      operationId: updateWebhook
+      summary: Update a Webhook
+      description: Updates a webhook's callback URL, model, description, or active status.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: callbackURL
+        in: query
+        description: The new callback URL for the webhook.
+        schema:
+          type: string
+          format: uri
+      - name: idModel
+        in: query
+        description: The new model ID to watch.
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: The new description for the webhook.
+        schema:
+          type: string
+          maxLength: 16384
+      - name: active
+        in: query
+        description: Whether the webhook is active.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successfully updated the webhook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Webhook not found.
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a Webhook
+      description: Permanently deletes a webhook.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully deleted the webhook.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Webhook not found.
+components:
+  schemas:
+    Webhook:
+      type: object
+      description: Represents a webhook that delivers HTTP POST callbacks to a specified URL when changes occur on a watched Trello model.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the webhook.
+        description:
+          type: string
+          description: A description of the webhook.
+        idModel:
+          type: string
+          description: The ID of the model being watched.
+        callbackURL:
+          type: string
+          format: uri
+          description: The URL that will receive webhook callbacks.
+        active:
+          type: boolean
+          description: Whether the webhook is active.
+        consecutiveFailures:
+          type: integer
+          description: The number of consecutive delivery failures.
+        firstConsecutiveFailDate:
+          type: string
+          format: date-time
+          description: The date of the first consecutive failure.
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

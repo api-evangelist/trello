@@ -1,0 +1,370 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Checklists API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Checklists
+  description: Operations for creating, retrieving, updating, and deleting checklists and their check items on cards.
+paths:
+  /checklists:
+    post:
+      operationId: createChecklist
+      summary: Create a Checklist
+      description: Creates a new checklist, optionally on a specific card.
+      tags:
+      - Checklists
+      parameters:
+      - name: idCard
+        in: query
+        required: true
+        description: The ID of the card the checklist should be on.
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: The name of the checklist.
+        schema:
+          type: string
+      - name: pos
+        in: query
+        description: The position of the checklist on the card.
+        schema:
+          type: string
+          default: bottom
+      - name: idChecklistSource
+        in: query
+        description: The ID of a source checklist to copy.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully created the checklist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checklist'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /checklists/{id}:
+    get:
+      operationId: getChecklist
+      summary: Get a Checklist
+      description: Retrieves a single checklist by its identifier.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: cards
+        in: query
+        description: Filter cards to include.
+        schema:
+          type: string
+          enum:
+          - all
+          - closed
+          - none
+          - open
+          - visible
+          default: none
+      - name: checkItems
+        in: query
+        description: Whether to include check items.
+        schema:
+          type: string
+          enum:
+          - all
+          - none
+          default: all
+      - name: checkItem_fields
+        in: query
+        description: A comma-separated list of check item fields to return.
+        schema:
+          type: string
+          default: name,nameData,pos,state,due,dueReminder,idMember
+      - name: fields
+        in: query
+        description: A comma-separated list of checklist fields to return.
+        schema:
+          type: string
+          default: all
+      responses:
+        '200':
+          description: Successfully retrieved the checklist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checklist'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist not found.
+    put:
+      operationId: updateChecklist
+      summary: Update a Checklist
+      description: Updates a checklist's name or position.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        description: The new name for the checklist.
+        schema:
+          type: string
+      - name: pos
+        in: query
+        description: The new position for the checklist.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully updated the checklist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checklist'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist not found.
+    delete:
+      operationId: deleteChecklist
+      summary: Delete a Checklist
+      description: Permanently deletes a checklist.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully deleted the checklist.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist not found.
+  /checklists/{id}/checkItems:
+    get:
+      operationId: getChecklistCheckItems
+      summary: Get Check Items on a Checklist
+      description: Retrieves all check items on a checklist.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: filter
+        in: query
+        description: Filter check items by state.
+        schema:
+          type: string
+          enum:
+          - all
+          - none
+          default: all
+      - name: fields
+        in: query
+        description: A comma-separated list of check item fields to return.
+        schema:
+          type: string
+          default: name,nameData,pos,state,due,dueReminder,idMember
+      responses:
+        '200':
+          description: Successfully retrieved check items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CheckItem'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist not found.
+    post:
+      operationId: createCheckItem
+      summary: Create a Check Item on a Checklist
+      description: Creates a new check item on a checklist.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        required: true
+        description: The name of the check item.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: pos
+        in: query
+        description: The position of the check item in the checklist.
+        schema:
+          type: string
+          default: bottom
+      - name: checked
+        in: query
+        description: Whether the check item is initially checked.
+        schema:
+          type: boolean
+          default: false
+      - name: due
+        in: query
+        description: A due date for the check item.
+        schema:
+          type: string
+          format: date-time
+      - name: idMember
+        in: query
+        description: The ID of a member to assign to the check item.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully created the check item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckItem'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist not found.
+  /checklists/{id}/checkItems/{idCheckItem}:
+    get:
+      operationId: getCheckItem
+      summary: Get a Check Item on a Checklist
+      description: Retrieves a specific check item on a checklist.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: idCheckItem
+        in: path
+        required: true
+        description: The ID of the check item.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved the check item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckItem'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist or check item not found.
+    delete:
+      operationId: deleteCheckItem
+      summary: Delete a Check Item from a Checklist
+      description: Removes a check item from a checklist.
+      tags:
+      - Checklists
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: idCheckItem
+        in: path
+        required: true
+        description: The ID of the check item to delete.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully deleted the check item.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Checklist or check item not found.
+components:
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  schemas:
+    CheckItem:
+      type: object
+      description: Represents a single item in a checklist that can be checked or unchecked.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the check item.
+        name:
+          type: string
+          description: The name of the check item.
+        state:
+          type: string
+          description: The completion state of the check item.
+          enum:
+          - complete
+          - incomplete
+        idChecklist:
+          type: string
+          description: The ID of the checklist the check item belongs to.
+        pos:
+          type: number
+          description: The position of the check item in the checklist.
+        due:
+          type: string
+          format: date-time
+          description: The due date for the check item.
+        idMember:
+          type: string
+          description: The ID of the member assigned to the check item.
+    Checklist:
+      type: object
+      description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the checklist.
+        name:
+          type: string
+          description: The name of the checklist.
+        idBoard:
+          type: string
+          description: The ID of the board the checklist belongs to.
+        idCard:
+          type: string
+          description: The ID of the card the checklist is on.
+        pos:
+          type: number
+          description: The position of the checklist on the card.
+        checkItems:
+          type: array
+          description: The check items in the checklist.
+          items:
+            $ref: '#/components/schemas/CheckItem'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

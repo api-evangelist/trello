@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Notifications API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Notifications
+  description: Operations for retrieving and managing member notifications about activity on boards, cards, and other Trello objects.
+paths:
+  /members/{id}/notifications:
+    get:
+      operationId: getMemberNotifications
+      summary: Get Notifications for a Member
+      description: Retrieves notifications for a member.
+      tags:
+      - Notifications
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: entities
+        in: query
+        description: Whether to include entities.
+        schema:
+          type: boolean
+          default: false
+      - name: display
+        in: query
+        description: Whether to include display information.
+        schema:
+          type: boolean
+          default: false
+      - name: filter
+        in: query
+        description: A comma-separated list of notification types to filter by.
+        schema:
+          type: string
+          default: all
+      - name: read_filter
+        in: query
+        description: Filter by read status.
+        schema:
+          type: string
+          enum:
+          - all
+          - read
+          - unread
+          default: all
+      - name: limit
+        in: query
+        description: Maximum number of notifications to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 50
+      - name: before
+        in: query
+        description: Return notifications created before this notification ID.
+        schema:
+          type: string
+      - name: since
+        in: query
+        description: Return notifications created after this notification ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved notifications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Member not found.
+  /notifications/{id}:
+    get:
+      operationId: getNotification
+      summary: Get a Notification
+      description: Retrieves a single notification by its identifier.
+      tags:
+      - Notifications
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the notification.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Notification not found.
+    put:
+      operationId: updateNotification
+      summary: Update a Notification
+      description: Updates a notification's read status.
+      tags:
+      - Notifications
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: unread
+        in: query
+        description: Whether the notification is unread.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successfully updated the notification.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Notification not found.
+  /notifications/all/read:
+    post:
+      operationId: markAllNotificationsRead
+      summary: Mark All Notifications as Read
+      description: Marks all of the authenticated member's notifications as read.
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Successfully marked all notifications as read.
+        '401':
+          description: Unauthorized.
+components:
+  schemas:
+    Notification:
+      type: object
+      description: Represents a notification sent to a member about activity on their boards, cards, or organizations.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the notification.
+        type:
+          type: string
+          description: The type of notification.
+        date:
+          type: string
+          format: date-time
+          description: The date the notification was created.
+        unread:
+          type: boolean
+          description: Whether the notification is unread.
+        data:
+          type: object
+          description: Context data about the notification.
+          properties:
+            board:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                shortLink:
+                  type: string
+            card:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                idShort:
+                  type: integer
+                shortLink:
+                  type: string
+            text:
+              type: string
+        idMemberCreator:
+          type: string
+          description: The ID of the member who triggered the notification.
+        memberCreator:
+          $ref: '#/components/schemas/Member'
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the member.
+        username:
+          type: string
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
+          type: array
+          description: The IDs of organizations the member belongs to.
+          items:
+            type: string
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

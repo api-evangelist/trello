@@ -1,0 +1,591 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Search API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Search
+  description: Operations for searching across Trello boards, cards, members, and organizations using query strings.
+paths:
+  /search:
+    get:
+      operationId: search
+      summary: Search Trello
+      description: Searches for Trello objects matching the provided query string across boards, cards, members, and organizations.
+      tags:
+      - Search
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: The search query string.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: idBoards
+        in: query
+        description: A comma-separated list of board IDs to limit the search to.
+        schema:
+          type: string
+      - name: idOrganizations
+        in: query
+        description: A comma-separated list of organization IDs to limit the search to.
+        schema:
+          type: string
+      - name: idCards
+        in: query
+        description: A comma-separated list of card IDs to limit the search to.
+        schema:
+          type: string
+      - name: modelTypes
+        in: query
+        description: A comma-separated list of model types to return. Valid values are actions, boards, cards, members, and organizations.
+        schema:
+          type: string
+          default: all
+      - name: board_fields
+        in: query
+        description: Board fields to return.
+        schema:
+          type: string
+      - name: boards_limit
+        in: query
+        description: Maximum number of boards to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 10
+      - name: card_fields
+        in: query
+        description: Card fields to return.
+        schema:
+          type: string
+      - name: cards_limit
+        in: query
+        description: Maximum number of cards to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 10
+      - name: cards_page
+        in: query
+        description: Page number of card results.
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - name: partial
+        in: query
+        description: Whether to return partial matches.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully returned search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+        '401':
+          description: Unauthorized.
+  /search/members:
+    get:
+      operationId: searchMembers
+      summary: Search Members
+      description: Searches for Trello members matching the provided query string.
+      tags:
+      - Search
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: The search query string.
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 16384
+      - name: limit
+        in: query
+        description: Maximum number of members to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 20
+          default: 8
+      - name: idBoard
+        in: query
+        description: The ID of a board to limit the search to.
+        schema:
+          type: string
+      - name: idOrganization
+        in: query
+        description: The ID of an organization to limit the search to.
+        schema:
+          type: string
+      - name: onlyOrgMembers
+        in: query
+        description: Whether to limit results to members of the given organization.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successfully returned member search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+        '401':
+          description: Unauthorized.
+components:
+  schemas:
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
+    Card:
+      type: object
+      description: Represents a Trello card, which is the fundamental unit of work on a board. Cards live within lists and can have members, labels, checklists, attachments, due dates, and comments.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the card.
+        name:
+          type: string
+          description: The name (title) of the card.
+        desc:
+          type: string
+          description: The description of the card in Markdown.
+        closed:
+          type: boolean
+          description: Whether the card is archived.
+        idBoard:
+          type: string
+          description: The ID of the board the card is on.
+        idList:
+          type: string
+          description: The ID of the list the card is in.
+        idShort:
+          type: integer
+          description: The short numeric identifier for the card within its board.
+        idMembers:
+          type: array
+          description: The IDs of members assigned to the card.
+          items:
+            type: string
+        idLabels:
+          type: array
+          description: The IDs of labels on the card.
+          items:
+            type: string
+        idChecklists:
+          type: array
+          description: The IDs of checklists on the card.
+          items:
+            type: string
+        idAttachmentCover:
+          type: string
+          description: The ID of the attachment used as the card cover.
+        pos:
+          type: number
+          description: The position of the card in its list.
+        due:
+          type: string
+          format: date-time
+          description: The due date for the card.
+        dueComplete:
+          type: boolean
+          description: Whether the due date has been marked as complete.
+        start:
+          type: string
+          format: date-time
+          description: The start date for the card.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the card.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the card.
+        shortLink:
+          type: string
+          description: The short link identifier for the card.
+        subscribed:
+          type: boolean
+          description: Whether the authenticated member is subscribed to the card.
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the card.
+        cover:
+          type: object
+          description: The card's cover image settings.
+          properties:
+            idAttachment:
+              type: string
+            color:
+              type: string
+            idUploadedBackground:
+              type: string
+            size:
+              type: string
+              enum:
+              - normal
+              - full
+            brightness:
+              type: string
+            idPlugin:
+              type: string
+        labels:
+          type: array
+          description: The labels on the card.
+          items:
+            $ref: '#/components/schemas/Label'
+        badges:
+          type: object
+          description: Badge counts and indicators for the card.
+          properties:
+            votes:
+              type: integer
+            attachments:
+              type: integer
+            comments:
+              type: integer
+            checkItems:
+              type: integer
+            checkItemsChecked:
+              type: integer
+            description:
+              type: boolean
+            due:
+              type: string
+              format: date-time
+            dueComplete:
+              type: boolean
+            subscribed:
+              type: boolean
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the member.
+        username:
+          type: string
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
+          type: array
+          description: The IDs of organizations the member belongs to.
+          items:
+            type: string
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+    SearchResult:
+      type: object
+      description: Represents the results of a search query across Trello objects.
+      properties:
+        options:
+          type: object
+          description: The search options that were used.
+          properties:
+            terms:
+              type: array
+              items:
+                type: object
+            modifiers:
+              type: array
+              items:
+                type: object
+            modelTypes:
+              type: array
+              items:
+                type: string
+            partial:
+              type: boolean
+        boards:
+          type: array
+          description: Boards matching the search query.
+          items:
+            $ref: '#/components/schemas/Board'
+        cards:
+          type: array
+          description: Cards matching the search query.
+          items:
+            $ref: '#/components/schemas/Card'
+        members:
+          type: array
+          description: Members matching the search query.
+          items:
+            $ref: '#/components/schemas/Member'
+        organizations:
+          type: array
+          description: Organizations matching the search query.
+          items:
+            $ref: '#/components/schemas/Organization'
+    Organization:
+      type: object
+      description: Represents a Trello organization (workspace), which is a group of members who share boards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the organization.
+        name:
+          type: string
+          description: The short name (URL-friendly slug) of the organization.
+        displayName:
+          type: string
+          description: The display name of the organization.
+        desc:
+          type: string
+          description: The description of the organization.
+        url:
+          type: string
+          format: uri
+          description: The URL of the organization.
+        website:
+          type: string
+          format: uri
+          description: The website of the organization.
+        logoHash:
+          type: string
+          description: The hash of the organization's logo.
+        products:
+          type: array
+          description: The product IDs associated with the organization.
+          items:
+            type: integer
+        idBoards:
+          type: array
+          description: The IDs of boards in the organization.
+          items:
+            type: string
+        memberships:
+          type: array
+          description: The membership records for the organization.
+          items:
+            $ref: '#/components/schemas/Membership'
+    Board:
+      type: object
+      description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the board.
+        name:
+          type: string
+          description: The name of the board.
+        desc:
+          type: string
+          description: The description of the board.
+        descData:
+          type: object
+          description: Additional description data.
+        closed:
+          type: boolean
+          description: Whether the board is closed (archived).
+        idMemberCreator:
+          type: string
+          description: The ID of the member who created the board.
+        idOrganization:
+          type: string
+          description: The ID of the organization the board belongs to.
+        pinned:
+          type: boolean
+          description: Whether the board is pinned.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the board.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the board.
+        shortLink:
+          type: string
+          description: The short link identifier for the board.
+        prefs:
+          type: object
+          description: Board preferences and settings.
+          properties:
+            permissionLevel:
+              type: string
+              enum:
+              - org
+              - private
+              - public
+            hideVotes:
+              type: boolean
+            voting:
+              type: string
+            comments:
+              type: string
+            selfJoin:
+              type: boolean
+            cardCovers:
+              type: boolean
+            cardAging:
+              type: string
+              enum:
+              - pirate
+              - regular
+            background:
+              type: string
+            backgroundColor:
+              type: string
+            backgroundImage:
+              type: string
+            backgroundTile:
+              type: boolean
+            backgroundBrightness:
+              type: string
+        labelNames:
+          type: object
+          description: The names assigned to each label color on the board.
+          properties:
+            green:
+              type: string
+            yellow:
+              type: string
+            orange:
+              type: string
+            red:
+              type: string
+            purple:
+              type: string
+            blue:
+              type: string
+            sky:
+              type: string
+            lime:
+              type: string
+            pink:
+              type: string
+            black:
+              type: string
+        starred:
+          type: boolean
+          description: Whether the authenticated member has starred the board.
+        memberships:
+          type: array
+          description: The board's membership records.
+          items:
+            $ref: '#/components/schemas/Membership'
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the board.
+        dateLastView:
+          type: string
+          format: date-time
+          description: The date and time the authenticated member last viewed the board.
+    Label:
+      type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the label.
+        idBoard:
+          type: string
+          description: The ID of the board the label belongs to.
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

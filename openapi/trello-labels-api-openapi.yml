@@ -1,0 +1,196 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions Labels API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Labels
+  description: Operations for creating, retrieving, updating, and deleting labels on boards and cards.
+paths:
+  /labels:
+    post:
+      operationId: createLabel
+      summary: Create a Label
+      description: Creates a new label.
+      tags:
+      - Labels
+      parameters:
+      - name: name
+        in: query
+        required: true
+        description: The name for the label.
+        schema:
+          type: string
+      - name: color
+        in: query
+        required: true
+        description: The color for the label.
+        schema:
+          type: string
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - 'null'
+      - name: idBoard
+        in: query
+        required: true
+        description: The ID of the board the label belongs to.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully created the label.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+  /labels/{id}:
+    get:
+      operationId: getLabel
+      summary: Get a Label
+      description: Retrieves a single label by its identifier.
+      tags:
+      - Labels
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the label.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Label not found.
+    put:
+      operationId: updateLabel
+      summary: Update a Label
+      description: Updates a label's name and/or color.
+      tags:
+      - Labels
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: name
+        in: query
+        description: The new name for the label.
+        schema:
+          type: string
+      - name: color
+        in: query
+        description: The new color for the label.
+        schema:
+          type: string
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - 'null'
+      responses:
+        '200':
+          description: Successfully updated the label.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Label'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Label not found.
+    delete:
+      operationId: deleteLabel
+      summary: Delete a Label
+      description: Permanently deletes a label.
+      tags:
+      - Labels
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully deleted the label.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Label not found.
+components:
+  schemas:
+    Label:
+      type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the label.
+        idBoard:
+          type: string
+          description: The ID of the board the label belongs to.
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/

@@ -1,0 +1,811 @@
+openapi: 3.1.0
+info:
+  title: Trello REST Actions API
+  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
+  version: '1'
+  contact:
+    name: Atlassian Developer Support
+    url: https://developer.atlassian.com/support
+  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+servers:
+- url: https://api.trello.com/1
+  description: Trello API v1 Production Server
+security:
+- apiKey: []
+  apiToken: []
+tags:
+- name: Actions
+  description: Operations for retrieving and managing actions, which represent activity events that occur on Trello objects such as boards, lists, and cards.
+paths:
+  /actions/{id}:
+    get:
+      operationId: getAction
+      summary: Get an Action
+      description: Retrieves a single action by its identifier. Actions represent events that have occurred on Trello objects.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the action.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+        '401':
+          description: Unauthorized. Invalid or missing API key and token.
+        '404':
+          description: Action not found.
+    put:
+      operationId: updateAction
+      summary: Update an Action
+      description: Updates the text of a comment action. Only comment actions can be updated.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: text
+        in: query
+        description: The new text for the comment action.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully updated the action.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+    delete:
+      operationId: deleteAction
+      summary: Delete an Action
+      description: Deletes a comment action. Only comment actions can be deleted.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully deleted the action.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/{field}:
+    get:
+      operationId: getActionField
+      summary: Get a specific field of an Action
+      description: Retrieves a single field value from an action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      - name: field
+        in: path
+        required: true
+        description: The field to retrieve from the action.
+        schema:
+          type: string
+          enum:
+          - id
+          - idMemberCreator
+          - data
+          - type
+          - date
+          - limits
+          - display
+          - memberCreator
+      responses:
+        '200':
+          description: Successfully retrieved the field value.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/board:
+    get:
+      operationId: getActionBoard
+      summary: Get the Board for an Action
+      description: Retrieves the board associated with a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the board.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Board'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/card:
+    get:
+      operationId: getActionCard
+      summary: Get the Card for an Action
+      description: Retrieves the card associated with a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the card.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/list:
+    get:
+      operationId: getActionList
+      summary: Get the List for an Action
+      description: Retrieves the list associated with a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrelloList'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/member:
+    get:
+      operationId: getActionMember
+      summary: Get the Member of an Action
+      description: Retrieves the member who was the subject of a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the member.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/memberCreator:
+    get:
+      operationId: getActionMemberCreator
+      summary: Get the Member Creator of an Action
+      description: Retrieves the member who created a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the member creator.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/organization:
+    get:
+      operationId: getActionOrganization
+      summary: Get the Organization for an Action
+      description: Retrieves the organization (workspace) associated with a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+  /actions/{id}/reactions:
+    get:
+      operationId: getActionReactions
+      summary: List Reactions for an Action
+      description: Retrieves all emoji reactions on a given action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      responses:
+        '200':
+          description: Successfully retrieved the reactions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+    post:
+      operationId: createActionReaction
+      summary: Create a Reaction for an Action
+      description: Adds an emoji reaction to an action.
+      tags:
+      - Actions
+      parameters:
+      - $ref: '#/components/parameters/idParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                shortName:
+                  type: string
+                  description: The short name of the emoji to react with.
+                skinVariation:
+                  type: string
+                  description: The skin variation of the emoji.
+                native:
+                  type: string
+                  description: The native emoji character.
+                unified:
+                  type: string
+                  description: The unified code of the emoji.
+      responses:
+        '200':
+          description: Successfully created the reaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Action not found.
+components:
+  schemas:
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
+    Card:
+      type: object
+      description: Represents a Trello card, which is the fundamental unit of work on a board. Cards live within lists and can have members, labels, checklists, attachments, due dates, and comments.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the card.
+        name:
+          type: string
+          description: The name (title) of the card.
+        desc:
+          type: string
+          description: The description of the card in Markdown.
+        closed:
+          type: boolean
+          description: Whether the card is archived.
+        idBoard:
+          type: string
+          description: The ID of the board the card is on.
+        idList:
+          type: string
+          description: The ID of the list the card is in.
+        idShort:
+          type: integer
+          description: The short numeric identifier for the card within its board.
+        idMembers:
+          type: array
+          description: The IDs of members assigned to the card.
+          items:
+            type: string
+        idLabels:
+          type: array
+          description: The IDs of labels on the card.
+          items:
+            type: string
+        idChecklists:
+          type: array
+          description: The IDs of checklists on the card.
+          items:
+            type: string
+        idAttachmentCover:
+          type: string
+          description: The ID of the attachment used as the card cover.
+        pos:
+          type: number
+          description: The position of the card in its list.
+        due:
+          type: string
+          format: date-time
+          description: The due date for the card.
+        dueComplete:
+          type: boolean
+          description: Whether the due date has been marked as complete.
+        start:
+          type: string
+          format: date-time
+          description: The start date for the card.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the card.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the card.
+        shortLink:
+          type: string
+          description: The short link identifier for the card.
+        subscribed:
+          type: boolean
+          description: Whether the authenticated member is subscribed to the card.
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the card.
+        cover:
+          type: object
+          description: The card's cover image settings.
+          properties:
+            idAttachment:
+              type: string
+            color:
+              type: string
+            idUploadedBackground:
+              type: string
+            size:
+              type: string
+              enum:
+              - normal
+              - full
+            brightness:
+              type: string
+            idPlugin:
+              type: string
+        labels:
+          type: array
+          description: The labels on the card.
+          items:
+            $ref: '#/components/schemas/Label'
+        badges:
+          type: object
+          description: Badge counts and indicators for the card.
+          properties:
+            votes:
+              type: integer
+            attachments:
+              type: integer
+            comments:
+              type: integer
+            checkItems:
+              type: integer
+            checkItemsChecked:
+              type: integer
+            description:
+              type: boolean
+            due:
+              type: string
+              format: date-time
+            dueComplete:
+              type: boolean
+            subscribed:
+              type: boolean
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the member.
+        username:
+          type: string
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
+          type: array
+          description: The IDs of organizations the member belongs to.
+          items:
+            type: string
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+    TrelloList:
+      type: object
+      description: Represents a list on a Trello board. Lists are vertical columns that contain cards and represent stages in a workflow.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the list.
+        name:
+          type: string
+          description: The name of the list.
+        closed:
+          type: boolean
+          description: Whether the list is closed (archived).
+        idBoard:
+          type: string
+          description: The ID of the board the list belongs to.
+        pos:
+          type: number
+          description: The position of the list on the board.
+        subscribed:
+          type: boolean
+          description: Whether the authenticated member is subscribed to the list.
+        softLimit:
+          type: string
+          description: A soft limit for the number of cards in the list.
+    Organization:
+      type: object
+      description: Represents a Trello organization (workspace), which is a group of members who share boards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the organization.
+        name:
+          type: string
+          description: The short name (URL-friendly slug) of the organization.
+        displayName:
+          type: string
+          description: The display name of the organization.
+        desc:
+          type: string
+          description: The description of the organization.
+        url:
+          type: string
+          format: uri
+          description: The URL of the organization.
+        website:
+          type: string
+          format: uri
+          description: The website of the organization.
+        logoHash:
+          type: string
+          description: The hash of the organization's logo.
+        products:
+          type: array
+          description: The product IDs associated with the organization.
+          items:
+            type: integer
+        idBoards:
+          type: array
+          description: The IDs of boards in the organization.
+          items:
+            type: string
+        memberships:
+          type: array
+          description: The membership records for the organization.
+          items:
+            $ref: '#/components/schemas/Membership'
+    Board:
+      type: object
+      description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the board.
+        name:
+          type: string
+          description: The name of the board.
+        desc:
+          type: string
+          description: The description of the board.
+        descData:
+          type: object
+          description: Additional description data.
+        closed:
+          type: boolean
+          description: Whether the board is closed (archived).
+        idMemberCreator:
+          type: string
+          description: The ID of the member who created the board.
+        idOrganization:
+          type: string
+          description: The ID of the organization the board belongs to.
+        pinned:
+          type: boolean
+          description: Whether the board is pinned.
+        url:
+          type: string
+          format: uri
+          description: The full URL of the board.
+        shortUrl:
+          type: string
+          format: uri
+          description: The short URL of the board.
+        shortLink:
+          type: string
+          description: The short link identifier for the board.
+        prefs:
+          type: object
+          description: Board preferences and settings.
+          properties:
+            permissionLevel:
+              type: string
+              enum:
+              - org
+              - private
+              - public
+            hideVotes:
+              type: boolean
+            voting:
+              type: string
+            comments:
+              type: string
+            selfJoin:
+              type: boolean
+            cardCovers:
+              type: boolean
+            cardAging:
+              type: string
+              enum:
+              - pirate
+              - regular
+            background:
+              type: string
+            backgroundColor:
+              type: string
+            backgroundImage:
+              type: string
+            backgroundTile:
+              type: boolean
+            backgroundBrightness:
+              type: string
+        labelNames:
+          type: object
+          description: The names assigned to each label color on the board.
+          properties:
+            green:
+              type: string
+            yellow:
+              type: string
+            orange:
+              type: string
+            red:
+              type: string
+            purple:
+              type: string
+            blue:
+              type: string
+            sky:
+              type: string
+            lime:
+              type: string
+            pink:
+              type: string
+            black:
+              type: string
+        starred:
+          type: boolean
+          description: Whether the authenticated member has starred the board.
+        memberships:
+          type: array
+          description: The board's membership records.
+          items:
+            $ref: '#/components/schemas/Membership'
+        dateLastActivity:
+          type: string
+          format: date-time
+          description: The date and time of the last activity on the board.
+        dateLastView:
+          type: string
+          format: date-time
+          description: The date and time the authenticated member last viewed the board.
+    Action:
+      type: object
+      description: Represents an activity event that occurred on a Trello object, such as creating a card, adding a comment, or moving a card between lists.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the action.
+        idMemberCreator:
+          type: string
+          description: The ID of the member who performed the action.
+        type:
+          type: string
+          description: The type of action that was performed.
+        date:
+          type: string
+          format: date-time
+          description: The date and time the action was performed.
+        data:
+          type: object
+          description: Context data about the action, including references to the objects involved.
+          properties:
+            text:
+              type: string
+              description: The text content of the action, if applicable.
+            board:
+              type: object
+              description: Reference to the board involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                shortLink:
+                  type: string
+            card:
+              type: object
+              description: Reference to the card involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                idShort:
+                  type: integer
+                shortLink:
+                  type: string
+            list:
+              type: object
+              description: Reference to the list involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            old:
+              type: object
+              description: The previous values of fields that were changed.
+        display:
+          type: object
+          description: Display information for rendering the action.
+        memberCreator:
+          $ref: '#/components/schemas/Member'
+    Label:
+      type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the label.
+        idBoard:
+          type: string
+          description: The ID of the board the label belongs to.
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
+    Reaction:
+      type: object
+      description: Represents an emoji reaction on an action (comment).
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the reaction.
+        idMember:
+          type: string
+          description: The ID of the member who added the reaction.
+        idModel:
+          type: string
+          description: The ID of the action the reaction is on.
+        idEmoji:
+          type: string
+          description: The ID of the emoji.
+        member:
+          $ref: '#/components/schemas/Member'
+        emoji:
+          type: object
+          description: The emoji details.
+          properties:
+            unified:
+              type: string
+            native:
+              type: string
+            name:
+              type: string
+            shortName:
+              type: string
+            skinVariation:
+              type: string
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+      description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+externalDocs:
+  description: Trello REST API Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/
