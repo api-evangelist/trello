@@ -1,33 +1,21 @@
 aid: trello
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/trello.png
 url: https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
 modified: '2026-05-19'
 apis:
-- aid: trello:rest-api
-  name: Trello REST API
-  tags:
-  - Atlassian
-  - Boards
-  - Cards
-  - Collaboration
-  - Kanban
-  - Project Management
-  - Task Management
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.trello.com
-  humanURL: https://developer.atlassian.com/cloud/trello/rest/
-  properties:
-  - url: https://developer.atlassian.com/cloud/trello/rest/
-    type: Documentation
-  - url: openapi/trello-rest-api-openapi.yml
-    type: OpenAPI
-  - url: graphql/trello-graphql.md
-    type: GraphQL
-  description: The Trello REST API provides programmatic access to Trello boards,
-    lists, cards, members, labels, checklists, and other resources that make up the
-    Trello project management platform. Developers can create, read, update, and delete
-    Trello objects, manage team collaboration workflows, and automate task management
-    processes. The API uses key and token based authentication and returns JSON responses
-    for all endpoints.
 - aid: trello:webhooks-api
   name: Trello Webhooks API
   tags:
@@ -43,11 +31,11 @@ apis:
     type: Documentation
   - url: asyncapi/trello-webhooks-asyncapi.yml
     type: AsyncAPI
-  description: The Trello Webhooks API allows developers to receive real-time notifications
-    when changes occur on Trello models such as boards, lists, and cards. Rather than
-    polling the REST API for updates, webhooks push event data to a specified callback
-    URL via HTTP POST requests containing JSON payloads. Webhook requests are signed
-    with HMAC-SHA1 for verification, and webhooks are scoped to the permissions of
+  description: >-
+    The Trello Webhooks API allows developers to receive real-time notifications when changes occur on
+    Trello models such as boards, lists, and cards. Rather than polling the REST API for updates, webhooks
+    push event data to a specified callback URL via HTTP POST requests containing JSON payloads. Webhook
+    requests are signed with HMAC-SHA1 for verification, and webhooks are scoped to the permissions of
     the token used to create them.
 - aid: trello:power-ups
   name: Trello Power-Ups
@@ -62,12 +50,227 @@ apis:
   properties:
   - url: https://developer.atlassian.com/cloud/trello/power-ups/
     type: Documentation
-  description: Trello Power-Ups are a framework for extending and integrating with
-    the Trello platform. Power-Ups allow developers to add custom functionality to
-    Trello boards, including custom fields, board buttons, card buttons, card badges,
-    and card detail sections. The Power-Up framework provides a client library with
-    utilities and helpers for interacting with the Trello interface, managing authorization,
-    and accessing the REST API from within the Power-Up context.
+  description: >-
+    Trello Power-Ups are a framework for extending and integrating with the Trello platform. Power-Ups
+    allow developers to add custom functionality to Trello boards, including custom fields, board buttons,
+    card buttons, card badges, and card detail sections. The Power-Up framework provides a client library
+    with utilities and helpers for interacting with the Trello interface, managing authorization, and
+    accessing the REST API from within the Power-Up context.
+- aid: trello:trello-actions-api
+  name: trello Actions API
+  description: >-
+    Operations for retrieving and managing actions, which represent activity events that occur on Trello
+    objects such as boards, lists, and cards.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-actions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-boards-api
+  name: trello Boards API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting boards, as well as managing board memberships,
+    lists, cards, labels, and other board-level resources.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Boards
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-boards-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-cards-api
+  name: trello Cards API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting cards, including managing card attachments,
+    checklists, comments, labels, members, and stickers.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-cards-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-checklists-api
+  name: trello Checklists API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting checklists and their check items on cards.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Checklists
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-checklists-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-customfields-api
+  name: trello CustomFields API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting custom field definitions and their values
+    on boards and cards.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - CustomFields
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-customfields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-labels-api
+  name: trello Labels API
+  description: Operations for creating, retrieving, updating, and deleting labels on boards and cards.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-labels-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-lists-api
+  name: trello Lists API
+  description: Operations for creating, retrieving, updating, and archiving lists on boards.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-lists-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-members-api
+  name: trello Members API
+  description: >-
+    Operations for retrieving and updating member profiles, boards, organizations, and notification settings.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-members-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-notifications-api
+  name: trello Notifications API
+  description: >-
+    Operations for retrieving and managing member notifications about activity on boards, cards, and other
+    Trello objects.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-organizations-api
+  name: trello Organizations API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting Trello workspaces (organizations), including
+    managing workspace members and settings.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-plugins-api
+  name: trello Plugins API
+  description: >-
+    Operations for managing Power-Up plugins, including listing, updating, and creating plugin marketplace
+    listings.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Plugins
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-plugins-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-search-api
+  name: trello Search API
+  description: >-
+    Operations for searching across Trello boards, cards, members, and organizations using query strings.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-search-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-tokens-api
+  name: trello Tokens API
+  description: Operations for retrieving and deleting API tokens and their associated webhooks.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-webhooks-api
+  name: trello Webhooks API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting webhooks that deliver real-time notifications
+    when Trello models change.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/trello-agentic-access.yml
