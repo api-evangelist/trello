@@ -1,0 +1,40 @@
+{
+  "provider": "trello",
+  "sources": [
+    "trello-actions-api-openapi.yml",
+    "trello-boards-api-openapi.yml",
+    "trello-cards-api-openapi.yml",
+    "trello-checklists-api-openapi.yml",
+    "trello-customfields-api-openapi.yml",
+    "trello-labels-api-openapi.yml",
+    "trello-lists-api-openapi.yml",
+    "trello-members-api-openapi.yml",
+    "trello-notifications-api-openapi.yml",
+    "trello-organizations-api-openapi.yml",
+    "trello-plugins-api-openapi.yml",
+    "trello-search-api-openapi.yml",
+    "trello-tokens-api-openapi.yml",
+    "trello-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "trello-actions-api-openapi.yml",
+    "trello-boards-api-openapi.yml",
+    "trello-cards-api-openapi.yml",
+    "trello-checklists-api-openapi.yml",
+    "trello-customfields-api-openapi.yml",
+    "trello-labels-api-openapi.yml",
+    "trello-lists-api-openapi.yml",
+    "trello-members-api-openapi.yml",
+    "trello-notifications-api-openapi.yml",
+    "trello-organizations-api-openapi.yml",
+    "trello-plugins-api-openapi.yml",
+    "trello-search-api-openapi.yml",
+    "trello-tokens-api-openapi.yml",
+    "trello-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
