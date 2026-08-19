@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Tokens API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/tokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token to retrieve information about."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of token fields to return."
+              },
+              {
+                "name": "webhooks",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include webhooks associated with the token."
+              }
+            ]
+          },
+          "docs": "Retrieves information about an API token."
+        },
+        {
+          "info": {
+            "name": "Delete a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/tokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token to delete."
+              }
+            ]
+          },
+          "docs": "Revokes and deletes an API token. This will also remove any webhooks associated with the token."
+        },
+        {
+          "info": {
+            "name": "Get Webhooks for a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/tokens/:token/webhooks",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token."
+              }
+            ]
+          },
+          "docs": "Retrieves all webhooks associated with a token."
+        },
+        {
+          "info": {
+            "name": "Create a Webhook for a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/tokens/:token/webhooks",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The API token."
+              },
+              {
+                "name": "callbackURL",
+                "value": "",
+                "type": "query",
+                "description": "A valid URL that will receive webhook callbacks via HTTP POST."
+              },
+              {
+                "name": "idModel",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the model to watch for changes."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "A description for the webhook."
+              }
+            ]
+          },
+          "docs": "Creates a new webhook for a token. Trello will make an HTTP HEAD request to the callback URL to verify it before creating the webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

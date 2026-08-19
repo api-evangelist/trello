@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Labels API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/labels",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the label."
+              },
+              {
+                "name": "color",
+                "value": "",
+                "type": "query",
+                "description": "The color for the label."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board the label belongs to."
+              }
+            ]
+          },
+          "docs": "Creates a new label."
+        },
+        {
+          "info": {
+            "name": "Get a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single label by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the label."
+              },
+              {
+                "name": "color",
+                "value": "",
+                "type": "query",
+                "description": "The new color for the label."
+              }
+            ]
+          },
+          "docs": "Updates a label's name and/or color."
+        },
+        {
+          "info": {
+            "name": "Delete a Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a label."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

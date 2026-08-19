@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Members API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to include."
+              },
+              {
+                "name": "boards",
+                "value": "",
+                "type": "query",
+                "description": "Filter boards to include."
+              },
+              {
+                "name": "organizations",
+                "value": "",
+                "type": "query",
+                "description": "Filter organizations to include."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of member fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a member by their identifier or username."
+        },
+        {
+          "info": {
+            "name": "Update a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fullName",
+                "value": "",
+                "type": "query",
+                "description": "The new full name for the member."
+              },
+              {
+                "name": "initials",
+                "value": "",
+                "type": "query",
+                "description": "The new initials for the member."
+              },
+              {
+                "name": "bio",
+                "value": "",
+                "type": "query",
+                "description": "The new bio for the member."
+              }
+            ]
+          },
+          "docs": "Updates a member's profile fields such as full name, initials, and bio."
+        },
+        {
+          "info": {
+            "name": "Get Boards for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/boards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter boards by status."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board fields to return."
+              },
+              {
+                "name": "lists",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include lists."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the organization."
+              }
+            ]
+          },
+          "docs": "Retrieves all boards that a member has access to."
+        },
+        {
+          "info": {
+            "name": "Get Cards for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/cards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter cards by status."
+              }
+            ]
+          },
+          "docs": "Retrieves all cards assigned to a member."
+        },
+        {
+          "info": {
+            "name": "Get Organizations for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/organizations",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter organizations."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of organization fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all organizations (workspaces) that a member belongs to."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

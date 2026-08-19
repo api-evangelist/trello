@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Plugins API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/plugins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a Power-Up plugin by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/plugins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Updates a Power-Up plugin's information."
+        },
+        {
+          "info": {
+            "name": "Create a Listing for a Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/plugins/:id/listings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new marketplace listing for a Power-Up plugin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Lists API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/lists",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the new list."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board the list should be created on."
+              },
+              {
+                "name": "idListSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a list to copy into the new list."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the list on the board."
+              }
+            ]
+          },
+          "docs": "Creates a new list on the specified board."
+        },
+        {
+          "info": {
+            "name": "Get a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of list fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a single list by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the list."
+              },
+              {
+                "name": "closed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the list is closed (archived)."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board to move the list to."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The new position of the list."
+              },
+              {
+                "name": "subscribed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the authenticated member is subscribed to the list."
+              }
+            ]
+          },
+          "docs": "Updates a list's name, position, closed status, or board assignment."
+        },
+        {
+          "info": {
+            "name": "Get Actions on a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id/actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to filter by."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of actions associated with a list."
+        },
+        {
+          "info": {
+            "name": "Get the Board for a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id/board",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the board that a list belongs to."
+        },
+        {
+          "info": {
+            "name": "Get Cards in a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/lists/:id/cards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all cards in a list."
+        },
+        {
+          "info": {
+            "name": "Archive All Cards in a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/lists/:id/archiveAllCards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Archives all cards in a list."
+        },
+        {
+          "info": {
+            "name": "Move All Cards in a List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/lists/:id/moveAllCards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the destination board."
+              },
+              {
+                "name": "idList",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the destination list."
+              }
+            ]
+          },
+          "docs": "Moves all cards in a list to a different list on the same or a different board."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

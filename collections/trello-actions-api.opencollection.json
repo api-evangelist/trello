@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single action by its identifier. Actions represent events that have occurred on Trello objects."
+        },
+        {
+          "info": {
+            "name": "Update an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/actions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "The new text for the comment action."
+              }
+            ]
+          },
+          "docs": "Updates the text of a comment action. Only comment actions can be updated."
+        },
+        {
+          "info": {
+            "name": "Delete an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/actions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Deletes a comment action. Only comment actions can be deleted."
+        },
+        {
+          "info": {
+            "name": "Get a specific field of an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/:field",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "path",
+                "description": "The field to retrieve from the action."
+              }
+            ]
+          },
+          "docs": "Retrieves a single field value from an action."
+        },
+        {
+          "info": {
+            "name": "Get the Board for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/board",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the board associated with a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Card for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/card",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the card associated with a given action."
+        },
+        {
+          "info": {
+            "name": "Get the List for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/list",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the list associated with a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Member of an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/member",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the member who was the subject of a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Member Creator of an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/memberCreator",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the member who created a given action."
+        },
+        {
+          "info": {
+            "name": "Get the Organization for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/organization",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the organization (workspace) associated with a given action."
+        },
+        {
+          "info": {
+            "name": "List Reactions for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/actions/:id/reactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all emoji reactions on a given action."
+        },
+        {
+          "info": {
+            "name": "Create a Reaction for an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/actions/:id/reactions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an emoji reaction to an action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

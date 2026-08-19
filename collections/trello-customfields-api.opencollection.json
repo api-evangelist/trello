@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions CustomFields API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CustomFields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/customFields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom field definition on a board."
+        },
+        {
+          "info": {
+            "name": "Get a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/customFields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a custom field definition by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/customFields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a custom field definition."
+        },
+        {
+          "info": {
+            "name": "Delete a Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/customFields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a custom field definition and removes its values from all cards on the board."
+        },
+        {
+          "info": {
+            "name": "Get Custom Field Items on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/customFieldItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves the custom field values set on a specific card."
+        },
+        {
+          "info": {
+            "name": "Set a Custom Field Value on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/cards/:idCard/customField/:idCustomField/item",
+            "params": [
+              {
+                "name": "idCard",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the card."
+              },
+              {
+                "name": "idCustomField",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the custom field."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets or updates the value of a custom field on a card."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

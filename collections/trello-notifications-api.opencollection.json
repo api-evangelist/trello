@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Notifications API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Notifications for a Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/members/:id/notifications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "entities",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include entities."
+              },
+              {
+                "name": "display",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include display information."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of notification types to filter by."
+              },
+              {
+                "name": "read_filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by read status."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notifications to return."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Return notifications created before this notification ID."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Return notifications created after this notification ID."
+              }
+            ]
+          },
+          "docs": "Retrieves notifications for a member."
+        },
+        {
+          "info": {
+            "name": "Get a Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single notification by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "unread",
+                "value": "",
+                "type": "query",
+                "description": "Whether the notification is unread."
+              }
+            ]
+          },
+          "docs": "Updates a notification's read status."
+        },
+        {
+          "info": {
+            "name": "Mark All Notifications as Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/notifications/all/read"
+          },
+          "docs": "Marks all of the authenticated member's notifications as read."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

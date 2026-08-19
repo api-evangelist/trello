@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Checklists API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checklists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/checklists",
+            "params": [
+              {
+                "name": "idCard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the card the checklist should be on."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the checklist."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the checklist on the card."
+              },
+              {
+                "name": "idChecklistSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a source checklist to copy."
+              }
+            ]
+          },
+          "docs": "Creates a new checklist, optionally on a specific card."
+        },
+        {
+          "info": {
+            "name": "Get a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/checklists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "cards",
+                "value": "",
+                "type": "query",
+                "description": "Filter cards to include."
+              },
+              {
+                "name": "checkItems",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include check items."
+              },
+              {
+                "name": "checkItem_fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of check item fields to return."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of checklist fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves a single checklist by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/checklists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the checklist."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The new position for the checklist."
+              }
+            ]
+          },
+          "docs": "Updates a checklist's name or position."
+        },
+        {
+          "info": {
+            "name": "Delete a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/checklists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a checklist."
+        },
+        {
+          "info": {
+            "name": "Get Check Items on a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter check items by state."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of check item fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all check items on a checklist."
+        },
+        {
+          "info": {
+            "name": "Create a Check Item on a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the check item."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the check item in the checklist."
+              },
+              {
+                "name": "checked",
+                "value": "",
+                "type": "query",
+                "description": "Whether the check item is initially checked."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "A due date for the check item."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a member to assign to the check item."
+              }
+            ]
+          },
+          "docs": "Creates a new check item on a checklist."
+        },
+        {
+          "info": {
+            "name": "Get a Check Item on a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems/:idCheckItem",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idCheckItem",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the check item."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific check item on a checklist."
+        },
+        {
+          "info": {
+            "name": "Delete a Check Item from a Checklist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/checklists/:id/checkItems/:idCheckItem",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idCheckItem",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the check item to delete."
+              }
+            ]
+          },
+          "docs": "Removes a check item from a checklist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

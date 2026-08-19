@@ -1,0 +1,1876 @@
+{
+  "item": [
+    {
+      "id": "bc72a1da-6af6-45ec-9639-3550a3c94a6d",
+      "name": "Checklists",
+      "description": {
+        "content": "Operations for creating, retrieving, updating, and deleting checklists and their check items on cards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18bb3c68-9091-40b2-b537-f781178ec1a9",
+          "name": "Create a Checklist",
+          "request": {
+            "name": "Create a Checklist",
+            "description": {
+              "content": "Creates a new checklist, optionally on a specific card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idCard",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the card the checklist should be on."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the checklist."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "bottom",
+                  "description": "The position of the checklist on the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "idChecklistSource",
+                  "value": "<string>",
+                  "description": "The ID of a source checklist to copy."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41d8f24d-1c34-47e4-ac71-5ca8b9e233a3",
+              "name": "Successfully created the checklist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idCard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "idChecklistSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"idBoard\": \"string\",\n  \"idCard\": \"string\",\n  \"pos\": 4051.3146080124716,\n  \"checkItems\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 4698.280333496654,\n      \"due\": \"1962-01-29T12:57:05.645Z\",\n      \"idMember\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 2653.227148335985,\n      \"due\": \"1949-03-08T08:49:21.859Z\",\n      \"idMember\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10794f04-3e89-4d1d-9b54-38ac2065ed60",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idCard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "idChecklistSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f63322f5-c511-49d4-a0b1-729a6a2a6cde",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idCard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "idChecklistSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "daefb4ba-c644-46fb-9402-a71e30da9dff",
+          "name": "Get a Checklist",
+          "request": {
+            "name": "Get a Checklist",
+            "description": {
+              "content": "Retrieves a single checklist by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cards",
+                  "value": "none",
+                  "description": "Filter cards to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkItems",
+                  "value": "all",
+                  "description": "Whether to include check items."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkItem_fields",
+                  "value": "name,nameData,pos,state,due,dueReminder,idMember",
+                  "description": "A comma-separated list of check item fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "all",
+                  "description": "A comma-separated list of checklist fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5068739-3623-49ff-8aa2-28c4968bc723",
+              "name": "Successfully retrieved the checklist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "checkItems",
+                      "value": "all"
+                    },
+                    {
+                      "key": "checkItem_fields",
+                      "value": "name,nameData,pos,state,due,dueReminder,idMember"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"idBoard\": \"string\",\n  \"idCard\": \"string\",\n  \"pos\": 4051.3146080124716,\n  \"checkItems\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 4698.280333496654,\n      \"due\": \"1962-01-29T12:57:05.645Z\",\n      \"idMember\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 2653.227148335985,\n      \"due\": \"1949-03-08T08:49:21.859Z\",\n      \"idMember\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b30ae2a-b449-4a28-af58-8120db8564ba",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "checkItems",
+                      "value": "all"
+                    },
+                    {
+                      "key": "checkItem_fields",
+                      "value": "name,nameData,pos,state,due,dueReminder,idMember"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9ccc045-01dd-4d56-a24f-404c44a92372",
+              "name": "Checklist not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "checkItems",
+                      "value": "all"
+                    },
+                    {
+                      "key": "checkItem_fields",
+                      "value": "name,nameData,pos,state,due,dueReminder,idMember"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7975757-0c12-4493-a5ba-d902e7483447",
+          "name": "Update a Checklist",
+          "request": {
+            "name": "Update a Checklist",
+            "description": {
+              "content": "Updates a checklist's name or position.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The new name for the checklist."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "<string>",
+                  "description": "The new position for the checklist."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "184cc6ee-5170-4ad1-a0cc-94d8c742076a",
+              "name": "Successfully updated the checklist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"idBoard\": \"string\",\n  \"idCard\": \"string\",\n  \"pos\": 4051.3146080124716,\n  \"checkItems\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 4698.280333496654,\n      \"due\": \"1962-01-29T12:57:05.645Z\",\n      \"idMember\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 2653.227148335985,\n      \"due\": \"1949-03-08T08:49:21.859Z\",\n      \"idMember\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02739de8-0f4d-4e36-8bc5-12fbb6c0a178",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d856d13c-f724-473f-a7d4-ed95017a3dc6",
+              "name": "Checklist not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "904e411f-e66e-4915-a840-20564bd37d79",
+          "name": "Delete a Checklist",
+          "request": {
+            "name": "Delete a Checklist",
+            "description": {
+              "content": "Permanently deletes a checklist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10a58040-c918-4a4b-81e5-a551088dd132",
+              "name": "Successfully deleted the checklist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97a33eb6-e4d3-4ad1-9510-9c25aab7365a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3af526c6-6e01-4c76-98a7-6fc6a217bc81",
+              "name": "Checklist not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf65e079-66bd-421a-92b3-cb488ff93081",
+          "name": "Get Check Items on a Checklist",
+          "request": {
+            "name": "Get Check Items on a Checklist",
+            "description": {
+              "content": "Retrieves all check items on a checklist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id",
+                "checkItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "all",
+                  "description": "Filter check items by state."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "name,nameData,pos,state,due,dueReminder,idMember",
+                  "description": "A comma-separated list of check item fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "797b7349-1246-4397-b3ac-f9dc62e4542c",
+              "name": "Successfully retrieved check items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,nameData,pos,state,due,dueReminder,idMember"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"state\": \"complete\",\n    \"idChecklist\": \"string\",\n    \"pos\": 9655.16809304845,\n    \"due\": \"2024-11-27T22:47:02.667Z\",\n    \"idMember\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"state\": \"complete\",\n    \"idChecklist\": \"string\",\n    \"pos\": 9179.241590555459,\n    \"due\": \"2003-03-02T13:58:39.456Z\",\n    \"idMember\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3fca1f9-3432-471d-9ecc-7c89abd74f78",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,nameData,pos,state,due,dueReminder,idMember"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21b86660-08bb-43f3-a62f-68f0018f8119",
+              "name": "Checklist not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,nameData,pos,state,due,dueReminder,idMember"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a913c7c3-3380-470b-9cb7-9390c8bd5004",
+          "name": "Create a Check Item on a Checklist",
+          "request": {
+            "name": "Create a Check Item on a Checklist",
+            "description": {
+              "content": "Creates a new check item on a checklist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id",
+                "checkItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the check item."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "bottom",
+                  "description": "The position of the check item in the checklist."
+                },
+                {
+                  "disabled": false,
+                  "key": "checked",
+                  "value": "false",
+                  "description": "Whether the check item is initially checked."
+                },
+                {
+                  "disabled": false,
+                  "key": "due",
+                  "value": "<dateTime>",
+                  "description": "A due date for the check item."
+                },
+                {
+                  "disabled": false,
+                  "key": "idMember",
+                  "value": "<string>",
+                  "description": "The ID of a member to assign to the check item."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2974e7af-9977-49c2-bc0a-5a43345db107",
+              "name": "Successfully created the check item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "false"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idMember",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"complete\",\n  \"idChecklist\": \"string\",\n  \"pos\": 36.29561590801633,\n  \"due\": \"1973-08-29T06:45:27.997Z\",\n  \"idMember\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55480fda-91ab-499b-8e12-12084a375ecb",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "false"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idMember",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e1e5d17c-544d-4da4-87f1-abffebfb3847",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "false"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idMember",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b4515ea-07f4-4909-8205-7a26532f477d",
+              "name": "Checklist not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "false"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idMember",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7f49290-c2e1-4255-8aef-535cc2f6a1e7",
+          "name": "Get a Check Item on a Checklist",
+          "request": {
+            "name": "Get a Check Item on a Checklist",
+            "description": {
+              "content": "Retrieves a specific check item on a checklist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id",
+                "checkItems",
+                ":idCheckItem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idCheckItem",
+                  "description": "(Required) The ID of the check item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ddfe69a-8751-486a-a0e8-6bce08095fdc",
+              "name": "Successfully retrieved the check item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems",
+                    ":idCheckItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCheckItem",
+                      "description": "(Required) The ID of the check item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"complete\",\n  \"idChecklist\": \"string\",\n  \"pos\": 36.29561590801633,\n  \"due\": \"1973-08-29T06:45:27.997Z\",\n  \"idMember\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1738ab30-5b08-4df8-ba03-c688179b0588",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems",
+                    ":idCheckItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCheckItem",
+                      "description": "(Required) The ID of the check item."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5ce1b85-9db6-47b6-9ca2-7e1c6134b8f0",
+              "name": "Checklist or check item not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems",
+                    ":idCheckItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCheckItem",
+                      "description": "(Required) The ID of the check item."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f263283-0421-4732-9eee-b26cc8274a04",
+          "name": "Delete a Check Item from a Checklist",
+          "request": {
+            "name": "Delete a Check Item from a Checklist",
+            "description": {
+              "content": "Removes a check item from a checklist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checklists",
+                ":id",
+                "checkItems",
+                ":idCheckItem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idCheckItem",
+                  "description": "(Required) The ID of the check item to delete."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc33ad0a-5feb-4191-b9df-d9d36a5cc891",
+              "name": "Successfully deleted the check item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems",
+                    ":idCheckItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCheckItem",
+                      "description": "(Required) The ID of the check item to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d52b143a-5f50-4215-b201-cdcfe729ac45",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems",
+                    ":idCheckItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCheckItem",
+                      "description": "(Required) The ID of the check item to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3bd594bb-48f1-4cd4-bf23-2e5f1e3c5f12",
+              "name": "Checklist or check item not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checklists",
+                    ":id",
+                    "checkItems",
+                    ":idCheckItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCheckItem",
+                      "description": "(Required) The ID of the check item to delete."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eaabbf0a-4ef6-48da-b83b-572dd3c52e64",
+    "name": "Trello REST Actions Checklists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

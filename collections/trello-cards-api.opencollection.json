@@ -1,0 +1,612 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Cards API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the card."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The description for the card."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the card in the list."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "The due date for the card."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date for the card."
+              },
+              {
+                "name": "dueComplete",
+                "value": "",
+                "type": "query",
+                "description": "Whether the due date is complete."
+              },
+              {
+                "name": "idList",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the list the card should be created in."
+              },
+              {
+                "name": "idMembers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of member IDs to add to the card."
+              },
+              {
+                "name": "idLabels",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label IDs to add to the card."
+              },
+              {
+                "name": "urlSource",
+                "value": "",
+                "type": "query",
+                "description": "A URL to attach to the card."
+              },
+              {
+                "name": "idCardSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a card to copy into the new card."
+              }
+            ]
+          },
+          "docs": "Creates a new card on the specified list."
+        },
+        {
+          "info": {
+            "name": "Get a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card fields to return."
+              },
+              {
+                "name": "actions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to include."
+              },
+              {
+                "name": "attachments",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include attachments."
+              },
+              {
+                "name": "members",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include members."
+              },
+              {
+                "name": "checkItemStates",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include check item states."
+              },
+              {
+                "name": "checklists",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include checklists."
+              }
+            ]
+          },
+          "docs": "Retrieves a single card by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new name for the card."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the card."
+              },
+              {
+                "name": "closed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the card is archived."
+              },
+              {
+                "name": "idMembers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of member IDs."
+              },
+              {
+                "name": "idLabels",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of label IDs."
+              },
+              {
+                "name": "idList",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the list to move the card to."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the board to move the card to."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The new position of the card."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "The new due date for the card."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date for the card."
+              },
+              {
+                "name": "dueComplete",
+                "value": "",
+                "type": "query",
+                "description": "Whether the due date is complete."
+              },
+              {
+                "name": "subscribed",
+                "value": "",
+                "type": "query",
+                "description": "Whether the authenticated member is subscribed to the card."
+              },
+              {
+                "name": "cover",
+                "value": "",
+                "type": "query",
+                "description": "JSON string for the card cover."
+              }
+            ]
+          },
+          "docs": "Updates the fields of a card, including name, description, position, due date, list assignment, and more."
+        },
+        {
+          "info": {
+            "name": "Delete a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a card. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get Actions on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action types to filter by."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of actions (activity events) on a card."
+        },
+        {
+          "info": {
+            "name": "Add a Comment to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/actions/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "The comment text."
+              }
+            ]
+          },
+          "docs": "Adds a new comment to a card."
+        },
+        {
+          "info": {
+            "name": "Get Attachments on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of attachment fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all attachments on a card."
+        },
+        {
+          "info": {
+            "name": "Create an Attachment on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the attachment."
+              },
+              {
+                "name": "mimeType",
+                "value": "",
+                "type": "query",
+                "description": "The MIME type of the attachment."
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "A URL to attach to the card."
+              }
+            ]
+          },
+          "docs": "Adds a new attachment to a card, either from a URL or a file upload."
+        },
+        {
+          "info": {
+            "name": "Get Checklists on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/checklists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all checklists on a card."
+        },
+        {
+          "info": {
+            "name": "Create a Checklist on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/checklists",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the checklist."
+              },
+              {
+                "name": "idChecklistSource",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a checklist to copy into the new checklist."
+              },
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "The position of the checklist on the card."
+              }
+            ]
+          },
+          "docs": "Creates a new checklist on the specified card."
+        },
+        {
+          "info": {
+            "name": "Add a Label to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/labels",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the label to add."
+              }
+            ]
+          },
+          "docs": "Adds an existing label to a card."
+        },
+        {
+          "info": {
+            "name": "Remove a Label from a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/cards/:id/labels/:idLabel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idLabel",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the label to remove."
+              }
+            ]
+          },
+          "docs": "Removes a label from a card."
+        },
+        {
+          "info": {
+            "name": "Add a Member to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the member to add."
+              }
+            ]
+          },
+          "docs": "Adds a member to a card."
+        },
+        {
+          "info": {
+            "name": "Remove a Member from a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/cards/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to remove."
+              }
+            ]
+          },
+          "docs": "Removes a member from a card."
+        },
+        {
+          "info": {
+            "name": "Get Stickers on a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/cards/:id/stickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all stickers on a card."
+        },
+        {
+          "info": {
+            "name": "Add a Sticker to a Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/cards/:id/stickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "image",
+                "value": "",
+                "type": "query",
+                "description": "The sticker image identifier."
+              },
+              {
+                "name": "top",
+                "value": "",
+                "type": "query",
+                "description": "The top position of the sticker as a percentage."
+              },
+              {
+                "name": "left",
+                "value": "",
+                "type": "query",
+                "description": "The left position of the sticker as a percentage."
+              },
+              {
+                "name": "zIndex",
+                "value": "",
+                "type": "query",
+                "description": "The z-index of the sticker."
+              },
+              {
+                "name": "rotate",
+                "value": "",
+                "type": "query",
+                "description": "The rotation of the sticker in degrees."
+              }
+            ]
+          },
+          "docs": "Adds a sticker to a card."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

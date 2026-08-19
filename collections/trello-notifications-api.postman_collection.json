@@ -1,0 +1,827 @@
+{
+  "item": [
+    {
+      "id": "22dceb58-65a9-45ba-94e5-43500e4737d6",
+      "name": "Notifications",
+      "description": {
+        "content": "Operations for retrieving and managing member notifications about activity on boards, cards, and other Trello objects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "550d4920-b4ea-42ca-a553-e70362e11dc3",
+          "name": "Get Notifications for a Member",
+          "request": {
+            "name": "Get Notifications for a Member",
+            "description": {
+              "content": "Retrieves notifications for a member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "members",
+                ":id",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entities",
+                  "value": "false",
+                  "description": "Whether to include entities."
+                },
+                {
+                  "disabled": false,
+                  "key": "display",
+                  "value": "false",
+                  "description": "Whether to include display information."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "all",
+                  "description": "A comma-separated list of notification types to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "read_filter",
+                  "value": "all",
+                  "description": "Filter by read status."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of notifications to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Return notifications created before this notification ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<string>",
+                  "description": "Return notifications created after this notification ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe847df8-6fa4-445a-b54b-e41ea846166c",
+              "name": "Successfully retrieved notifications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entities",
+                      "value": "false"
+                    },
+                    {
+                      "key": "display",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "read_filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1983-01-20T14:25:20.270Z\",\n    \"unread\": true,\n    \"data\": {\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 9785,\n        \"shortLink\": \"string\"\n      },\n      \"text\": \"string\"\n    },\n    \"idMemberCreator\": \"string\",\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://cS.bzlaHjhZ43XMBbEqbjJePluI.,SLsLHQ-rF-wBS4gN222zXW\",\n      \"url\": \"http://svRwjOIclhqqxMzBoprFywB.zyqbOEIUQNkqzvkNKasdM3tdgrE2ZrfIp12unFbLx1xol.-1y\",\n      \"confirmed\": true,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1960-02-29T16:51:52.660Z\",\n    \"unread\": false,\n    \"data\": {\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 8628,\n        \"shortLink\": \"string\"\n      },\n      \"text\": \"string\"\n    },\n    \"idMemberCreator\": \"string\",\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://qCkR.fcRJuIlzRrmogNCE0X3o3MYg5R9e\",\n      \"url\": \"http://nAZIWpCPhACfIBV.zvvoGz5WDygzizWfXra,\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "366aaa80-b013-421e-b8fb-bf11bbcf3d97",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entities",
+                      "value": "false"
+                    },
+                    {
+                      "key": "display",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "read_filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84f1ac6f-9c24-4d8e-9f93-2eb95d0fc6c4",
+              "name": "Member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entities",
+                      "value": "false"
+                    },
+                    {
+                      "key": "display",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "read_filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0467bd6f-b76d-4fda-abf3-183d1bb38181",
+          "name": "Get a Notification",
+          "request": {
+            "name": "Get a Notification",
+            "description": {
+              "content": "Retrieves a single notification by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dd31123-2ada-44f1-9b4e-e2e7b2e4d9c6",
+              "name": "Successfully retrieved the notification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"date\": \"1973-03-06T17:43:22.416Z\",\n  \"unread\": false,\n  \"data\": {\n    \"board\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"shortLink\": \"string\"\n    },\n    \"card\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"idShort\": 5444,\n      \"shortLink\": \"string\"\n    },\n    \"text\": \"string\"\n  },\n  \"idMemberCreator\": \"string\",\n  \"memberCreator\": {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"fullName\": \"string\",\n    \"initials\": \"string\",\n    \"bio\": \"string\",\n    \"avatarHash\": \"string\",\n    \"avatarUrl\": \"https://mwLRLXSpzzBZqCRbPzvQarZsWbiiu.wizrW7T-hF+WFB7W\",\n    \"url\": \"http://pIywkDHHwYjvYHcVtap.brpB,1Wdm0-smO,YPhSVS76jb7oCDvfbXNL1\",\n    \"confirmed\": false,\n    \"memberType\": \"string\",\n    \"status\": \"string\",\n    \"idOrganizations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca3690ee-dec6-44aa-8822-5c369a784e29",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d77f436d-fc9c-4363-a7fc-029b963d8440",
+              "name": "Notification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc25eccd-b0ed-4434-870d-7def09214d50",
+          "name": "Update a Notification",
+          "request": {
+            "name": "Update a Notification",
+            "description": {
+              "content": "Updates a notification's read status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "unread",
+                  "value": "<boolean>",
+                  "description": "Whether the notification is unread."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "717e00c6-0eec-4fb4-a240-5946b1a6bb0c",
+              "name": "Successfully updated the notification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff915c60-9903-4ee6-b4b7-fa44a17f3b70",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "102572ad-82ad-4016-92cb-911656f48583",
+              "name": "Notification not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unread",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c17dfd7d-79a9-4c92-a587-7a5a5b1191eb",
+          "name": "Mark All Notifications as Read",
+          "request": {
+            "name": "Mark All Notifications as Read",
+            "description": {
+              "content": "Marks all of the authenticated member's notifications as read.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "notifications",
+                "all",
+                "read"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c885360d-ed52-4312-8f07-7cd792efea81",
+              "name": "Successfully marked all notifications as read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    "all",
+                    "read"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6dcd1595-e0ce-4cba-a32d-a0d318973399",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "notifications",
+                    "all",
+                    "read"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72661993-cd90-46f1-99e5-c84349ad84ec",
+    "name": "Trello REST Actions Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,4298 @@
+{
+  "item": [
+    {
+      "id": "84216a80-0c16-4492-acc3-0c08cf434617",
+      "name": "Boards",
+      "description": {
+        "content": "Operations for creating, retrieving, updating, and deleting boards, as well as managing board memberships, lists, cards, labels, and other board-level resources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16830c1c-7611-4d8a-b8a0-ced87524d88c",
+          "name": "Create a Board",
+          "request": {
+            "name": "Create a Board",
+            "description": {
+              "content": "Creates a new Trello board with the specified name and optional settings such as description, organization, permission level, and initial configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name for the new board."
+                },
+                {
+                  "disabled": false,
+                  "key": "defaultLabels",
+                  "value": "true",
+                  "description": "Whether to apply the default set of labels to the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "defaultLists",
+                  "value": "true",
+                  "description": "Whether to add the default set of lists to the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "A description for the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "idOrganization",
+                  "value": "<string>",
+                  "description": "The ID or name of the organization (workspace) the board should belong to."
+                },
+                {
+                  "disabled": false,
+                  "key": "idBoardSource",
+                  "value": "<string>",
+                  "description": "The ID of a board to copy into the new board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs_permissionLevel",
+                  "value": "private",
+                  "description": "The permissions level of the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs_voting",
+                  "value": "disabled",
+                  "description": "Who can vote on the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs_comments",
+                  "value": "members",
+                  "description": "Who can comment on cards on the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs_background",
+                  "value": "blue",
+                  "description": "The background color or image for the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs_cardAging",
+                  "value": "regular",
+                  "description": "The style of card aging to apply to the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs_selfJoin",
+                  "value": "true",
+                  "description": "Whether workspace members can join the board themselves."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e4b03aa-c393-475a-b051-29ca4909d7fa",
+              "name": "Successfully created the board.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "defaultLabels",
+                      "value": "true"
+                    },
+                    {
+                      "key": "defaultLists",
+                      "value": "true"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoardSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs_permissionLevel",
+                      "value": "private"
+                    },
+                    {
+                      "key": "prefs_voting",
+                      "value": "disabled"
+                    },
+                    {
+                      "key": "prefs_comments",
+                      "value": "members"
+                    },
+                    {
+                      "key": "prefs_background",
+                      "value": "blue"
+                    },
+                    {
+                      "key": "prefs_cardAging",
+                      "value": "regular"
+                    },
+                    {
+                      "key": "prefs_selfJoin",
+                      "value": "true"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"descData\": {},\n  \"closed\": false,\n  \"idMemberCreator\": \"string\",\n  \"idOrganization\": \"string\",\n  \"pinned\": false,\n  \"url\": \"http://oGLk.enilzhE.OPEU\",\n  \"shortUrl\": \"http://DZWk.nosialQrFG0i7Y7TMGcZ-o7rDV\",\n  \"shortLink\": \"string\",\n  \"prefs\": {\n    \"permissionLevel\": \"private\",\n    \"hideVotes\": true,\n    \"voting\": \"string\",\n    \"comments\": \"string\",\n    \"selfJoin\": true,\n    \"cardCovers\": false,\n    \"cardAging\": \"regular\",\n    \"background\": \"string\",\n    \"backgroundColor\": \"string\",\n    \"backgroundImage\": \"string\",\n    \"backgroundTile\": true,\n    \"backgroundBrightness\": \"string\"\n  },\n  \"labelNames\": {\n    \"green\": \"string\",\n    \"yellow\": \"string\",\n    \"orange\": \"string\",\n    \"red\": \"string\",\n    \"purple\": \"string\",\n    \"blue\": \"string\",\n    \"sky\": \"string\",\n    \"lime\": \"string\",\n    \"pink\": \"string\",\n    \"black\": \"string\"\n  },\n  \"starred\": false,\n  \"memberships\": [\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"observer\",\n      \"unconfirmed\": true,\n      \"deactivated\": false\n    },\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"normal\",\n      \"unconfirmed\": false,\n      \"deactivated\": true\n    }\n  ],\n  \"dateLastActivity\": \"1964-11-24T05:47:31.007Z\",\n  \"dateLastView\": \"2018-07-05T04:43:29.975Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc13ad2d-1048-4b16-9769-a7e19c8413f4",
+              "name": "Bad request. Missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "defaultLabels",
+                      "value": "true"
+                    },
+                    {
+                      "key": "defaultLists",
+                      "value": "true"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoardSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs_permissionLevel",
+                      "value": "private"
+                    },
+                    {
+                      "key": "prefs_voting",
+                      "value": "disabled"
+                    },
+                    {
+                      "key": "prefs_comments",
+                      "value": "members"
+                    },
+                    {
+                      "key": "prefs_background",
+                      "value": "blue"
+                    },
+                    {
+                      "key": "prefs_cardAging",
+                      "value": "regular"
+                    },
+                    {
+                      "key": "prefs_selfJoin",
+                      "value": "true"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2fd9083-e167-4e1a-a348-03440a5c5bec",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "defaultLabels",
+                      "value": "true"
+                    },
+                    {
+                      "key": "defaultLists",
+                      "value": "true"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoardSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs_permissionLevel",
+                      "value": "private"
+                    },
+                    {
+                      "key": "prefs_voting",
+                      "value": "disabled"
+                    },
+                    {
+                      "key": "prefs_comments",
+                      "value": "members"
+                    },
+                    {
+                      "key": "prefs_background",
+                      "value": "blue"
+                    },
+                    {
+                      "key": "prefs_cardAging",
+                      "value": "regular"
+                    },
+                    {
+                      "key": "prefs_selfJoin",
+                      "value": "true"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10b82531-526d-4809-bb75-6f3623fb106e",
+          "name": "Get a Board",
+          "request": {
+            "name": "Get a Board",
+            "description": {
+              "content": "Retrieves a single board by its identifier, including its fields and optionally nested resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "actions",
+                  "value": "<string>",
+                  "description": "A comma-separated list of action types to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "boardStars",
+                  "value": "<string>",
+                  "description": "Whether to include board stars."
+                },
+                {
+                  "disabled": false,
+                  "key": "cards",
+                  "value": "none",
+                  "description": "Filter cards to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "card_fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of card fields to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "checklists",
+                  "value": "none",
+                  "description": "Whether to include checklists."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "name,desc,descData,closed,idOrganization,pinned,url,shortUrl,prefs,labelNames",
+                  "description": "A comma-separated list of board fields to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "Whether to include labels."
+                },
+                {
+                  "disabled": false,
+                  "key": "lists",
+                  "value": "none",
+                  "description": "Filter lists to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "members",
+                  "value": "none",
+                  "description": "Whether to include members."
+                },
+                {
+                  "disabled": false,
+                  "key": "memberships",
+                  "value": "<string>",
+                  "description": "Whether to include memberships."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "false",
+                  "description": "Whether to include the organization."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33b32bbf-030a-40d9-bc44-0eca2119da22",
+              "name": "Successfully retrieved the board.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boardStars",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checklists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,desc,descData,closed,idOrganization,pinned,url,shortUrl,prefs,labelNames"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "members",
+                      "value": "none"
+                    },
+                    {
+                      "key": "memberships",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"descData\": {},\n  \"closed\": false,\n  \"idMemberCreator\": \"string\",\n  \"idOrganization\": \"string\",\n  \"pinned\": false,\n  \"url\": \"http://oGLk.enilzhE.OPEU\",\n  \"shortUrl\": \"http://DZWk.nosialQrFG0i7Y7TMGcZ-o7rDV\",\n  \"shortLink\": \"string\",\n  \"prefs\": {\n    \"permissionLevel\": \"private\",\n    \"hideVotes\": true,\n    \"voting\": \"string\",\n    \"comments\": \"string\",\n    \"selfJoin\": true,\n    \"cardCovers\": false,\n    \"cardAging\": \"regular\",\n    \"background\": \"string\",\n    \"backgroundColor\": \"string\",\n    \"backgroundImage\": \"string\",\n    \"backgroundTile\": true,\n    \"backgroundBrightness\": \"string\"\n  },\n  \"labelNames\": {\n    \"green\": \"string\",\n    \"yellow\": \"string\",\n    \"orange\": \"string\",\n    \"red\": \"string\",\n    \"purple\": \"string\",\n    \"blue\": \"string\",\n    \"sky\": \"string\",\n    \"lime\": \"string\",\n    \"pink\": \"string\",\n    \"black\": \"string\"\n  },\n  \"starred\": false,\n  \"memberships\": [\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"observer\",\n      \"unconfirmed\": true,\n      \"deactivated\": false\n    },\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"normal\",\n      \"unconfirmed\": false,\n      \"deactivated\": true\n    }\n  ],\n  \"dateLastActivity\": \"1964-11-24T05:47:31.007Z\",\n  \"dateLastView\": \"2018-07-05T04:43:29.975Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8134648-8a56-4b6a-8d2f-48af48a24b6b",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boardStars",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checklists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,desc,descData,closed,idOrganization,pinned,url,shortUrl,prefs,labelNames"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "members",
+                      "value": "none"
+                    },
+                    {
+                      "key": "memberships",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64be0aad-cbad-42bf-a7e6-9018cf084768",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boardStars",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "checklists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,desc,descData,closed,idOrganization,pinned,url,shortUrl,prefs,labelNames"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "members",
+                      "value": "none"
+                    },
+                    {
+                      "key": "memberships",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "380af1ad-1e32-4678-86cf-83b6a02722aa",
+          "name": "Update a Board",
+          "request": {
+            "name": "Update a Board",
+            "description": {
+              "content": "Updates a board's fields, including name, description, preferences, and organizational settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The new name for the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "The new description for the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "closed",
+                  "value": "<boolean>",
+                  "description": "Whether the board is closed (archived)."
+                },
+                {
+                  "disabled": false,
+                  "key": "subscribed",
+                  "value": "<boolean>",
+                  "description": "Whether the authenticated member is subscribed to the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "idOrganization",
+                  "value": "<string>",
+                  "description": "The ID of the organization to move the board to."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs/permissionLevel",
+                  "value": "<string>",
+                  "description": "The permission level for the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs/selfJoin",
+                  "value": "<boolean>",
+                  "description": "Whether workspace members can join the board themselves."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs/cardCovers",
+                  "value": "<boolean>",
+                  "description": "Whether card covers are enabled."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs/hideVotes",
+                  "value": "<boolean>",
+                  "description": "Whether votes are hidden until voting is complete."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs/background",
+                  "value": "<string>",
+                  "description": "The background for the board."
+                },
+                {
+                  "disabled": false,
+                  "key": "prefs/cardAging",
+                  "value": "<string>",
+                  "description": "The card aging style."
+                },
+                {
+                  "disabled": false,
+                  "key": "labelNames/green",
+                  "value": "<string>",
+                  "description": "Name for the green label."
+                },
+                {
+                  "disabled": false,
+                  "key": "labelNames/yellow",
+                  "value": "<string>",
+                  "description": "Name for the yellow label."
+                },
+                {
+                  "disabled": false,
+                  "key": "labelNames/orange",
+                  "value": "<string>",
+                  "description": "Name for the orange label."
+                },
+                {
+                  "disabled": false,
+                  "key": "labelNames/red",
+                  "value": "<string>",
+                  "description": "Name for the red label."
+                },
+                {
+                  "disabled": false,
+                  "key": "labelNames/purple",
+                  "value": "<string>",
+                  "description": "Name for the purple label."
+                },
+                {
+                  "disabled": false,
+                  "key": "labelNames/blue",
+                  "value": "<string>",
+                  "description": "Name for the blue label."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df628186-ccc1-458c-97b0-8962aea24e92",
+              "name": "Successfully updated the board.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/permissionLevel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/selfJoin",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/cardCovers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/hideVotes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/background",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/cardAging",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/green",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/yellow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/orange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/red",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/purple",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/blue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"descData\": {},\n  \"closed\": false,\n  \"idMemberCreator\": \"string\",\n  \"idOrganization\": \"string\",\n  \"pinned\": false,\n  \"url\": \"http://oGLk.enilzhE.OPEU\",\n  \"shortUrl\": \"http://DZWk.nosialQrFG0i7Y7TMGcZ-o7rDV\",\n  \"shortLink\": \"string\",\n  \"prefs\": {\n    \"permissionLevel\": \"private\",\n    \"hideVotes\": true,\n    \"voting\": \"string\",\n    \"comments\": \"string\",\n    \"selfJoin\": true,\n    \"cardCovers\": false,\n    \"cardAging\": \"regular\",\n    \"background\": \"string\",\n    \"backgroundColor\": \"string\",\n    \"backgroundImage\": \"string\",\n    \"backgroundTile\": true,\n    \"backgroundBrightness\": \"string\"\n  },\n  \"labelNames\": {\n    \"green\": \"string\",\n    \"yellow\": \"string\",\n    \"orange\": \"string\",\n    \"red\": \"string\",\n    \"purple\": \"string\",\n    \"blue\": \"string\",\n    \"sky\": \"string\",\n    \"lime\": \"string\",\n    \"pink\": \"string\",\n    \"black\": \"string\"\n  },\n  \"starred\": false,\n  \"memberships\": [\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"observer\",\n      \"unconfirmed\": true,\n      \"deactivated\": false\n    },\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"normal\",\n      \"unconfirmed\": false,\n      \"deactivated\": true\n    }\n  ],\n  \"dateLastActivity\": \"1964-11-24T05:47:31.007Z\",\n  \"dateLastView\": \"2018-07-05T04:43:29.975Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6497f5f3-8a8c-4070-b216-b7e6b55f0419",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/permissionLevel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/selfJoin",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/cardCovers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/hideVotes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/background",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/cardAging",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/green",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/yellow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/orange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/red",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/purple",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/blue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eff3a518-a9ed-4fcb-a459-b5d8c66a0f25",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/permissionLevel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/selfJoin",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/cardCovers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/hideVotes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "prefs/background",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefs/cardAging",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/green",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/yellow",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/orange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/red",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/purple",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labelNames/blue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0335b7fe-eedb-4efd-b459-de1e2f8a289f",
+          "name": "Delete a Board",
+          "request": {
+            "name": "Delete a Board",
+            "description": {
+              "content": "Permanently deletes a board. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c37567c-e363-4623-83b4-3e3178d7a438",
+              "name": "Successfully deleted the board.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87a30043-3cac-48b5-85ee-b78c286b0ea3",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbce00ec-0649-460d-91f3-caa394da6379",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02b9cc73-61e6-43f5-a7fa-fbc6fa3d97e2",
+          "name": "Get Actions for a Board",
+          "request": {
+            "name": "Get Actions for a Board",
+            "description": {
+              "content": "Retrieves a list of actions (activity events) associated with a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A comma-separated list of action types to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "The maximum number of actions to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95bd74aa-02a8-48f5-b435-ea643b42ad41",
+              "name": "Successfully retrieved board actions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"idMemberCreator\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"2014-03-28T05:28:32.868Z\",\n    \"data\": {\n      \"text\": \"string\",\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 3372,\n        \"shortLink\": \"string\"\n      },\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"old\": {}\n    },\n    \"display\": {},\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://oyrmmucGjwQSNTbRXtvZeW.qfuCWacG,sY0JTBMotFDVYLyXFtqJmI-ExYm7jOOzTejS,7BsQzjBuJxq.QDxRKxUk\",\n      \"url\": \"http://SNeLzRnunPnMx.frIcbH8W\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"idMemberCreator\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1965-01-19T07:27:06.714Z\",\n    \"data\": {\n      \"text\": \"string\",\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 2671,\n        \"shortLink\": \"string\"\n      },\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"old\": {}\n    },\n    \"display\": {},\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://dHCmbYFzllkkEaSxaHLFyEJVRjucPazMW.ksiEzjU.X6b2zM,kkz+0l0G1VbNLl6OUPdSZJA0s90ao3bMfM1cFZ\",\n      \"url\": \"https://HyWAsJHi.roqmdBxM3zotQ9D2THtadu4.ExlcUzjgVZtBjVuG.QTtHtM-MYhpYdaKVq\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "415e86e5-e925-4345-b8df-e939fe818939",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75a1a7b6-7084-4ea7-ad24-0c81ca2b059c",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c46f0a7e-b1b6-45bf-9128-2ff3954e2e99",
+          "name": "Get Cards on a Board",
+          "request": {
+            "name": "Get Cards on a Board",
+            "description": {
+              "content": "Retrieves all cards on a board, with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of card fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c4e7b1b-6243-44c6-8cef-3b10f7df265d",
+              "name": "Successfully retrieved board cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": true,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 7797,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 4370.93288572302,\n    \"due\": \"1966-05-20T15:28:46.737Z\",\n    \"dueComplete\": false,\n    \"start\": \"1985-04-13T11:22:44.494Z\",\n    \"url\": \"https://BProbJ.glota2xrcE6e9hkk0HhhwSIpiOW0W2bWCQLDZyU6W8Ft2Z.+rMtSIu,LGcSPWobp\",\n    \"shortUrl\": \"https://wPSAX.yprknyeXMUcL.JogXIZd-RQ,Cs\",\n    \"shortLink\": \"string\",\n    \"subscribed\": true,\n    \"dateLastActivity\": \"2002-07-24T03:43:37.439Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"normal\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"black\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"purple\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 4571,\n      \"attachments\": 957,\n      \"comments\": 8804,\n      \"checkItems\": 6749,\n      \"checkItemsChecked\": 9739,\n      \"description\": false,\n      \"due\": \"2010-11-21T23:01:49.106Z\",\n      \"dueComplete\": true,\n      \"subscribed\": true\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": true,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 6944,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 9298.771007914153,\n    \"due\": \"2018-11-22T01:14:17.134Z\",\n    \"dueComplete\": false,\n    \"start\": \"1970-08-24T23:48:52.519Z\",\n    \"url\": \"https://KGhCPnJPmHsvcaBsSJDzQs.awkRa-7JY.kYDdenyQyLet,W8m7zbl28xQ5-0E0DGsEDIr7up\",\n    \"shortUrl\": \"https://lnnLHwOufVHwSnRRs.ayuoYtEcs31rk0-LIjZPJydzVhSqB8s7psUoObpSDfphe9dmvqTO6\",\n    \"shortLink\": \"string\",\n    \"subscribed\": false,\n    \"dateLastActivity\": \"1963-12-14T03:48:48.504Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"normal\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"green\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"null\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 9951,\n      \"attachments\": 8686,\n      \"comments\": 9861,\n      \"checkItems\": 8772,\n      \"checkItemsChecked\": 4020,\n      \"description\": false,\n      \"due\": \"2013-08-31T21:49:29.926Z\",\n      \"dueComplete\": true,\n      \"subscribed\": false\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "011db87c-b970-4839-859a-03513a014f16",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b093f0a-01c5-4a3a-ac9b-52a49306914b",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e69faadb-5b09-4e62-9b3d-151e1d4ead2a",
+          "name": "Get Filtered Cards on a Board",
+          "request": {
+            "name": "Get Filtered Cards on a Board",
+            "description": {
+              "content": "Retrieves cards on a board filtered by status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "cards",
+                ":filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filter",
+                  "description": "(Required) The filter to apply to the cards."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54110f7b-3194-42ad-8068-f8ea51cd2c21",
+              "name": "Successfully retrieved filtered board cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "cards",
+                    ":filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter",
+                      "description": "(Required) The filter to apply to the cards."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": true,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 7797,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 4370.93288572302,\n    \"due\": \"1966-05-20T15:28:46.737Z\",\n    \"dueComplete\": false,\n    \"start\": \"1985-04-13T11:22:44.494Z\",\n    \"url\": \"https://BProbJ.glota2xrcE6e9hkk0HhhwSIpiOW0W2bWCQLDZyU6W8Ft2Z.+rMtSIu,LGcSPWobp\",\n    \"shortUrl\": \"https://wPSAX.yprknyeXMUcL.JogXIZd-RQ,Cs\",\n    \"shortLink\": \"string\",\n    \"subscribed\": true,\n    \"dateLastActivity\": \"2002-07-24T03:43:37.439Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"normal\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"black\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"purple\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 4571,\n      \"attachments\": 957,\n      \"comments\": 8804,\n      \"checkItems\": 6749,\n      \"checkItemsChecked\": 9739,\n      \"description\": false,\n      \"due\": \"2010-11-21T23:01:49.106Z\",\n      \"dueComplete\": true,\n      \"subscribed\": true\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": true,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 6944,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 9298.771007914153,\n    \"due\": \"2018-11-22T01:14:17.134Z\",\n    \"dueComplete\": false,\n    \"start\": \"1970-08-24T23:48:52.519Z\",\n    \"url\": \"https://KGhCPnJPmHsvcaBsSJDzQs.awkRa-7JY.kYDdenyQyLet,W8m7zbl28xQ5-0E0DGsEDIr7up\",\n    \"shortUrl\": \"https://lnnLHwOufVHwSnRRs.ayuoYtEcs31rk0-LIjZPJydzVhSqB8s7psUoObpSDfphe9dmvqTO6\",\n    \"shortLink\": \"string\",\n    \"subscribed\": false,\n    \"dateLastActivity\": \"1963-12-14T03:48:48.504Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"normal\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"green\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"null\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 9951,\n      \"attachments\": 8686,\n      \"comments\": 9861,\n      \"checkItems\": 8772,\n      \"checkItemsChecked\": 4020,\n      \"description\": false,\n      \"due\": \"2013-08-31T21:49:29.926Z\",\n      \"dueComplete\": true,\n      \"subscribed\": false\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6085bbb9-d181-4580-ad84-3ebaac7380b0",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "cards",
+                    ":filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter",
+                      "description": "(Required) The filter to apply to the cards."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de4e91d7-02c4-4c37-8e60-e279546d54b9",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "cards",
+                    ":filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter",
+                      "description": "(Required) The filter to apply to the cards."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fec63655-b281-4ff9-b41c-42224112806f",
+          "name": "Get Checklists on a Board",
+          "request": {
+            "name": "Get Checklists on a Board",
+            "description": {
+              "content": "Retrieves all checklists on a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "checklists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "627621c6-e969-4839-b91b-752b609c8ccb",
+              "name": "Successfully retrieved board checklists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"idBoard\": \"string\",\n    \"idCard\": \"string\",\n    \"pos\": 3033.937367339641,\n    \"checkItems\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"incomplete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 6554.883039898379,\n        \"due\": \"1995-09-28T23:59:03.166Z\",\n        \"idMember\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"complete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 5356.89353388093,\n        \"due\": \"2003-03-22T04:27:05.410Z\",\n        \"idMember\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"idBoard\": \"string\",\n    \"idCard\": \"string\",\n    \"pos\": 317.2442805594156,\n    \"checkItems\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"incomplete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 9630.533648608338,\n        \"due\": \"1961-08-07T13:34:00.539Z\",\n        \"idMember\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"incomplete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 690.5229606969931,\n        \"due\": \"1995-04-29T21:23:05.091Z\",\n        \"idMember\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "842d8450-e228-47c5-8e2d-71023bac6ed3",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8f2b8e7-2af9-4fb8-ae08-f162edf6a177",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6c0eb75-8b6c-4224-ae38-bb93e77a9354",
+          "name": "Get Labels on a Board",
+          "request": {
+            "name": "Get Labels on a Board",
+            "description": {
+              "content": "Retrieves all labels defined on a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "all",
+                  "description": "A comma-separated list of label fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of labels to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09dc3c1b-b183-463a-b029-db06c1f32a98",
+              "name": "Successfully retrieved board labels.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"idBoard\": \"string\",\n    \"name\": \"string\",\n    \"color\": \"sky\"\n  },\n  {\n    \"id\": \"string\",\n    \"idBoard\": \"string\",\n    \"name\": \"string\",\n    \"color\": \"sky\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d8c7f4a-ec2a-4232-b9fe-f70da319c144",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64825cac-da43-49d6-9b14-6a32202e7f8f",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdf488d6-583f-4c87-adcc-6d3086c4b98a",
+          "name": "Create a Label on a Board",
+          "request": {
+            "name": "Create a Label on a Board",
+            "description": {
+              "content": "Creates a new label on a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name for the label."
+                },
+                {
+                  "disabled": false,
+                  "key": "color",
+                  "value": "<string>",
+                  "description": "(Required) The color for the label."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89e9c7ed-90e6-4ab3-8ae9-ecede928dbd2",
+              "name": "Successfully created the label.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"idBoard\": \"string\",\n  \"name\": \"string\",\n  \"color\": \"orange\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dd8d3e6-1a62-4a59-ae65-8bf5a7deb6a9",
+              "name": "Bad request. Missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fcb7b954-a122-4122-8dc1-c7f72427d67c",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26e10693-1eb1-4540-8bcf-0b55e96ec64b",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "028168c7-db4f-4ea3-bfaf-3271b04fd068",
+          "name": "Get Lists on a Board",
+          "request": {
+            "name": "Get Lists on a Board",
+            "description": {
+              "content": "Retrieves all lists on a board, with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "lists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cards",
+                  "value": "none",
+                  "description": "Filter cards within lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "card_fields",
+                  "value": "all",
+                  "description": "A comma-separated list of card fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "open",
+                  "description": "Filter lists by status."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "all",
+                  "description": "A comma-separated list of list fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3e04fa63-4118-4af2-b2a7-c4db23553092",
+              "name": "Successfully retrieved board lists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "open"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"closed\": false,\n    \"idBoard\": \"string\",\n    \"pos\": 5238.672864014316,\n    \"subscribed\": false,\n    \"softLimit\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"closed\": false,\n    \"idBoard\": \"string\",\n    \"pos\": 6430.565079036753,\n    \"subscribed\": true,\n    \"softLimit\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d91973a-b29e-426e-8a1b-4ec7418d7667",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "open"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2b0124c-4953-4df8-8a8f-cb93047fa22f",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "open"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21fc9345-22da-436f-967e-04314454013d",
+          "name": "Create a List on a Board",
+          "request": {
+            "name": "Create a List on a Board",
+            "description": {
+              "content": "Creates a new list on the specified board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "lists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name for the new list."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "top",
+                  "description": "The position of the list on the board."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fcbd024-2e12-48ee-bcf2-c64ad3c4c747",
+              "name": "Successfully created the list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"closed\": true,\n  \"idBoard\": \"string\",\n  \"pos\": 9984.154431076295,\n  \"subscribed\": true,\n  \"softLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34d7343b-6dbb-4242-baa9-8f470bdb183a",
+              "name": "Bad request. Missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9da8c28-fcfb-45ad-9923-99c420791a6b",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e33ecc00-b662-4ec9-b420-d06a9f30d233",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b16768d4-de23-4d16-9735-df0766c7caf7",
+          "name": "Get Members of a Board",
+          "request": {
+            "name": "Get Members of a Board",
+            "description": {
+              "content": "Retrieves the members associated with a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92ef27cb-d2d6-4ff0-a67d-6db5cfb68908",
+              "name": "Successfully retrieved board members.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"fullName\": \"string\",\n    \"initials\": \"string\",\n    \"bio\": \"string\",\n    \"avatarHash\": \"string\",\n    \"avatarUrl\": \"http://SxCLWtJSB.giYZNM0edsJO,xpGG,mnjRkyU0bmo5DbJXn\",\n    \"url\": \"https://JvI.dpdgrJS+q\",\n    \"confirmed\": true,\n    \"memberType\": \"string\",\n    \"status\": \"string\",\n    \"idOrganizations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"fullName\": \"string\",\n    \"initials\": \"string\",\n    \"bio\": \"string\",\n    \"avatarHash\": \"string\",\n    \"avatarUrl\": \"https://xclTDdTrnfUzXPavaiHWkU.bhgkfAu2,uUKQXPfFXGWV8xPwRSc,hKIEDk0FHdD2EIp.dqakkSHn4KfKIqKiZ4PU3pRwIr,x.wDwHi2P\",\n    \"url\": \"http://BZO.zpOltex1AGFsrH2tVuREhtD85owEXECk7paKuHWHVxT.7m-4Ta7W32.V\",\n    \"confirmed\": false,\n    \"memberType\": \"string\",\n    \"status\": \"string\",\n    \"idOrganizations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0fabc7d-019f-4a7d-bdce-61f4eb8d25aa",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e41efef4-1643-4913-b8f9-67e9fcd633e3",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56429767-8d8c-4a2b-a9c4-a86e10f64f68",
+          "name": "Invite a Member to a Board",
+          "request": {
+            "name": "Invite a Member to a Board",
+            "description": {
+              "content": "Invites a member to a board via email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) The email address of the member to invite."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "normal",
+                  "description": "The type of membership."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aadb3289-fbc2-43cf-9146-2d31594b11d5",
+              "name": "Successfully invited the member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "normal"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36c128b7-021a-4cb5-8f4b-0a8ff90e7dc3",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "normal"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d56a689d-99fb-4ce8-bf5d-4838f4bbb719",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "normal"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbfb435a-8788-490f-ba43-0bddb926c35a",
+          "name": "Update a Board Member",
+          "request": {
+            "name": "Update a Board Member",
+            "description": {
+              "content": "Updates the membership type for a member on a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "members",
+                ":idMember"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) The new membership type."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idMember",
+                  "description": "(Required) The ID of the member to update."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae31cc5e-53f0-450b-93ee-b28ffeb61979",
+              "name": "Successfully updated the board member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to update."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f2932b7-11ad-40d4-9f7d-abef8d709b3f",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to update."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a2a85f2-9df9-4987-82d1-60aea79f0186",
+              "name": "Board or member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to update."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b86309f-017f-410c-bd18-97fbc475fd66",
+          "name": "Remove a Member from a Board",
+          "request": {
+            "name": "Remove a Member from a Board",
+            "description": {
+              "content": "Removes a member from a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "members",
+                ":idMember"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idMember",
+                  "description": "(Required) The ID of the member to remove."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ebb0866-9b73-4094-bec8-77e412ef61dc",
+              "name": "Successfully removed the member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67784054-6d5e-4a75-9726-5a50c75e96b0",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0342461-7326-4284-b1ca-063f093fa901",
+              "name": "Board or member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60770825-c9e2-4f4d-92ca-ff570fbe487c",
+          "name": "Get Memberships of a Board",
+          "request": {
+            "name": "Get Memberships of a Board",
+            "description": {
+              "content": "Retrieves the membership records for a board, including membership type and member references.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boards",
+                ":id",
+                "memberships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "all",
+                  "description": "Filter memberships by type."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e593b88b-0902-4600-a673-685ae3306091",
+              "name": "Successfully retrieved board memberships.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"idMember\": \"string\",\n    \"memberType\": \"observer\",\n    \"unconfirmed\": true,\n    \"deactivated\": false\n  },\n  {\n    \"id\": \"string\",\n    \"idMember\": \"string\",\n    \"memberType\": \"normal\",\n    \"unconfirmed\": false,\n    \"deactivated\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddae245f-2ee8-4a1c-9a21-7bfdffd8ee50",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a8226b7-6ac9-4855-b880-d170ec59c291",
+              "name": "Board not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boards",
+                    ":id",
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8832e63e-b0b7-41df-b159-4a173f6189d0",
+    "name": "Trello REST Actions Boards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

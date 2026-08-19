@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Organizations API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/organizations",
+            "params": [
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "The display name for the organization."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "A description for the organization."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A short name (URL-friendly) for the organization."
+              },
+              {
+                "name": "website",
+                "value": "",
+                "type": "query",
+                "description": "A URL for the organization's website."
+              }
+            ]
+          },
+          "docs": "Creates a new Trello organization (workspace)."
+        },
+        {
+          "info": {
+            "name": "Get an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a single organization (workspace) by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The new short name for the organization."
+              },
+              {
+                "name": "displayName",
+                "value": "",
+                "type": "query",
+                "description": "The new display name for the organization."
+              },
+              {
+                "name": "desc",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the organization."
+              },
+              {
+                "name": "website",
+                "value": "",
+                "type": "query",
+                "description": "The new website URL for the organization."
+              }
+            ]
+          },
+          "docs": "Updates an organization's fields such as name, description, and website."
+        },
+        {
+          "info": {
+            "name": "Delete an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes an organization (workspace) and all its boards."
+        },
+        {
+          "info": {
+            "name": "Get Boards in an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/organizations/:id/boards",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter boards by status."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board fields to return."
+              }
+            ]
+          },
+          "docs": "Retrieves all boards in an organization."
+        },
+        {
+          "info": {
+            "name": "Get Members of an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/organizations/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves all members of an organization."
+        },
+        {
+          "info": {
+            "name": "Update a Member of an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/organizations/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to update."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The new membership type."
+              }
+            ]
+          },
+          "docs": "Updates the membership type for a member in an organization."
+        },
+        {
+          "info": {
+            "name": "Remove a Member from an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/organizations/:id/members/:idMember",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "idMember",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the member to remove."
+              }
+            ]
+          },
+          "docs": "Removes a member from an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

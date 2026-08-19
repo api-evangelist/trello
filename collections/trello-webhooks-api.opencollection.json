@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Webhooks API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trello.com/1/webhooks",
+            "params": [
+              {
+                "name": "callbackURL",
+                "value": "",
+                "type": "query",
+                "description": "A valid URL that will receive webhook callbacks via HTTP POST."
+              },
+              {
+                "name": "idModel",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the model to watch for changes."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "A description for the webhook."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Whether the webhook is active."
+              }
+            ]
+          },
+          "docs": "Creates a new webhook. Trello will make an HTTP HEAD request to the callback URL to verify it returns a 200 status code before creating the webhook."
+        },
+        {
+          "info": {
+            "name": "Get a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a webhook by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.trello.com/1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              },
+              {
+                "name": "callbackURL",
+                "value": "",
+                "type": "query",
+                "description": "The new callback URL for the webhook."
+              },
+              {
+                "name": "idModel",
+                "value": "",
+                "type": "query",
+                "description": "The new model ID to watch."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "The new description for the webhook."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Whether the webhook is active."
+              }
+            ]
+          },
+          "docs": "Updates a webhook's callback URL, model, description, or active status."
+        },
+        {
+          "info": {
+            "name": "Delete a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trello.com/1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the resource."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

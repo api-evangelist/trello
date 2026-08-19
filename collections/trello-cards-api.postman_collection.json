@@ -1,0 +1,3772 @@
+{
+  "item": [
+    {
+      "id": "c4962d75-5998-4179-9eaf-f7b2c20500c2",
+      "name": "Cards",
+      "description": {
+        "content": "Operations for creating, retrieving, updating, and deleting cards, including managing card attachments, checklists, comments, labels, members, and stickers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02a1b28c-77ca-466a-a2ef-9d5efdc69ba0",
+          "name": "Create a Card",
+          "request": {
+            "name": "Create a Card",
+            "description": {
+              "content": "Creates a new card on the specified list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "The description for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "bottom",
+                  "description": "The position of the card in the list."
+                },
+                {
+                  "disabled": false,
+                  "key": "due",
+                  "value": "<dateTime>",
+                  "description": "The due date for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "The start date for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "dueComplete",
+                  "value": "false",
+                  "description": "Whether the due date is complete."
+                },
+                {
+                  "disabled": false,
+                  "key": "idList",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the list the card should be created in."
+                },
+                {
+                  "disabled": false,
+                  "key": "idMembers",
+                  "value": "<string>",
+                  "description": "Comma-separated list of member IDs to add to the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "idLabels",
+                  "value": "<string>",
+                  "description": "Comma-separated list of label IDs to add to the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "urlSource",
+                  "value": "<uri>",
+                  "description": "A URL to attach to the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "idCardSource",
+                  "value": "<string>",
+                  "description": "The ID of a card to copy into the new card."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c183aa54-1aa5-476a-9662-251e08edef79",
+              "name": "Successfully created the card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "dueComplete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idMembers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "urlSource",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "idCardSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"closed\": false,\n  \"idBoard\": \"string\",\n  \"idList\": \"string\",\n  \"idShort\": 1765,\n  \"idMembers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idLabels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idChecklists\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idAttachmentCover\": \"string\",\n  \"pos\": 8668.792590160409,\n  \"due\": \"2005-12-02T08:45:43.831Z\",\n  \"dueComplete\": false,\n  \"start\": \"1949-05-27T11:25:22.764Z\",\n  \"url\": \"http://ThWnwQZTzlUakUB.foAXOZaso+z9YU-P\",\n  \"shortUrl\": \"https://GLqIyLsHLgT.rjdncqHscYC1\",\n  \"shortLink\": \"string\",\n  \"subscribed\": true,\n  \"dateLastActivity\": \"2016-01-02T11:24:32.714Z\",\n  \"cover\": {\n    \"idAttachment\": \"string\",\n    \"color\": \"string\",\n    \"idUploadedBackground\": \"string\",\n    \"size\": \"normal\",\n    \"brightness\": \"string\",\n    \"idPlugin\": \"string\"\n  },\n  \"labels\": [\n    {\n      \"id\": \"string\",\n      \"idBoard\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"lime\"\n    },\n    {\n      \"id\": \"string\",\n      \"idBoard\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"orange\"\n    }\n  ],\n  \"badges\": {\n    \"votes\": 8984,\n    \"attachments\": 5282,\n    \"comments\": 3098,\n    \"checkItems\": 8335,\n    \"checkItemsChecked\": 8934,\n    \"description\": true,\n    \"due\": \"2020-07-29T11:35:13.572Z\",\n    \"dueComplete\": true,\n    \"subscribed\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b1dc198-783f-4d17-bc0c-27a3216e15a1",
+              "name": "Bad request. Missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "dueComplete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idMembers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "urlSource",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "idCardSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f78aa81-446d-4e66-aecc-546d9cfc05ff",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "dueComplete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idMembers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "urlSource",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "idCardSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dea9d50b-4dca-4fa4-8424-3db591956bb1",
+          "name": "Get a Card",
+          "request": {
+            "name": "Get a Card",
+            "description": {
+              "content": "Retrieves a single card by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "all",
+                  "description": "A comma-separated list of card fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "actions",
+                  "value": "<string>",
+                  "description": "A comma-separated list of action types to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "attachments",
+                  "value": "false",
+                  "description": "Whether to include attachments."
+                },
+                {
+                  "disabled": false,
+                  "key": "members",
+                  "value": "false",
+                  "description": "Whether to include members."
+                },
+                {
+                  "disabled": false,
+                  "key": "checkItemStates",
+                  "value": "false",
+                  "description": "Whether to include check item states."
+                },
+                {
+                  "disabled": false,
+                  "key": "checklists",
+                  "value": "none",
+                  "description": "Whether to include checklists."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb0f310f-84f8-4510-8337-b84b30c742b7",
+              "name": "Successfully retrieved the card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "members",
+                      "value": "false"
+                    },
+                    {
+                      "key": "checkItemStates",
+                      "value": "false"
+                    },
+                    {
+                      "key": "checklists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"closed\": false,\n  \"idBoard\": \"string\",\n  \"idList\": \"string\",\n  \"idShort\": 1765,\n  \"idMembers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idLabels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idChecklists\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idAttachmentCover\": \"string\",\n  \"pos\": 8668.792590160409,\n  \"due\": \"2005-12-02T08:45:43.831Z\",\n  \"dueComplete\": false,\n  \"start\": \"1949-05-27T11:25:22.764Z\",\n  \"url\": \"http://ThWnwQZTzlUakUB.foAXOZaso+z9YU-P\",\n  \"shortUrl\": \"https://GLqIyLsHLgT.rjdncqHscYC1\",\n  \"shortLink\": \"string\",\n  \"subscribed\": true,\n  \"dateLastActivity\": \"2016-01-02T11:24:32.714Z\",\n  \"cover\": {\n    \"idAttachment\": \"string\",\n    \"color\": \"string\",\n    \"idUploadedBackground\": \"string\",\n    \"size\": \"normal\",\n    \"brightness\": \"string\",\n    \"idPlugin\": \"string\"\n  },\n  \"labels\": [\n    {\n      \"id\": \"string\",\n      \"idBoard\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"lime\"\n    },\n    {\n      \"id\": \"string\",\n      \"idBoard\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"orange\"\n    }\n  ],\n  \"badges\": {\n    \"votes\": 8984,\n    \"attachments\": 5282,\n    \"comments\": 3098,\n    \"checkItems\": 8335,\n    \"checkItemsChecked\": 8934,\n    \"description\": true,\n    \"due\": \"2020-07-29T11:35:13.572Z\",\n    \"dueComplete\": true,\n    \"subscribed\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a266ce1e-56a8-4e98-96f0-53afb9f92f2c",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "members",
+                      "value": "false"
+                    },
+                    {
+                      "key": "checkItemStates",
+                      "value": "false"
+                    },
+                    {
+                      "key": "checklists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6936f624-e0a0-49d7-a9d6-b9c978f162f8",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attachments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "members",
+                      "value": "false"
+                    },
+                    {
+                      "key": "checkItemStates",
+                      "value": "false"
+                    },
+                    {
+                      "key": "checklists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d813e73-d710-4dd5-b9c7-824793a88378",
+          "name": "Update a Card",
+          "request": {
+            "name": "Update a Card",
+            "description": {
+              "content": "Updates the fields of a card, including name, description, position, due date, list assignment, and more.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The new name for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "desc",
+                  "value": "<string>",
+                  "description": "The new description for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "closed",
+                  "value": "<boolean>",
+                  "description": "Whether the card is archived."
+                },
+                {
+                  "disabled": false,
+                  "key": "idMembers",
+                  "value": "<string>",
+                  "description": "Comma-separated list of member IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "idLabels",
+                  "value": "<string>",
+                  "description": "Comma-separated list of label IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "idList",
+                  "value": "<string>",
+                  "description": "The ID of the list to move the card to."
+                },
+                {
+                  "disabled": false,
+                  "key": "idBoard",
+                  "value": "<string>",
+                  "description": "The ID of the board to move the card to."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "<string>",
+                  "description": "The new position of the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "due",
+                  "value": "<dateTime>",
+                  "description": "The new due date for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "The start date for the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "dueComplete",
+                  "value": "<boolean>",
+                  "description": "Whether the due date is complete."
+                },
+                {
+                  "disabled": false,
+                  "key": "subscribed",
+                  "value": "<boolean>",
+                  "description": "Whether the authenticated member is subscribed to the card."
+                },
+                {
+                  "disabled": false,
+                  "key": "cover",
+                  "value": "<string>",
+                  "description": "JSON string for the card cover."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d29d1207-3f89-47d5-b156-33aa0f918fcd",
+              "name": "Successfully updated the card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idMembers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "dueComplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cover",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"closed\": false,\n  \"idBoard\": \"string\",\n  \"idList\": \"string\",\n  \"idShort\": 1765,\n  \"idMembers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idLabels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idChecklists\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idAttachmentCover\": \"string\",\n  \"pos\": 8668.792590160409,\n  \"due\": \"2005-12-02T08:45:43.831Z\",\n  \"dueComplete\": false,\n  \"start\": \"1949-05-27T11:25:22.764Z\",\n  \"url\": \"http://ThWnwQZTzlUakUB.foAXOZaso+z9YU-P\",\n  \"shortUrl\": \"https://GLqIyLsHLgT.rjdncqHscYC1\",\n  \"shortLink\": \"string\",\n  \"subscribed\": true,\n  \"dateLastActivity\": \"2016-01-02T11:24:32.714Z\",\n  \"cover\": {\n    \"idAttachment\": \"string\",\n    \"color\": \"string\",\n    \"idUploadedBackground\": \"string\",\n    \"size\": \"normal\",\n    \"brightness\": \"string\",\n    \"idPlugin\": \"string\"\n  },\n  \"labels\": [\n    {\n      \"id\": \"string\",\n      \"idBoard\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"lime\"\n    },\n    {\n      \"id\": \"string\",\n      \"idBoard\": \"string\",\n      \"name\": \"string\",\n      \"color\": \"orange\"\n    }\n  ],\n  \"badges\": {\n    \"votes\": 8984,\n    \"attachments\": 5282,\n    \"comments\": 3098,\n    \"checkItems\": 8335,\n    \"checkItemsChecked\": 8934,\n    \"description\": true,\n    \"due\": \"2020-07-29T11:35:13.572Z\",\n    \"dueComplete\": true,\n    \"subscribed\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98136765-c349-47c1-8640-7e0550356430",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idMembers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "dueComplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cover",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c32e9a47-b93c-4d8a-8ede-1dd6f904ff6d",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idMembers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idLabels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "dueComplete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "cover",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e6e2c6e-ad5c-43f6-84e5-cdf848668dcf",
+          "name": "Delete a Card",
+          "request": {
+            "name": "Delete a Card",
+            "description": {
+              "content": "Permanently deletes a card. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa21e8d1-cf48-43b0-99eb-492d3e8376d0",
+              "name": "Successfully deleted the card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de412057-6223-4698-94b4-df6f4caf4051",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "892735fd-30bf-4b4f-b618-679dcecc7d3b",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95725a2b-249e-407d-8e57-966a1b6710c5",
+          "name": "Get Actions on a Card",
+          "request": {
+            "name": "Get Actions on a Card",
+            "description": {
+              "content": "Retrieves a list of actions (activity events) on a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A comma-separated list of action types to filter by."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "287b6ab5-b335-457d-b7ea-a8fb8dd10f9e",
+              "name": "Successfully retrieved card actions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"idMemberCreator\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1972-06-14T10:37:56.267Z\",\n    \"data\": {\n      \"text\": \"string\",\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 6627,\n        \"shortLink\": \"string\"\n      },\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"old\": {}\n    },\n    \"display\": {},\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://drmpfhHthozSQeITHEs.fqyevDEzu6b4guhM7UaghM1sQDfLufFVQQo\",\n      \"url\": \"https://EYQCIzIVBaFtDntGRfVXoOrbN.eymq4JkDc1OOXZog6tFnWLCDpXB,hW\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"idMemberCreator\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1979-03-01T15:21:03.764Z\",\n    \"data\": {\n      \"text\": \"string\",\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 7156,\n        \"shortLink\": \"string\"\n      },\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"old\": {}\n    },\n    \"display\": {},\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://SAKoqwdrqjDXm.jpzwAd91s0WJGnk+addmcN32n1rek+6bDr0P+aiNruJGWWwdinyFmu7iCGh\",\n      \"url\": \"http://ZupLdrfzlBrsrSnLDwsfgGfaOpVgbYG.siiqP97+5J6jbtfFutY4XuywpSedZpjbR\",\n      \"confirmed\": true,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46c12458-21cf-4c2b-95fe-c0383887a216",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "106650b1-477a-4d42-b072-640dabec4ef7",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1eba011-a4a6-4371-add7-1040fccd2dea",
+          "name": "Add a Comment to a Card",
+          "request": {
+            "name": "Add a Comment to a Card",
+            "description": {
+              "content": "Adds a new comment to a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "actions",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "(Required) The comment text."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d572f51-6c84-40d2-8160-fd68027975dc",
+              "name": "Successfully added the comment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "actions",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"idMemberCreator\": \"string\",\n  \"type\": \"string\",\n  \"date\": \"2004-04-28T17:25:37.148Z\",\n  \"data\": {\n    \"text\": \"string\",\n    \"board\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"shortLink\": \"string\"\n    },\n    \"card\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"idShort\": 3580,\n      \"shortLink\": \"string\"\n    },\n    \"list\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    \"old\": {}\n  },\n  \"display\": {},\n  \"memberCreator\": {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"fullName\": \"string\",\n    \"initials\": \"string\",\n    \"bio\": \"string\",\n    \"avatarHash\": \"string\",\n    \"avatarUrl\": \"https://mFvCLBrQoDpLUaKQfgOlNO.pekvwkN,I3K4-DlDUT4MB9r\",\n    \"url\": \"http://YzqwLRdsqxfpT.dsibE4d3+2HxfAy.-JnqpH9+yQSTjE733rt8Ldait9dOriVNFkbr7W30NLa+\",\n    \"confirmed\": true,\n    \"memberType\": \"string\",\n    \"status\": \"string\",\n    \"idOrganizations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40a87a50-2c69-4c36-8dbe-8c30d4b90971",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "actions",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d8fecb26-579c-4d1c-9849-967cdab8bf49",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "actions",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a74c31d7-c955-4001-9966-78701cd83833",
+          "name": "Get Attachments on a Card",
+          "request": {
+            "name": "Get Attachments on a Card",
+            "description": {
+              "content": "Retrieves all attachments on a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "all",
+                  "description": "A comma-separated list of attachment fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a35b133-50af-41ba-b232-f5ec879ecb0e",
+              "name": "Successfully retrieved card attachments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"url\": \"https://EJbUBZWMV.jtX-8O2wE1mmtoxrPu.MvV-hM200I\",\n    \"bytes\": 5599,\n    \"date\": \"1991-12-16T16:39:18.282Z\",\n    \"edgeColor\": \"string\",\n    \"idMember\": \"string\",\n    \"isUpload\": false,\n    \"mimeType\": \"string\",\n    \"previews\": [\n      {\n        \"id\": \"string\",\n        \"url\": \"http://BLxrHuBwNGGkNmMounBmgccpxnF.uvgIPAVUCexpfmWrt,.gFe6..fFHMMsIW2BicblgJHUv1ivibfNWG5N6RI,zgwJqR7WwEFFeBxr,-+B\",\n        \"width\": 9736,\n        \"height\": 4218,\n        \"bytes\": 9948\n      },\n      {\n        \"id\": \"string\",\n        \"url\": \"https://LmPwF.kaazzvc2Oysd,TLVUTVZzDRvJBDCXSzsgpjGKoDdAlnacA7AR16UdVMXQt1l\",\n        \"width\": 3606,\n        \"height\": 9034,\n        \"bytes\": 6604\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"url\": \"https://Ws.hzfwRbyARl9CotEKQGio4FsCwAPGGU1omxKJo0OmshU.svGSkihOs5Wud\",\n    \"bytes\": 9085,\n    \"date\": \"1948-08-04T19:18:08.943Z\",\n    \"edgeColor\": \"string\",\n    \"idMember\": \"string\",\n    \"isUpload\": false,\n    \"mimeType\": \"string\",\n    \"previews\": [\n      {\n        \"id\": \"string\",\n        \"url\": \"http://dyPXNgmALKnTJ.rwBt3gB.bZyBcBUJMvQ2mmm,-dfmCeZu\",\n        \"width\": 1464,\n        \"height\": 8793,\n        \"bytes\": 1647\n      },\n      {\n        \"id\": \"string\",\n        \"url\": \"http://NXpuEWrwFhFBrQPTxghqHaaWhxqe.ydeejEIopAlNpiyH8zPcamqXTyXtZhbvSeLvzNL\",\n        \"width\": 6761,\n        \"height\": 7111,\n        \"bytes\": 9543\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76317275-3205-461d-a417-cd0fbcf61d37",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f84486e2-4089-4182-93b6-2565a0a4f1aa",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "all"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c6d8980-e22f-41af-b2bf-a577ea41af42",
+          "name": "Create an Attachment on a Card",
+          "request": {
+            "name": "Create an Attachment on a Card",
+            "description": {
+              "content": "Adds a new attachment to a card, either from a URL or a file upload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name for the attachment."
+                },
+                {
+                  "disabled": false,
+                  "key": "mimeType",
+                  "value": "<string>",
+                  "description": "The MIME type of the attachment."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "A URL to attach to the card."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ce2750c-302c-43cf-9ee4-d35b5f8c0ceb",
+              "name": "Successfully created the attachment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mimeType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"url\": \"http://pNVbCYVClQjZrDhzpYOw.izjmdwsB8EL6xuZFqNGVA8P8RmJ\",\n  \"bytes\": 4498,\n  \"date\": \"2026-01-17T03:09:46.595Z\",\n  \"edgeColor\": \"string\",\n  \"idMember\": \"string\",\n  \"isUpload\": false,\n  \"mimeType\": \"string\",\n  \"previews\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"https://srTECguYXOQZgqDsuJVbmwbDU.yqwsWzJdIVG33xUj8a3TgbB+SiWq+rH97Wma70f5XY\",\n      \"width\": 5325,\n      \"height\": 6018,\n      \"bytes\": 8417\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"http://GiVYmLTXNegpFqpkQJIiJKGS.qucwxwPSiIIXpcvKz9jxKY\",\n      \"width\": 6168,\n      \"height\": 4831,\n      \"bytes\": 7007\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ec00e94-216c-4feb-a3ee-c5825a3610a2",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mimeType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fbe17aaf-ce81-4cf1-af91-4dac61aaca33",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mimeType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71b77773-eb64-4f94-9358-ff5b65ac5cb9",
+          "name": "Get Checklists on a Card",
+          "request": {
+            "name": "Get Checklists on a Card",
+            "description": {
+              "content": "Retrieves all checklists on a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "checklists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfe75bf3-3f73-4b21-b2d2-3d1e0fba71e1",
+              "name": "Successfully retrieved card checklists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"idBoard\": \"string\",\n    \"idCard\": \"string\",\n    \"pos\": 8460.657993586037,\n    \"checkItems\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"complete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 9952.863823431024,\n        \"due\": \"1975-06-24T08:19:42.177Z\",\n        \"idMember\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"complete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 3067.199692364314,\n        \"due\": \"1955-09-02T15:17:56.547Z\",\n        \"idMember\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"idBoard\": \"string\",\n    \"idCard\": \"string\",\n    \"pos\": 7408.993817919483,\n    \"checkItems\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"complete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 6440.301094040569,\n        \"due\": \"2026-01-18T02:48:51.522Z\",\n        \"idMember\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"incomplete\",\n        \"idChecklist\": \"string\",\n        \"pos\": 9186.068791885042,\n        \"due\": \"2021-09-05T04:21:58.924Z\",\n        \"idMember\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d0912ff-6d1c-4e9d-81e2-cf45ce97b6ab",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec799982-e308-429a-8bf9-aaf72926d060",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "774de562-2fdf-4b62-b6ff-63a69c9c44c5",
+          "name": "Create a Checklist on a Card",
+          "request": {
+            "name": "Create a Checklist on a Card",
+            "description": {
+              "content": "Creates a new checklist on the specified card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "checklists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name for the checklist."
+                },
+                {
+                  "disabled": false,
+                  "key": "idChecklistSource",
+                  "value": "<string>",
+                  "description": "The ID of a checklist to copy into the new checklist."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "bottom",
+                  "description": "The position of the checklist on the card."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b07af103-f09e-43df-9f89-92024b9ba841",
+              "name": "Successfully created the checklist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idChecklistSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"idBoard\": \"string\",\n  \"idCard\": \"string\",\n  \"pos\": 1191.7814539960448,\n  \"checkItems\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 6997.697568913625,\n      \"due\": \"1992-01-28T04:17:43.789Z\",\n      \"idMember\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"complete\",\n      \"idChecklist\": \"string\",\n      \"pos\": 9879.933679464264,\n      \"due\": \"1989-05-28T00:43:59.854Z\",\n      \"idMember\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68ffdf15-6bf2-42e3-82f7-f34f3e6e71ae",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idChecklistSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "076143a1-df9d-4276-8e69-7e2263b41de4",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "checklists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idChecklistSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "bottom"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9038bf47-5c00-41ea-8849-177b9eeb260f",
+          "name": "Add a Label to a Card",
+          "request": {
+            "name": "Add a Label to a Card",
+            "description": {
+              "content": "Adds an existing label to a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "labels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the label to add."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5990a0f0-2c22-476f-8974-55f53b101a09",
+              "name": "Successfully added the label.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ae89a17-7ce6-49c3-a5b5-78bd9c792232",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e4f56ea-5f25-4715-96e5-85ac7d8a1fa1",
+              "name": "Card or label not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "labels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdb68580-e20f-452a-8215-1caa7988c2fc",
+          "name": "Remove a Label from a Card",
+          "request": {
+            "name": "Remove a Label from a Card",
+            "description": {
+              "content": "Removes a label from a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "labels",
+                ":idLabel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idLabel",
+                  "description": "(Required) The ID of the label to remove."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0eae37f5-5ff0-429c-b67c-f2be9dd8f09c",
+              "name": "Successfully removed the label.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "labels",
+                    ":idLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idLabel",
+                      "description": "(Required) The ID of the label to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5fc3cad3-e9eb-4882-8b90-9892c90e2fba",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "labels",
+                    ":idLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idLabel",
+                      "description": "(Required) The ID of the label to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22bc52c8-4610-4f40-895e-89a9c764224f",
+              "name": "Card or label not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "labels",
+                    ":idLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idLabel",
+                      "description": "(Required) The ID of the label to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d903d81-3536-4aa4-b135-73d1e93eee88",
+          "name": "Add a Member to a Card",
+          "request": {
+            "name": "Add a Member to a Card",
+            "description": {
+              "content": "Adds a member to a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the member to add."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5a26f93-88f5-4a32-9c9b-6a0223206435",
+              "name": "Successfully added the member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b92a7517-8860-40dd-aba6-add8ee40c367",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d045629-3541-4e39-8cec-6d751579bd37",
+              "name": "Card or member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49de35ca-392b-4a29-ab7b-d59823138226",
+          "name": "Remove a Member from a Card",
+          "request": {
+            "name": "Remove a Member from a Card",
+            "description": {
+              "content": "Removes a member from a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "members",
+                ":idMember"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idMember",
+                  "description": "(Required) The ID of the member to remove."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df414c7a-e223-484c-93ac-a5e233b30292",
+              "name": "Successfully removed the member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f74cd00e-703b-47a1-b8d7-16feac5cb64f",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc9bdf91-991a-45b5-afb5-2c2d01ba4770",
+              "name": "Card or member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "members",
+                    ":idMember"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idMember",
+                      "description": "(Required) The ID of the member to remove."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e95ff3c-1fbc-481e-9709-7e93bd3bd54e",
+          "name": "Get Stickers on a Card",
+          "request": {
+            "name": "Get Stickers on a Card",
+            "description": {
+              "content": "Retrieves all stickers on a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "stickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9f4504e-aa73-44e5-a2e1-7290efb52d69",
+              "name": "Successfully retrieved card stickers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "stickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"image\": \"string\",\n    \"imageUrl\": \"http://YuRFWPYWnbwvgwFIIcD.hakoyPtZQKC.srLx6x\",\n    \"top\": 2614.546115881444,\n    \"left\": 2433.545527154285,\n    \"zIndex\": 9155,\n    \"rotate\": 3792.3368482752253\n  },\n  {\n    \"id\": \"string\",\n    \"image\": \"string\",\n    \"imageUrl\": \"http://HBlioAOwZCgrpBdlBwxzIXR.hgsPYvKWUJqRa4Ut9bvCAsNg.AUM2XVuz.blzy7tuf6bzU74zGlx-8yxNIPC88lhtoi,\",\n    \"top\": 7214.512235770509,\n    \"left\": 9276.884007453033,\n    \"zIndex\": 6201,\n    \"rotate\": 7351.363212693933\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0a03fa2-30dd-46ac-9c74-9bcadb942741",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "stickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7ce6405-f58c-4d22-bfe6-f51156a4e6bb",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "stickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa53aa6c-7e7a-40b0-b280-3eb660ec6a9b",
+          "name": "Add a Sticker to a Card",
+          "request": {
+            "name": "Add a Sticker to a Card",
+            "description": {
+              "content": "Adds a sticker to a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "stickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "(Required) The sticker image identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<number>",
+                  "description": "(Required) The top position of the sticker as a percentage."
+                },
+                {
+                  "disabled": false,
+                  "key": "left",
+                  "value": "<number>",
+                  "description": "(Required) The left position of the sticker as a percentage."
+                },
+                {
+                  "disabled": false,
+                  "key": "zIndex",
+                  "value": "<integer>",
+                  "description": "(Required) The z-index of the sticker."
+                },
+                {
+                  "disabled": false,
+                  "key": "rotate",
+                  "value": "0",
+                  "description": "The rotation of the sticker in degrees."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69dbf031-f064-4c03-9f5b-2b6d0b99cb6c",
+              "name": "Successfully added the sticker.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "stickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "left",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "zIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "rotate",
+                      "value": "0"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"image\": \"string\",\n  \"imageUrl\": \"https://FMyfhiSRovhgAggrdWEwiIUTT.xxA0q6ZeWn8Pr.Nh3WXEldkIAo,EOZQey4kcLsH9biII3OSEwmB3ORHCNElZ,zy1bAr7ylX4qpjfQfgZp+w\",\n  \"top\": 3225.561465698922,\n  \"left\": 4931.38773836337,\n  \"zIndex\": 517,\n  \"rotate\": 672.5656605915409\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93b27a8e-5b1d-44d5-ab49-1fd554cc8429",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "stickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "left",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "zIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "rotate",
+                      "value": "0"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94fbb17b-f9eb-4845-a592-93b79c5c9d1a",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "stickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "top",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "left",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "zIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "rotate",
+                      "value": "0"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4e6e7572-bef0-416d-b09c-f95f80678774",
+    "name": "Trello REST Actions Cards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

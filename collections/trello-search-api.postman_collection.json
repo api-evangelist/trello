@@ -1,0 +1,496 @@
+{
+  "item": [
+    {
+      "id": "34840880-ce34-4563-8675-2a2a986b6e8c",
+      "name": "Search",
+      "description": {
+        "content": "Operations for searching across Trello boards, cards, members, and organizations using query strings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9b4e1cc-436d-4ac2-a220-5d76e360f383",
+          "name": "Search Trello",
+          "request": {
+            "name": "Search Trello",
+            "description": {
+              "content": "Searches for Trello objects matching the provided query string across boards, cards, members, and organizations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The search query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "idBoards",
+                  "value": "<string>",
+                  "description": "A comma-separated list of board IDs to limit the search to."
+                },
+                {
+                  "disabled": false,
+                  "key": "idOrganizations",
+                  "value": "<string>",
+                  "description": "A comma-separated list of organization IDs to limit the search to."
+                },
+                {
+                  "disabled": false,
+                  "key": "idCards",
+                  "value": "<string>",
+                  "description": "A comma-separated list of card IDs to limit the search to."
+                },
+                {
+                  "disabled": false,
+                  "key": "modelTypes",
+                  "value": "all",
+                  "description": "A comma-separated list of model types to return. Valid values are actions, boards, cards, members, and organizations."
+                },
+                {
+                  "disabled": false,
+                  "key": "board_fields",
+                  "value": "<string>",
+                  "description": "Board fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "boards_limit",
+                  "value": "10",
+                  "description": "Maximum number of boards to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "card_fields",
+                  "value": "<string>",
+                  "description": "Card fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "cards_limit",
+                  "value": "10",
+                  "description": "Maximum number of cards to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "cards_page",
+                  "value": "0",
+                  "description": "Page number of card results."
+                },
+                {
+                  "disabled": false,
+                  "key": "partial",
+                  "value": "false",
+                  "description": "Whether to return partial matches."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c9a3dbc-f0b7-4cf1-81e4-cbd57715edb3",
+              "name": "Successfully returned search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoards",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganizations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idCards",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modelTypes",
+                      "value": "all"
+                    },
+                    {
+                      "key": "board_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boards_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cards_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cards_page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "partial",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"options\": {\n    \"modelTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"partial\": false\n  },\n  \"boards\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"desc\": \"string\",\n      \"descData\": {},\n      \"closed\": true,\n      \"idMemberCreator\": \"string\",\n      \"idOrganization\": \"string\",\n      \"pinned\": true,\n      \"url\": \"http://JqmdIeIisduudl.usvekNclIvGFnt\",\n      \"shortUrl\": \"https://RqjPsTpXuvgzdvuCgJhBEduy.ijwkTf8a8KdZx\",\n      \"shortLink\": \"string\",\n      \"prefs\": {\n        \"permissionLevel\": \"private\",\n        \"hideVotes\": false,\n        \"voting\": \"string\",\n        \"comments\": \"string\",\n        \"selfJoin\": true,\n        \"cardCovers\": false,\n        \"cardAging\": \"regular\",\n        \"background\": \"string\",\n        \"backgroundColor\": \"string\",\n        \"backgroundImage\": \"string\",\n        \"backgroundTile\": false,\n        \"backgroundBrightness\": \"string\"\n      },\n      \"labelNames\": {\n        \"green\": \"string\",\n        \"yellow\": \"string\",\n        \"orange\": \"string\",\n        \"red\": \"string\",\n        \"purple\": \"string\",\n        \"blue\": \"string\",\n        \"sky\": \"string\",\n        \"lime\": \"string\",\n        \"pink\": \"string\",\n        \"black\": \"string\"\n      },\n      \"starred\": true,\n      \"memberships\": [\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"admin\",\n          \"unconfirmed\": true,\n          \"deactivated\": true\n        },\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"normal\",\n          \"unconfirmed\": true,\n          \"deactivated\": true\n        }\n      ],\n      \"dateLastActivity\": \"1948-11-24T16:29:06.484Z\",\n      \"dateLastView\": \"1947-05-12T09:25:31.406Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"desc\": \"string\",\n      \"descData\": {},\n      \"closed\": true,\n      \"idMemberCreator\": \"string\",\n      \"idOrganization\": \"string\",\n      \"pinned\": false,\n      \"url\": \"http://pQkPQQjEHKTbEJnEodm.acqPabwpw,4CnJ79iYHOlfoes8--CcAE3TRfg.Ptjo\",\n      \"shortUrl\": \"https://QtWCnC.qftCMKqlkERI0PhWuC2pSm6aAv9AH3PeosyFDvPuaF,NdTTRZe-QzfTKSFHi5VV\",\n      \"shortLink\": \"string\",\n      \"prefs\": {\n        \"permissionLevel\": \"public\",\n        \"hideVotes\": false,\n        \"voting\": \"string\",\n        \"comments\": \"string\",\n        \"selfJoin\": true,\n        \"cardCovers\": true,\n        \"cardAging\": \"pirate\",\n        \"background\": \"string\",\n        \"backgroundColor\": \"string\",\n        \"backgroundImage\": \"string\",\n        \"backgroundTile\": true,\n        \"backgroundBrightness\": \"string\"\n      },\n      \"labelNames\": {\n        \"green\": \"string\",\n        \"yellow\": \"string\",\n        \"orange\": \"string\",\n        \"red\": \"string\",\n        \"purple\": \"string\",\n        \"blue\": \"string\",\n        \"sky\": \"string\",\n        \"lime\": \"string\",\n        \"pink\": \"string\",\n        \"black\": \"string\"\n      },\n      \"starred\": true,\n      \"memberships\": [\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"admin\",\n          \"unconfirmed\": true,\n          \"deactivated\": true\n        },\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"observer\",\n          \"unconfirmed\": false,\n          \"deactivated\": true\n        }\n      ],\n      \"dateLastActivity\": \"1979-06-17T08:24:11.935Z\",\n      \"dateLastView\": \"2005-11-17T21:40:32.207Z\"\n    }\n  ],\n  \"cards\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"desc\": \"string\",\n      \"closed\": true,\n      \"idBoard\": \"string\",\n      \"idList\": \"string\",\n      \"idShort\": 8288,\n      \"idMembers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idLabels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idChecklists\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idAttachmentCover\": \"string\",\n      \"pos\": 5969.268235521449,\n      \"due\": \"1962-08-02T10:28:53.563Z\",\n      \"dueComplete\": true,\n      \"start\": \"1974-12-18T12:16:39.850Z\",\n      \"url\": \"http://bFCxaYKchjswfoZZBfNyq.dtmwG,AdJJ5YS7Ui,UQ\",\n      \"shortUrl\": \"https://NH.ivmmxdvJrR7cqXT6Q1fHOL6WaNAJEbnLb\",\n      \"shortLink\": \"string\",\n      \"subscribed\": false,\n      \"dateLastActivity\": \"2022-04-13T03:01:13.835Z\",\n      \"cover\": {\n        \"idAttachment\": \"string\",\n        \"color\": \"string\",\n        \"idUploadedBackground\": \"string\",\n        \"size\": \"full\",\n        \"brightness\": \"string\",\n        \"idPlugin\": \"string\"\n      },\n      \"labels\": [\n        {\n          \"id\": \"string\",\n          \"idBoard\": \"string\",\n          \"name\": \"string\",\n          \"color\": \"yellow\"\n        },\n        {\n          \"id\": \"string\",\n          \"idBoard\": \"string\",\n          \"name\": \"string\",\n          \"color\": \"blue\"\n        }\n      ],\n      \"badges\": {\n        \"votes\": 8445,\n        \"attachments\": 9482,\n        \"comments\": 6015,\n        \"checkItems\": 6428,\n        \"checkItemsChecked\": 4850,\n        \"description\": false,\n        \"due\": \"1982-11-28T20:32:49.313Z\",\n        \"dueComplete\": true,\n        \"subscribed\": true\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"desc\": \"string\",\n      \"closed\": true,\n      \"idBoard\": \"string\",\n      \"idList\": \"string\",\n      \"idShort\": 5090,\n      \"idMembers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idLabels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idChecklists\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idAttachmentCover\": \"string\",\n      \"pos\": 8118.571986878184,\n      \"due\": \"1999-11-23T18:02:01.318Z\",\n      \"dueComplete\": true,\n      \"start\": \"1967-06-11T05:02:02.922Z\",\n      \"url\": \"https://zNlSpB.fpocoVbK8weXKHI5pTJCrX-oUDTxliuge2bnEiCaK58mXJ2-vQTw7tkkP+ta\",\n      \"shortUrl\": \"https://sibumsRJBwZjMwF.fciTrymR1ASSe8O6kQx3q9+xnVaQ,ADPMWYRtTXTmY0S\",\n      \"shortLink\": \"string\",\n      \"subscribed\": true,\n      \"dateLastActivity\": \"2009-01-24T05:58:16.528Z\",\n      \"cover\": {\n        \"idAttachment\": \"string\",\n        \"color\": \"string\",\n        \"idUploadedBackground\": \"string\",\n        \"size\": \"full\",\n        \"brightness\": \"string\",\n        \"idPlugin\": \"string\"\n      },\n      \"labels\": [\n        {\n          \"id\": \"string\",\n          \"idBoard\": \"string\",\n          \"name\": \"string\",\n          \"color\": \"null\"\n        },\n        {\n          \"id\": \"string\",\n          \"idBoard\": \"string\",\n          \"name\": \"string\",\n          \"color\": \"black\"\n        }\n      ],\n      \"badges\": {\n        \"votes\": 9470,\n        \"attachments\": 6304,\n        \"comments\": 8095,\n        \"checkItems\": 9387,\n        \"checkItemsChecked\": 8132,\n        \"description\": true,\n        \"due\": \"2002-09-23T09:59:16.204Z\",\n        \"dueComplete\": false,\n        \"subscribed\": true\n      }\n    }\n  ],\n  \"members\": [\n    {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"http://UuMoTtUMbRepcleFuhleavoOXwuzQb.wcm+SfwsB3Ay-EyAyzairw\",\n      \"url\": \"https://EJXuaLHQIKkicacndEvfxFCwDtOMYmkJJ.twUU1VP0uK2cimV6knvME\",\n      \"confirmed\": true,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"http://TAlHlYootaLfcDYMDKLOwKlFEAH.nzGcx90UzPkY.YsdCN+jcA\",\n      \"url\": \"https://zPbtkjxFWFCKqJMNupHII.mmkbR4BtRMHZlp6ewXXVbb8s9u1EqCjrvnGgx7iFlLbBiFMDdnVqGdPHL0gT7acmo\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"organizations\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"displayName\": \"string\",\n      \"desc\": \"string\",\n      \"url\": \"http://hiFfZIzPCRwCVsrYmaJFP.uoDKzDFyE4hAw+NaOjOliH5GtjuPb.fv\",\n      \"website\": \"https://IDPqhhQOmSoNBNvuhyCsgHegPBF.ebanFRQY77RRLXS9F0mlP+VtOjV7PA\",\n      \"logoHash\": \"string\",\n      \"products\": [\n        2351,\n        5695\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ],\n      \"memberships\": [\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"admin\",\n          \"unconfirmed\": true,\n          \"deactivated\": true\n        },\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"observer\",\n          \"unconfirmed\": false,\n          \"deactivated\": true\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"displayName\": \"string\",\n      \"desc\": \"string\",\n      \"url\": \"https://kUHQvlPhf.drRsD\",\n      \"website\": \"https://ZfIxGIQfI.heTpRvlYVcxLncW0p\",\n      \"logoHash\": \"string\",\n      \"products\": [\n        9811,\n        7759\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ],\n      \"memberships\": [\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"observer\",\n          \"unconfirmed\": true,\n          \"deactivated\": true\n        },\n        {\n          \"id\": \"string\",\n          \"idMember\": \"string\",\n          \"memberType\": \"admin\",\n          \"unconfirmed\": true,\n          \"deactivated\": true\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "312d00c9-a1c9-4907-9a6c-69dbe7c13d00",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoards",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganizations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idCards",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modelTypes",
+                      "value": "all"
+                    },
+                    {
+                      "key": "board_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boards_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "card_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cards_limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cards_page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "partial",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20832dc6-351b-4d20-ba57-e7e6de480c2c",
+          "name": "Search Members",
+          "request": {
+            "name": "Search Members",
+            "description": {
+              "content": "Searches for Trello members matching the provided query string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The search query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "8",
+                  "description": "Maximum number of members to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "idBoard",
+                  "value": "<string>",
+                  "description": "The ID of a board to limit the search to."
+                },
+                {
+                  "disabled": false,
+                  "key": "idOrganization",
+                  "value": "<string>",
+                  "description": "The ID of an organization to limit the search to."
+                },
+                {
+                  "disabled": false,
+                  "key": "onlyOrgMembers",
+                  "value": "false",
+                  "description": "Whether to limit results to members of the given organization."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8574d760-66b7-44d5-be96-e320aa92ae96",
+              "name": "Successfully returned member search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "8"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "onlyOrgMembers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"fullName\": \"string\",\n    \"initials\": \"string\",\n    \"bio\": \"string\",\n    \"avatarHash\": \"string\",\n    \"avatarUrl\": \"http://ZDfnGP.uulbtMMcZrdgghuVWCJJSRuf8Ew96x9\",\n    \"url\": \"https://XgFhB.aiigiKZ66-\",\n    \"confirmed\": false,\n    \"memberType\": \"string\",\n    \"status\": \"string\",\n    \"idOrganizations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"username\": \"string\",\n    \"fullName\": \"string\",\n    \"initials\": \"string\",\n    \"bio\": \"string\",\n    \"avatarHash\": \"string\",\n    \"avatarUrl\": \"https://ZtRjCPLzNMXYogEaogfVjpMibUY.xtRUEnOHkyehHyrwv2Jdm9CF+,tWLa0P5pBYlT+eG.otUdkr9U\",\n    \"url\": \"https://xZtZFZMkquPG.mshqMVQHFP5fn1kIklocs9zrnjsHCIUCqti8dcmll,fAwBsPPZMgOsJuz+2yaQJJEI\",\n    \"confirmed\": true,\n    \"memberType\": \"string\",\n    \"status\": \"string\",\n    \"idOrganizations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b73850ac-2799-46ff-99b1-73fa26a00e50",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "8"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idOrganization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "onlyOrgMembers",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fe66627b-4d69-48ec-bbf8-a255b313620b",
+    "name": "Trello REST Actions Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

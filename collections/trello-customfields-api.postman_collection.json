@@ -1,0 +1,1220 @@
+{
+  "item": [
+    {
+      "id": "dbdd4fbd-ccb7-4c6f-aa85-4a5dc9ba0233",
+      "name": "CustomFields",
+      "description": {
+        "content": "Operations for creating, retrieving, updating, and deleting custom field definitions and their values on boards and cards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6403c1cf-2b19-448d-947b-706664704256",
+          "name": "Create a Custom Field Definition",
+          "request": {
+            "name": "Create a Custom Field Definition",
+            "description": {
+              "content": "Creates a new custom field definition on a board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customFields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idModel\": \"<string>\",\n  \"modelType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display_cardFront\": \"<boolean>\",\n  \"options\": [\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    },\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28b51a44-873c-4140-a69d-ef745e82a2ac",
+              "name": "Successfully created the custom field.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idModel\": \"<string>\",\n  \"modelType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display_cardFront\": \"<boolean>\",\n  \"options\": [\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    },\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"idModel\": \"string\",\n  \"modelType\": \"string\",\n  \"fieldGroup\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"checkbox\",\n  \"pos\": 9617.560194314652,\n  \"display\": {\n    \"cardFront\": true\n  },\n  \"options\": [\n    {\n      \"id\": \"string\",\n      \"idCustomField\": \"string\",\n      \"value\": {\n        \"text\": \"string\"\n      },\n      \"color\": \"string\",\n      \"pos\": 7824\n    },\n    {\n      \"id\": \"string\",\n      \"idCustomField\": \"string\",\n      \"value\": {\n        \"text\": \"string\"\n      },\n      \"color\": \"string\",\n      \"pos\": 3994\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bae82cba-5f99-4f61-82f8-9873b7318c29",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idModel\": \"<string>\",\n  \"modelType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display_cardFront\": \"<boolean>\",\n  \"options\": [\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    },\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f757ce5-de8a-41a2-bd99-08fc779547c0",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idModel\": \"<string>\",\n  \"modelType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display_cardFront\": \"<boolean>\",\n  \"options\": [\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    },\n    {\n      \"color\": \"<string>\",\n      \"value\": {\n        \"text\": \"<string>\"\n      },\n      \"pos\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c721ca9-87d4-4e70-9963-4849d44440be",
+          "name": "Get a Custom Field Definition",
+          "request": {
+            "name": "Get a Custom Field Definition",
+            "description": {
+              "content": "Retrieves a custom field definition by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customFields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0db0de72-06d8-47fd-b31b-5927b6a4fa5c",
+              "name": "Successfully retrieved the custom field.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"idModel\": \"string\",\n  \"modelType\": \"string\",\n  \"fieldGroup\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"checkbox\",\n  \"pos\": 9617.560194314652,\n  \"display\": {\n    \"cardFront\": true\n  },\n  \"options\": [\n    {\n      \"id\": \"string\",\n      \"idCustomField\": \"string\",\n      \"value\": {\n        \"text\": \"string\"\n      },\n      \"color\": \"string\",\n      \"pos\": 7824\n    },\n    {\n      \"id\": \"string\",\n      \"idCustomField\": \"string\",\n      \"value\": {\n        \"text\": \"string\"\n      },\n      \"color\": \"string\",\n      \"pos\": 3994\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c2ec72-ceab-4d57-a329-98127c9c19f7",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89b7c236-fb93-4431-9b4d-9fc3bfd899dc",
+              "name": "Custom field not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa1a963c-574c-426d-8bc4-941d27378a33",
+          "name": "Update a Custom Field Definition",
+          "request": {
+            "name": "Update a Custom Field Definition",
+            "description": {
+              "content": "Updates a custom field definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customFields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display/cardFront\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b0a3bbf-cde6-4e65-addb-973a732c6a15",
+              "name": "Successfully updated the custom field.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display/cardFront\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"idModel\": \"string\",\n  \"modelType\": \"string\",\n  \"fieldGroup\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"checkbox\",\n  \"pos\": 9617.560194314652,\n  \"display\": {\n    \"cardFront\": true\n  },\n  \"options\": [\n    {\n      \"id\": \"string\",\n      \"idCustomField\": \"string\",\n      \"value\": {\n        \"text\": \"string\"\n      },\n      \"color\": \"string\",\n      \"pos\": 7824\n    },\n    {\n      \"id\": \"string\",\n      \"idCustomField\": \"string\",\n      \"value\": {\n        \"text\": \"string\"\n      },\n      \"color\": \"string\",\n      \"pos\": 3994\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec6e9899-e267-406e-903a-e8b317c31fee",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display/cardFront\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9cef011-d62d-4570-850a-bc8e1fc875ae",
+              "name": "Custom field not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"pos\": \"<string>\",\n  \"display/cardFront\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e376cbdf-14c7-40f4-b7ca-1f612070830e",
+          "name": "Delete a Custom Field Definition",
+          "request": {
+            "name": "Delete a Custom Field Definition",
+            "description": {
+              "content": "Permanently deletes a custom field definition and removes its values from all cards on the board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customFields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4e446f8-be4a-44ea-acc8-5a92f539d1ff",
+              "name": "Successfully deleted the custom field.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d25f918e-3281-4c4c-8db3-430b456baf4e",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c59e723-004a-4ef4-be1c-1bac56db46fe",
+              "name": "Custom field not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customFields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57e5fd9c-e24c-47d0-b1a4-0c6f449710ee",
+          "name": "Get Custom Field Items on a Card",
+          "request": {
+            "name": "Get Custom Field Items on a Card",
+            "description": {
+              "content": "Retrieves the custom field values set on a specific card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id",
+                "customFieldItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d1462ec-730f-427d-8d90-ac1b489020a4",
+              "name": "Successfully retrieved custom field items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "customFieldItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"idCustomField\": \"string\",\n    \"idModel\": \"string\",\n    \"modelType\": \"string\",\n    \"value\": {\n      \"text\": \"string\",\n      \"number\": \"string\",\n      \"date\": \"1988-05-29T12:10:05.416Z\",\n      \"checked\": \"string\"\n    },\n    \"idValue\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"idCustomField\": \"string\",\n    \"idModel\": \"string\",\n    \"modelType\": \"string\",\n    \"value\": {\n      \"text\": \"string\",\n      \"number\": \"string\",\n      \"date\": \"1971-01-19T07:23:51.343Z\",\n      \"checked\": \"string\"\n    },\n    \"idValue\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d17c612a-43e4-4f13-8325-37d9b8d9aa72",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "customFieldItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b59e3af-1b04-48fc-92dd-d74811b0d02f",
+              "name": "Card not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id",
+                    "customFieldItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2857c524-d7d2-4a89-aa83-0327f7426b7d",
+          "name": "Set a Custom Field Value on a Card",
+          "request": {
+            "name": "Set a Custom Field Value on a Card",
+            "description": {
+              "content": "Sets or updates the value of a custom field on a card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":idCard",
+                "customField",
+                ":idCustomField",
+                "item"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idCard",
+                  "description": "(Required) The ID of the card."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idCustomField",
+                  "description": "(Required) The ID of the custom field."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<object>\",\n  \"idValue\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9706afbc-d243-440a-9f1c-02a001954512",
+              "name": "Successfully updated the custom field value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":idCard",
+                    "customField",
+                    ":idCustomField",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCard",
+                      "description": "(Required) The ID of the card."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCustomField",
+                      "description": "(Required) The ID of the custom field."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"<object>\",\n  \"idValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc3927a9-54b1-4b70-9ea1-67d03649fdb2",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":idCard",
+                    "customField",
+                    ":idCustomField",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCard",
+                      "description": "(Required) The ID of the card."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCustomField",
+                      "description": "(Required) The ID of the custom field."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"<object>\",\n  \"idValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a90344e-6669-4f93-8431-a3faa93be9fe",
+              "name": "Card or custom field not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":idCard",
+                    "customField",
+                    ":idCustomField",
+                    "item"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCard",
+                      "description": "(Required) The ID of the card."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idCustomField",
+                      "description": "(Required) The ID of the custom field."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"<object>\",\n  \"idValue\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2cc595a7-8086-409f-8e0c-33e31e09f158",
+    "name": "Trello REST Actions CustomFields API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

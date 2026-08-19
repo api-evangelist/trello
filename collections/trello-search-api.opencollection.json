@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trello REST Actions Search API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Trello",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "idBoards",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of board IDs to limit the search to."
+              },
+              {
+                "name": "idOrganizations",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of organization IDs to limit the search to."
+              },
+              {
+                "name": "idCards",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of card IDs to limit the search to."
+              },
+              {
+                "name": "modelTypes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of model types to return. Valid values are actions, boards, cards, members, and organizations."
+              },
+              {
+                "name": "board_fields",
+                "value": "",
+                "type": "query",
+                "description": "Board fields to return."
+              },
+              {
+                "name": "boards_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of boards to return."
+              },
+              {
+                "name": "card_fields",
+                "value": "",
+                "type": "query",
+                "description": "Card fields to return."
+              },
+              {
+                "name": "cards_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of cards to return."
+              },
+              {
+                "name": "cards_page",
+                "value": "",
+                "type": "query",
+                "description": "Page number of card results."
+              },
+              {
+                "name": "partial",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return partial matches."
+              }
+            ]
+          },
+          "docs": "Searches for Trello objects matching the provided query string across boards, cards, members, and organizations."
+        },
+        {
+          "info": {
+            "name": "Search Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trello.com/1/search/members",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of members to return."
+              },
+              {
+                "name": "idBoard",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a board to limit the search to."
+              },
+              {
+                "name": "idOrganization",
+                "value": "",
+                "type": "query",
+                "description": "The ID of an organization to limit the search to."
+              },
+              {
+                "name": "onlyOrgMembers",
+                "value": "",
+                "type": "query",
+                "description": "Whether to limit results to members of the given organization."
+              }
+            ]
+          },
+          "docs": "Searches for Trello members matching the provided query string."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

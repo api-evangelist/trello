@@ -1,0 +1,1213 @@
+{
+  "item": [
+    {
+      "id": "2ebd623e-7636-43be-a85d-cb2a6e0024d7",
+      "name": "Members",
+      "description": {
+        "content": "Operations for retrieving and updating member profiles, boards, organizations, and notification settings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccee1247-6b4f-4c28-8fa4-b14c2bef0031",
+          "name": "Get a Member",
+          "request": {
+            "name": "Get a Member",
+            "description": {
+              "content": "Retrieves a member by their identifier or username.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "members",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "actions",
+                  "value": "<string>",
+                  "description": "A comma-separated list of action types to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "boards",
+                  "value": "none",
+                  "description": "Filter boards to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "organizations",
+                  "value": "none",
+                  "description": "Filter organizations to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of member fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0e2b281-5071-4192-828b-92cf641b3867",
+              "name": "Successfully retrieved the member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "organizations",
+                      "value": "none"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"fullName\": \"string\",\n  \"initials\": \"string\",\n  \"bio\": \"string\",\n  \"avatarHash\": \"string\",\n  \"avatarUrl\": \"http://JrvrEnwNKYrvTSlTMXwdJRFeLjrKEf.kvlKMHo3CkZ3LwRevpfR9V4qJ8IkgHFNFxRKcGoA7tEoNmRXcz-fJnRaHh5PHJXjNcsbp2D\",\n  \"url\": \"http://EJqTyeqQDYgj.zufhYWH8uLbF1xr\",\n  \"confirmed\": false,\n  \"memberType\": \"string\",\n  \"status\": \"string\",\n  \"idOrganizations\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idBoards\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48e1b0c2-6f25-445f-a7fe-26a5952c021e",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "organizations",
+                      "value": "none"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09beff2f-43d0-4efd-b8d4-18238d212ff8",
+              "name": "Member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boards",
+                      "value": "none"
+                    },
+                    {
+                      "key": "organizations",
+                      "value": "none"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff941f03-881b-434a-b42d-38ffb89245cc",
+          "name": "Update a Member",
+          "request": {
+            "name": "Update a Member",
+            "description": {
+              "content": "Updates a member's profile fields such as full name, initials, and bio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "members",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fullName",
+                  "value": "<string>",
+                  "description": "The new full name for the member."
+                },
+                {
+                  "disabled": false,
+                  "key": "initials",
+                  "value": "<string>",
+                  "description": "The new initials for the member."
+                },
+                {
+                  "disabled": false,
+                  "key": "bio",
+                  "value": "<string>",
+                  "description": "The new bio for the member."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39bf7e5c-f5ef-4a2d-9512-c6eaf65bc4b8",
+              "name": "Successfully updated the member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fullName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "initials",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"fullName\": \"string\",\n  \"initials\": \"string\",\n  \"bio\": \"string\",\n  \"avatarHash\": \"string\",\n  \"avatarUrl\": \"http://JrvrEnwNKYrvTSlTMXwdJRFeLjrKEf.kvlKMHo3CkZ3LwRevpfR9V4qJ8IkgHFNFxRKcGoA7tEoNmRXcz-fJnRaHh5PHJXjNcsbp2D\",\n  \"url\": \"http://EJqTyeqQDYgj.zufhYWH8uLbF1xr\",\n  \"confirmed\": false,\n  \"memberType\": \"string\",\n  \"status\": \"string\",\n  \"idOrganizations\": [\n    \"string\",\n    \"string\"\n  ],\n  \"idBoards\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4601b6f-cc61-4dd5-aa94-e85c0e9d1e32",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fullName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "initials",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e6b1a01-a3fd-4d13-ba28-75c069acda98",
+              "name": "Member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fullName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "initials",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75fb8a30-8b44-43ec-aaaf-c8be4c1544c5",
+          "name": "Get Boards for a Member",
+          "request": {
+            "name": "Get Boards for a Member",
+            "description": {
+              "content": "Retrieves all boards that a member has access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "members",
+                ":id",
+                "boards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "all",
+                  "description": "Filter boards by status."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of board fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "lists",
+                  "value": "none",
+                  "description": "Whether to include lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "false",
+                  "description": "Whether to include the organization."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ded0c6b-a0f3-4eb9-9763-b7c8a484d5ee",
+              "name": "Successfully retrieved member boards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "boards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"descData\": {},\n    \"closed\": false,\n    \"idMemberCreator\": \"string\",\n    \"idOrganization\": \"string\",\n    \"pinned\": true,\n    \"url\": \"https://BCN.endAABrk5QtRzaMgpBFF5uZlAbc7hod1mRidtb4kezdx\",\n    \"shortUrl\": \"https://nObsjv.couHTT-bvcnNIuC4REti9\",\n    \"shortLink\": \"string\",\n    \"prefs\": {\n      \"permissionLevel\": \"org\",\n      \"hideVotes\": true,\n      \"voting\": \"string\",\n      \"comments\": \"string\",\n      \"selfJoin\": true,\n      \"cardCovers\": true,\n      \"cardAging\": \"regular\",\n      \"background\": \"string\",\n      \"backgroundColor\": \"string\",\n      \"backgroundImage\": \"string\",\n      \"backgroundTile\": false,\n      \"backgroundBrightness\": \"string\"\n    },\n    \"labelNames\": {\n      \"green\": \"string\",\n      \"yellow\": \"string\",\n      \"orange\": \"string\",\n      \"red\": \"string\",\n      \"purple\": \"string\",\n      \"blue\": \"string\",\n      \"sky\": \"string\",\n      \"lime\": \"string\",\n      \"pink\": \"string\",\n      \"black\": \"string\"\n    },\n    \"starred\": false,\n    \"memberships\": [\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"observer\",\n        \"unconfirmed\": false,\n        \"deactivated\": false\n      },\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"observer\",\n        \"unconfirmed\": true,\n        \"deactivated\": false\n      }\n    ],\n    \"dateLastActivity\": \"1969-07-22T14:00:33.372Z\",\n    \"dateLastView\": \"1966-04-09T06:47:13.856Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"descData\": {},\n    \"closed\": false,\n    \"idMemberCreator\": \"string\",\n    \"idOrganization\": \"string\",\n    \"pinned\": false,\n    \"url\": \"https://FtYlgtOVyCHH.krhk+5uQcG8G\",\n    \"shortUrl\": \"https://tEQxIpRWFKgzlGkixkOLv.ugdytk5WlhJDvcypOq1\",\n    \"shortLink\": \"string\",\n    \"prefs\": {\n      \"permissionLevel\": \"private\",\n      \"hideVotes\": true,\n      \"voting\": \"string\",\n      \"comments\": \"string\",\n      \"selfJoin\": true,\n      \"cardCovers\": false,\n      \"cardAging\": \"regular\",\n      \"background\": \"string\",\n      \"backgroundColor\": \"string\",\n      \"backgroundImage\": \"string\",\n      \"backgroundTile\": false,\n      \"backgroundBrightness\": \"string\"\n    },\n    \"labelNames\": {\n      \"green\": \"string\",\n      \"yellow\": \"string\",\n      \"orange\": \"string\",\n      \"red\": \"string\",\n      \"purple\": \"string\",\n      \"blue\": \"string\",\n      \"sky\": \"string\",\n      \"lime\": \"string\",\n      \"pink\": \"string\",\n      \"black\": \"string\"\n    },\n    \"starred\": false,\n    \"memberships\": [\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"normal\",\n        \"unconfirmed\": true,\n        \"deactivated\": false\n      },\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"observer\",\n        \"unconfirmed\": true,\n        \"deactivated\": false\n      }\n    ],\n    \"dateLastActivity\": \"1960-06-26T11:52:38.990Z\",\n    \"dateLastView\": \"2013-05-18T22:26:56.400Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6e2cd79-dfc6-40ed-872d-6d4f0af4bde4",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "boards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e1e2ce4-c770-419c-a04a-872727dfbc47",
+              "name": "Member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "boards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lists",
+                      "value": "none"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "false"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41641881-119a-49b7-8adc-5b35ed063c6c",
+          "name": "Get Cards for a Member",
+          "request": {
+            "name": "Get Cards for a Member",
+            "description": {
+              "content": "Retrieves all cards assigned to a member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "members",
+                ":id",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "visible",
+                  "description": "Filter cards by status."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0074aab-9da1-4710-afe1-c5c4f0f444ad",
+              "name": "Successfully retrieved member cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "visible"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": false,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 8214,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 3143.458637078892,\n    \"due\": \"2000-12-13T20:08:30.339Z\",\n    \"dueComplete\": false,\n    \"start\": \"1970-10-15T16:30:20.663Z\",\n    \"url\": \"http://DFwzpbdKlNH.ddioXI6fLmxFpgChrxI+kp73JdStJd2YLoT\",\n    \"shortUrl\": \"https://lYkZAQYoaWdYpOkkHfAyU.besL+q2yE2jrA\",\n    \"shortLink\": \"string\",\n    \"subscribed\": false,\n    \"dateLastActivity\": \"2024-10-02T12:07:38.610Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"normal\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"lime\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"purple\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 6012,\n      \"attachments\": 8686,\n      \"comments\": 8457,\n      \"checkItems\": 4970,\n      \"checkItemsChecked\": 2273,\n      \"description\": false,\n      \"due\": \"2012-11-19T01:09:06.955Z\",\n      \"dueComplete\": false,\n      \"subscribed\": false\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": false,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 5721,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 6352.761183817995,\n    \"due\": \"1969-05-27T00:34:33.135Z\",\n    \"dueComplete\": false,\n    \"start\": \"1968-03-10T07:09:17.575Z\",\n    \"url\": \"http://IfVyUR.swrm8owXRypSxlDqv+RnSf5Zuzs0TBY1ls5zrJ2psPpwUa+Vsx\",\n    \"shortUrl\": \"http://XDewADnnqRufWZENPiBsfPzsWivz.rztphbyIT.a8nwPcD+B5c2MDay\",\n    \"shortLink\": \"string\",\n    \"subscribed\": true,\n    \"dateLastActivity\": \"1950-02-26T15:08:45.056Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"full\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"lime\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"pink\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 742,\n      \"attachments\": 6480,\n      \"comments\": 8672,\n      \"checkItems\": 3482,\n      \"checkItemsChecked\": 3523,\n      \"description\": true,\n      \"due\": \"2015-10-12T23:39:25.150Z\",\n      \"dueComplete\": false,\n      \"subscribed\": false\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fe77053-9f94-4948-815b-6e666d879ecb",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "visible"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff509dd0-e772-44f9-a0c4-f37511cde0b8",
+              "name": "Member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "visible"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f64b64a-c149-4ab8-9f2c-0f7721ad52bf",
+          "name": "Get Organizations for a Member",
+          "request": {
+            "name": "Get Organizations for a Member",
+            "description": {
+              "content": "Retrieves all organizations (workspaces) that a member belongs to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "members",
+                ":id",
+                "organizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "all",
+                  "description": "Filter organizations."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of organization fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f067482-d9fa-4fde-84ea-3a585f69f470",
+              "name": "Successfully retrieved member organizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"displayName\": \"string\",\n    \"desc\": \"string\",\n    \"url\": \"https://ZXatjIhtgilozBZsvLiPwxHsQ.xykeDeyTLJWZiKfLP.UOYRX9Z9zNpyYsm2h5o+ACKv\",\n    \"website\": \"https://Gi.gzFpMkR5zhhgiCaJObGbCf-zHBOq3DE\",\n    \"logoHash\": \"string\",\n    \"products\": [\n      4875,\n      4284\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ],\n    \"memberships\": [\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"admin\",\n        \"unconfirmed\": true,\n        \"deactivated\": false\n      },\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"normal\",\n        \"unconfirmed\": true,\n        \"deactivated\": false\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"displayName\": \"string\",\n    \"desc\": \"string\",\n    \"url\": \"http://uaCpTBdKXzolCjG.lkmlt0GEQFrfIc4R.N5RBdZOJqHfAlwaDXsiQF.plGY4Tbt26LDU\",\n    \"website\": \"https://COEexzWBsOLqYWAJS.sbDV5D.EktDFone3AYnQSuDDBFScuJC4ZODaC6KRTnRY780UBqI78rUIDog32IhGpIZiB7y7udfCOgydgpglfVC\",\n    \"logoHash\": \"string\",\n    \"products\": [\n      4260,\n      1081\n    ],\n    \"idBoards\": [\n      \"string\",\n      \"string\"\n    ],\n    \"memberships\": [\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"admin\",\n        \"unconfirmed\": false,\n        \"deactivated\": false\n      },\n      {\n        \"id\": \"string\",\n        \"idMember\": \"string\",\n        \"memberType\": \"observer\",\n        \"unconfirmed\": false,\n        \"deactivated\": false\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3327459d-f473-4633-8fc2-0ebfad57d1ed",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "946a0890-66d3-445e-a0e1-dcd0e05a2a22",
+              "name": "Member not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "members",
+                    ":id",
+                    "organizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "all"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c5c27d5d-020c-41b7-9831-e6e1237d7f21",
+    "name": "Trello REST Actions Members API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

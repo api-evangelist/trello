@@ -1,0 +1,1680 @@
+{
+  "item": [
+    {
+      "id": "cc2f9591-cf90-4cb6-8739-a684233a46c3",
+      "name": "Lists",
+      "description": {
+        "content": "Operations for creating, retrieving, updating, and archiving lists on boards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac162c7b-4ed5-4763-912a-aa6b08160bf9",
+          "name": "Create a List",
+          "request": {
+            "name": "Create a List",
+            "description": {
+              "content": "Creates a new list on the specified board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name for the new list."
+                },
+                {
+                  "disabled": false,
+                  "key": "idBoard",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the board the list should be created on."
+                },
+                {
+                  "disabled": false,
+                  "key": "idListSource",
+                  "value": "<string>",
+                  "description": "The ID of a list to copy into the new list."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "top",
+                  "description": "The position of the list on the board."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd2e32b6-5e75-4348-a810-788f19cb8526",
+              "name": "Successfully created the list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idListSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"closed\": true,\n  \"idBoard\": \"string\",\n  \"pos\": 5879.628940070565,\n  \"subscribed\": false,\n  \"softLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef00c7b1-bbb7-4970-87a6-22508c9600e5",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idListSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff1b2ce8-afd4-430f-bf71-1111a082b10a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idListSource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "top"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "316240aa-74c1-459b-8898-55d3359a7432",
+          "name": "Get a List",
+          "request": {
+            "name": "Get a List",
+            "description": {
+              "content": "Retrieves a single list by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "name,closed,idBoard,pos",
+                  "description": "A comma-separated list of list fields to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8ab7201-6f76-4fa7-b699-0ab957e747b0",
+              "name": "Successfully retrieved the list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "name,closed,idBoard,pos"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"closed\": true,\n  \"idBoard\": \"string\",\n  \"pos\": 5879.628940070565,\n  \"subscribed\": false,\n  \"softLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cda199e7-7cc2-4947-9567-f6060d15c86f",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "name,closed,idBoard,pos"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ac4ab2c-4e30-4049-94f7-c930b1e34fa6",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "name,closed,idBoard,pos"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88eb673d-1ca9-4bcc-9eb2-a64007e1b44b",
+          "name": "Update a List",
+          "request": {
+            "name": "Update a List",
+            "description": {
+              "content": "Updates a list's name, position, closed status, or board assignment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The new name for the list."
+                },
+                {
+                  "disabled": false,
+                  "key": "closed",
+                  "value": "<boolean>",
+                  "description": "Whether the list is closed (archived)."
+                },
+                {
+                  "disabled": false,
+                  "key": "idBoard",
+                  "value": "<string>",
+                  "description": "The ID of the board to move the list to."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos",
+                  "value": "<string>",
+                  "description": "The new position of the list."
+                },
+                {
+                  "disabled": false,
+                  "key": "subscribed",
+                  "value": "<boolean>",
+                  "description": "Whether the authenticated member is subscribed to the list."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "085df2a6-3352-4a70-b142-2e14cf3a2186",
+              "name": "Successfully updated the list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"closed\": true,\n  \"idBoard\": \"string\",\n  \"pos\": 5879.628940070565,\n  \"subscribed\": false,\n  \"softLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b88c5c4a-f072-4913-adc6-a2d92c3803f3",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ea2a619-abc4-4adc-8604-4d6117f1416e",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "closed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subscribed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7deadb1-503a-457c-a839-ed1b5966fd8b",
+          "name": "Get Actions on a List",
+          "request": {
+            "name": "Get Actions on a List",
+            "description": {
+              "content": "Retrieves a list of actions associated with a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A comma-separated list of action types to filter by."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52e84d0a-8263-4d08-ade4-3425c41895b5",
+              "name": "Successfully retrieved list actions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"idMemberCreator\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1954-09-30T15:19:25.925Z\",\n    \"data\": {\n      \"text\": \"string\",\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 8279,\n        \"shortLink\": \"string\"\n      },\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"old\": {}\n    },\n    \"display\": {},\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"https://dSxXZUtOnMoxN.dcfzIFrQ2Xhs5vS+7o,mL\",\n      \"url\": \"http://qMrXogboZRtinEi.yqyalJv-jpcUZDsOO6C+u4f,Sd2JA1KqDRjZohJoFzu-EhcwUzk\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"idMemberCreator\": \"string\",\n    \"type\": \"string\",\n    \"date\": \"1949-10-04T02:29:47.076Z\",\n    \"data\": {\n      \"text\": \"string\",\n      \"board\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"shortLink\": \"string\"\n      },\n      \"card\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"idShort\": 2126,\n        \"shortLink\": \"string\"\n      },\n      \"list\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"old\": {}\n    },\n    \"display\": {},\n    \"memberCreator\": {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"fullName\": \"string\",\n      \"initials\": \"string\",\n      \"bio\": \"string\",\n      \"avatarHash\": \"string\",\n      \"avatarUrl\": \"http://JtNhBEPMulFOPktjOEZqnMjFBJhgTWPav.ubsbKIi0N15dqy-qxp4D6vi\",\n      \"url\": \"http://juQEuKDQptNxZQeHETBaUxnx.wexSJIR.B-eLBk3QjUYBN4jVis-J,i-FKvV01BZiNGa0LP-hTMz-jkNl\",\n      \"confirmed\": false,\n      \"memberType\": \"string\",\n      \"status\": \"string\",\n      \"idOrganizations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"idBoards\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "293282de-e013-4801-a950-ccf57689a14d",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ccce063b-09ba-482c-80ad-0177a0514496",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c647a2b-e690-4338-bbe1-d352284d5069",
+          "name": "Get the Board for a List",
+          "request": {
+            "name": "Get the Board for a List",
+            "description": {
+              "content": "Retrieves the board that a list belongs to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id",
+                "board"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d780a87f-3831-4344-8b2f-4621a0535f9c",
+              "name": "Successfully retrieved the board.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "board"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"desc\": \"string\",\n  \"descData\": {},\n  \"closed\": true,\n  \"idMemberCreator\": \"string\",\n  \"idOrganization\": \"string\",\n  \"pinned\": true,\n  \"url\": \"http://jBGk.jany2xMFHDFMsmVQkv0YCqm1UJDdK7xynlGbgI-atZKXbxx\",\n  \"shortUrl\": \"https://rldMRWJzrZdXQSYIaRTBMIGJS.mwswUv6tbaGSy8lr8VppDDP9YM4P7dcvBvUcL,vIBhoTZDPEMGOdx1y,0Baa25f\",\n  \"shortLink\": \"string\",\n  \"prefs\": {\n    \"permissionLevel\": \"private\",\n    \"hideVotes\": true,\n    \"voting\": \"string\",\n    \"comments\": \"string\",\n    \"selfJoin\": true,\n    \"cardCovers\": false,\n    \"cardAging\": \"regular\",\n    \"background\": \"string\",\n    \"backgroundColor\": \"string\",\n    \"backgroundImage\": \"string\",\n    \"backgroundTile\": false,\n    \"backgroundBrightness\": \"string\"\n  },\n  \"labelNames\": {\n    \"green\": \"string\",\n    \"yellow\": \"string\",\n    \"orange\": \"string\",\n    \"red\": \"string\",\n    \"purple\": \"string\",\n    \"blue\": \"string\",\n    \"sky\": \"string\",\n    \"lime\": \"string\",\n    \"pink\": \"string\",\n    \"black\": \"string\"\n  },\n  \"starred\": true,\n  \"memberships\": [\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"observer\",\n      \"unconfirmed\": true,\n      \"deactivated\": false\n    },\n    {\n      \"id\": \"string\",\n      \"idMember\": \"string\",\n      \"memberType\": \"normal\",\n      \"unconfirmed\": false,\n      \"deactivated\": false\n    }\n  ],\n  \"dateLastActivity\": \"1998-05-11T12:05:05.259Z\",\n  \"dateLastView\": \"1994-09-18T13:12:03.637Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f82bf83-db91-4e8e-b812-832ea69137fd",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "board"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef8c2ec8-26a0-4749-8003-0b0050751005",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "board"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0783fa4b-6f1e-4b03-b9a6-5206ad98ab79",
+          "name": "Get Cards in a List",
+          "request": {
+            "name": "Get Cards in a List",
+            "description": {
+              "content": "Retrieves all cards in a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53b5e07d-10dc-4590-b394-da6bbe8dcecd",
+              "name": "Successfully retrieved list cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": false,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 8510,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 6388.3997154955605,\n    \"due\": \"1961-11-11T21:05:55.123Z\",\n    \"dueComplete\": false,\n    \"start\": \"1995-06-22T14:02:45.483Z\",\n    \"url\": \"https://rb.scgBLgjdknP2.9V3yFxfDMdtb45\",\n    \"shortUrl\": \"https://rshymGRCxMsOa.osywtKXqLL68bdEP0DVJsN\",\n    \"shortLink\": \"string\",\n    \"subscribed\": false,\n    \"dateLastActivity\": \"1993-09-10T18:50:02.790Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"full\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"sky\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"green\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 3363,\n      \"attachments\": 5837,\n      \"comments\": 9638,\n      \"checkItems\": 9232,\n      \"checkItemsChecked\": 9105,\n      \"description\": true,\n      \"due\": \"1990-11-11T08:05:08.516Z\",\n      \"dueComplete\": true,\n      \"subscribed\": false\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"closed\": false,\n    \"idBoard\": \"string\",\n    \"idList\": \"string\",\n    \"idShort\": 9004,\n    \"idMembers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idChecklists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"idAttachmentCover\": \"string\",\n    \"pos\": 8671.168491836168,\n    \"due\": \"1977-08-25T03:35:48.276Z\",\n    \"dueComplete\": false,\n    \"start\": \"1997-10-07T11:22:48.386Z\",\n    \"url\": \"https://vv.mtwfKCwaPOwly\",\n    \"shortUrl\": \"https://knImPWSMVOLlWGwMQUNMfPEkAIZ.fztmQDMmN3qbDQT1jqJzZpPiE4b0ac\",\n    \"shortLink\": \"string\",\n    \"subscribed\": true,\n    \"dateLastActivity\": \"1960-09-14T07:27:24.387Z\",\n    \"cover\": {\n      \"idAttachment\": \"string\",\n      \"color\": \"string\",\n      \"idUploadedBackground\": \"string\",\n      \"size\": \"full\",\n      \"brightness\": \"string\",\n      \"idPlugin\": \"string\"\n    },\n    \"labels\": [\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"orange\"\n      },\n      {\n        \"id\": \"string\",\n        \"idBoard\": \"string\",\n        \"name\": \"string\",\n        \"color\": \"green\"\n      }\n    ],\n    \"badges\": {\n      \"votes\": 9267,\n      \"attachments\": 3364,\n      \"comments\": 6674,\n      \"checkItems\": 7449,\n      \"checkItemsChecked\": 2844,\n      \"description\": false,\n      \"due\": \"1992-01-23T00:52:02.467Z\",\n      \"dueComplete\": false,\n      \"subscribed\": false\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "939b09a7-5b18-41c1-be1b-8c9adc384e59",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b65b07d9-b845-4ba4-b27e-0f2690f960c1",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecc44229-300d-43a7-ad99-22bee9acce65",
+          "name": "Archive All Cards in a List",
+          "request": {
+            "name": "Archive All Cards in a List",
+            "description": {
+              "content": "Archives all cards in a list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id",
+                "archiveAllCards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39e28646-d2dd-469e-906c-5c417208e585",
+              "name": "Successfully archived all cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "archiveAllCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6a90c6e-0368-452f-bff2-fbb2665818d6",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "archiveAllCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa3e9562-45b2-40e2-ba34-ed5cab88a98a",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "archiveAllCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51b22e60-f473-4f3d-9a63-a0746276c63c",
+          "name": "Move All Cards in a List",
+          "request": {
+            "name": "Move All Cards in a List",
+            "description": {
+              "content": "Moves all cards in a list to a different list on the same or a different board.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lists",
+                ":id",
+                "moveAllCards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idBoard",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the destination board."
+                },
+                {
+                  "disabled": false,
+                  "key": "idList",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the destination list."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the resource."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb20272a-f78c-4d89-aeb7-a2450079e9d6",
+              "name": "Successfully moved all cards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "moveAllCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9eefa11-12a1-4bb8-b238-1f8aa345b8ab",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "moveAllCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eda01511-2ecd-4697-bfbe-7444dfb18531",
+              "name": "List not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lists",
+                    ":id",
+                    "moveAllCards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idBoard",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idList",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trello.com/1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3fa5874-d75d-4630-b13b-84bee0230344",
+    "name": "Trello REST Actions Lists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.\n\nContact Support:\n Name: Atlassian Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
