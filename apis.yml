@@ -20,6 +20,11 @@ apis:
 - aid: trello:webhooks-api
   name: Trello Webhooks API
   tags:
+  - Event
+  - Notification
+  - Real-Time
+  - Webhook
+  tags_raw:
   - Events
   - Notifications
   - Real-Time
@@ -41,6 +46,11 @@ apis:
 - aid: trello:power-ups
   name: Trello Power-Ups
   tags:
+  - Customization
+  - Extensions
+  - Integration
+  - Plugins
+  tags_raw:
   - Customization
   - Extensions
   - Integrations
@@ -128,6 +138,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/trello/rest/
   baseURL: https://api.trello.com
   tags:
+  - Custom Fields
+  tags_raw:
   - CustomFields
   properties:
   - type: OpenAPI
@@ -156,6 +168,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/trello/rest/
   baseURL: https://api.trello.com
   tags:
+  - List
+  tags_raw:
   - Lists
   properties:
   - type: OpenAPI
@@ -187,6 +201,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/trello/rest/
   baseURL: https://api.trello.com
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -203,6 +219,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/trello/rest/
   baseURL: https://api.trello.com
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -264,6 +282,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/trello/rest/
   baseURL: https://api.trello.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
