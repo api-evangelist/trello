@@ -143,24 +143,6 @@ apis:
     url: https://developer.atlassian.com/cloud/trello/rest/
   - type: GraphQL
     url: graphql/trello-graphql.md
-- aid: trello:trello-customfields-api
-  name: trello CustomFields API
-  description: >-
-    Operations for creating, retrieving, updating, and deleting custom field definitions and their values
-    on boards and cards.
-  humanURL: https://developer.atlassian.com/cloud/trello/rest/
-  baseURL: https://api.trello.com
-  tags:
-  - Custom Fields
-  tags_raw:
-  - CustomFields
-  properties:
-  - type: OpenAPI
-    url: openapi/trello-customfields-api-openapi.yml
-  - type: Documentation
-    url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-labels-api
   name: trello Labels API
   description: Operations for creating, retrieving, updating, and deleting labels on boards and cards.
@@ -301,6 +283,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/trello-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GraphQL
+    url: graphql/trello-graphql.md
+- aid: trello:trello-custom-fields-api
+  name: Trello Custom Fields API
+  description: >-
+    Operations for creating, retrieving, updating, and deleting custom field definitions and their values
+    on boards and cards.
+  humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  baseURL: https://api.trello.com
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-custom-fields-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
   - type: GraphQL
