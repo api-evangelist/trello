@@ -28,7 +28,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/trello.png
 url: https://raw.githubusercontent.com/api-evangelist/trello/refs/heads/main/apis.yml
-modified: '2026-05-19'
+modified: '2026-09-17'
 apis:
 - aid: trello:webhooks-api
   name: Trello Webhooks API
@@ -69,11 +69,16 @@ apis:
   - Integrations
   - Plugins
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.example.com
+  baseURL: https://api.trello.com
   humanURL: https://developer.atlassian.com/cloud/trello/power-ups/
   properties:
   - url: https://developer.atlassian.com/cloud/trello/power-ups/
     type: Documentation
+  - url: https://developer.atlassian.com/cloud/trello/power-ups/client-library/
+    type: APIReference
+    name: Power-Up client library reference
+  - url: components/trello-components.yml
+    type: Components
   description: >-
     Trello Power-Ups are a framework for extending and integrating with the Trello platform. Power-Ups
     allow developers to add custom functionality to Trello boards, including custom fields, board buttons,
@@ -303,7 +308,122 @@ apis:
     url: https://developer.atlassian.com/cloud/trello/rest/
   - type: GraphQL
     url: graphql/trello-graphql.md
+- aid: trello:trello-rest-api
+  name: Trello REST API
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: >-
+    The complete first-party Trello REST API v1, as published by Atlassian at
+    https://developer.atlassian.com/cloud/trello/swagger.v3.json. OpenAPI 3.0.0, 191 paths,
+    261 operations and 63 schemas covering boards, lists, cards, checklists, labels, custom
+    fields, attachments, members, workspaces, enterprises, actions, notifications, search,
+    webhooks, tokens, Power-Up plugins, emoji and batch requests. Every operation carries an
+    operationId and a summary. Authorization is an API key plus user token passed as query
+    parameters, or OAuth 2.0 3LO (GA 15 September 2026) with ten granular scopes.
+  humanURL: https://developer.atlassian.com/cloud/trello/rest/
+  baseURL: https://api.trello.com/1
+  tags:
+  - Project Management
+  - Kanban
+  - Task Management
+  - Collaboration
+  - Productivity
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-rest-api-openapi.json
+  - type: OpenAPI
+    url: https://developer.atlassian.com/cloud/trello/swagger.v3.json
+    name: OpenAPI (provider-hosted)
+  - type: Overlay
+    url: overlays/trello-rest-api-overlay.yaml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GettingStarted
+    url: https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+  - type: DataModel
+    url: data-model/trello-data-model.yml
+  - type: ErrorCatalog
+    url: errors/trello-problem-types.yml
+  - type: Conventions
+    url: conventions/trello-conventions.yml
 common:
+- type: Website
+  url: https://trello.com/
+- type: DeveloperPortal
+  url: https://developer.atlassian.com/cloud/trello/
+- type: Documentation
+  url: https://developer.atlassian.com/cloud/trello/rest/
+- type: APIReference
+  url: https://developer.atlassian.com/cloud/trello/rest/
+- type: GettingStarted
+  url: https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+- type: Support
+  url: https://support.atlassian.com/trello/
+- type: Community
+  url: https://community.developer.atlassian.com/c/trello/
+- type: Blog
+  url: https://www.atlassian.com/blog/trello
+- type: Roadmap
+  url: https://www.atlassian.com/roadmap/cloud?products=trello
+- type: Pricing
+  url: https://trello.com/pricing
+- type: SignUp
+  url: https://trello.com/signup
+- type: TermsOfService
+  url: https://www.atlassian.com/legal/cloud-terms-of-service
+- type: PrivacyPolicy
+  url: https://www.atlassian.com/legal/privacy-policy
+- type: Plans
+  url: plans/trello-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/trello-rate-limits.yml
+- type: FinOps
+  url: finops/trello-finops.yml
+- type: Packages
+  url: packages/trello-packages.yml
+- type: SDKs
+  url: packages/trello-packages.yml
+- type: Components
+  url: components/trello-components.yml
+- type: WellKnown
+  url: well-known/trello-well-known.yml
+- type: SecurityTxt
+  url: well-known/trello-security.txt
+- type: Security
+  url: security/trello-vulnerability-disclosure.yml
+- type: Compliance
+  url: conformance/trello-conformance.yml
+- type: Conformance
+  url: conformance/trello-conformance.yml
+- type: Lifecycle
+  url: lifecycle/trello-lifecycle.yml
+- type: StatusPage
+  url: https://trello.status.atlassian.com/
+- type: Deprecation
+  url: lifecycle/trello-lifecycle.yml
+- type: ChangeLog
+  url: changelog/trello-changelog.yml
+- type: Conventions
+  url: conventions/trello-conventions.yml
+- type: ErrorCatalog
+  url: errors/trello-problem-types.yml
+- type: DataModel
+  url: data-model/trello-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/trello-llms.txt
+- type: Overlay
+  url: overlays/trello-rest-api-overlay.yaml
+- type: AsyncAPI
+  url: asyncapi/trello-webhooks-asyncapi.yml
+- type: Webhooks
+  url: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+- type: Examples
+  url: examples/trello-get-board-cards-example.json
+- type: OAuthScopes
+  url: scopes/trello-scopes.yml
 - type: AgenticAccess
   url: agentic-access/trello-agentic-access.yml
 - type: TrustCenter
@@ -355,5 +475,44 @@ common:
   sources:
   - https://trello.com/pricing
   updated: '2026-05-04'
-description: Trello is a web-based, kanban-style, list-making application that allows
-  users to organize tasks, projects, and workflows using boards, lists, and cards.
+description: >-
+  Trello is a web-based, kanban-style, list-making application from Atlassian that lets teams
+  organize tasks, projects and workflows as boards, lists and cards. Its public REST API v1
+  at https://api.trello.com/1 exposes 261 operations across boards, lists, cards, checklists,
+  labels, custom fields, attachments, members, workspaces, enterprises, actions,
+  notifications, search, webhooks, tokens and Power-Up plugins, with a first-party OpenAPI
+  3.0.0 definition published by Atlassian. Authorization is an API key plus user token, or
+  OAuth 2.0 3LO with ten granular scopes, generally available since 15 September 2026.
+  Trello also ships a webhook surface signed with HMAC-SHA1, a browser client library
+  (client.js), and the Power-Ups framework for extending the Trello board UI. The platform
+  publishes no MCP server and no A2A agent card, no idempotency mechanism and no rate-limit
+  response headers.
+created: '2026-05-03'
+tags:
+- Project Management
+- Kanban
+- Task Management
+- Collaboration
+- Productivity
+- Workflows
+- Boards
+- Atlassian
+tags_raw:
+- Project Management
+- Kanban
+- Task Management
+- Collaboration
+- Productivity
+- Workflow
+- Boards
+- Atlassian
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
+
+x-enrichment:
+  date: '2026-09-17'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v3
