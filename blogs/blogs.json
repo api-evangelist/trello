@@ -1,0 +1,14 @@
+{
+  "repo": "trello",
+  "feeds": [
+    {
+      "source": "https://community.developer.atlassian.com/c/trello/",
+      "feed_url": "https://community.developer.atlassian.com/posts.rss",
+      "title": "",
+      "saved": 24,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 24,
+  "fetched": "2026-09-19T20:17:39Z"
+}
