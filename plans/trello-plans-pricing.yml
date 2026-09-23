@@ -4,10 +4,15 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Trello
 providerId: trello
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+# 2026-09-17: re-read from https://trello.com/pricing and upgraded from the 2026-05-04
+# bulk sweep (method: generated) to method: searched. Annual per-user prices confirmed;
+# monthly-billed prices, the Free collaborator cap and the Workspace command-run quotas
+# added from the live page.
+generated: '2026-09-17'
+method: searched
+modified: '2026-09-17'
+plan_count: 4
+docs: https://trello.com/pricing
 reconciled: true
 tags:
   - Project Management
@@ -19,7 +24,8 @@ plans:
   - id: trello-free
     name: Free
     type: freemium
-    description: Up to 10 boards per workspace.
+    description: >-
+      Free for up to 10 collaborators per Workspace, with a 10-board cap per Workspace.
     entries:
       - label: Boards/workspace
         name: boards
@@ -36,10 +42,11 @@ plans:
       - name: Inbox
       - name: Unlimited Power-Ups per board
       - name: 2FA
+      - name: 250 Workspace command runs per month
   - id: trello-standard
     name: Standard
     type: paid
-    description: $5/user/month annual.
+    description: $5 per user/month billed annually, or $6 billed monthly.
     entries:
       - label: Per user (annual)
         name: seat
@@ -58,10 +65,11 @@ plans:
       - name: Card mirroring
       - name: Custom Fields
       - name: Advanced checklists
+      - name: 1,000 Workspace command runs per month
   - id: trello-premium
     name: Premium
     type: paid
-    description: $10/user/month annual.
+    description: $10 per user/month billed annually, or $12.50 billed monthly.
     entries:
       - label: Per user (annual)
         name: seat
@@ -83,7 +91,9 @@ plans:
   - id: trello-enterprise
     name: Enterprise
     type: enterprise
-    description: $17.50/user/month annual.
+    description: >-
+      $17.50 per user/month, billed annually only ($210.00 annual price per user).
+      Includes Atlassian Guard Standard and 24/7 Enterprise Admin support.
     entries:
       - label: Per user (annual)
         name: seat

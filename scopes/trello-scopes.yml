@@ -1,0 +1,113 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  openapi/trello-rest-api-openapi.json (components.securitySchemes.OAuth2) confirmed against
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/ and
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/
+description: >-
+  Trello OAuth 2.0 3LO scopes. OAuth 2.0 reached GA for Trello on 2026-09-15; these ten
+  scopes replace the three coarse legacy Trello Auth scopes (read, write, account), which
+  remain live on the 1/authorize route. Scope-to-resource mapping for the webhook surface is
+  documented by Trello and recorded per scope below.
+legacy_scopes:
+  mechanism: Trello Auth 1/authorize route (and OAuth 1.0a)
+  docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+  scopes:
+  - scope: read
+    description: Reading of boards, organizations and other objects on behalf of the user.
+  - scope: write
+    description: Writing of boards, organizations and other objects on behalf of the user.
+  - scope: account
+    description: >-
+      Read the member email address, write member info, and mark notifications read. Member
+      emails are only accessible when this scope is granted, and only for the granting user.
+  expiration_options: [1hour, 1day, 30days, never]
+  status: >-
+    Still supported. Announced 2025-04-16 as the mechanism OAuth 2.0 would replace, but no
+    removal date has been published.
+schemes:
+- name: OAuth2
+  source: openapi/trello-rest-api-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+scopes:
+- scope: read:board:trello
+  description: Read cards, lists, and comments in boards.
+  webhook_models: [Board, List, Card]
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: read:enterprise:trello
+  description: Read enterprises.
+  webhook_models: [Enterprise]
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: read:member:trello
+  description: Read email address, public name, public avatar, and memberships of boards, workspaces,
+    and enterprises.
+  webhook_models: [Member]
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: read:organization:trello
+  description: Read workspaces.
+  webhook_models: [Organization]
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: write:board:membership:trello
+  description: Add, remove, or modify memberships on boards.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: write:board:trello
+  description: Create and update cards, lists, and comments in boards.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: write:enterprise:trello
+  description: Update and manage enterprises.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: write:member:trello
+  description: Upload custom emojis and stickers, star boards, and save searches.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: write:organization:membership:trello
+  description: Add, remove, or modify memberships on workspaces.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+- scope: write:organization:trello
+  description: Update workspaces.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/trello-rest-api-openapi.json
+restrictions:
+  power_up_clients: >-
+    Power-Up OAuth 2.0 clients are workspace-restricted. Any model they act on - including a
+    webhook's idModel - must belong to a workspace the access token was authorized for, or
+    the request fails with 403. OAuth 2.0 clients of non-Power-Up apps carry no such
+    restriction.
+  source: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+token_lifetime:
+  short_lived: true
+  refresh: true
+  note: OAuth 2.0 tokens have limited lifetimes by default and must be periodically refreshed.
+  source: https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/

@@ -1,11 +1,31 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/trello-rest-api-openapi.yml
+generated: '2026-09-17'
+method: searched
+docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+oauth2_docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/
+description: >-
+  Trello runs two authorization systems side by side. The legacy Trello Auth system passes an
+  API key and a user token, by default as QUERY PARAMETERS - which is what both apiKey schemes
+  in the OpenAPI declare, and which puts credentials in logs, proxies and browser history.
+  Trello also documents an Authorization header form
+  (OAuth oauth_consumer_key="{key}", oauth_token="{token}") and a request-body form, and an
+  agent should prefer the header. OAuth 2.0 3LO reached GA on 2026-09-15 with ten granular
+  scopes, short-lived refreshable tokens and resource restrictions; see
+  scopes/trello-scopes.yml. OAuth 1.0a is also still supported. Tokens are user-revocable at
+  https://trello.com/u/{username}/account and via DELETE /1/tokens/{token}; a revoked token
+  returns HTTP 401 with the plain-text body "invalid token".
+source: openapi/trello-actions-api-openapi.yml, openapi/trello-boards-api-openapi.yml, openapi/trello-cards-api-openapi.yml,
+  openapi/trello-checklists-api-openapi.yml, openapi/trello-custom-fields-api-openapi.yml, openapi/trello-labels-api-openapi.yml,
+  openapi/trello-lists-api-openapi.yml, openapi/trello-members-api-openapi.yml, openapi/trello-notifications-api-openapi.yml,
+  openapi/trello-organizations-api-openapi.yml, openapi/trello-plugins-api-openapi.yml, openapi/trello-rest-api-openapi.json
+  ...
 summary:
   types:
   - apiKey
+  - oauth2
   api_key_in:
   - query
+  oauth2_flows:
+  - authorizationCode
 schemes:
 - name: apiKey
   type: apiKey
@@ -13,7 +33,21 @@ schemes:
   parameter: key
   description: Your Trello API key, obtained from the Power-Ups admin page at https://trello.com/power-ups/admin.
   sources:
-  - openapi/trello-rest-api-openapi.yml
+  - openapi/trello-actions-api-openapi.yml
+  - openapi/trello-boards-api-openapi.yml
+  - openapi/trello-cards-api-openapi.yml
+  - openapi/trello-checklists-api-openapi.yml
+  - openapi/trello-custom-fields-api-openapi.yml
+  - openapi/trello-labels-api-openapi.yml
+  - openapi/trello-lists-api-openapi.yml
+  - openapi/trello-members-api-openapi.yml
+  - openapi/trello-notifications-api-openapi.yml
+  - openapi/trello-organizations-api-openapi.yml
+  - openapi/trello-plugins-api-openapi.yml
+  - openapi/trello-rest-api-openapi.json
+  - openapi/trello-search-api-openapi.yml
+  - openapi/trello-tokens-api-openapi.yml
+  - openapi/trello-webhooks-api-openapi.yml
 - name: apiToken
   type: apiKey
   in: query
@@ -21,4 +55,49 @@ schemes:
   description: A user token that grants access to Trello resources. Obtained by authorizing
     via the /1/authorize route or OAuth 1.0.
   sources:
-  - openapi/trello-rest-api-openapi.yml
+  - openapi/trello-actions-api-openapi.yml
+  - openapi/trello-boards-api-openapi.yml
+  - openapi/trello-cards-api-openapi.yml
+  - openapi/trello-checklists-api-openapi.yml
+  - openapi/trello-custom-fields-api-openapi.yml
+  - openapi/trello-labels-api-openapi.yml
+  - openapi/trello-lists-api-openapi.yml
+  - openapi/trello-members-api-openapi.yml
+  - openapi/trello-notifications-api-openapi.yml
+  - openapi/trello-organizations-api-openapi.yml
+  - openapi/trello-plugins-api-openapi.yml
+  - openapi/trello-rest-api-openapi.json
+  - openapi/trello-search-api-openapi.yml
+  - openapi/trello-tokens-api-openapi.yml
+  - openapi/trello-webhooks-api-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.atlassian.com/authorize
+    tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+    scopes: 10
+  sources:
+  - openapi/trello-rest-api-openapi.json
+api_key:
+  issuance: https://trello.com/apps/admin
+  note: >-
+    An API key is tied to a Power-Up. Trello states the key may be public but the user token
+    must never be, and that a key with no allowed origins configured will have every redirect
+    blocked.
+  allowed_origins:
+    required: true
+    wildcards: true
+    note: >-
+      Allowed origins constrain where Trello will redirect after consent, preventing a third
+      party from reusing your key and redirecting users elsewhere.
+oauth1:
+  supported: true
+  request_token_url: https://trello.com/1/OAuthGetRequestToken
+  authorize_url: https://trello.com/1/OAuthAuthorizeToken
+  access_token_url: https://trello.com/1/OAuthGetAccessToken
+revocation:
+  user_surface: https://trello.com/u/{username}/account
+  api: DELETE /1/tokens/{token}
+  on_revoked_status: 401
+  on_revoked_body: invalid token

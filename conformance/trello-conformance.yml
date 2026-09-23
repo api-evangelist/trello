@@ -1,0 +1,141 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  openapi/trello-rest-api-openapi.json,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/status-codes/,
+  https://developer.atlassian.com/cloud/trello/changelog/,
+  https://trello.com/pricing,
+  https://www.atlassian.com/trust
+description: >-
+  Standards and cross-cutting conformance assertions for the Trello REST API. Each entry is
+  evidenced against Trello's own contract or documentation; an absence here is a measured
+  absence, not an unchecked box.
+conformance:
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749) authorization code grant / 3LO
+    conforms: true
+    evidence: >-
+      components.securitySchemes.OAuth2 in openapi/trello-rest-api-openapi.json declares an
+      authorizationCode flow with authorizationUrl https://auth.atlassian.com/authorize,
+      tokenUrl https://auth.atlassian.com/authorize/oauth/token and ten named scopes.
+      Announced GA 2026-09-15 on the developer changelog.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/
+  - id: oauth1
+    name: OAuth 1.0a
+    conforms: true
+    evidence: >-
+      Trello documents OAuth 1.0a endpoints at https://trello.com/1/OAuthGetRequestToken,
+      /OAuthAuthorizeToken and /OAuthGetAccessToken, signed with the application secret.
+      Still live alongside OAuth 2.0; no removal date published.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: >-
+      No id_token, no openid scope among the ten published scopes, and
+      /.well-known/openid-configuration returns the Trello SPA HTML shell on every
+      trello.com host and 404 on developer.atlassian.com and atlassian.com
+      (well-known/trello-well-known.yml).
+  - id: scim
+    name: SCIM 2.0 (RFC 7643 / RFC 7644)
+    conforms: false
+    evidence: >-
+      Trello DID serve /scim/v2/users and /scim/v2/groups, and deprecated both on
+      2025-09-15 for removal on or after 2025-12-10, directing callers to
+      enterprises/{id}/members/query and boards/{id}/memberships instead. The standard
+      surface was therefore deliberately withdrawn in favour of proprietary routes — a
+      regression for any enterprise identity system that speaks SCIM.
+    source: https://developer.atlassian.com/cloud/trello/changelog/
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      No application/problem+json response is declared anywhere in the 261-operation
+      OpenAPI. Errors are a proprietary {"error","message"} object, and several documented
+      4xx responses are bare text/plain strings. See errors/trello-problem-types.yml.
+  - id: rfc8594
+    name: RFC 8594 Sunset header / Deprecation header
+    conforms: false
+    evidence: >-
+      Deprecations are published only as dated changelog entries. No Sunset or Deprecation
+      response header is documented, and no operation in the OpenAPI carries
+      deprecated: true. See lifecycle/trello-lifecycle.yml.
+  - id: rfc9116
+    name: RFC 9116 security.txt
+    conforms: true
+    evidence: >-
+      A PGP-signed security.txt with Contact, Expires (2027-02-04), Encryption,
+      Preferred-Languages, Canonical, Policy and Hiring fields is served with HTTP 200 from
+      trello.com, www.trello.com, api.trello.com, developer.atlassian.com and
+      atlassian.com. Saved verbatim at well-known/trello-security.txt.
+    source: https://trello.com/.well-known/security.txt
+  - id: idempotency
+    name: Idempotency-Key request replay protection
+    conforms: false
+    evidence: >-
+      No idempotency header, client-supplied request id or dedup window is documented in
+      any REST guide or declared on any of the 261 operations. See
+      conventions/trello-conventions.yml (idempotency.coverage = none).
+  - id: pagination
+    name: Uniform collection pagination
+    conforms: false
+    evidence: >-
+      Mixed and mostly absent — limit on 5 operations, page on 3, cursor on 2, before/since
+      on 2; most collection endpoints return an unpaginated bare JSON array with no total
+      and no next link.
+  - id: rate-limit-headers
+    name: IETF RateLimit header fields (draft) / Retry-After
+    conforms: false
+    evidence: >-
+      Limits are documented in prose only. No RateLimit-*, X-RateLimit-* or Retry-After
+      header is documented on the 429. The only machine signal is the symbolic error code
+      in the response body.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+  - id: webhooks-hmac
+    name: HMAC-signed webhook delivery
+    conforms: true
+    evidence: >-
+      Trello signs every webhook callback with an HMAC-SHA1 digest in the X-Trello-Webhook
+      header, computed over the request body concatenated with the callback URL and keyed
+      on the application secret.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  - id: gdpr
+    name: GDPR personal-data handling for third-party apps
+    conforms: true
+    evidence: >-
+      Trello publishes a compliance-polling requirement and a dedicated route
+      (/1/plugin/{id}/compliance/memberPrivacy) that Power-Ups and integrations storing
+      personal data are required to use.
+    source: https://developer.atlassian.com/cloud/trello/guides/compliance/personal-data-storage-gdpr/
+domain_standard:
+  applicable: false
+  note: >-
+    Project/task management has no adopted machine-readable domain standard for a contract
+    to declare, so this is a reward-only slot Trello cannot be marked down on. The nearest
+    thing Trello ever shipped was SCIM 2.0 for enterprise identity, and it was withdrawn in
+    December 2025 (see the scim entry above). Recorded as not applicable rather than absent.
+compliance:
+  certifications:
+    - name: SOC 2 Type 2
+      evidence: >-
+        "Trello, Inc. is SOC2 Type 2 certified — we receive and review our data hosting
+        providers' SOC1 and SOC2 reports every 6 months under NDA."
+      source: https://trello.com/pricing
+    - name: ISO/IEC 27001
+      evidence: >-
+        "Trello is ISO/IEC 27001 certified which validates our information security
+        management system (ISMS) and the implementation of our security controls."
+      source: https://trello.com/pricing
+    - name: PCI DSS
+      evidence: '"Trello is PCI-DSS certified."'
+      source: https://trello.com/pricing
+    - name: FedRAMP
+      evidence: >-
+        Named on the Atlassian Trust Center; Atlassian Government Cloud baseline app
+        security requirements take effect 2026-03-31 (developer changelog, 2026-02-20).
+      source: https://www.atlassian.com/trust
+  trust_center: https://www.atlassian.com/trust
+  note: >-
+    The certifications are published on Trello's own pricing page FAQ and on the Atlassian
+    Trust Management System, not in the API contract.

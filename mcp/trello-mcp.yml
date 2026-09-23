@@ -1,0 +1,1335 @@
+generated: '2026-09-17'
+method: derived
+source: openapi/trello-rest-api-openapi.json (Trello REST API, 261 operations, fetched from https://developer.atlassian.com/cloud/trello/swagger.v3.json)
+status: candidate
+description: CANDIDATE tool surface derived from the official Trello REST OpenAPI. Trello ships no MCP
+  server of its own. Atlassian DOES operate a remote MCP server at https://mcp.atlassian.com/v2/mcp (OAuth-gated;
+  tools/list returns 401 invalid_token anonymously, WWW-Authenticate points at https://mcp.atlassian.com/.well-known/oauth-protected-resource/v2/mcp),
+  but it covers Jira, Jira Service Management, Confluence, Bitbucket, Projects and Goals — NOT Trello.
+  The only occurrences of "Trello" on the Atlassian Rovo MCP product page are in the site-wide product
+  navigation, and the Atlassian Rovo A2A agent card at https://a2a.atlassian.com/.well-known/agent.json
+  declares exactly two skills, work-in-jira and work-in-confluence, with zero Trello mentions. So there
+  is no agent surface for Trello today; every tool below is a candidate this pipeline derived, not something
+  a provider ships.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+  note: 'Probed 2026-09-17: https://mcp.trello.com/mcp -> 403 (Akamai edge, no MCP), https://api.trello.com/mcp
+    -> 403, https://mcp.atlassian.com/v2/mcp -> 401 invalid_token but Trello is out of scope for that
+    server. No Trello MCP package exists on npm or PyPI.'
+server:
+  name: trello (candidate)
+  transport: null
+  base_url: https://api.trello.com/1
+  auth: API key + token in query params, or OAuth 2.0 3LO bearer token (GA 2026-09-15)
+tool_count: 261
+tools:
+- name: post-boards
+  category: boards
+  method: POST
+  path: /boards/
+  description: Create a Board
+- name: get-boards-id-actions
+  category: boards
+  method: GET
+  path: /boards/{boardId}/actions
+  description: Get Actions of a Board
+- name: get-boards-id-boardstars
+  category: boards
+  method: GET
+  path: /boards/{boardId}/boardStars
+  description: Get boardStars on a Board
+- name: delete-boards-id
+  category: boards
+  method: DELETE
+  path: /boards/{id}
+  description: Delete a Board
+- name: get-boards-id
+  category: boards
+  method: GET
+  path: /boards/{id}
+  description: Get a Board
+- name: put-boards-id
+  category: boards
+  method: PUT
+  path: /boards/{id}
+  description: Update a Board
+- name: get-boards-id-boardplugins
+  category: boards
+  method: GET
+  path: /boards/{id}/boardPlugins
+  description: Get Enabled Power-Ups on Board
+- name: post-boards-id-boardplugins
+  category: boards
+  method: POST
+  path: /boards/{id}/boardPlugins
+  description: Enable a Power-Up on a Board
+- name: delete-boards-id-boardplugins
+  category: boards
+  method: DELETE
+  path: /boards/{id}/boardPlugins/{idPlugin}
+  description: Disable a Power-Up on a Board
+- name: post-boards-id-calendarkey-generate
+  category: boards
+  method: POST
+  path: /boards/{id}/calendarKey/generate
+  description: Create a calendarKey for a Board
+- name: get-boards-id-cards
+  category: boards
+  method: GET
+  path: /boards/{id}/cards
+  description: Get Cards on a Board
+- name: get-boards-id-cards-filter
+  category: boards
+  method: GET
+  path: /boards/{id}/cards/{filter}
+  description: Get filtered Cards on a Board
+- name: boards-id-checklists
+  category: boards
+  method: GET
+  path: /boards/{id}/checklists
+  description: Get Checklists on a Board
+- name: get-boards-id-customfields
+  category: boards
+  method: GET
+  path: /boards/{id}/customFields
+  description: Get Custom Fields for Board
+- name: post-boards-id-emailkey-generate
+  category: boards
+  method: POST
+  path: /boards/{id}/emailKey/generate
+  description: Create a emailKey for a Board
+- name: post-boards-id-exports
+  category: boards
+  method: POST
+  path: /boards/{id}/exports
+  description: Create an Export for a Board
+- name: get-boards-id-exports-mostrecent
+  category: boards
+  method: GET
+  path: /boards/{id}/exports/mostRecent
+  description: Get a Board's Most Recent Export
+- name: delete-boards-id-exports-idexport
+  category: boards
+  method: DELETE
+  path: /boards/{id}/exports/{idExport}
+  description: Delete an Export for a Board
+- name: get-boards-id-exports-idexport
+  category: boards
+  method: GET
+  path: /boards/{id}/exports/{idExport}
+  description: Get an Export for a Board
+- name: get-boards-id-exports-idexport-download
+  category: boards
+  method: GET
+  path: /boards/{id}/exports/{idExport}/download
+  description: Download an Export for a Board
+- name: post-boards-id-idtags
+  category: boards
+  method: POST
+  path: /boards/{id}/idTags
+  description: Create a Tag for a Board
+- name: get-boards-id-labels
+  category: boards
+  method: GET
+  path: /boards/{id}/labels
+  description: Get Labels on a Board
+- name: post-boards-id-labels
+  category: boards
+  method: POST
+  path: /boards/{id}/labels
+  description: Create a Label on a Board
+- name: get-boards-id-lists
+  category: boards
+  method: GET
+  path: /boards/{id}/lists
+  description: Get Lists on a Board
+- name: post-boards-id-lists
+  category: boards
+  method: POST
+  path: /boards/{id}/lists
+  description: Create a List on a Board
+- name: get-boards-id-lists-filter
+  category: boards
+  method: GET
+  path: /boards/{id}/lists/{filter}
+  description: Get filtered Lists on a Board
+- name: post-boards-id-markedasviewed
+  category: boards
+  method: POST
+  path: /boards/{id}/markAsViewed
+  description: Mark Board as viewed
+- name: get-boards-id-members
+  category: boards
+  method: GET
+  path: /boards/{id}/members
+  description: Get the Members of a Board
+- name: put-boards-id-members
+  category: boards
+  method: PUT
+  path: /boards/{id}/members
+  description: Invite Member to Board via email
+- name: boardsidmembersidmember
+  category: boards
+  method: DELETE
+  path: /boards/{id}/members/{idMember}
+  description: Remove Member from Board
+- name: put-boards-id-members-idmember
+  category: boards
+  method: PUT
+  path: /boards/{id}/members/{idMember}
+  description: Add a Member to a Board
+- name: get-boards-id-memberships
+  category: boards
+  method: GET
+  path: /boards/{id}/memberships
+  description: Get Memberships of a Board
+- name: put-boards-id-memberships-idmembership
+  category: boards
+  method: PUT
+  path: /boards/{id}/memberships/{idMembership}
+  description: Update Membership of Member on a Board
+- name: put-boards-id-myprefs-emailposition
+  category: boards
+  method: PUT
+  path: /boards/{id}/myPrefs/emailPosition
+  description: Update emailPosition Pref on a Board
+- name: put-boards-id-myprefs-idemaillist
+  category: boards
+  method: PUT
+  path: /boards/{id}/myPrefs/idEmailList
+  description: Update idEmailList Pref on a Board
+- name: put-boards-id-myPrefs-showsidebar
+  category: boards
+  method: PUT
+  path: /boards/{id}/myPrefs/showSidebar
+  description: Update showSidebar Pref on a Board
+- name: put-boards-id-myPrefs-showsidebaractivity
+  category: boards
+  method: PUT
+  path: /boards/{id}/myPrefs/showSidebarActivity
+  description: Update showSidebarActivity Pref on a Board
+- name: put-boards-id-myPrefs-showsidebarboardactions
+  category: boards
+  method: PUT
+  path: /boards/{id}/myPrefs/showSidebarBoardActions
+  description: Update showSidebarBoardActions Pref on a Board
+- name: put-boards-id-myPrefs-showsidebarmembers
+  category: boards
+  method: PUT
+  path: /boards/{id}/myPrefs/showSidebarMembers
+  description: Update showSidebarMembers Pref on a Board
+- name: get-board-id-plugins
+  category: boards
+  method: GET
+  path: /boards/{id}/plugins
+  description: Get Power-Ups on a Board
+- name: get-boards-id-field
+  category: boards
+  method: GET
+  path: /boards/{id}/{field}
+  description: Get a field on a Board
+- name: post-lists
+  category: lists
+  method: POST
+  path: /lists
+  description: Create a new List
+- name: get-lists-id
+  category: lists
+  method: GET
+  path: /lists/{id}
+  description: Get a List
+- name: put-lists-id
+  category: lists
+  method: PUT
+  path: /lists/{id}
+  description: Update a List
+- name: get-lists-id-actions
+  category: lists
+  method: GET
+  path: /lists/{id}/actions
+  description: Get Actions for a List
+- name: post-lists-id-archiveallcards
+  category: lists
+  method: POST
+  path: /lists/{id}/archiveAllCards
+  description: Archive all Cards in List
+- name: get-lists-id-board
+  category: lists
+  method: GET
+  path: /lists/{id}/board
+  description: Get the Board a List is on
+- name: get-lists-id-cards
+  category: lists
+  method: GET
+  path: /lists/{id}/cards
+  description: Get Cards in a List
+- name: put-lists-id-closed
+  category: lists
+  method: PUT
+  path: /lists/{id}/closed
+  description: Archive or unarchive a list
+- name: put-id-idboard
+  category: lists
+  method: PUT
+  path: /lists/{id}/idBoard
+  description: Move List to Board
+- name: post-lists-id-moveallcards
+  category: lists
+  method: POST
+  path: /lists/{id}/moveAllCards
+  description: Move all Cards in List
+- name: put-lists-id-field
+  category: lists
+  method: PUT
+  path: /lists/{id}/{field}
+  description: Update a field on a List
+- name: post-cards
+  category: cards
+  method: POST
+  path: /cards
+  description: Create a new Card
+- name: put-cards-idcard-checklist-idchecklist-checkitem-idcheckitem
+  category: cards
+  method: PUT
+  path: /cards/{idCard}/checklist/{idChecklist}/checkItem/{idCheckItem}
+  description: Update Checkitem on Checklist on Card
+- name: put-cards-idcard-customfield-idcustomfield-item
+  category: cards
+  method: PUT
+  path: /cards/{idCard}/customField/{idCustomField}/item
+  description: Update Custom Field item on Card
+- name: put-cards-idcard-customfields
+  category: cards
+  method: PUT
+  path: /cards/{idCard}/customFields
+  description: Update Multiple Custom Field items on Card
+- name: delete-cards-id
+  category: cards
+  method: DELETE
+  path: /cards/{id}
+  description: Delete a Card
+- name: get-cards-id
+  category: cards
+  method: GET
+  path: /cards/{id}
+  description: Get a Card
+- name: put-cards-id
+  category: cards
+  method: PUT
+  path: /cards/{id}
+  description: Update a Card
+- name: get-cards-id-actions
+  category: cards
+  method: GET
+  path: /cards/{id}/actions
+  description: Get Actions on a Card
+- name: post-cards-id-actions-comments
+  category: cards
+  method: POST
+  path: /cards/{id}/actions/comments
+  description: Add a new comment to a Card
+- name: delete-cards-id-actions-id-comments
+  category: cards
+  method: DELETE
+  path: /cards/{id}/actions/{idAction}/comments
+  description: Delete a comment on a Card
+- name: put-cards-id-actions-idaction-comments
+  category: cards
+  method: PUT
+  path: /cards/{id}/actions/{idAction}/comments
+  description: Update Comment Action on a Card
+- name: get-cards-id-attachments
+  category: cards
+  method: GET
+  path: /cards/{id}/attachments
+  description: Get Attachments on a Card
+- name: post-cards-id-attachments
+  category: cards
+  method: POST
+  path: /cards/{id}/attachments
+  description: Create Attachment On Card
+- name: deleted-cards-id-attachments-idattachment
+  category: cards
+  method: DELETE
+  path: /cards/{id}/attachments/{idAttachment}
+  description: Delete an Attachment on a Card
+- name: get-cards-id-attachments-idattachment
+  category: cards
+  method: GET
+  path: /cards/{id}/attachments/{idAttachment}
+  description: Get an Attachment on a Card
+- name: get-cards-id-board
+  category: cards
+  method: GET
+  path: /cards/{id}/board
+  description: Get the Board the Card is on
+- name: delete-cards-id-checkitem-idcheckitem
+  category: cards
+  method: DELETE
+  path: /cards/{id}/checkItem/{idCheckItem}
+  description: Delete checkItem on a Card
+- name: get-cards-id-checkitem-idcheckitem
+  category: cards
+  method: GET
+  path: /cards/{id}/checkItem/{idCheckItem}
+  description: Get checkItem on a Card
+- name: put-cards-id-checkitem-idcheckitem
+  category: cards
+  method: PUT
+  path: /cards/{id}/checkItem/{idCheckItem}
+  description: Update a checkItem on a Card
+- name: get-cards-id-checkitemstates
+  category: cards
+  method: GET
+  path: /cards/{id}/checkItemStates
+  description: Get checkItems on a Card
+- name: get-cards-id-checklists
+  category: cards
+  method: GET
+  path: /cards/{id}/checklists
+  description: Get Checklists on a Card
+- name: post-cards-id-checklists
+  category: cards
+  method: POST
+  path: /cards/{id}/checklists
+  description: Create Checklist on a Card
+- name: delete-cards-id-checklists-idchecklist
+  category: cards
+  method: DELETE
+  path: /cards/{id}/checklists/{idChecklist}
+  description: Delete a Checklist on a Card
+- name: get-cards-id-customfielditems
+  category: cards
+  method: GET
+  path: /cards/{id}/customFieldItems
+  description: Get Custom Field Items for a Card
+- name: post-cards-id-idlabels
+  category: cards
+  method: POST
+  path: /cards/{id}/idLabels
+  description: Add a Label to a Card
+- name: delete-cards-id-idlabels-idlabel
+  category: cards
+  method: DELETE
+  path: /cards/{id}/idLabels/{idLabel}
+  description: Remove a Label from a Card
+- name: post-cards-id-idmembers
+  category: cards
+  method: POST
+  path: /cards/{id}/idMembers
+  description: Add a Member to a Card
+- name: delete-id-idmembers-idmember
+  category: cards
+  method: DELETE
+  path: /cards/{id}/idMembers/{idMember}
+  description: Remove a Member from a Card
+- name: post-cards-id-labels
+  category: cards
+  method: POST
+  path: /cards/{id}/labels
+  description: Create a new Label on a Card
+- name: get-cards-id-list
+  category: cards
+  method: GET
+  path: /cards/{id}/list
+  description: Get the List of a Card
+- name: post-cards-id-markassociatednotificationsread
+  category: cards
+  method: POST
+  path: /cards/{id}/markAssociatedNotificationsRead
+  description: Mark a Card's Notifications as read
+- name: get-cards-id-members
+  category: cards
+  method: GET
+  path: /cards/{id}/members
+  description: Get the Members of a Card
+- name: get-cards-id-membersvoted
+  category: cards
+  method: GET
+  path: /cards/{id}/membersVoted
+  description: Get Members who have voted on a Card
+- name: cardsidmembersvoted-1
+  category: cards
+  method: POST
+  path: /cards/{id}/membersVoted
+  description: Add Member vote to Card
+- name: delete-cards-id-membersvoted-idmember
+  category: cards
+  method: DELETE
+  path: /cards/{id}/membersVoted/{idMember}
+  description: Remove a Member's Vote on a Card
+- name: get-cards-id-plugindata
+  category: cards
+  method: GET
+  path: /cards/{id}/pluginData
+  description: Get pluginData on a Card
+- name: get-cards-id-stickers
+  category: cards
+  method: GET
+  path: /cards/{id}/stickers
+  description: Get Stickers on a Card
+- name: post-cards-id-stickers
+  category: cards
+  method: POST
+  path: /cards/{id}/stickers
+  description: Add a Sticker to a Card
+- name: delete-cards-id-stickers-idsticker
+  category: cards
+  method: DELETE
+  path: /cards/{id}/stickers/{idSticker}
+  description: Delete a Sticker on a Card
+- name: get-cards-id-stickers-idsticker
+  category: cards
+  method: GET
+  path: /cards/{id}/stickers/{idSticker}
+  description: Get a Sticker on a Card
+- name: put-cards-id-stickers-idsticker
+  category: cards
+  method: PUT
+  path: /cards/{id}/stickers/{idSticker}
+  description: Update a Sticker on a Card
+- name: get-cards-id-field
+  category: cards
+  method: GET
+  path: /cards/{id}/{field}
+  description: Get a field on a Card
+- name: post-checklists
+  category: checklists
+  method: POST
+  path: /checklists
+  description: Create a Checklist
+- name: delete-checklists-id
+  category: checklists
+  method: DELETE
+  path: /checklists/{id}
+  description: Delete a Checklist
+- name: get-checklists-id
+  category: checklists
+  method: GET
+  path: /checklists/{id}
+  description: Get a Checklist
+- name: put-checlists-id
+  category: checklists
+  method: PUT
+  path: /checklists/{id}
+  description: Update a Checklist
+- name: get-checklists-id-board
+  category: checklists
+  method: GET
+  path: /checklists/{id}/board
+  description: Get the Board the Checklist is on
+- name: get-checklists-id-cards
+  category: checklists
+  method: GET
+  path: /checklists/{id}/cards
+  description: Get the Card a Checklist is on
+- name: get-checklists-id-checkitems
+  category: checklists
+  method: GET
+  path: /checklists/{id}/checkItems
+  description: Get Checkitems on a Checklist
+- name: post-checklists-id-checkitems
+  category: checklists
+  method: POST
+  path: /checklists/{id}/checkItems
+  description: Create Checkitem on Checklist
+- name: delete-checklists-id-checkitems-idcheckitem
+  category: checklists
+  method: DELETE
+  path: /checklists/{id}/checkItems/{idCheckItem}
+  description: Delete Checkitem from Checklist
+- name: get-checklists-id-checkitems-idcheckitem
+  category: checklists
+  method: GET
+  path: /checklists/{id}/checkItems/{idCheckItem}
+  description: Get a Checkitem on a Checklist
+- name: get-checklists-id-field
+  category: checklists
+  method: GET
+  path: /checklists/{id}/{field}
+  description: Get field on a Checklist
+- name: put-checklists-id-field
+  category: checklists
+  method: PUT
+  path: /checklists/{id}/{field}
+  description: Update field on a Checklist
+- name: post-labels
+  category: labels
+  method: POST
+  path: /labels
+  description: Create a Label
+- name: delete-labels-id
+  category: labels
+  method: DELETE
+  path: /labels/{id}
+  description: Delete a Label
+- name: get-labels-id
+  category: labels
+  method: GET
+  path: /labels/{id}
+  description: Get a Label
+- name: put-labels-id
+  category: labels
+  method: PUT
+  path: /labels/{id}
+  description: Update a Label
+- name: put-labels-id-field
+  category: labels
+  method: PUT
+  path: /labels/{id}/{field}
+  description: Update a field on a label
+- name: post-customfields
+  category: customFields
+  method: POST
+  path: /customFields
+  description: Create a new Custom Field on a Board
+- name: delete-customfields-id
+  category: customFields
+  method: DELETE
+  path: /customFields/{id}
+  description: Delete a Custom Field definition
+- name: get-customfields-id
+  category: customFields
+  method: GET
+  path: /customFields/{id}
+  description: Get a Custom Field
+- name: put-customfields-id
+  category: customFields
+  method: PUT
+  path: /customFields/{id}
+  description: Update a Custom Field definition
+- name: post-customfields-id-options
+  category: customFields
+  method: GET
+  path: /customFields/{id}/options
+  description: Get Options of Custom Field drop down
+- name: get-customfields-id-options
+  category: customFields
+  method: POST
+  path: /customFields/{id}/options
+  description: Add Option to Custom Field dropdown
+- name: delete-customfields-options-idcustomfieldoption
+  category: customFields
+  method: DELETE
+  path: /customFields/{id}/options/{idCustomFieldOption}
+  description: Delete Option of Custom Field dropdown
+- name: get-customfields-options-idcustomfieldoption
+  category: customFields
+  method: GET
+  path: /customFields/{id}/options/{idCustomFieldOption}
+  description: Get Option of Custom Field dropdown
+- name: get-members=id
+  category: members
+  method: GET
+  path: /members/{id}
+  description: Get a Member
+- name: put-members-id
+  category: members
+  method: PUT
+  path: /members/{id}
+  description: Update a Member
+- name: get-members-id-actions
+  category: members
+  method: GET
+  path: /members/{id}/actions
+  description: Get a Member's Actions
+- name: membersidavatar
+  category: members
+  method: POST
+  path: /members/{id}/avatar
+  description: Create Avatar for Member
+- name: get-members-id-boardbackgrounds
+  category: members
+  method: GET
+  path: /members/{id}/boardBackgrounds
+  description: Get Member's custom Board backgrounds
+- name: post-members-id-boardbackgrounds-1
+  category: members
+  method: POST
+  path: /members/{id}/boardBackgrounds
+  description: Upload new boardBackground for Member
+- name: delete-members-id-boardbackgrounds-idbackground
+  category: members
+  method: DELETE
+  path: /members/{id}/boardBackgrounds/{idBackground}
+  description: Delete a Member's custom Board background
+- name: get-members-id-boardbackgrounds-idbackground
+  category: members
+  method: GET
+  path: /members/{id}/boardBackgrounds/{idBackground}
+  description: Get a boardBackground of a Member
+- name: put-members-id-boardbackgrounds-idbackground
+  category: members
+  method: PUT
+  path: /members/{id}/boardBackgrounds/{idBackground}
+  description: Update a Member's custom Board background
+- name: get-members-id-boardstars
+  category: members
+  method: GET
+  path: /members/{id}/boardStars
+  description: Get a Member's boardStars
+- name: post-members-id-boardstars
+  category: members
+  method: POST
+  path: /members/{id}/boardStars
+  description: Create Star for Board
+- name: delete-members-id-boardstars-idstar
+  category: members
+  method: DELETE
+  path: /members/{id}/boardStars/{idStar}
+  description: Delete Star for Board
+- name: get-members-id-boardstars-idstar
+  category: members
+  method: GET
+  path: /members/{id}/boardStars/{idStar}
+  description: Get a boardStar of Member
+- name: put-members-id-boardstars-idstar
+  category: members
+  method: PUT
+  path: /members/{id}/boardStars/{idStar}
+  description: Update the position of a boardStar of Member
+- name: get-members-id-boards
+  category: members
+  method: GET
+  path: /members/{id}/boards
+  description: Get Boards that Member belongs to
+- name: get-members-id-boardsinvited
+  category: members
+  method: GET
+  path: /members/{id}/boardsInvited
+  description: Get Boards the Member has been invited to
+- name: get-members-id-cards
+  category: members
+  method: GET
+  path: /members/{id}/cards
+  description: Get Cards the Member is on
+- name: get-members-id-customboardbackgrounds
+  category: members
+  method: GET
+  path: /members/{id}/customBoardBackgrounds
+  description: Get a Member's custom Board Backgrounds
+- name: membersidcustomboardbackgrounds-1
+  category: members
+  method: POST
+  path: /members/{id}/customBoardBackgrounds
+  description: Create a new custom Board Background
+- name: delete-members-id-customboardbackgrounds-idbackground
+  category: members
+  method: DELETE
+  path: /members/{id}/customBoardBackgrounds/{idBackground}
+  description: Delete custom Board Background of Member
+- name: get-members-id-customboardbackgrounds-idbackground
+  category: members
+  method: GET
+  path: /members/{id}/customBoardBackgrounds/{idBackground}
+  description: Get custom Board Background of Member
+- name: put-members-id-customboardbackgrounds-idbackground
+  category: members
+  method: PUT
+  path: /members/{id}/customBoardBackgrounds/{idBackground}
+  description: Update custom Board Background of Member
+- name: get-members-id-customemoji
+  category: members
+  method: GET
+  path: /members/{id}/customEmoji
+  description: Get a Member's customEmojis
+- name: post-members-id-customemoji
+  category: members
+  method: POST
+  path: /members/{id}/customEmoji
+  description: Create custom Emoji for Member
+- name: membersidcustomemojiidemoji
+  category: members
+  method: GET
+  path: /members/{id}/customEmoji/{idEmoji}
+  description: Get a Member's custom Emoji
+- name: get-members-id-customstickers
+  category: members
+  method: GET
+  path: /members/{id}/customStickers
+  description: Get Member's custom Stickers
+- name: post-members-id-customstickers
+  category: members
+  method: POST
+  path: /members/{id}/customStickers
+  description: Create custom Sticker for Member
+- name: delete-members-id-customstickers-idsticker
+  category: members
+  method: DELETE
+  path: /members/{id}/customStickers/{idSticker}
+  description: Delete a Member's custom Sticker
+- name: get-members-id-customstickers-idsticker
+  category: members
+  method: GET
+  path: /members/{id}/customStickers/{idSticker}
+  description: Get a Member's custom Sticker
+- name: get-members-id-notificationChannelSettings
+  category: members
+  method: GET
+  path: /members/{id}/notificationChannelSettings
+  description: Get a Member's notification channel settings
+- name: put-members-id-notificationChannelSettings
+  category: members
+  method: PUT
+  path: /members/{id}/notificationChannelSettings
+  description: Update blocked notification keys of Member on a channel
+- name: get-members-id-notificationChannelSettings-channel
+  category: members
+  method: GET
+  path: /members/{id}/notificationChannelSettings/{channel}
+  description: Get blocked notification keys of Member on this channel
+- name: put-members-id-notificationChannelSettings-channel
+  category: members
+  method: PUT
+  path: /members/{id}/notificationChannelSettings/{channel}
+  description: Update blocked notification keys of Member on a channel
+- name: put-members-id-notificationChannelSettings-channel-blockedKeys
+  category: members
+  method: PUT
+  path: /members/{id}/notificationChannelSettings/{channel}/{blockedKeys}
+  description: Update blocked notification keys of Member on a channel
+- name: get-members-id-notifications
+  category: members
+  method: GET
+  path: /members/{id}/notifications
+  description: Get Member's Notifications
+- name: post-members-id-onetimemessagesdismissed
+  category: members
+  method: POST
+  path: /members/{id}/oneTimeMessagesDismissed
+  description: Dismiss a message for Member
+- name: get-members-id-organizations
+  category: members
+  method: GET
+  path: /members/{id}/organizations
+  description: Get Member's Organizations
+- name: get-members-id-organizationsinvited
+  category: members
+  method: GET
+  path: /members/{id}/organizationsInvited
+  description: Get Organizations a Member has been invited to
+- name: get-members-id-savedsearches
+  category: members
+  method: GET
+  path: /members/{id}/savedSearches
+  description: Get Member's saved searched
+- name: post-members-id-savedsearches
+  category: members
+  method: POST
+  path: /members/{id}/savedSearches
+  description: Create saved Search for Member
+- name: delete-members-id-savedsearches-idsearch
+  category: members
+  method: DELETE
+  path: /members/{id}/savedSearches/{idSearch}
+  description: Delete a saved search
+- name: get-members-id-savedsearches-idsearch
+  category: members
+  method: GET
+  path: /members/{id}/savedSearches/{idSearch}
+  description: Get a saved search
+- name: put-members-id-savedsearches-idsearch
+  category: members
+  method: PUT
+  path: /members/{id}/savedSearches/{idSearch}
+  description: Update a saved search
+- name: get-members-id-tokens
+  category: members
+  method: GET
+  path: /members/{id}/tokens
+  description: Get Member's Tokens
+- name: get-members-id-field
+  category: members
+  method: GET
+  path: /members/{id}/{field}
+  description: Get a field on a Member
+- name: post-organizations
+  category: organizations
+  method: POST
+  path: /organizations
+  description: Create a new Organization
+- name: delete-organizations-id
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}
+  description: Delete an Organization
+- name: get-organizations-id
+  category: organizations
+  method: GET
+  path: /organizations/{id}
+  description: Get an Organization
+- name: put-organizations-id
+  category: organizations
+  method: PUT
+  path: /organizations/{id}
+  description: Update an Organization
+- name: get-organizations-id-actions
+  category: organizations
+  method: GET
+  path: /organizations/{id}/actions
+  description: Get Actions for Organization
+- name: get-organizations-id-boards
+  category: organizations
+  method: GET
+  path: /organizations/{id}/boards
+  description: Get Boards in an Organization
+- name: get-organizations-id-exports
+  category: organizations
+  method: GET
+  path: /organizations/{id}/exports
+  description: Retrieve Organization's Exports
+- name: post-organizations-id-exports
+  category: organizations
+  method: POST
+  path: /organizations/{id}/exports
+  description: Create Export for Organizations
+- name: delete-organizations-id-logo
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}/logo
+  description: Delete Logo for Organization
+- name: post-organizations-id-logo
+  category: organizations
+  method: POST
+  path: /organizations/{id}/logo
+  description: Update logo for an Organization
+- name: get-organizations-id-members
+  category: organizations
+  method: GET
+  path: /organizations/{id}/members
+  description: Get the Members of an Organization
+- name: put-organizations-id-members
+  category: organizations
+  method: PUT
+  path: /organizations/{id}/members
+  description: Update an Organization's Members
+- name: delete-organizations-id-members
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}/members/{idMember}
+  description: Remove a Member from an Organization
+- name: put-organizations-id-members-idmember
+  category: organizations
+  method: PUT
+  path: /organizations/{id}/members/{idMember}
+  description: Update a Member of an Organization
+- name: organizations-id-members-idmember-all
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}/members/{idMember}/all
+  description: Remove a Member from an Organization and all Organization Boards
+- name: put-organizations-id-members-idmember-deactivated
+  category: organizations
+  method: PUT
+  path: /organizations/{id}/members/{idMember}/deactivated
+  description: Deactivate or reactivate a member of an Organization
+- name: get-organizations-id-memberships
+  category: organizations
+  method: GET
+  path: /organizations/{id}/memberships
+  description: Get Memberships of an Organization
+- name: get-organizations-id-memberships-idmembership
+  category: organizations
+  method: GET
+  path: /organizations/{id}/memberships/{idMembership}
+  description: Get a Membership of an Organization
+- name: get-organizations-id-newbillableguests-idboard
+  category: organizations
+  method: GET
+  path: /organizations/{id}/newBillableGuests/{idBoard}
+  description: Get Organizations new billable guests
+- name: get-organizations-id-plugindata
+  category: organizations
+  method: GET
+  path: /organizations/{id}/pluginData
+  description: Get the pluginData Scoped to Organization
+- name: delete-organizations-id-prefs-associateddomain
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}/prefs/associatedDomain
+  description: Remove the associated Google Apps domain from a Workspace
+- name: delete-organizations-id-prefs-orginviterestrict
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}/prefs/orgInviteRestrict
+  description: Delete the email domain restriction on who can be invited to the Workspace
+- name: get-organizations-id-tags
+  category: organizations
+  method: GET
+  path: /organizations/{id}/tags
+  description: Get Tags of an Organization
+- name: post-organizations-id-tags
+  category: organizations
+  method: POST
+  path: /organizations/{id}/tags
+  description: Create a Tag in Organization
+- name: delete-organizations-id-tags-idtag
+  category: organizations
+  method: DELETE
+  path: /organizations/{id}/tags/{idTag}
+  description: Delete an Organization's Tag
+- name: get-organizations-id-field
+  category: organizations
+  method: GET
+  path: /organizations/{id}/{field}
+  description: Get field on Organization
+- name: put-enterprises-id-enterpriseJoinRequest-bulk
+  category: enterprises
+  method: PUT
+  path: /enterprises/${id}/enterpriseJoinRequest/bulk
+  description: Decline enterpriseJoinRequests from one organization or a bulk list of organizations.
+- name: get-enterprises-id
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}
+  description: Get an Enterprise
+- name: get-enterprises-id-admins
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/admins
+  description: Get Enterprise admin Members
+- name: enterprises-id-organizations-idmember
+  category: enterprises
+  method: DELETE
+  path: /enterprises/{id}/admins/{idMember}
+  description: Remove a Member as admin from Enterprise.
+- name: put-enterprises-id-admins-idmember
+  category: enterprises
+  method: PUT
+  path: /enterprises/{id}/admins/{idMember}
+  description: Update Member to be admin of Enterprise
+- name: get-enterprises-id-auditlog
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/auditlog
+  description: Get auditlog data for an Enterprise
+- name: get-enterprises-id-claimableOrganizations
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/claimableOrganizations
+  description: Get ClaimableOrganizations of an Enterprise
+- name: get-enterprises-id-members
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/members
+  description: Get Members of Enterprise
+- name: get-users-id
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/members/query
+  description: Get Users of an Enterprise
+- name: get-enterprises-id-members-idmember
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/members/{idMember}
+  description: Get a Member of Enterprise
+- name: enterprises-id-members-idMember-deactivated
+  category: enterprises
+  method: PUT
+  path: /enterprises/{id}/members/{idMember}/deactivated
+  description: Deactivate a Member of an Enterprise.
+- name: put-enterprises-id-members-idmember-licensed
+  category: enterprises
+  method: PUT
+  path: /enterprises/{id}/members/{idMember}/licensed
+  description: Update a Member's licensed status
+- name: get-enterprises-id-organizations
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/organizations
+  description: Get Organizations of an Enterprise
+- name: put-enterprises-id-organizations
+  category: enterprises
+  method: PUT
+  path: /enterprises/{id}/organizations
+  description: Transfer an Organization to an Enterprise.
+- name: get-enterprises-id-organizations-bulk-idOrganizations
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/organizations/bulk/{idOrganizations}
+  description: Bulk accept a set of organizations to an Enterprise.
+- name: delete-enterprises-id-organizations-idorg
+  category: enterprises
+  method: DELETE
+  path: /enterprises/{id}/organizations/{idOrg}
+  description: Delete an Organization from an Enterprise.
+- name: get-enterprises-id-pendingOrganizations
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/pendingOrganizations
+  description: Get PendingOrganizations of an Enterprise
+- name: get-enterprises-id-signupurl
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/signupUrl
+  description: Get signupUrl for Enterprise
+- name: post-enterprises-id-tokens
+  category: enterprises
+  method: POST
+  path: /enterprises/{id}/tokens
+  description: Create an auth Token for an Enterprise.
+- name: get-enterprises-id-transferrable-bulk-idOrganizations
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/transferrable/bulk/{idOrganizations}
+  description: Get a bulk list of organizations that can be transferred to an enterprise.
+- name: get-enterprises-id-transferrable-organization-idOrganization
+  category: enterprises
+  method: GET
+  path: /enterprises/{id}/transferrable/organization/{idOrganization}
+  description: Get whether an organization can be transferred to an enterprise.
+- name: get-actions-idaction-reactions
+  category: actions
+  method: GET
+  path: /actions/{idAction}/reactions
+  description: Get Action's Reactions
+- name: post-actions-idaction-reactions
+  category: actions
+  method: POST
+  path: /actions/{idAction}/reactions
+  description: Create Reaction for Action
+- name: delete-actions-idaction-reactions-id
+  category: actions
+  method: DELETE
+  path: /actions/{idAction}/reactions/{id}
+  description: Delete Action's Reaction
+- name: get-actions-idaction-reactions-id
+  category: actions
+  method: GET
+  path: /actions/{idAction}/reactions/{id}
+  description: Get Action's Reaction
+- name: get-actions-idaction-reactionsummary
+  category: actions
+  method: GET
+  path: /actions/{idAction}/reactionsSummary
+  description: List Action's summary of Reactions
+- name: delete-actions-id
+  category: actions
+  method: DELETE
+  path: /actions/{id}
+  description: Delete an Action
+- name: get-actions-id
+  category: actions
+  method: GET
+  path: /actions/{id}
+  description: Get an Action
+- name: put-actions-id
+  category: actions
+  method: PUT
+  path: /actions/{id}
+  description: Update an Action
+- name: get-actions-id-board
+  category: actions
+  method: GET
+  path: /actions/{id}/board
+  description: Get the Board for an Action
+- name: get-actions-id-card
+  category: actions
+  method: GET
+  path: /actions/{id}/card
+  description: Get the Card for an Action
+- name: get-actions-id-list
+  category: actions
+  method: GET
+  path: /actions/{id}/list
+  description: Get the List for an Action
+- name: get-actions-id-member
+  category: actions
+  method: GET
+  path: /actions/{id}/member
+  description: Get the Member of an Action
+- name: get-actions-id-membercreator
+  category: actions
+  method: GET
+  path: /actions/{id}/memberCreator
+  description: Get the Member Creator of an Action
+- name: get-actions-id-organization
+  category: actions
+  method: GET
+  path: /actions/{id}/organization
+  description: Get the Organization of an Action
+- name: put-actions-id-text
+  category: actions
+  method: PUT
+  path: /actions/{id}/text
+  description: Update a Comment Action
+- name: get-actions-id-field
+  category: actions
+  method: GET
+  path: /actions/{id}/{field}
+  description: Get a specific field on an Action
+- name: post-notifications-all-read
+  category: notifications
+  method: POST
+  path: /notifications/all/read
+  description: Mark all Notifications as read
+- name: get-notifications-id
+  category: notifications
+  method: GET
+  path: /notifications/{id}
+  description: Get a Notification
+- name: put-notifications-id
+  category: notifications
+  method: PUT
+  path: /notifications/{id}
+  description: Update a Notification's read status
+- name: get-notifications-id-board
+  category: notifications
+  method: GET
+  path: /notifications/{id}/board
+  description: Get the Board a Notification is on
+- name: get-notifications-id-card
+  category: notifications
+  method: GET
+  path: /notifications/{id}/card
+  description: Get the Card a Notification is on
+- name: get-notifications-id-list
+  category: notifications
+  method: GET
+  path: /notifications/{id}/list
+  description: Get the List a Notification is on
+- name: notificationsidmember
+  category: notifications
+  method: GET
+  path: /notifications/{id}/member
+  description: Get the Member a Notification is about (not the creator)
+- name: get-notifications-id-membercreator
+  category: notifications
+  method: GET
+  path: /notifications/{id}/memberCreator
+  description: Get the Member who created the Notification
+- name: get-notifications-id-organization
+  category: notifications
+  method: GET
+  path: /notifications/{id}/organization
+  description: Get a Notification's associated Organization
+- name: put-notifications-id-unread
+  category: notifications
+  method: PUT
+  path: /notifications/{id}/unread
+  description: Update Notification's read status
+- name: get-notifications-id-field
+  category: notifications
+  method: GET
+  path: /notifications/{id}/{field}
+  description: Get a field of a Notification
+- name: get-search
+  category: search
+  method: GET
+  path: /search
+  description: Search Trello
+- name: get-search-members
+  category: search
+  method: GET
+  path: /search/members/
+  description: Search for Members
+- name: post-webhooks
+  category: webhooks
+  method: POST
+  path: /webhooks/
+  description: Create a Webhook
+- name: delete-webhooks-id
+  category: webhooks
+  method: DELETE
+  path: /webhooks/{id}
+  description: Delete a Webhook
+- name: get-webhooks-id
+  category: webhooks
+  method: GET
+  path: /webhooks/{id}
+  description: Get a Webhook
+- name: put-webhooks-id
+  category: webhooks
+  method: PUT
+  path: /webhooks/{id}
+  description: Update a Webhook
+- name: webhooksidfield
+  category: webhooks
+  method: GET
+  path: /webhooks/{id}/{field}
+  description: Get a field on a Webhook
+- name: get-tokens-token
+  category: tokens
+  method: GET
+  path: /tokens/{token}
+  description: Get a Token
+- name: delete-token
+  category: tokens
+  method: DELETE
+  path: /tokens/{token}/
+  description: Delete a Token
+- name: get-tokens-token-member
+  category: tokens
+  method: GET
+  path: /tokens/{token}/member
+  description: Get Token's Member
+- name: get-tokens-token-webhooks
+  category: tokens
+  method: GET
+  path: /tokens/{token}/webhooks
+  description: Get Webhooks for Token
+- name: post-tokens-token-webhooks
+  category: tokens
+  method: POST
+  path: /tokens/{token}/webhooks
+  description: Create Webhooks for Token
+- name: delete-tokens-token-webhooks-idwebhook
+  category: tokens
+  method: DELETE
+  path: /tokens/{token}/webhooks/{idWebhook}
+  description: Delete a Webhook created by Token
+- name: get-tokens-token-webhooks-idwebhook
+  category: tokens
+  method: GET
+  path: /tokens/{token}/webhooks/{idWebhook}
+  description: Get a Webhook belonging to a Token
+- name: tokenstokenwebhooks-1
+  category: tokens
+  method: PUT
+  path: /tokens/{token}/webhooks/{idWebhook}
+  description: Update a Webhook created by Token
+- name: post-plugins-idplugin-listing
+  category: plugins
+  method: POST
+  path: /plugins/{idPlugin}/listings
+  description: Create a Listing for Plugin
+- name: put-plugins-idplugin-listings-idlisting
+  category: plugins
+  method: PUT
+  path: /plugins/{idPlugin}/listings/{idListing}
+  description: Updating Plugin's Listing
+- name: get-plugins-id
+  category: plugins
+  method: GET
+  path: /plugins/{id}/
+  description: Get a Plugin
+- name: put-plugins-id
+  category: plugins
+  method: PUT
+  path: /plugins/{id}/
+  description: Update a Plugin
+- name: get-plugins-id-compliance-memberprivacy
+  category: plugins
+  method: GET
+  path: /plugins/{id}/compliance/memberPrivacy
+  description: Get Plugin's Member privacy compliance
+- name: applications-key-compliance
+  category: applications
+  method: GET
+  path: /applications/{key}/compliance
+  description: Get Application's compliance data
+- name: emoji
+  category: emoji
+  method: GET
+  path: /emoji
+  description: List available Emoji
+- name: get-batch
+  category: batch
+  method: GET
+  path: /batch
+  description: Batch Requests

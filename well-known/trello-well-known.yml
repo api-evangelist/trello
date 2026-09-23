@@ -1,0 +1,129 @@
+generated: '2026-09-17'
+method: probed
+source: live GET of the RFC 8615 named path list on every host this record knows
+description: >-
+  Well-known document probe for Trello. The only real document served on any Trello
+  host is the RFC 9116 security.txt, which Atlassian serves identically (PGP-signed,
+  canonical https://www.atlassian.com/.well-known/security.txt) from trello.com,
+  www.trello.com, api.trello.com, developer.atlassian.com and atlassian.com. Every
+  other named path on the trello.com hosts answers HTTP 200 with the Trello
+  single-page-app HTML shell, which is NOT a document — those are recorded as misses.
+  No OpenID/OAuth discovery, no api-catalog, no ai-plugin.json and no agent card is
+  published on any Trello host.
+notes:
+  - The trello.com / www.trello.com / api.trello.com hosts are a catch-all SPA - every
+    unrecognised /.well-known/* path returns 200 with '<!doctype html>' Trello app HTML.
+    Treated as a miss per the pipeline contract.
+  - developer.atlassian.com and atlassian.com return honest 404s for the same paths.
+  - Trello OAuth 2.0 (3LO, GA 15 September 2026) authorizes at auth.atlassian.com, but
+    that authorization server publishes no anonymous discovery document under the
+    Trello record's hosts.
+hosts:
+  - host: trello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: trello-security.txt
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/api-catalog
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/agent.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+  - host: www.trello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: trello-security.txt
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/api-catalog
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/agent.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+  - host: api.trello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: trello-security.txt
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/api-catalog
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+      - path: /.well-known/agent.json
+        status: 200
+        note: SPA HTML shell, not a document - miss
+  - host: developer.atlassian.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: trello-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: atlassian.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: trello-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404

@@ -1,0 +1,31 @@
+generated: '2026-09-17'
+method: generated
+source: openapi/trello-rest-api-openapi.json, conventions/trello-conventions.yml, errors/trello-problem-types.yml
+description: >-
+  Packaged Agent Skills for the Trello REST API v1. Every operationId referenced in these
+  skills was read out of Trello's own published OpenAPI
+  (https://developer.atlassian.com/cloud/trello/swagger.v3.json, 261 operations) — none is
+  invented. Each skill carries the two runtime facts a Trello agent most needs and that the
+  contract does not state: there is no idempotency mechanism, and there are no rate-limit
+  response headers.
+skills:
+  - file: trello-provision-board.md
+    name: trello-provision-board
+    summary: Create a board with its lists and labels, then verify the structure.
+    operations: 7
+  - file: trello-triage-card.md
+    name: trello-triage-card
+    summary: Create, label, assign, attach to and comment on a card; move it between lists.
+    operations: 10
+  - file: trello-subscribe-webhooks.md
+    name: trello-subscribe-webhooks
+    summary: >-
+      Register a webhook on the right route for your auth model, satisfy the HEAD
+      validation, and verify the HMAC-SHA1 signature on delivery.
+    operations: 6
+  - file: trello-archive-and-restore.md
+    name: trello-archive-and-restore
+    summary: >-
+      Which Trello removals are reversible and which are permanent, and why
+      archiveAllCards needs a snapshot first.
+    operations: 8

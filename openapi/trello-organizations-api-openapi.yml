@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Trello REST Actions Organizations API
+  title: Trello REST Organizations API
   description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
   version: '1'
   contact:
@@ -318,48 +318,6 @@ components:
           description: The IDs of boards the member has access to.
           items:
             type: string
-    Organization:
-      type: object
-      description: Represents a Trello organization (workspace), which is a group of members who share boards.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the organization.
-        name:
-          type: string
-          description: The short name (URL-friendly slug) of the organization.
-        displayName:
-          type: string
-          description: The display name of the organization.
-        desc:
-          type: string
-          description: The description of the organization.
-        url:
-          type: string
-          format: uri
-          description: The URL of the organization.
-        website:
-          type: string
-          format: uri
-          description: The website of the organization.
-        logoHash:
-          type: string
-          description: The hash of the organization's logo.
-        products:
-          type: array
-          description: The product IDs associated with the organization.
-          items:
-            type: integer
-        idBoards:
-          type: array
-          description: The IDs of boards in the organization.
-          items:
-            type: string
-        memberships:
-          type: array
-          description: The membership records for the organization.
-          items:
-            $ref: '#/components/schemas/Membership'
     Board:
       type: object
       description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
@@ -474,6 +432,48 @@ components:
           type: string
           format: date-time
           description: The date and time the authenticated member last viewed the board.
+    Organization:
+      type: object
+      description: Represents a Trello organization (workspace), which is a group of members who share boards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the organization.
+        name:
+          type: string
+          description: The short name (URL-friendly slug) of the organization.
+        displayName:
+          type: string
+          description: The display name of the organization.
+        desc:
+          type: string
+          description: The description of the organization.
+        url:
+          type: string
+          format: uri
+          description: The URL of the organization.
+        website:
+          type: string
+          format: uri
+          description: The website of the organization.
+        logoHash:
+          type: string
+          description: The hash of the organization's logo.
+        products:
+          type: array
+          description: The product IDs associated with the organization.
+          items:
+            type: integer
+        idBoards:
+          type: array
+          description: The IDs of boards in the organization.
+          items:
+            type: string
+        memberships:
+          type: array
+          description: The membership records for the organization.
+          items:
+            $ref: '#/components/schemas/Membership'
   parameters:
     idParam:
       name: id

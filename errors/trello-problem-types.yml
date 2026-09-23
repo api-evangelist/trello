@@ -1,0 +1,136 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/status-codes/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/,
+  and openapi/trello-rest-api-openapi.json
+format: proprietary
+rfc9457: false
+description: >-
+  Trello's error surface has two layers. The HTTP status table is published and complete
+  (developer.atlassian.com status-codes page). The symbolic error codes are NOT published
+  as a registry — they are scattered through the guides, and the ones below are every code
+  this pass could evidence from Trello's own documentation. Many 4xx responses carry no
+  JSON at all, only a plain-text string such as "invalid token", so a client that parses
+  application/json unconditionally will fail on them.
+envelope:
+  json: '{"error": "<SYMBOLIC_CODE>", "message": "<human readable>"}'
+  text: 'bare text/plain body, e.g. "invalid token"'
+  note: >-
+    The envelope is not uniform. The rate-limit family reliably returns the JSON shape;
+    auth and validation failures frequently return the text shape. There is no type URI,
+    no instance, no problem+json media type.
+status_codes:
+  - status: 200
+    name: Success
+    meaning: Everything was fine and worked.
+  - status: 302
+    name: Found
+    meaning: Redirect. Declared on one operation in the OpenAPI.
+  - status: 400
+    name: Bad Request
+    meaning: The request is missing required fields, or its fields are invalid in some way.
+    remediation: Fix the request payload or query parameters; do not retry unchanged.
+  - status: 401
+    name: Unauthorized
+    meaning: >-
+      Invalid credentials, absent credentials where credentials are required, or the user
+      lacks permission. Also the response after a user revokes a token.
+    remediation: Re-authorize the user. Retrying with the same token will not succeed.
+  - status: 403
+    name: Forbidden
+    meaning: >-
+      The API will not allow that in this case — for example a plan or object limit is
+      reached, or an OAuth 2.0 Power-Up client reached outside its authorized workspace.
+    remediation: Check object limits and, for OAuth 2.0, the workspace restriction on the client.
+  - status: 404
+    name: Not Found
+    meaning: No route registered there, or the model (or a nested resource) could not be found.
+  - status: 409
+    name: Conflict
+    meaning: The request does not match Trello's state in some way.
+  - status: 429
+    name: Too Many Requests
+    meaning: A rate limit was exceeded.
+    remediation: >-
+      Back off. Read the symbolic code in the body to learn which ceiling was hit. Note
+      that Trello publishes no Retry-After and no RateLimit-* headers, and that more than
+      200 429s on one key inside a 10s window locks the key out for the rest of that window.
+  - status: 449
+    name: Sub-Request Failed
+    meaning: The API was unable to process every part of the request.
+    note: Non-standard status, used for partial failure on composite requests.
+  - status: 500
+    name: Internal Server Error
+    meaning: Something went wrong and Trello does not know what.
+  - status: 503
+    name: Service Unavailable
+    meaning: Something that should be up is down; the load balancers may return this.
+  - status: 504
+    name: Gateway Timeout
+    meaning: Trello could not handle the GET request within its 30-second time limit.
+    remediation: >-
+      Narrow the request — use fields= to shrink the payload, or split a nested-resource
+      request into several smaller calls.
+problem_types:
+  - code: API_KEY_LIMIT_EXCEEDED
+    status: 429
+    title: API key rate limit exceeded
+    detail: More than 300 requests in a 10-second window were made with this API key.
+    remediation: Throttle to under 300 requests per 10 seconds per key.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+  - code: API_TOKEN_LIMIT_EXCEEDED
+    status: 429
+    title: API token rate limit exceeded
+    detail: More than 100 requests in a 10-second window were made with this token.
+    remediation: Throttle per token, independently of the per-key budget.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+  - code: API_TOKEN_DB_LIMIT_EXCEEDED
+    status: 429
+    title: Database time limit exceeded for this token
+    detail: >-
+      Each token is allotted a budget of database query response time. This token is
+      making too many database-expensive calls.
+    remediation: >-
+      Reduce response sizes and break large nested-resource requests into smaller ones.
+      There is no published quota number for this limit.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+  - code: API_TOO_MANY_CARDS_REQUESTED
+    status: 429
+    title: Too many cards requested with action loads
+    detail: >-
+      A single request asked for too many Trello objects — canonically a board's cards
+      with actions=all&filter=all.
+    remediation: >-
+      Fetch the cards first, then fetch each card's actions in follow-up requests.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+  - code: invalid token
+    status: 401
+    title: Invalid or revoked token
+    detail: >-
+      Plain-text body, not JSON. Returned when the user has revoked the token or the
+      token is otherwise unusable.
+    remediation: Prompt the user to re-authorize the application.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+webhook_errors:
+  - condition: Creating a webhook whose token cannot read the idModel
+    status: 400 or 403
+    detail: >-
+      Under OAuth 2.0 the access token must carry a scope granting read on the watched
+      model — read:board:trello for a board/list/card, read:organization:trello for a
+      workspace, read:member:trello for a member, read:enterprise:trello for an enterprise.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  - condition: Power-Up OAuth 2.0 client watching a model outside its authorized workspace
+    status: 403
+    detail: Power-Up OAuth 2.0 clients are workspace-restricted.
+    source: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+spec_coverage:
+  operations: 261
+  with_2xx_response: 260
+  with_4xx_or_5xx_response: 14
+  note: >-
+    A real contract-quality gap: 247 of 261 operations in Trello's own OpenAPI declare no
+    error response at all, so a code generator reading the spec produces clients that have
+    never been told about the 401/404/429 surface documented in prose.

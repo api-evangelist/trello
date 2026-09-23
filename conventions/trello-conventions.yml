@@ -1,0 +1,203 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/oauth-2-getting-started/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/status-codes/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/limits/,
+  and openapi/trello-rest-api-openapi.json
+description: >-
+  Cross-cutting runtime semantics for the Trello REST API v1 — what an agent needs to
+  know before it calls, beyond the per-operation contract.
+
+auth:
+  style: api-key-and-token, or OAuth 2.0 3LO bearer
+  docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+  transports:
+    - name: query parameters
+      example: 'https://api.trello.com/1/members/me?key={apiKey}&token={apiToken}'
+      note: >-
+        The documented default, and the one the OpenAPI declares (both securitySchemes
+        are apiKey in: query). Credentials in the query string appear in logs, proxies
+        and browser history — an agent should prefer the Authorization header.
+    - name: Authorization header
+      example: 'Authorization: OAuth oauth_consumer_key="{apiKey}", oauth_token="{apiToken}"'
+    - name: request body
+      note: PUT/POST may carry key and token as body fields.
+    - name: OAuth 2.0 bearer
+      example: 'Authorization: Bearer {access_token}'
+      note: >-
+        Trello OAuth 2.0 3LO reached GA on 15 September 2026. Ten granular scopes
+        (see scopes/trello-scopes.yml). Tokens are short-lived and must be refreshed.
+        Legacy Trello Auth tokens have configurable expiry (1hour/1day/30days/never)
+        and three coarse scopes (read, write, account).
+  token_revocation:
+    supported: true
+    user_surface: 'https://trello.com/u/{username}/account'
+    api: DELETE /1/tokens/{token}
+    on_revoked: 'HTTP 401 with message "invalid token" — the client must re-authorize.'
+
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  docs: null
+  note: >-
+    Trello publishes no replay-protection mechanism. There is no Idempotency-Key header,
+    no client-supplied request id, and no documented dedup window anywhere in the REST
+    API guides or the 261-operation OpenAPI. A retried POST /1/cards creates a second
+    card. Agents must implement their own dedup (for example by writing a caller-owned
+    idempotency marker into the card description or a custom field, then searching for
+    it before retrying). Verified 2026-09-17 against the full spec and the API guides —
+    an honest none, not an unchecked field.
+
+reversibility:
+  grade: verified
+  summary: >-
+    Trello's core write surface is archive-based, not delete-based, and the archive is
+    reversible with no time limit — the same operation that archives an object unarchives
+    it by flipping one boolean. Hard deletes exist and are NOT reversible. The window is
+    stated by the provider for the one case where a window applies (board deletion via
+    the 30-day closed-board recovery path).
+  surfaces:
+    - write: PUT /1/cards/{id} with closed=true (archive a card)
+      operationId: put-cards-id
+      reversal: PUT /1/cards/{id} with closed=false
+      reversal_operationId: put-cards-id
+      window: unlimited — an archived card stays recoverable indefinitely
+      docs: https://developer.atlassian.com/cloud/trello/rest/
+    - write: PUT /1/lists/{id}/closed with value=true (archive a list)
+      operationId: put-lists-id-closed
+      reversal: PUT /1/lists/{id}/closed with value=false
+      reversal_operationId: put-lists-id-closed
+      window: unlimited
+      note: >-
+        The spec's own summary for this operation is "Archive or unarchive a list" — the
+        reversal is the operation.
+      docs: https://developer.atlassian.com/cloud/trello/rest/
+    - write: POST /1/lists/{id}/archiveAllCards (bulk archive every card in a list)
+      operationId: post-lists-id-archiveallcards
+      reversal: 'PUT /1/cards/{id} closed=false, per card — there is no bulk unarchive'
+      reversal_operationId: put-cards-id
+      window: unlimited, but the reversal is O(n) and the caller must have captured the card ids first
+      confidence: medium
+      note: >-
+        This is the sharpest reversibility edge in the Trello API. One call archives an
+        unbounded number of cards; undoing it requires the caller to already know every
+        card id, because the archive response does not return them. An agent should list
+        the cards BEFORE calling this.
+    - write: PUT /1/boards/{id} with closed=true (close a board)
+      operationId: put-boards-id
+      reversal: PUT /1/boards/{id} with closed=false
+      reversal_operationId: put-boards-id
+      window: unlimited while the board is only closed
+    - write: DELETE /1/cards/{id}
+      operationId: delete-cards-id
+      reversal: none
+      window: null
+      note: Permanent. There is no published undelete for a deleted card.
+    - write: DELETE /1/checklists/{id}, DELETE /1/labels/{id}, DELETE /1/webhooks/{id}
+      reversal: none
+      window: null
+      note: Permanent deletes with no published restore path.
+  na: false
+
+pagination:
+  style: mixed — cursor/id-anchored on activity feeds, offset on a few list endpoints, unpaginated elsewhere
+  params:
+    - name: limit
+      note: Caps the page size. Present on 5 of 261 operations (actions, notifications, search).
+    - name: before
+      note: Return items created before this action/notification id or ISO date.
+    - name: since
+      note: Return items created after this action/notification id or ISO date.
+    - name: page
+      note: Zero-indexed offset paging, on 3 operations.
+    - name: cursor
+      note: Opaque cursor, on 2 operations.
+  response_envelope: bare JSON array — no wrapper object, no total, no next link
+  note: >-
+    There is no uniform pagination contract. Most collection endpoints (a board's cards,
+    a list's cards, an organization's members) return the entire collection in one
+    unpaginated array, which is why the response-size limits below exist instead.
+
+field_selection:
+  supported: true
+  param: fields
+  operations: 54
+  note: >-
+    A comma-separated allowlist of attributes, or "all". The primary payload-shaping tool
+    and the main defence against the response-size limits.
+  filter_param: filter
+  filter_operations: 22
+
+nested_resources:
+  supported: true
+  docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/
+  note: >-
+    Sub-resources can be inlined on a parent request (for example a board request that
+    also returns its cards and their actions) to avoid N+1 calls. This is the feature that
+    triggers API_TOO_MANY_CARDS_REQUESTED when over-used.
+
+versioning:
+  style: URI path
+  current: '1'
+  base: https://api.trello.com/1
+  note: >-
+    One version since launch. Breaking changes are announced as dated Deprecation Notice
+    entries on the developer changelog rather than by cutting a new version prefix.
+  changelog: https://developer.atlassian.com/cloud/trello/changelog/
+
+error_envelope:
+  format: proprietary
+  rfc9457: false
+  shapes:
+    - 'application/json object: {"error": "<SYMBOLIC_CODE>", "message": "<human text>"}'
+    - 'text/plain body for many 400/401 responses, e.g. "invalid token", "invalid id"'
+  note: >-
+    Not RFC 9457. There is no type URI, no problem+json content type, and no machine-stable
+    code on the plain-text responses — the string IS the signal. See
+    errors/trello-problem-types.yml.
+
+rate_limit_signaling:
+  status_on_exhaustion: 429
+  response_headers: []
+  note: >-
+    THIS IS THE RUNTIME GAP. Trello documents its limits in prose (300 req/10s per API key,
+    100 req/10s per token, 100 req/900s on /1/members) but publishes NO rate-limit response
+    headers — no X-RateLimit-Limit, no X-RateLimit-Remaining, no RateLimit-* draft headers,
+    and no Retry-After is documented on the 429. An agent cannot read its remaining budget
+    from a response; it can only discover exhaustion by being refused. The one machine
+    signal is the symbolic error code in the 429 body, which distinguishes which ceiling
+    was hit — API_KEY_LIMIT_EXCEEDED vs API_TOKEN_LIMIT_EXCEEDED.
+  docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+  escalation: >-
+    Exceeding 200 429s on one API key inside a 10-second window causes Trello to 429 every
+    remaining request for that key for the rest of the window — retry storms are penalised.
+
+dry_run_mode:
+  supported: false
+  note: No preview/simulate/validate-only mode is published for any write operation.
+
+request_tracing:
+  request_id_header: null
+  note: No documented correlation-id header on requests or responses.
+
+metadata:
+  supported: true
+  mechanism: Custom Fields
+  docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/
+  note: >-
+    Trello has no generic key/value metadata bag. Arbitrary caller-owned data goes in
+    Custom Fields (Standard plan and above) or in the object's description text.
+
+cross_links:
+  errors: errors/trello-problem-types.yml
+  lifecycle: lifecycle/trello-lifecycle.yml
+  authentication: authentication/trello-authentication.yml
+  scopes: scopes/trello-scopes.yml
+  rate_limits: rate-limits/trello-rate-limits.yml

@@ -1,0 +1,209 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements to the Trello REST API
+  version: 1.0.0
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: openapi/trello-rest-api-openapi.json, fetched verbatim from https://developer.atlassian.com/cloud/trello/swagger.v3.json
+    on 2026-09-17
+  x-note: Non-destructive. This overlay records what API Evangelist would add to Trello's published contract; the
+    original spec in openapi/ is never mutated. Every change below addresses a defect measured in the published
+    spec, not a stylistic preference.
+extends: openapi/trello-rest-api-openapi.json
+actions:
+- target: $.info
+  description: Add the contact, terms and external documentation that the published spec omits (info carries only
+    title and version).
+  update:
+    description: The Trello REST API v1 provides programmatic access to Trello boards, lists, cards, checklists,
+      labels, custom fields, members, workspaces, enterprises, actions, notifications, search, webhooks and Power-Up
+      plugins. Authorization is either a legacy API key + user token pair passed as query parameters, or OAuth 2.0
+      3LO (GA 15 September 2026) with ten granular scopes. There is no idempotency mechanism and no rate-limit response
+      header - see the API Evangelist conventions artifact for the runtime semantics the contract does not state.
+    contact:
+      name: Atlassian Developer Support
+      url: https://developer.atlassian.com/support
+    termsOfService: https://developer.atlassian.com/cloud/trello/developer-terms/
+    license:
+      name: Atlassian Cloud Terms of Service
+      url: https://www.atlassian.com/legal/cloud-terms-of-service
+- target: $
+  description: Add externalDocs pointing at the Trello REST reference.
+  update:
+    externalDocs:
+      description: Trello REST API documentation
+      url: https://developer.atlassian.com/cloud/trello/rest/
+- target: $
+  description: Declare a tag set. The published spec declares NO tags and tags NO operations - all 261 are untagged,
+    so every generated client lands in one flat namespace.
+  update:
+    tags:
+    - name: Boards
+      description: Operations on Trello boards.
+    - name: Lists
+      description: Operations on Trello lists.
+    - name: Cards
+      description: Operations on Trello cards.
+    - name: Checklists
+      description: Operations on Trello checklists.
+    - name: Labels
+      description: Operations on Trello labels.
+    - name: Custom Fields
+      description: Operations on Trello custom fields.
+    - name: Members
+      description: Operations on Trello members.
+    - name: Organizations
+      description: Operations on Trello organizations.
+    - name: Enterprises
+      description: Operations on Trello enterprises.
+    - name: Actions
+      description: Operations on Trello actions.
+    - name: Notifications
+      description: Operations on Trello notifications.
+    - name: Search
+      description: Operations on Trello search.
+    - name: Webhooks
+      description: Operations on Trello webhooks.
+    - name: Tokens
+      description: Operations on Trello tokens.
+    - name: Plugins
+      description: Operations on Trello plugins.
+    - name: Applications
+      description: Operations on Trello applications.
+    - name: Emoji
+      description: Operations on Trello emoji.
+    - name: Batch
+      description: Operations on Trello batch.
+- target: $.paths[?(@property.match('^/actions(/.*)?$'))].*
+  description: Tag the 12 actions path(s) as "Actions".
+  update:
+    tags:
+    - Actions
+- target: $.paths[?(@property.match('^/applications(/.*)?$'))].*
+  description: Tag the 1 applications path(s) as "Applications".
+  update:
+    tags:
+    - Applications
+- target: $.paths[?(@property.match('^/batch(/.*)?$'))].*
+  description: Tag the 1 batch path(s) as "Batch".
+  update:
+    tags:
+    - Batch
+- target: $.paths[?(@property.match('^/boards(/.*)?$'))].*
+  description: Tag the 33 boards path(s) as "Boards".
+  update:
+    tags:
+    - Boards
+- target: $.paths[?(@property.match('^/cards(/.*)?$'))].*
+  description: Tag the 30 cards path(s) as "Cards".
+  update:
+    tags:
+    - Cards
+- target: $.paths[?(@property.match('^/checklists(/.*)?$'))].*
+  description: Tag the 7 checklists path(s) as "Checklists".
+  update:
+    tags:
+    - Checklists
+- target: $.paths[?(@property.match('^/customFields(/.*)?$'))].*
+  description: Tag the 4 customFields path(s) as "Custom Fields".
+  update:
+    tags:
+    - Custom Fields
+- target: $.paths[?(@property.match('^/emoji(/.*)?$'))].*
+  description: Tag the 1 emoji path(s) as "Emoji".
+  update:
+    tags:
+    - Emoji
+- target: $.paths[?(@property.match('^/enterprises(/.*)?$'))].*
+  description: Tag the 19 enterprises path(s) as "Enterprises".
+  update:
+    tags:
+    - Enterprises
+- target: $.paths[?(@property.match('^/labels(/.*)?$'))].*
+  description: Tag the 3 labels path(s) as "Labels".
+  update:
+    tags:
+    - Labels
+- target: $.paths[?(@property.match('^/lists(/.*)?$'))].*
+  description: Tag the 10 lists path(s) as "Lists".
+  update:
+    tags:
+    - Lists
+- target: $.paths[?(@property.match('^/members(/.*)?$'))].*
+  description: Tag the 27 members path(s) as "Members".
+  update:
+    tags:
+    - Members
+- target: $.paths[?(@property.match('^/notifications(/.*)?$'))].*
+  description: Tag the 10 notifications path(s) as "Notifications".
+  update:
+    tags:
+    - Notifications
+- target: $.paths[?(@property.match('^/organizations(/.*)?$'))].*
+  description: Tag the 19 organizations path(s) as "Organizations".
+  update:
+    tags:
+    - Organizations
+- target: $.paths[?(@property.match('^/plugins(/.*)?$'))].*
+  description: Tag the 4 plugins path(s) as "Plugins".
+  update:
+    tags:
+    - Plugins
+- target: $.paths[?(@property.match('^/search(/.*)?$'))].*
+  description: Tag the 2 search path(s) as "Search".
+  update:
+    tags:
+    - Search
+- target: $.paths[?(@property.match('^/tokens(/.*)?$'))].*
+  description: Tag the 5 tokens path(s) as "Tokens".
+  update:
+    tags:
+    - Tokens
+- target: $.paths[?(@property.match('^/webhooks(/.*)?$'))].*
+  description: Tag the 3 webhooks path(s) as "Webhooks".
+  update:
+    tags:
+    - Webhooks
+- target: $.paths['/members/{id}'].get
+  description: Normalise operationId "get-members=id" to "get-members-id" - the published value contains an "="
+    character, which is not a valid identifier in most generators.
+  update:
+    operationId: get-members-id
+- target: $.paths['/boards/{id}/members/{idMember}'].delete
+  description: Normalise operationId "boardsidmembersidmember" to "delete-boards-id-members-idmember" - the published
+    value drops the HTTP method prefix used by every other operationId in the spec.
+  update:
+    operationId: delete-boards-id-members-idmember
+- target: $.paths['/checklists/{id}'].put
+  description: Normalise operationId "put-checlists-id" to "put-checklists-id" - the published value misspells "checklists".
+  update:
+    operationId: put-checklists-id
+- target: $.paths['/lists/{id}/idBoard'].put
+  description: Normalise operationId "put-id-idboard" to "put-lists-id-idboard" - the published value omits the
+    resource name.
+  update:
+    operationId: put-lists-id-idboard
+- target: $.paths['/enterprises/{id}/members/{idMember}/deactivated'].put
+  description: Normalise operationId "enterprises-id-members-idMember-deactivated" to "put-enterprises-id-members-idmember-deactivated"
+    - the published value drops the method prefix and mixes case.
+  update:
+    operationId: put-enterprises-id-members-idmember-deactivated
+- target: $.paths['/members/{id}/avatar'].post
+  description: Normalise operationId "membersidavatar" to "post-members-id-avatar" - the published value drops the
+    method prefix and all separators.
+  update:
+    operationId: post-members-id-avatar
+- target: $.paths['/organizations/{id}/members/{idMember}/all'].delete
+  description: Normalise operationId "organizations-id-members-idmember-all" to "delete-organizations-id-members-idmember-all"
+    - the published value drops the method prefix.
+  update:
+    operationId: delete-organizations-id-members-idmember-all
+- target: $.paths['/customFields/{id}/options'].post
+  description: 'The published spec swaps these two operationIds: the POST is labelled get-customfields-id-options
+    and the GET is labelled post-customfields-id-options. Correct the POST.'
+  update:
+    operationId: post-customfields-id-options
+- target: $.paths['/customFields/{id}/options'].get
+  description: Correct the GET half of the swapped customFields options operationIds.
+  update:
+    operationId: get-customfields-id-options

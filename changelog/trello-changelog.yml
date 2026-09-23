@@ -1,0 +1,109 @@
+generated: '2026-09-17'
+method: searched
+source: https://developer.atlassian.com/cloud/trello/changelog/
+url: https://developer.atlassian.com/cloud/trello/changelog/
+description: >-
+  Trello's developer changelog, described by Atlassian as "the source of truth for all
+  changes to the Trello developer platform". Dated, typed (Announcement / Deprecation
+  Notice), and filterable. Page last updated 15 September 2026 at the time of this pass.
+scheme:
+  versioned: false
+  note: >-
+    Entries are dated, not versioned — the API itself has been at v1 since launch, so
+    there is no release number to anchor an entry to.
+  entry_types:
+    - Announcement
+    - Deprecation Notice
+current_version: '1'
+cadence: >-
+  Irregular and sparse — roughly six to eight entries per year. Nine months elapsed between
+  the 20 February 2026 security-requirements entry and the 15 September 2026 OAuth 2.0 GA.
+entries:
+  - date: '2026-09-15'
+    type: Announcement
+    title: OAuth 2.0 3LO is now available for Trello
+    breaking: false
+    additions:
+      - OAuth 2.0 authorization code grants for Trello apps
+      - Ten granular scopes replacing the read/write/account triple
+      - Short-lived tokens with refresh
+      - Resource restrictions
+      - Redesigned consent screen consistent with other Atlassian products
+    highlights: >-
+      The single most significant change to the Trello API surface in years. New apps can
+      opt in immediately; existing apps may transition when ready. Trello Auth tokens are
+      not yet scheduled for removal.
+  - date: '2026-02-20'
+    type: Announcement
+    title: Upcoming AGC app security requirements and 2026 updates to Cloud App Security Requirements
+    breaking: false
+    effective: '2026-03-31'
+    highlights: >-
+      Baseline security requirements for Atlassian Government Cloud apps take effect
+      31 March 2026. The 2026 general Cloud App Security Requirements add AI-security
+      provisions (Forge Rovo action input validation, permission checks on admin-level
+      actions), data-protection rules (external OAuth2 clients must use Forge OAuth2
+      Providers as confidential clients; no PII in application logs; strict tenant
+      isolation), application-security rules (parameterized queries for Forge SQL, CSP
+      guidance on unsafe-inline/unsafe-eval) and a ban on end-of-life Node.js runtimes.
+  - date: '2025-11-18'
+    type: Announcement
+    title: Power-Up UI components rendering update
+    breaking: false
+    highlights: >-
+      Atlassian is updating the rendering code behind some Power-Up UI components. No
+      functional change is intended; early access is available on request for testing.
+  - date: '2025-09-15'
+    type: Deprecation Notice
+    title: Trello SCIM API endpoints deprecated in favor of REST API endpoints
+    breaking: true
+    effective: '2025-12-10'
+    highlights: >-
+      /scim/v2/users and /scim/v2/groups removed. Callers move to
+      enterprises/{id}/members/query, members/{id}, enterprises/{id}/organizations and
+      boards/{id}/memberships. This removed Trello's only SCIM (RFC 7643/7644) surface.
+  - date: '2025-08-06'
+    type: Deprecation Notice
+    title: 'Trello deprecation notice: GET /application/:id/compliance/memberPrivacy'
+    breaking: true
+    effective: '2025-09-08'
+    highlights: >-
+      The legacy compliance route is replaced by /plugin/:id/compliance/memberPrivacy.
+      Privacy compliance remains mandatory for Power-Ups and integrations that store
+      personal data.
+  - date: '2025-07-22'
+    type: Announcement
+    title: Trello Glitch Example Projects copied to a public Bitbucket repository
+    breaking: false
+    highlights: >-
+      Glitch shut down its app hosting, so the Trello developer example apps and Power-Ups
+      moved to https://bitbucket.org/atlassianlabs/trello-glitch-example-projects/ and the
+      docs were re-pointed at it.
+  - date: '2025-06-26'
+    type: Deprecation Notice
+    title: 'Trello to deprecate PUT /board/:id/myPrefs/showListGuide'
+    breaking: true
+    effective: '2025-07-26'
+    highlights: >-
+      The endpoint was already absent from the docs and the showListGuide preference is no
+      longer used in the product. No replacement.
+  - date: '2025-05-09'
+    type: Announcement
+    title: Changes to the Trello card detail screen
+    breaking: false
+    highlights: >-
+      New side-by-side comments/activity panel and a popover menu for Power-Up and
+      automation card buttons. The API is unchanged, but the redesign may affect
+      third-party Power-Ups, which Atlassian asked developers to re-test.
+  - date: '2025-04-16'
+    type: Announcement
+    title: Introducing OAuth2 to Trello
+    breaking: false
+    highlights: >-
+      The RFC-89 announcement that Trello's existing authorization mechanism would be
+      replaced by OAuth 2.0 3LO, introducing scopes, resource restrictions and token
+      expiry. Shipped GA seventeen months later on 2026-09-15.
+  - date: '2025-04-11'
+    type: Announcement
+    title: Markdown changes in global power-up directory
+    breaking: false

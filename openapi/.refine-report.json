@@ -1,20 +1,7 @@
 {
   "provider": "trello",
   "sources": [
-    "trello-actions-api-openapi.yml",
-    "trello-boards-api-openapi.yml",
-    "trello-cards-api-openapi.yml",
-    "trello-checklists-api-openapi.yml",
-    "trello-customfields-api-openapi.yml",
-    "trello-labels-api-openapi.yml",
-    "trello-lists-api-openapi.yml",
-    "trello-members-api-openapi.yml",
-    "trello-notifications-api-openapi.yml",
-    "trello-organizations-api-openapi.yml",
-    "trello-plugins-api-openapi.yml",
-    "trello-search-api-openapi.yml",
-    "trello-tokens-api-openapi.yml",
-    "trello-webhooks-api-openapi.yml"
+    "_original/trello-rest-api-openapi.yml"
   ],
   "outputs": [
     "trello-actions-api-openapi.yml",
@@ -32,9 +19,31 @@
     "trello-tokens-api-openapi.yml",
     "trello-webhooks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "trello-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: trello-custom-fields-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 16 total)"
+  ],
+  "skipped": [
+    "trello-actions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-boards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-checklists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-members-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-plugins-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "trello-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

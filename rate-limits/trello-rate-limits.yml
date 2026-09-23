@@ -4,40 +4,108 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Trello
 providerId: trello
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-09-17'
+generated: '2026-09-17'
+method: searched
 reconciled: true
 tags:
   - Rate Limiting
   - Kanban
-description: Trello REST API rate limits per API key + token combo.
+description: >-
+  Trello REST API rate limits, read from Atlassian's own rate-limits guide on 2026-09-17.
+  This replaces an earlier bulk-sweep artifact that carried limits sourced to
+  https://trello.com/pricing; the figures below are taken from the developer documentation
+  and only limits Trello actually states a number for are recorded as numbers.
 sources:
-  - https://trello.com/pricing
   - https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
+docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/
 headers:
-  retryAfter: Retry-After
+  rateLimitLimit: null
+  rateLimitRemaining: null
+  rateLimitReset: null
+  retryAfter: null
+  note: >-
+    THE RUNTIME GAP. Trello publishes no rate-limit response headers of any kind — no
+    X-RateLimit-*, no RateLimit-* draft fields, and no documented Retry-After on the 429.
+    An agent cannot read its remaining budget; it can only discover exhaustion by being
+    refused. The single machine-readable signal is the symbolic error code in the 429
+    JSON body, which identifies which ceiling was hit.
 responseCodes:
   throttled: 429
+errorCodes:
+  - code: API_KEY_LIMIT_EXCEEDED
+    meaning: The per-API-key ceiling was exceeded.
+  - code: API_TOKEN_LIMIT_EXCEEDED
+    meaning: The per-token ceiling was exceeded.
+  - code: API_TOKEN_DB_LIMIT_EXCEEDED
+    meaning: >-
+      The token exhausted its allotted database query response time. No quota figure is
+      published for this limit.
+  - code: API_TOO_MANY_CARDS_REQUESTED
+    meaning: >-
+      A single request asked for too many objects, canonically a board's cards with
+      actions=all&filter=all.
+limit_count: 3
 limits:
   - name: Per API key
     scope: api_key
     metric: requests_per_10s
     limit: 300
     timeFrame: 10 seconds
+    documented: true
   - name: Per token
     scope: token
     metric: requests_per_10s
     limit: 100
     timeFrame: 10 seconds
-  - name: Search
-    scope: key+token
-    metric: requests_per_minute
-    limit: 50
-    timeFrame: minute
-  - name: Webhooks
-    scope: callback
-    metric: events_per_minute
-    limit: 600
-    timeFrame: minute
+    documented: true
+  - name: /1/members route
+    scope: route
+    path: /1/members
+    metric: requests_per_900s
+    limit: 100
+    timeFrame: 900 seconds
+    documented: true
+    note: >-
+      A request to /1/members counts against this route limit AND the key limit AND the
+      token limit. Requests to nested resources under it (for example /1/members/me/boards)
+      do not count against the route limit.
+  - name: /1/membersSearch route
+    scope: route
+    path: /1/membersSearch
+    metric: unspecified
+    limit: null
+    timeFrame: null
+    documented: false
+    note: >-
+      Trello names this as one of three routes with "much stricter" special limits but
+      publishes no figure. Recorded as an honest unknown rather than a guess.
+  - name: /1/search route
+    scope: route
+    path: /1/search
+    metric: unspecified
+    limit: null
+    timeFrame: null
+    documented: false
+    note: >-
+      Named as a special-limit route with no published figure. An earlier version of this
+      artifact asserted 50 requests per minute sourced to the pricing page; that number is
+      not stated in Trello's rate-limit documentation and has been withdrawn.
+escalation:
+  rule: >-
+    If more than 200 429 responses are returned for an API key within a 10-second window,
+    Trello returns 429 for every remaining request on that key for the rest of the window.
+  implication: Retry storms are actively penalised — back off rather than retry hard.
+other_limits:
+  - name: Response size limits
+    description: >-
+      Limits exist to stop a single request returning too many Trello objects, surfaced as
+      API_TOO_MANY_CARDS_REQUESTED. Break large nested-resource requests into smaller calls.
+  - name: Gateway timeout
+    description: GET requests that exceed Trello's 30-second processing limit return 504.
+  - name: Per-object limits
+    description: >-
+      Separate from rate limiting, Trello caps how many cards, checklists, stickers and
+      similar objects a board or card may hold. Values vary by board and account and must
+      be read at runtime via ?fields=limits.
+    docs: https://developer.atlassian.com/cloud/trello/guides/rest-api/limits/

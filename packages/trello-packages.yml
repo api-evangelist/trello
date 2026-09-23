@@ -1,0 +1,144 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org, rubygems.org, api.nuget.org, search.maven.org,
+  repo.packagist.org, crates.io, proxy.golang.org, and
+  https://developer.atlassian.com/cloud/trello/guides/client-js/getting-started-with-client-js/
+description: >-
+  Client libraries for the Trello REST API. THE HEADLINE FINDING IS THE ABSENCE:
+  Atlassian publishes exactly one first-party Trello client library — client.js, a
+  browser-only jQuery-dependent wrapper served from the API host itself at
+  https://api.trello.com/1/client.js. There is no first-party Trello SDK on npm,
+  PyPI, RubyGems, NuGet, Maven Central, Packagist, crates.io or the Go module proxy.
+  Every server-side language binding below is community-maintained, and most of them
+  have not shipped a release since before Trello's OAuth 2.0 3LO launch (15 September
+  2026) — so none of them speaks the current authorization system.
+summary:
+  official_count: 2
+  community_count: 10
+  official_registry_published: 0
+  note: >-
+    The single official library is CDN/host-distributed, not registry-distributed,
+    and it is unversioned at its URL — a consumer cannot pin it or tell what they
+    are getting.
+packages:
+  - name: client.js
+    language: javascript
+    official: true
+    registry: cdn
+    url: https://api.trello.com/1/client.js
+    docs: https://developer.atlassian.com/cloud/trello/guides/client-js/client-js-reference/
+    getting_started: https://developer.atlassian.com/cloud/trello/guides/client-js/getting-started-with-client-js/
+    install: '<script src="https://api.trello.com/1/client.js?key={APIKey}"></script>'
+    version: null
+    published: null
+    note: >-
+      Checked 2026-09-17, HTTP 200, 5,891 bytes. First-party Atlassian library, but the
+      distribution URL carries no version segment and no CDN metadata endpoint exists
+      for it, so the version floats to whatever Trello is serving. That unpinnability
+      is itself the finding: a consumer has no way to know which build they loaded.
+      Requires jQuery 3.x as a peer dependency. Browser-only — there is no server-side
+      first-party equivalent.
+  - name: power-up.js (Power-Up client library)
+    language: javascript
+    official: true
+    registry: cdn
+    url: https://p.trellocdn.com/power-up.min.js
+    docs: https://developer.atlassian.com/cloud/trello/power-ups/client-library/
+    install: '<script src="https://p.trellocdn.com/power-up.min.js"></script>'
+    version: null
+    published: null
+    note: >-
+      Checked 2026-09-17, HTTP 200, 353,679 bytes minified (862,654 unminified at
+      /power-up.js). First-party iframe-bridge library for Trello Power-Ups, not a REST
+      client. Same unpinned-CDN problem as client.js — no version in the URL, no
+      registry metadata endpoint, so version and publish date are unknowable.
+  - name: trello
+    language: javascript
+    official: false
+    registry: npm
+    url: https://www.npmjs.com/package/trello
+    repository: https://github.com/norberteder/trello
+    version: 0.11.0
+    published: '2021-11-10'
+    note: Community wrapper. Last release predates OAuth 2.0 3LO by nearly five years.
+  - name: trello.js
+    language: typescript
+    official: false
+    registry: npm
+    url: https://www.npmjs.com/package/trello.js
+    repository: https://github.com/MrRefactoring/trello.js
+    version: 2.2.0
+    published: '2026-08-20'
+    note: >-
+      The most currently maintained community binding found. Type-safe, ESM-only,
+      Zod-validated. Still predates the 15 September 2026 OAuth 2.0 3LO GA by four weeks.
+  - name: node-trello
+    language: javascript
+    official: false
+    registry: npm
+    url: https://www.npmjs.com/package/node-trello
+    repository: https://github.com/adunkman/node-trello
+    version: 1.3.0
+    published: '2017-08-22'
+    note: Community wrapper, effectively abandoned - no release in nine years.
+  - name: trello-powerup
+    language: typescript
+    official: false
+    registry: npm
+    url: https://www.npmjs.com/package/trello-powerup
+    version: 1.0.1
+    published: '2025-01-10'
+    note: Community TypeScript typings/SDK for building Power-Ups. Not Atlassian-published.
+  - name: py-trello
+    language: python
+    official: false
+    registry: pypi
+    url: https://pypi.org/project/py-trello/
+    version: 0.20.1
+    published: '2024-06-11'
+    note: The de-facto Python binding. Community-maintained; no OAuth 2.0 3LO support.
+  - name: ruby-trello
+    language: ruby
+    official: false
+    registry: rubygems
+    url: https://rubygems.org/gems/ruby-trello
+    repository: https://github.com/jeremytregunna/ruby-trello
+    version: 4.2.0
+    published: '2023-12-21'
+    note: Community Ruby binding.
+  - name: TrelloDotNet
+    language: dotnet
+    official: false
+    registry: nuget
+    url: https://www.nuget.org/packages/TrelloDotNet
+    version: 2.8.4
+    published: '2026-09-16'
+    note: >-
+      The single most actively maintained community binding in any language - released
+      the day before this probe, and one day after Trello's OAuth 2.0 3LO GA.
+  - name: com.julienvey.trello:trello-java-wrapper
+    language: java
+    official: false
+    registry: maven
+    url: https://search.maven.org/artifact/com.julienvey.trello/trello-java-wrapper
+    version: 0.3.2
+    published: '2015-09-30'
+    note: Only Java binding on Maven Central with any traction. Eleven years stale.
+  - name: github.com/adlio/trello
+    language: go
+    official: false
+    registry: gomodules
+    url: https://pkg.go.dev/github.com/adlio/trello
+    repository: https://github.com/adlio/trello
+    version: v1.12.0
+    published: '2024-04-15'
+    note: Community Go binding.
+  - name: stevenmaguire/trello-php
+    language: php
+    official: false
+    registry: packagist
+    url: https://packagist.org/packages/stevenmaguire/trello-php
+    version: 1.0.0
+    published: '2022-10-27'
+    note: Community PHP binding.

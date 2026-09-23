@@ -1,0 +1,225 @@
+generated: '2026-09-17'
+method: derived
+source: >-
+  openapi/trello-rest-api-openapi.json (components.schemas, 63 schemas) plus
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/
+description: >-
+  Entity-relationship graph for the Trello domain, derived from the id-reference fields and
+  $ref links in Trello's own OpenAPI. Trello's model is a strict containment tree
+  (Enterprise > Organization/Workspace > Board > List > Card > Checklist > CheckItem) with
+  membership, labels, custom fields and plugins hanging off it as cross-cutting joins.
+identifiers:
+  scheme: 24-character lowercase hexadecimal MongoDB ObjectId
+  schema: TrelloID
+  pattern: '^[0-9a-fA-F]{24}$'
+  prefixed: false
+  note: >-
+    Trello uses NO type prefix on its ids — unlike Stripe's cus_/ch_, a Trello id carries no
+    indication of what kind of object it points at. An agent holding a bare id cannot tell a
+    board from a card without calling the API. The one exception is Card.idShort, a
+    per-board integer used in the human-facing short URL.
+entities:
+  - name: Enterprise
+    schema: Enterprise
+    relationships:
+      - has_many: Organization
+        via: idOrganizations
+      - has_many: Member
+        via: idAdmins
+        role: admin
+      - has_many: EnterpriseAuditLog
+        via: idAction
+  - name: Organization
+    aka: Workspace
+    schema: Organization
+    relationships:
+      - belongs_to: Enterprise
+        via: idEnterprise
+      - has_many: Board
+        via: idBoards
+      - has_many: Membership
+        via: memberships
+      - has_one: OrganizationPrefs
+        via: prefs
+  - name: Board
+    schema: Board
+    relationships:
+      - belongs_to: Organization
+        via: idOrganization
+      - belongs_to: Member
+        via: idMemberCreator
+        role: creator
+      - has_many: TrelloList
+        via: TrelloList.idBoard
+      - has_many: Card
+        via: Card.idBoard
+      - has_many: Label
+        via: Label.idBoard
+      - has_many: Tag
+        via: idTags
+      - has_one: Prefs
+        via: prefs
+      - has_one: Limits
+        via: limits
+      - has_one: BoardBackground
+        via: prefs.background
+  - name: TrelloList
+    aka: List
+    schema: TrelloList
+    relationships:
+      - belongs_to: Board
+        via: idBoard
+      - has_many: Card
+        via: Card.idList
+      - has_one: Limits
+        via: limits
+  - name: Card
+    schema: Card
+    relationships:
+      - belongs_to: Board
+        via: idBoard
+      - belongs_to: TrelloList
+        via: idList
+      - has_many: Checklist
+        via: idChecklists
+      - has_many: Label
+        via: idLabels
+      - has_many: Member
+        via: idMembers
+      - has_many: Member
+        via: idMembersVoted
+        role: voter
+      - has_one: Attachment
+        via: idAttachmentCover
+        role: cover
+      - has_many: CustomFieldItems
+        via: CustomFieldItems.idModel
+      - has_one: Limits
+        via: limits
+  - name: Checklist
+    schema: Checklist
+    relationships:
+      - has_many: CheckItem
+        via: CheckItem.idChecklist
+  - name: CheckItem
+    schema: CheckItem
+    relationships:
+      - belongs_to: Checklist
+        via: idChecklist
+  - name: Label
+    schema: Label
+    relationships:
+      - belongs_to: Board
+        via: idBoard
+      - has_one: Color
+        via: color
+  - name: Member
+    schema: Member
+    relationships:
+      - belongs_to: Enterprise
+        via: idEnterprise
+      - has_many: Board
+        via: idBoards
+      - has_many: Organization
+        via: idOrganizations
+      - has_many: Enterprise
+        via: idEnterprisesAdmin
+        role: admin
+      - belongs_to: Member
+        via: idMemberReferrer
+        role: referrer
+      - has_one: MemberPrefs
+        via: prefs
+      - has_many: BoardStars
+        via: BoardStars.idBoard
+      - has_many: SavedSearch
+      - has_many: CustomEmoji
+      - has_many: CustomSticker
+  - name: Membership
+    schema: Membership
+    note: Join entity binding a Member to a Board or Organization with a role.
+  - name: Action
+    schema: Action
+    note: >-
+      The activity/event record. Every mutation in Trello produces an Action, and Actions are
+      what webhooks deliver and what the Notifications surface reads.
+    relationships:
+      - belongs_to: Member
+        via: idMemberCreator
+  - name: Notification
+    schema: Notification
+    relationships:
+      - belongs_to: Action
+        via: idAction
+      - belongs_to: Member
+        via: idMemberCreator
+      - has_one: Card
+        via: card
+      - has_one: Board
+        via: board
+      - has_one: NotificationChannelSettings
+  - name: CustomField
+    schema: CustomField
+    relationships:
+      - belongs_to_polymorphic: idModel
+        note: Points at the Board the field is defined on.
+      - has_many: CustomFieldItems
+  - name: CustomFieldItems
+    schema: CustomFieldItems
+    relationships:
+      - belongs_to: CustomField
+        via: idCustomField
+      - belongs_to_polymorphic: idModel
+        note: Points at the Card carrying the value.
+      - has_one: customFieldItemValue
+        via: value
+  - name: Attachment
+    schema: Attachment
+    relationships:
+      - belongs_to: Member
+        via: idMember
+      - has_one: Color
+        via: edgeColor
+  - name: Plugin
+    aka: Power-Up
+    schema: Plugin
+    relationships:
+      - has_many: PluginListing
+      - has_many: PluginData
+  - name: PluginData
+    schema: PluginData
+    relationships:
+      - belongs_to: Plugin
+        via: idPlugin
+      - belongs_to_polymorphic: idModel
+        note: Scoped storage attached to a board, card, member or organization.
+  - name: Webhook
+    schema: Webhook
+    relationships:
+      - belongs_to_polymorphic: idModel
+        note: >-
+          The single most important polymorphic reference in the API — a webhook watches
+          exactly one model of any type, and fires for every action on it. There is no
+          per-event-type filter.
+      - belongs_to: Token
+  - name: Token
+    schema: Token
+    relationships:
+      - belongs_to: Member
+        via: idMember
+      - has_many: TokenPermission
+        via: permissions
+      - has_many: Webhook
+  - name: Limits
+    schema: Limits
+    note: >-
+      Per-object quota envelope returned on Board, TrelloList and Card via ?fields=limits.
+      Values vary by board and account, so they must be read at runtime rather than assumed.
+polymorphic_references:
+  - field: idModel
+    used_by: [Webhook, CustomField, CustomFieldItems, PluginData, TokenPermission]
+    note: >-
+      Trello's central untyped foreign key. Because ids carry no type prefix, an idModel is
+      opaque — a consumer must already know, out of band, what kind of object it points at.
+      This is the single biggest machine-readability weakness in the Trello data model.
+render: null

@@ -1,0 +1,101 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.atlassian.com/cloud/trello/changelog/,
+  https://trello.status.atlassian.com/,
+  https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/,
+  https://www.atlassian.com/legal/cloud-terms-of-service
+description: >-
+  Versioning, deprecation and operational-status posture for the Trello REST API.
+versioning:
+  style: URI path
+  current_version: '1'
+  base_url: https://api.trello.com/1
+  since: 2011
+  policy: >-
+    Trello has shipped exactly one API version. Rather than cutting v2, breaking changes
+    are announced individually as dated "Deprecation Notice" entries on the developer
+    changelog, each with a named removal date.
+  breaking_change_notice: >-
+    Observed lead time on the four most recent deprecation notices ranges from roughly
+    30 days (GET /application/:id/compliance/memberPrivacy, announced 6 August 2025 for
+    removal after 8 September 2025) to roughly 90 days (SCIM v2 endpoints, announced
+    15 September 2025 for removal on or after 10 December 2025). There is no published
+    minimum-notice commitment.
+deprecation:
+  policy_published: true
+  policy_url: https://developer.atlassian.com/cloud/trello/changelog/
+  mechanism: dated Deprecation Notice entries on the developer changelog
+  rfc8594_headers:
+    sunset: false
+    deprecation: false
+    note: >-
+      Trello does NOT emit RFC 8594 Sunset or Deprecation response headers. A deprecation
+      is only discoverable by a human reading the changelog — an agent calling a doomed
+      endpoint gets no runtime warning until the endpoint 404s.
+  announced:
+    - endpoint: /scim/v2/users
+      kind: removal
+      announced: '2025-09-15'
+      effective: '2025-12-10'
+      replacement: 'GET /1/enterprises/{id}/members/query, GET /1/members/{id}'
+      source: https://developer.atlassian.com/cloud/trello/changelog/
+    - endpoint: /scim/v2/groups
+      kind: removal
+      announced: '2025-09-15'
+      effective: '2025-12-10'
+      replacement: 'GET /1/enterprises/{id}/organizations, GET /1/boards/{id}/memberships'
+      source: https://developer.atlassian.com/cloud/trello/changelog/
+    - endpoint: 'GET /1/application/{id}/compliance/memberPrivacy'
+      kind: removal
+      announced: '2025-08-06'
+      effective: '2025-09-08'
+      replacement: 'GET /1/plugin/{id}/compliance/memberPrivacy'
+      source: https://developer.atlassian.com/cloud/trello/changelog/
+    - endpoint: 'PUT /1/board/{id}/myPrefs/showListGuide'
+      kind: removal
+      announced: '2025-06-26'
+      effective: '2025-07-26'
+      replacement: none — the underlying board preference is no longer used
+      source: https://developer.atlassian.com/cloud/trello/changelog/
+    - endpoint: Trello Auth token authorization (1/authorize + OAuth 1.0a)
+      kind: superseded
+      announced: '2025-04-16'
+      effective: null
+      replacement: OAuth 2.0 3LO, GA 2026-09-15
+      note: >-
+        Announced as a replacement for "Trello's current authorization mechanism", but no
+        removal date has been published and both systems remain live. Existing apps may
+        transition when ready.
+      source: https://developer.atlassian.com/cloud/trello/changelog/
+  deprecated_in_spec:
+    count: 0
+    note: >-
+      No operation in openapi/trello-rest-api-openapi.json carries deprecated: true. The
+      four removed endpoints above were dropped from the spec rather than flagged in it,
+      so the machine contract never signalled the deprecation to a generated client.
+status_page:
+  url: https://trello.status.atlassian.com/
+  provider: Atlassian Statuspage
+  status: 200
+  probed: '2026-09-17'
+  scope: Trello-specific status page, separate from https://status.atlassian.com/
+  machine_readable:
+    - https://trello.status.atlassian.com/api/v2/status.json
+    - https://trello.status.atlassian.com/api/v2/summary.json
+    - https://trello.status.atlassian.com/history.rss
+  note: >-
+    Statuspage exposes a standard v2 JSON API and RSS/Atom feeds at these paths, which is
+    the one piece of Trello operational telemetry an agent can poll without credentials.
+sla:
+  published: false
+  note: >-
+    No per-plan uptime SLA is published on the Trello pricing page or the developer site.
+    Enterprise customers are covered by the Atlassian Cloud Terms of Service; Atlassian
+    publishes SLAs for some Cloud Enterprise products, but none specific to Trello was
+    found.
+  terms: https://www.atlassian.com/legal/cloud-terms-of-service
+support:
+  developer_community: https://community.developer.atlassian.com/c/trello/
+  help_center: https://support.atlassian.com/trello/
+  developer_support: https://developer.atlassian.com/support

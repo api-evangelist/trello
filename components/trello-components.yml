@@ -1,0 +1,75 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.atlassian.com/cloud/trello/guides/components/board-tile-component/,
+  https://developer.atlassian.com/cloud/trello/guides/components/card-components/,
+  https://developer.atlassian.com/cloud/trello/guides/embedding/embedding-boards/,
+  https://developer.atlassian.com/cloud/trello/guides/embedding/embedding-cards/,
+  https://developer.atlassian.com/cloud/trello/power-ups/client-library/,
+  https://developer.atlassian.com/cloud/trello/guides/client-js/client-js-reference/
+description: >-
+  Trello's client-side surface is unusually large for a project-management API, and it is
+  distinct from the REST SDK story: two loader libraries served from Atlassian CDNs, a set
+  of drop-in embed components for putting live Trello objects into someone else's page, and
+  a full iframe-bridge framework (Power-Ups) for putting someone else's UI into Trello.
+  All of it is first-party and all of it is browser-only.
+families:
+  - name: Embed components
+    docs: https://developer.atlassian.com/cloud/trello/guides/components/board-tile-component/
+    description: >-
+      Drop-in components that render a live Trello object inside a third-party page. These
+      are the closest thing Trello has to a hosted UI element library.
+    components:
+      - name: Board Tile Component
+        docs: https://developer.atlassian.com/cloud/trello/guides/components/board-tile-component/
+        renders: A card-shaped tile representing a Trello board, with its background and title.
+      - name: Card Component
+        docs: https://developer.atlassian.com/cloud/trello/guides/components/card-components/
+        renders: A live rendering of a single Trello card.
+  - name: Embedding
+    docs: https://developer.atlassian.com/cloud/trello/guides/embedding/embedding-boards/
+    description: >-
+      Documented markup for embedding whole Trello boards and individual cards into an
+      external site, including oEmbed-style URL handling.
+    components:
+      - name: Embedding Boards
+        docs: https://developer.atlassian.com/cloud/trello/guides/embedding/embedding-boards/
+      - name: Embedding Cards
+        docs: https://developer.atlassian.com/cloud/trello/guides/embedding/embedding-cards/
+  - name: Power-Ups framework
+    docs: https://developer.atlassian.com/cloud/trello/power-ups/
+    description: >-
+      The inverse direction — a sandboxed iframe framework that lets a third party render
+      its own UI inside the Trello board: board buttons, card buttons, card badges, card
+      detail sections, card back sections, custom fields and attachment sections. The
+      client library brokers every interaction between the iframe and the Trello host page
+      (t.get/t.set for per-scope storage, t.authorize for auth, t.popup/t.boardBar for
+      chrome).
+    loader:
+      url: https://p.trellocdn.com/power-up.min.js
+      unminified: https://p.trellocdn.com/power-up.js
+      size_bytes: 353679
+      probed: '2026-09-17'
+      status: 200
+      versioned: false
+      note: >-
+        The loader URL carries no version segment, so a Power-Up always loads whatever
+        Trello is currently serving. Atlassian announced a rendering update to these
+        components on 18 November 2025 and offered early access for testing, which is the
+        only change-management signal available for an unpinnable dependency.
+    reference: https://developer.atlassian.com/cloud/trello/power-ups/client-library/
+  - name: client.js
+    docs: https://developer.atlassian.com/cloud/trello/guides/client-js/getting-started-with-client-js/
+    reference: https://developer.atlassian.com/cloud/trello/guides/client-js/client-js-reference/
+    description: >-
+      A browser wrapper around the REST API that also carries the authorization flow. Loaded
+      from the API host with the API key in the query string; exposes a global Trello object
+      with Trello.authorize(), Trello.get/post/put/delete helpers.
+    loader:
+      url: 'https://api.trello.com/1/client.js?key={APIKey}'
+      size_bytes: 5891
+      probed: '2026-09-17'
+      status: 200
+      versioned: false
+      dependencies:
+        - jQuery 3.x (documented as a required peer script tag)
