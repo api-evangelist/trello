@@ -99,8 +99,6 @@ apis:
     url: openapi/trello-actions-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-boards-api
   name: trello Boards API
   description: >-
@@ -115,8 +113,6 @@ apis:
     url: openapi/trello-boards-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-cards-api
   name: trello Cards API
   description: >-
@@ -131,8 +127,6 @@ apis:
     url: openapi/trello-cards-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-checklists-api
   name: trello Checklists API
   description: >-
@@ -146,8 +140,6 @@ apis:
     url: openapi/trello-checklists-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-labels-api
   name: trello Labels API
   description: Operations for creating, retrieving, updating, and deleting labels on boards and cards.
@@ -160,8 +152,6 @@ apis:
     url: openapi/trello-labels-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-lists-api
   name: trello Lists API
   description: Operations for creating, retrieving, updating, and archiving lists on boards.
@@ -176,8 +166,6 @@ apis:
     url: openapi/trello-lists-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-members-api
   name: trello Members API
   description: >-
@@ -191,8 +179,6 @@ apis:
     url: openapi/trello-members-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-notifications-api
   name: trello Notifications API
   description: >-
@@ -209,8 +195,6 @@ apis:
     url: openapi/trello-notifications-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-organizations-api
   name: trello Organizations API
   description: >-
@@ -227,8 +211,6 @@ apis:
     url: openapi/trello-organizations-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-plugins-api
   name: trello Plugins API
   description: >-
@@ -243,8 +225,6 @@ apis:
     url: openapi/trello-plugins-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-search-api
   name: trello Search API
   description: >-
@@ -258,8 +238,6 @@ apis:
     url: openapi/trello-search-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-tokens-api
   name: trello Tokens API
   description: Operations for retrieving and deleting API tokens and their associated webhooks.
@@ -272,8 +250,6 @@ apis:
     url: openapi/trello-tokens-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-webhooks-api
   name: trello Webhooks API
   description: >-
@@ -290,8 +266,6 @@ apis:
     url: openapi/trello-webhooks-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-custom-fields-api
   name: Trello Custom Fields API
   description: >-
@@ -306,8 +280,6 @@ apis:
     url: openapi/trello-custom-fields-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
-  - type: GraphQL
-    url: graphql/trello-graphql.md
 - aid: trello:trello-rest-api
   name: Trello REST API
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
