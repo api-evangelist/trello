@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Checklists API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Checklists API
+  version: '1.0'
+  description: 'Operations tagged Checklists across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Checklists
   description: Operations for creating, retrieving, updating, and deleting checklists and their check items on cards.
@@ -58,6 +51,12 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /checklists/{id}:
     get:
       operationId: getChecklist
@@ -111,6 +110,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist not found.
+      security:
+      - apiKey: []
+        apiToken: []
     put:
       operationId: updateChecklist
       summary: Update a Checklist
@@ -140,6 +142,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: deleteChecklist
       summary: Delete a Checklist
@@ -155,6 +160,19 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: id
+      in: path
+      description: ID of a checklist.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /checklists/{id}/checkItems:
     get:
       operationId: getChecklistCheckItems
@@ -192,6 +210,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist not found.
+      security:
+      - apiKey: []
+        apiToken: []
     post:
       operationId: createCheckItem
       summary: Create a Check Item on a Checklist
@@ -244,6 +265,19 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: id
+      in: path
+      description: ID of a checklist.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /checklists/{id}/checkItems/{idCheckItem}:
     get:
       operationId: getCheckItem
@@ -270,6 +304,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist or check item not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: deleteCheckItem
       summary: Delete a Check Item from a Checklist
@@ -291,32 +328,137 @@ paths:
           description: Unauthorized.
         '404':
           description: Checklist or check item not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: id
+      in: path
+      description: ID of a checklist.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    - name: idCheckItem
+      in: path
+      description: ID of the check item to retrieve.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /checklists/{id}/{field}:
+    parameters:
+    - name: id
+      in: path
+      description: ID of a checklist.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    - name: field
+      in: path
+      description: Field to update.
+      required: true
+      schema:
+        type: string
+        enum:
+        - name
+        - pos
+    get:
+      tags:
+      - Checklists
+      summary: Get field on a Checklist
+      description: ''
+      operationId: get-checklists-id-field
+      security:
+      - OAuth2:
+        - read:board:trello
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+      - Checklists
+      summary: Update field on a Checklist
+      description: ''
+      operationId: put-checklists-id-field
+      security:
+      - OAuth2:
+        - read:board:trello
+        - write:board:trello
+      parameters:
+      - name: value
+        in: query
+        description: The value to change the checklist name to. Should be a string of length 1 to 16384.
+        required: true
+        schema:
+          oneOf:
+          - $ref: '#/components/schemas/posStringOrNumber'
+          - $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /checklists/{id}/board:
+    get:
+      tags:
+      - Checklists
+      summary: Get the Board the Checklist is on
+      description: ''
+      operationId: get-checklists-id-board
+      security:
+      - OAuth2:
+        - read:board:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of a checklist.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of board [fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - name
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /checklists/{id}/cards:
+    get:
+      tags:
+      - Checklists
+      summary: Get the Card a Checklist is on
+      description: ''
+      operationId: get-checklists-id-cards
+      security:
+      - OAuth2:
+        - read:board:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of a checklist.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
 components:
   schemas:
-    Checklist:
-      type: object
-      description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the checklist.
-        name:
-          type: string
-          description: The name of the checklist.
-        idBoard:
-          type: string
-          description: The ID of the board the checklist belongs to.
-        idCard:
-          type: string
-          description: The ID of the card the checklist is on.
-        pos:
-          type: number
-          description: The position of the checklist on the card.
-        checkItems:
-          type: array
-          description: The check items in the checklist.
-          items:
-            $ref: '#/components/schemas/CheckItem'
     CheckItem:
       type: object
       description: Represents a single item in a checklist that can be checked or unchecked.
@@ -346,6 +488,43 @@ components:
         idMember:
           type: string
           description: The ID of the member assigned to the check item.
+    Checklist:
+      type: object
+      description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the checklist.
+        name:
+          type: string
+          description: The name of the checklist.
+        idBoard:
+          type: string
+          description: The ID of the board the checklist belongs to.
+        idCard:
+          type: string
+          description: The ID of the card the checklist is on.
+        pos:
+          type: number
+          description: The position of the checklist on the card.
+        checkItems:
+          type: array
+          description: The check items in the checklist.
+          items:
+            $ref: '#/components/schemas/CheckItem'
+    posStringOrNumber:
+      oneOf:
+      - type: string
+        enum:
+        - top
+        - bottom
+      - type: number
+        format: float
+        example: 1293.5
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
   parameters:
     idParam:
       name: id
@@ -365,6 +544,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

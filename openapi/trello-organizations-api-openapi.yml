@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Organizations API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Organizations API
+  version: '1.0'
+  description: 'Operations tagged Organizations across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Organizations
   description: Operations for creating, retrieving, updating, and deleting Trello workspaces (organizations), including managing workspace members and settings.
@@ -61,6 +54,12 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /organizations/{id}:
     get:
       operationId: getOrganization
@@ -81,6 +80,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization not found.
+      security:
+      - apiKey: []
+        apiToken: []
     put:
       operationId: updateOrganization
       summary: Update an Organization
@@ -122,6 +124,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: deleteOrganization
       summary: Delete an Organization
@@ -137,6 +142,19 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: id
+      in: path
+      description: The ID or name of the Organization
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /organizations/{id}/boards:
     get:
       operationId: getOrganizationBoards
@@ -170,6 +188,12 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /organizations/{id}/members:
     get:
       operationId: getOrganizationMembers
@@ -192,6 +216,56 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    put:
+      tags:
+      - Organizations
+      summary: Update an Organization's Members
+      description: ''
+      operationId: put-organizations-id-members
+      security:
+      - OAuth2:
+        - write:organization:membership:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: email
+        in: query
+        description: An email address
+        required: true
+        schema:
+          type: string
+          format: email
+      - name: fullName
+        in: query
+        description: Name for the member, at least 1 character not beginning or ending with a space
+        required: true
+        schema:
+          type: string
+          minLength: 1
+      - name: type
+        in: query
+        description: 'One of: `admin`, `normal`'
+        required: false
+        schema:
+          type: string
+          default: normal
+          enum:
+          - admin
+          - normal
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /organizations/{id}/members/{idMember}:
     put:
       operationId: updateOrganizationMember
@@ -223,6 +297,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization or member not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: removeOrganizationMember
       summary: Remove a Member from an Organization
@@ -244,80 +321,535 @@ paths:
           description: Unauthorized.
         '404':
           description: Organization or member not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /organizations/{id}/{field}:
+    get:
+      tags:
+      - Organizations
+      summary: Get field on Organization
+      description: ''
+      operationId: get-organizations-id-field
+      security:
+      - OAuth2:
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: field
+        in: path
+        description: An organization [field](/cloud/trello/guides/rest-api/object-definitions/)
+        required: true
+        schema:
+          $ref: '#/components/schemas/OrganizationFields'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization_2'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/actions:
+    get:
+      tags:
+      - Organizations
+      summary: Get Actions for Organization
+      description: List the actions on a Workspace
+      operationId: get-organizations-id-actions
+      security:
+      - OAuth2:
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Action'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/exports:
+    parameters:
+    - name: id
+      in: path
+      description: The ID or name of the Workspace
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    post:
+      tags:
+      - Organizations
+      summary: Create Export for Organizations
+      description: Kick off CSV export for an organization
+      operationId: post-organizations-id-exports
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:trello
+      parameters:
+      - name: attachments
+        in: query
+        description: Whether the CSV should include attachments or not.
+        required: false
+        schema:
+          type: boolean
+          default: true
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Export'
+    get:
+      tags:
+      - Organizations
+      summary: Retrieve Organization's Exports
+      description: Retrieve the exports that exist for the given organization
+      operationId: get-organizations-id-exports
+      security:
+      - OAuth2:
+        - read:organization:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Export'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/memberships:
+    get:
+      tags:
+      - Organizations
+      summary: Get Memberships of an Organization
+      description: List the memberships of a Workspace
+      operationId: get-organizations-id-memberships
+      security:
+      - OAuth2:
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: filter
+        in: query
+        description: '`all` or a comma-separated list of: `active`, `admin`, `deactivated`, `me`, `normal`'
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          default: all
+          enum:
+          - all
+          - active
+          - admin
+          - deactivated
+          - me
+          - normal
+      - name: member
+        in: query
+        description: Whether to include the Member objects with the Memberships
+        required: false
+        schema:
+          type: boolean
+          default: false
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/Memberships'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/memberships/{idMembership}:
+    get:
+      tags:
+      - Organizations
+      summary: Get a Membership of an Organization
+      description: Get a single Membership for an Organization
+      operationId: get-organizations-id-memberships-idmembership
+      security:
+      - OAuth2:
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMembership
+        in: path
+        description: The ID of the membership to load
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: member
+        in: query
+        description: Whether to include the Member object in the response
+        required: false
+        schema:
+          type: boolean
+          default: false
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Memberships'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/pluginData:
+    get:
+      tags:
+      - Organizations
+      summary: Get the pluginData Scoped to Organization
+      description: Get organization scoped pluginData on this Workspace
+      operationId: get-organizations-id-plugindata
+      security:
+      - OAuth2:
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/PluginData'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/tags:
+    parameters:
+    - name: id
+      in: path
+      description: The ID or name of the Organization
+      required: true
+      schema:
+        oneOf:
+        - type: string
+        - $ref: '#/components/schemas/TrelloID'
+    get:
+      tags:
+      - Organizations
+      summary: Get Tags of an Organization
+      description: List the organization's collections
+      operationId: get-organizations-id-tags
+      security:
+      - OAuth2:
+        - read:organization:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/Tag'
+    post:
+      tags:
+      - Organizations
+      summary: Create a Tag in Organization
+      description: Create a Tag in an Organization
+      operationId: post-organizations-id-tags
+      security:
+      - OAuth2:
+        - write:organization:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Tag'
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/members/{idMember}/deactivated:
+    put:
+      tags:
+      - Organizations
+      summary: Deactivate or reactivate a member of an Organization
+      description: Deactivate or reactivate a member of a Workspace
+      operationId: put-organizations-id-members-idmember-deactivated
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:membership:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: The ID or username of the member to update
+        required: true
+        schema:
+          oneOf:
+          - $ref: '#/components/schemas/TrelloID'
+          - type: string
+      - name: value
+        in: query
+        description: ''
+        required: true
+        schema:
+          type: boolean
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/logo:
+    post:
+      tags:
+      - Organizations
+      summary: Update logo for an Organization
+      description: Set the logo image for a Workspace
+      operationId: post-organizations-id-logo
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the Workspace
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: file
+        in: query
+        description: Image file for the logo
+        required: false
+        schema:
+          type: string
+          format: binary
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Organization_2'
+    delete:
+      tags:
+      - Organizations
+      summary: Delete Logo for Organization
+      description: Delete a the logo from a Workspace
+      operationId: delete-organizations-id-logo
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/members/{idMember}/all:
+    delete:
+      tags:
+      - Organizations
+      summary: Remove a Member from an Organization and all Organization Boards
+      description: Remove a member from a Workspace and from all Workspace boards
+      operationId: organizations-id-members-idmember-all
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:membership:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: The ID of the member to remove from the Workspace
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/prefs/associatedDomain:
+    delete:
+      tags:
+      - Organizations
+      summary: Remove the associated Google Apps domain from a Workspace
+      operationId: delete-organizations-id-prefs-associateddomain
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+      security:
+      - APIKey: []
+        APIToken: []
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/prefs/orgInviteRestrict:
+    delete:
+      tags:
+      - Organizations
+      summary: Delete the email domain restriction on who can be invited to the Workspace
+      description: Remove the email domain restriction on who can be invited to the Workspace
+      operationId: delete-organizations-id-prefs-orginviterestrict
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/tags/{idTag}:
+    delete:
+      tags:
+      - Organizations
+      summary: Delete an Organization's Tag
+      description: Delete an organization's tag
+      operationId: delete-organizations-id-tags-idtag
+      security:
+      - OAuth2:
+        - write:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          type: string
+      - name: idTag
+        in: path
+        description: The ID of the tag to delete
+        required: true
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /organizations/{id}/newBillableGuests/{idBoard}:
+    get:
+      tags:
+      - Organizations
+      summary: Get Organizations new billable guests
+      description: Used to check whether the given board has new billable guests on it.
+      operationId: get-organizations-id-newbillableguests-idboard
+      security:
+      - OAuth2:
+        - read:board:trello
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idBoard
+        in: path
+        description: The ID of the board to check for new billable guests.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
 components:
   schemas:
-    Membership:
-      type: object
-      description: Represents a membership record linking a member to a board or organization with a specific role.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the membership.
-        idMember:
-          type: string
-          description: The ID of the member.
-        memberType:
-          type: string
-          description: The type of membership.
-          enum:
-          - admin
-          - normal
-          - observer
-        unconfirmed:
-          type: boolean
-          description: Whether the membership is unconfirmed.
-        deactivated:
-          type: boolean
-          description: Whether the membership is deactivated.
-    Member:
-      type: object
-      description: Represents a Trello user who can be a member of boards, organizations, and cards.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the member.
-        username:
-          type: string
-          description: The username of the member.
-        fullName:
-          type: string
-          description: The full name of the member.
-        initials:
-          type: string
-          description: The initials of the member.
-        bio:
-          type: string
-          description: The biography of the member.
-        avatarHash:
-          type: string
-          description: The hash of the member's avatar image.
-        avatarUrl:
-          type: string
-          format: uri
-          description: The URL of the member's avatar image.
-        url:
-          type: string
-          format: uri
-          description: The URL of the member's Trello profile.
-        confirmed:
-          type: boolean
-          description: Whether the member's email has been confirmed.
-        memberType:
-          type: string
-          description: The type of member account.
-        status:
-          type: string
-          description: The activity status of the member.
-        idOrganizations:
-          type: array
-          description: The IDs of organizations the member belongs to.
-          items:
-            type: string
-        idBoards:
-          type: array
-          description: The IDs of boards the member has access to.
-          items:
-            type: string
     Board:
       type: object
       description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
@@ -432,6 +964,78 @@ components:
           type: string
           format: date-time
           description: The date and time the authenticated member last viewed the board.
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the member.
+        username:
+          type: string
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
+        url:
+          type: string
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
+          type: array
+          description: The IDs of organizations the member belongs to.
+          items:
+            type: string
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
     Organization:
       type: object
       description: Represents a Trello organization (workspace), which is a group of members who share boards.
@@ -474,6 +1078,840 @@ components:
           description: The membership records for the organization.
           items:
             $ref: '#/components/schemas/Membership'
+    Export:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5dced8665015383ed5ca248c
+        status:
+          type: object
+          properties:
+            attempts:
+              type: number
+              example: 0
+            finished:
+              type: boolean
+              example: false
+            stage:
+              type: string
+              example: Export_queued
+        startedAt:
+          type: string
+          format: date-time
+          example: '2019-11-15T16:55:02.000Z'
+        size:
+          type:
+          - string
+          - 'null'
+          example: null
+        exportUrl:
+          type:
+          - string
+          - 'null'
+          example: null
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    Memberships:
+      type: object
+      description: ''
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+    Board_2:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the board.
+          example: Trello Platform Changes
+        desc:
+          type: string
+          example: Track changes to Trello's Platform on this board.
+        descData:
+          type: string
+        closed:
+          type: boolean
+          example: false
+        idMemberCreator:
+          $ref: '#/components/schemas/TrelloID'
+        idOrganization:
+          $ref: '#/components/schemas/TrelloID'
+        pinned:
+          type: boolean
+          example: false
+        url:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ/trello-platform-changelog
+        shortUrl:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ
+        prefs:
+          $ref: '#/components/schemas/Prefs'
+        labelNames:
+          type: object
+          properties:
+            green:
+              type: string
+              example: Addition
+            yellow:
+              type: string
+              example: Update
+            orange:
+              type: string
+              example: Deprecation
+            red:
+              type: string
+              example: Deletion
+            purple:
+              type: string
+              example: Power-Ups
+            blue:
+              type: string
+              example: News
+            sky:
+              type: string
+              example: Announcement
+            lime:
+              type: string
+              example: Delight
+            pink:
+              type: string
+              example: REST API
+            black:
+              type: string
+              example: Capabilties
+        limits:
+          type: object
+          $ref: '#/components/schemas/Limits'
+        starred:
+          type: boolean
+        memberships:
+          type: string
+        shortLink:
+          type: string
+        subscribed:
+          type: boolean
+        powerUps:
+          type: string
+        dateLastActivity:
+          type: string
+          format: date
+        dateLastView:
+          type: string
+          format: date
+        idTags:
+          type: string
+        datePluginDisable:
+          type:
+          - string
+          - 'null'
+          format: date
+        creationMethod:
+          type:
+          - string
+          - 'null'
+        ixUpdate:
+          type: integer
+        templateGallery:
+          type:
+          - string
+          - 'null'
+        enterpriseOwned:
+          type: boolean
+    Limits:
+      type: object
+      properties:
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
+    OrganizationFields:
+      type: string
+      enum:
+      - id
+      - name
+    OrganizationPrefs:
+      type: object
+      properties:
+        boardVisibilityRestrict:
+          type: object
+        boardDeleteRestrict:
+          type: object
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
+            enum:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+          - enterprise
+          - domain
+          example: private
+    Member_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        activityBlocked:
+          type: boolean
+          example: false
+        avatarHash:
+          type: string
+          example: fc8faaaee46666a4eb8b626c08933e16
+        avatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/fc8faaaee46666a4eb8b626c08933e16
+        bio:
+          type: string
+          example: 👋 I'm a developer advocate at Trello!
+        bioData:
+          type: object
+          properties:
+            emoji:
+              type: object
+        confirmed:
+          type: boolean
+          example: true
+        fullName:
+          type: string
+          example: Bentley Cook
+        idEnterprise:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idEnterprisesDeactivated:
+          type: array
+          items:
+            type: string
+        idMemberReferrer:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        idPremOrgsAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        initials:
+          type: string
+          example: BC
+        memberType:
+          type: string
+          enum:
+          - normal
+          - ghost
+          example: normal
+        nonPublic:
+          type: object
+          description: 'Profile data with restricted visibility. These fields are visible only to members of the
+
+            same organization. The values here (full name, for example) may differ from the values
+
+            at the top level of the response.
+
+            '
+          properties:
+            fullName:
+              type: string
+              example: Bentley Cook
+            initials:
+              type: string
+              example: BC
+            avatarUrl:
+              type: string
+              format: url
+              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
+              description: A URL that references the non-public avatar for the member
+            avatarHash:
+              type: string
+              example: db2adf80c2e6c26b76e1f10400eb4c45
+        nonPublicAvailable:
+          type: boolean
+          example: false
+          description: Whether the response contains non-public profile data for the member
+        products:
+          type: array
+          items:
+            type: integer
+        url:
+          type: string
+          format: url
+          example: https://trello.com/bentleycook
+        username:
+          type: string
+          example: bentleycook
+        status:
+          type: string
+          enum:
+          - disconnected
+          example: disconnected
+        aaEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+          example: null
+        aaEnrolledDate:
+          type:
+          - string
+          - 'null'
+          example: null
+        aaId:
+          type:
+          - string
+          - 'null'
+          example: null
+        avatarSource:
+          type: string
+          enum:
+          - gravatar
+          - upload
+          example: gravatar
+        email:
+          type: string
+          example: bcook@atlassian.com
+        gravatarHash:
+          type: string
+          example: 0a1e804f6e35a65ae5e1f7ef4c92471c
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idEnterprisesAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        limits:
+          $ref: '#/components/schemas/LimitsObject'
+        loginTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - password
+            - saml
+            example: password
+        marketingOptIn:
+          type: object
+          properties:
+            optedIn:
+              type: boolean
+              example: false
+            date:
+              type: string
+              format: date
+              example: '2018-04-26T17:03:25.155Z'
+        messagesDismissed:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ad-security-features
+            count:
+              type: string
+              example: 4
+            lastDismissed:
+              type: string
+              format: date
+              example: '2019-03-11T20:19:46.809Z'
+            _id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5995d44573d197eada632a32
+        oneTimeMessagesDismissed:
+          type: array
+          items:
+            type: string
+        prefs:
+          $ref: '#/components/schemas/MemberPrefs'
+        trophies:
+          type: array
+          items:
+            type: string
+        uploadedAvatarHash:
+          type: string
+          example: dac3ad49ff117829dd63a79bb2ea3426
+        uploadedAvatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/dac3ad49ff117829dd63a79bb2ea3426
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+        isAaMastered:
+          type: boolean
+          example: false
+        ixUpdate:
+          type: number
+          example: '48427'
+        idBoardsPinned:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrelloID'
+    Prefs:
+      type: object
+      properties:
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - board
+        hideVotes:
+          type: boolean
+        voting:
+          type: string
+          enum:
+          - disabled
+          - enabled
+        comments:
+          type: string
+        invitations:
+          enum:
+          - admins
+          - members
+        selfJoin:
+          type: boolean
+        cardCovers:
+          type: boolean
+        isTemplate:
+          type: boolean
+        cardAging:
+          $ref: '#/components/schemas/CardAging'
+        calendarFeedEnabled:
+          type: boolean
+        background:
+          $ref: '#/components/schemas/TrelloID'
+        backgroundImage:
+          type: string
+          format: uri
+        backgroundImageScaled:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageDescriptor'
+        backgroundTile:
+          type: boolean
+        backgroundBrightness:
+          type: string
+          example: dark
+        backgroundBottomColor:
+          type: string
+          example: '#1e2e00'
+        backgroundTopColor:
+          type: string
+          example: '#ffffff'
+        canBePublic:
+          type: boolean
+        canBeEnterprise:
+          type: boolean
+        canBeOrg:
+          type: boolean
+        canBePrivate:
+          type: boolean
+        canInvite:
+          type: boolean
+    ImageDescriptor:
+      type: object
+      properties:
+        width:
+          description: The width of the image.
+          type: integer
+          example: 100
+        height:
+          description: The height of the image.
+          type: integer
+          example: 64
+        url:
+          description: The URL of the image.
+          format: url
+          type: string
+          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
+    BoardFields:
+      type: string
+      enum:
+      - id
+      - name
+      - desc
+      - descData
+      - closed
+      - idMemberCreator
+      - idOrganization
+      - pinned
+      - url
+      - shortUrl
+      - prefs
+      - labelNames
+      - starred
+      - limits
+      - memberships
+      - enterpriseOwned
+    Action:
+      type: object
+      properties:
+        id:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idMemberCreator:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        data:
+          type: object
+          properties:
+            text:
+              type: string
+              example: Can never go wrong with bowie
+            card:
+              type: object
+              properties:
+                id:
+                  type: string
+                  $ref: '#/components/schemas/TrelloID'
+                name:
+                  type: string
+                  example: Bowie
+                idShort:
+                  type: integer
+                  example: 7
+                shortLink:
+                  type: string
+                  example: 3CsPkqOF
+            board:
+              type: object
+              properties:
+                id:
+                  type: string
+                  $ref: '#/components/schemas/TrelloID'
+                name:
+                  type: string
+                  example: Mullets
+                shortLink:
+                  type: string
+                  example: 3CsPkqOF
+            list:
+              type: object
+              properties:
+                id:
+                  type: string
+                  $ref: '#/components/schemas/TrelloID'
+                name:
+                  type: string
+                  example: Amazing
+        type:
+          type: string
+          example: commentCard
+        date:
+          type: string
+          format: date-time
+          example: '2020-03-09T19:41:51.396Z'
+        limits:
+          type: object
+          properties:
+            reactions:
+              type: object
+              properties:
+                perAction:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: ok
+                    disableAt:
+                      type: number
+                      example: 1000
+                    warnAt:
+                      type: number
+                      example: 900
+                uniquePerAction:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: ok
+                    disableAt:
+                      type: number
+                      example: 1000
+                    warnAt:
+                      type: number
+                      example: 900
+        display:
+          type: object
+          properties:
+            translationKey:
+              type: string
+              example: action_comment_on_card
+            entities:
+              type: object
+              properties:
+                contextOn:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: translatable
+                    translationKey:
+                      type: string
+                      example: action_on
+                    hideIfContext:
+                      type: boolean
+                    idContext:
+                      type: string
+                      $ref: '#/components/schemas/TrelloID'
+                card:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: card
+                    hideIfContext:
+                      type: boolean
+                    id:
+                      type: string
+                      $ref: '#/components/schemas/TrelloID'
+                    shortLink:
+                      type: string
+                      example: 3CsPkqOF
+                    text:
+                      type: string
+                      example: Bowie
+                comment:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: comment
+                    text:
+                      type: string
+                      example: Can never go wrong with bowie
+                memberCreator:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: member
+                    id:
+                      $ref: '#/components/schemas/TrelloID'
+                    username:
+                      type: string
+                      example: bobloblaw
+                    text:
+                      type: string
+                      example: Bob Loblaw (World)
+        memberCreator:
+          type: object
+          properties:
+            id:
+              type: string
+              $ref: '#/components/schemas/TrelloID'
+              example: 5b02e7f4e1facdc393169f9d
+            activityBlocked:
+              type: boolean
+              example: false
+            avatarHash:
+              type: string
+              example: db2adf80c2e6c26b76e1f10400eb4c45
+            avatarUrl:
+              type: string
+              format: url
+              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
+            fullName:
+              type: string
+              example: Bob Loblaw (Trello)
+            idMemberReferrer:
+              type:
+              - string
+              - 'null'
+              $ref: '#/components/schemas/TrelloID'
+              example: null
+            initials:
+              type: string
+              example: BL
+            username:
+              type: string
+              example: bobloblaw
+    CardAging:
+      type: string
+      enum:
+      - pirate
+      - regular
+    Tag:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 58dd6dcaf8b86744d3cb4cde
+        name:
+          type: string
+          example: My Collection
+    Organization_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+        displayName:
+          type: string
+          example: Organization Name
+        dateLastActivity:
+          type: string
+          format: date
+          example: '2018-10-17T19:10:14.808Z'
+        prefs:
+          $ref: '#/components/schemas/OrganizationPrefs'
+        idEnterprise:
+          $ref: '#/components/schemas/TrelloID'
+        offering:
+          type: string
+          example: trello.enterprise
+        url:
+          type: string
+          format: url
+          example: https://trello.com/w/<name>
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+    PluginData:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5c487f39294cab6ac1d6b305
+        idPlugin:
+          $ref: '#/components/schemas/TrelloID'
+          example: 55a5d915446f517774210003
+        scope:
+          type: string
+          enum:
+          - member
+          - board
+          - organization
+          - card
+          example: organization
+        idModel:
+          $ref: '#/components/schemas/TrelloID'
+          example: 586e8d7b1af892b26d5b76b1
+        value:
+          type: string
+          example: '{"token":"S=s458:U=bda7cda:E=16fd2e21f55:C=1687b30f2c0:P=185:A=it-team-0604:V=2:H=3b0f3bac9c2a2af766202ebb9530a4a5"}'
+        access:
+          type: string
+          enum:
+          - private
+          - shared
+          example: private
   parameters:
     idParam:
       name: id
@@ -493,6 +1931,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

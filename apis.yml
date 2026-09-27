@@ -266,6 +266,94 @@ apis:
     url: openapi/trello-webhooks-api-openapi.yml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
+- aid: trello:trello-applications-api
+  name: Trello Applications API
+  description: The Applications API from Trello — 1 operation(s) for applications.
+  humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  baseURL: https://api.trello.com
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-applications-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GettingStarted
+    url: https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+  - type: DataModel
+    url: data-model/trello-data-model.yml
+  - type: ErrorCatalog
+    url: errors/trello-problem-types.yml
+  - type: Conventions
+    url: conventions/trello-conventions.yml
+- aid: trello:trello-batch-api
+  name: Trello Batch API
+  description: The Batch API from Trello — 1 operation(s) for batch.
+  humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  baseURL: https://api.trello.com
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-batch-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GettingStarted
+    url: https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+  - type: DataModel
+    url: data-model/trello-data-model.yml
+  - type: ErrorCatalog
+    url: errors/trello-problem-types.yml
+  - type: Conventions
+    url: conventions/trello-conventions.yml
+- aid: trello:trello-emoji-api
+  name: Trello Emoji API
+  description: The Emoji API from Trello — 1 operation(s) for emoji.
+  humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  baseURL: https://api.trello.com
+  tags:
+  - Emoji
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-emoji-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GettingStarted
+    url: https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+  - type: DataModel
+    url: data-model/trello-data-model.yml
+  - type: ErrorCatalog
+    url: errors/trello-problem-types.yml
+  - type: Conventions
+    url: conventions/trello-conventions.yml
+- aid: trello:trello-enterprises-api
+  name: Trello Enterprises API
+  description: The Enterprises API from Trello — 19 operation(s) for enterprises.
+  humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
+  baseURL: https://api.trello.com
+  tags:
+  - Enterprises
+  properties:
+  - type: OpenAPI
+    url: openapi/trello-enterprises-api-openapi.yml
+  - type: Documentation
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: APIReference
+    url: https://developer.atlassian.com/cloud/trello/rest/
+  - type: GettingStarted
+    url: https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+  - type: DataModel
+    url: data-model/trello-data-model.yml
+  - type: ErrorCatalog
+    url: errors/trello-problem-types.yml
+  - type: Conventions
+    url: conventions/trello-conventions.yml
 - aid: trello:trello-custom-fields-api
   name: Trello Custom Fields API
   description: >-
@@ -278,35 +366,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/trello-custom-fields-api-openapi.yml
-  - type: Documentation
-    url: https://developer.atlassian.com/cloud/trello/rest/
-- aid: trello:trello-rest-api
-  name: Trello REST API
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  description: >-
-    The complete first-party Trello REST API v1, as published by Atlassian at
-    https://developer.atlassian.com/cloud/trello/swagger.v3.json. OpenAPI 3.0.0, 191 paths,
-    261 operations and 63 schemas covering boards, lists, cards, checklists, labels, custom
-    fields, attachments, members, workspaces, enterprises, actions, notifications, search,
-    webhooks, tokens, Power-Up plugins, emoji and batch requests. Every operation carries an
-    operationId and a summary. Authorization is an API key plus user token passed as query
-    parameters, or OAuth 2.0 3LO (GA 15 September 2026) with ten granular scopes.
-  humanURL: https://developer.atlassian.com/cloud/trello/rest/
-  baseURL: https://api.trello.com/1
-  tags:
-  - Project Management
-  - Kanban
-  - Task Management
-  - Collaboration
-  - Productivity
-  properties:
-  - type: OpenAPI
-    url: openapi/trello-rest-api-openapi.json
-  - type: OpenAPI
-    url: https://developer.atlassian.com/cloud/trello/swagger.v3.json
-    name: OpenAPI (provider-hosted)
-  - type: Overlay
-    url: overlays/trello-rest-api-overlay.yaml
   - type: Documentation
     url: https://developer.atlassian.com/cloud/trello/rest/
   - type: APIReference

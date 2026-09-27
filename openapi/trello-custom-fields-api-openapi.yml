@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Custom Fields API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Custom Fields API
+  version: '1.0'
+  description: 'Operations tagged CustomFields across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Custom Fields
   description: Operations for creating, retrieving, updating, and deleting custom field definitions and their values on boards and cards.
@@ -89,6 +82,12 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /customFields/{id}:
     get:
       operationId: getCustomField
@@ -109,6 +108,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Custom field not found.
+      security:
+      - apiKey: []
+        apiToken: []
     put:
       operationId: updateCustomField
       summary: Update a Custom Field Definition
@@ -143,6 +145,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Custom field not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: deleteCustomField
       summary: Delete a Custom Field Definition
@@ -158,6 +163,19 @@ paths:
           description: Unauthorized.
         '404':
           description: Custom field not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: id
+      in: path
+      description: ID of the Custom Field.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /cards/{id}/customFieldItems:
     get:
       operationId: getCardCustomFieldItems
@@ -180,6 +198,12 @@ paths:
           description: Unauthorized.
         '404':
           description: Card not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /cards/{idCard}/customField/{idCustomField}/item:
     put:
       operationId: updateCardCustomFieldItem
@@ -220,7 +244,99 @@ paths:
           description: Unauthorized.
         '404':
           description: Card or custom field not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /customFields/{id}/options:
+    parameters:
+    - name: id
+      in: path
+      description: ID of the customfield.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    post:
+      tags:
+      - Custom Fields
+      summary: Add Option to Custom Field dropdown
+      description: Add an option to a dropdown Custom Field
+      operationId: get-customfields-id-options
+      security:
+      - OAuth2:
+        - write:board:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    get:
+      tags:
+      - Custom Fields
+      summary: Get Options of Custom Field drop down
+      description: Get the options of a drop down Custom Field
+      operationId: post-customfields-id-options
+      security:
+      - OAuth2:
+        - read:board:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /customFields/{id}/options/{idCustomFieldOption}:
+    parameters:
+    - name: id
+      in: path
+      description: ID of the customfielditem.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    - name: idCustomFieldOption
+      in: path
+      description: ID of the customfieldoption to retrieve.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    get:
+      tags:
+      - Custom Fields
+      summary: Get Option of Custom Field dropdown
+      description: Retrieve a specific, existing Option on a given dropdown-type Custom Field
+      operationId: get-customfields-options-idcustomfieldoption
+      security:
+      - OAuth2:
+        - read:board:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+      - Custom Fields
+      summary: Delete Option of Custom Field dropdown
+      description: Delete an option from a Custom Field dropdown.
+      operationId: delete-customfields-options-idcustomfieldoption
+      security:
+      - OAuth2:
+        - write:board:trello
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
 components:
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   schemas:
     CustomFieldItem:
       type: object
@@ -311,14 +427,76 @@ components:
                 type: string
               pos:
                 type: integer
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
+    posStringOrNumber:
+      oneOf:
+      - type: string
+        enum:
+        - top
+        - bottom
+      - type: number
+        format: float
+        example: 1293.5
+    CustomField_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5ab10be237846c43015f108e
+        idModel:
+          type: string
+          example: 586e8f681d4fe9b06a928307
+        modelType:
+          type: string
+          enum:
+          - card
+          - board
+          - member
+          example: board
+        fieldGroup:
+          type: string
+          example: f6177ba6839d6fff0f73922c1cea105e793fda8a1433d466104dacc0b7c56955
+        display:
+          type: object
+          properties:
+            cardFront:
+              type: boolean
+              example: true
+            name:
+              type: string
+              example: Priority 🏔
+            pos:
+              type: string
+              example: 98304,
+            options:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f1091
+                  idCustomField:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f108e
+                  value:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        example: High
+                  color:
+                    type: string
+                    example: red
+                  pos:
+                    type: number
+                    example: 16384
+        type:
+          type: string
+          example: list
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
   securitySchemes:
     apiKey:
       type: apiKey
@@ -330,6 +508,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

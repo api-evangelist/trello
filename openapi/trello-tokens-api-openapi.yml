@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Tokens API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Tokens API
+  version: '1.0'
+  description: 'Operations tagged Tokens across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Tokens
   description: Operations for retrieving and deleting API tokens and their associated webhooks.
@@ -54,6 +47,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Token not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: deleteToken
       summary: Delete a Token
@@ -74,6 +70,12 @@ paths:
           description: Unauthorized.
         '404':
           description: Token not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /tokens/{token}/webhooks:
     get:
       operationId: getTokenWebhooks
@@ -101,6 +103,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Token not found.
+      security:
+      - apiKey: []
+        apiToken: []
     post:
       operationId: createTokenWebhook
       summary: Create a Webhook for a Token
@@ -144,8 +149,178 @@ paths:
           description: Bad request. Invalid callback URL or model ID.
         '401':
           description: Unauthorized.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: token
+      in: path
+      description: ''
+      required: true
+      schema:
+        type: string
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /tokens/{token}/member:
+    get:
+      tags:
+      - Tokens
+      summary: Get Token's Member
+      description: Retrieve information about a token's owner by token.
+      operationId: get-tokens-token-member
+      security:
+      - OAuth2: []
+      parameters:
+      - name: token
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of valid fields for [Member Object](/cloud/trello/guides/rest-api/object-definitions/).'
+        required: false
+        schema:
+          $ref: '#/components/schemas/MemberFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+    servers:
+    - url: https://api.trello.com/1
+  /tokens/{token}/webhooks/{idWebhook}:
+    parameters:
+    - name: token
+      in: path
+      description: ''
+      required: true
+      schema:
+        type: string
+    - name: idWebhook
+      in: path
+      description: ID of the [Webhooks](ref:webhooks) to retrieve.
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    get:
+      tags:
+      - Tokens
+      summary: Get a Webhook belonging to a Token
+      description: Retrieve a webhook created with a Token.
+      operationId: get-tokens-token-webhooks-idwebhook
+      security:
+      - OAuth2: []
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook_2'
+    delete:
+      tags:
+      - Tokens
+      summary: Delete a Webhook created by Token
+      description: Delete a webhook created with given token.
+      operationId: delete-tokens-token-webhooks-idwebhook
+      security:
+      - OAuth2: []
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+      - Tokens
+      summary: Update a Webhook created by Token
+      operationId: tokenstokenwebhooks-1
+      security:
+      - OAuth2: []
+      parameters:
+      - name: description
+        in: query
+        description: A description to be displayed when retrieving information about the webhook.
+        required: false
+        schema:
+          type: string
+      - name: callbackURL
+        in: query
+        description: The URL that the webhook should `POST` information to.
+        required: false
+        schema:
+          type: string
+          format: url
+      - name: idModel
+        in: query
+        description: ID of the object that the webhook is on.
+        required: false
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /tokens/{token}/:
+    delete:
+      tags:
+      - Tokens
+      summary: Delete a Token
+      description: Delete a token.
+      operationId: delete-token
+      security:
+      - OAuth2: []
+      parameters:
+      - name: token
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
 components:
   schemas:
+    Webhook:
+      type: object
+      description: Represents a webhook that delivers HTTP POST callbacks to a specified URL when changes occur on a watched Trello model.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the webhook.
+        description:
+          type: string
+          description: A description of the webhook.
+        idModel:
+          type: string
+          description: The ID of the model being watched.
+        callbackURL:
+          type: string
+          format: uri
+          description: The URL that will receive webhook callbacks.
+        active:
+          type: boolean
+          description: Whether the webhook is active.
+        consecutiveFailures:
+          type: integer
+          description: The number of consecutive delivery failures.
+        firstConsecutiveFailDate:
+          type: string
+          format: date-time
+          description: The date of the first consecutive failure.
     Token:
       type: object
       description: Represents an API token that grants access to Trello resources on behalf of a user.
@@ -185,33 +360,381 @@ components:
               write:
                 type: boolean
                 description: Whether write access is granted.
-    Webhook:
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    MemberPrefs:
       type: object
-      description: Represents a webhook that delivers HTTP POST callbacks to a specified URL when changes occur on a watched Trello model.
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    TokenFields:
+      type: string
+      enum:
+      - identifier
+      - idMember
+      - dateCreated
+      - dateExpires
+      - permissions
+    Member:
+      type: object
       properties:
         id:
+          $ref: '#/components/schemas/TrelloID'
+        activityBlocked:
+          type: boolean
+          example: false
+        avatarHash:
           type: string
-          description: The unique identifier for the webhook.
+          example: fc8faaaee46666a4eb8b626c08933e16
+        avatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/fc8faaaee46666a4eb8b626c08933e16
+        bio:
+          type: string
+          example: 👋 I'm a developer advocate at Trello!
+        bioData:
+          type: object
+          properties:
+            emoji:
+              type: object
+        confirmed:
+          type: boolean
+          example: true
+        fullName:
+          type: string
+          example: Bentley Cook
+        idEnterprise:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idEnterprisesDeactivated:
+          type: array
+          items:
+            type: string
+        idMemberReferrer:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        idPremOrgsAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        initials:
+          type: string
+          example: BC
+        memberType:
+          type: string
+          enum:
+          - normal
+          - ghost
+          example: normal
+        nonPublic:
+          type: object
+          description: 'Profile data with restricted visibility. These fields are visible only to members of the
+
+            same organization. The values here (full name, for example) may differ from the values
+
+            at the top level of the response.
+
+            '
+          properties:
+            fullName:
+              type: string
+              example: Bentley Cook
+            initials:
+              type: string
+              example: BC
+            avatarUrl:
+              type: string
+              format: url
+              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
+              description: A URL that references the non-public avatar for the member
+            avatarHash:
+              type: string
+              example: db2adf80c2e6c26b76e1f10400eb4c45
+        nonPublicAvailable:
+          type: boolean
+          example: false
+          description: Whether the response contains non-public profile data for the member
+        products:
+          type: array
+          items:
+            type: integer
+        url:
+          type: string
+          format: url
+          example: https://trello.com/bentleycook
+        username:
+          type: string
+          example: bentleycook
+        status:
+          type: string
+          enum:
+          - disconnected
+          example: disconnected
+        aaEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+          example: null
+        aaEnrolledDate:
+          type:
+          - string
+          - 'null'
+          example: null
+        aaId:
+          type:
+          - string
+          - 'null'
+          example: null
+        avatarSource:
+          type: string
+          enum:
+          - gravatar
+          - upload
+          example: gravatar
+        email:
+          type: string
+          example: bcook@atlassian.com
+        gravatarHash:
+          type: string
+          example: 0a1e804f6e35a65ae5e1f7ef4c92471c
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idEnterprisesAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        limits:
+          $ref: '#/components/schemas/LimitsObject'
+        loginTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - password
+            - saml
+            example: password
+        marketingOptIn:
+          type: object
+          properties:
+            optedIn:
+              type: boolean
+              example: false
+            date:
+              type: string
+              format: date
+              example: '2018-04-26T17:03:25.155Z'
+        messagesDismissed:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ad-security-features
+            count:
+              type: string
+              example: 4
+            lastDismissed:
+              type: string
+              format: date
+              example: '2019-03-11T20:19:46.809Z'
+            _id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5995d44573d197eada632a32
+        oneTimeMessagesDismissed:
+          type: array
+          items:
+            type: string
+        prefs:
+          $ref: '#/components/schemas/MemberPrefs'
+        trophies:
+          type: array
+          items:
+            type: string
+        uploadedAvatarHash:
+          type: string
+          example: dac3ad49ff117829dd63a79bb2ea3426
+        uploadedAvatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/dac3ad49ff117829dd63a79bb2ea3426
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+        isAaMastered:
+          type: boolean
+          example: false
+        ixUpdate:
+          type: number
+          example: '48427'
+        idBoardsPinned:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrelloID'
+    MemberFields:
+      type: string
+      enum:
+      - id
+    Webhook_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 58dd6dcaf8b86744d3cb4cde
         description:
           type: string
-          description: A description of the webhook.
+          example: Board Webhook
         idModel:
-          type: string
-          description: The ID of the model being watched.
+          $ref: '#/components/schemas/TrelloID'
+          example: 59cd149051aa57a706962996
         callbackURL:
           type: string
-          format: uri
-          description: The URL that will receive webhook callbacks.
+          format: url
+          example: https://mywebhookurl.com/?type=board
         active:
           type: boolean
-          description: Whether the webhook is active.
+          example: true
         consecutiveFailures:
-          type: integer
-          description: The number of consecutive delivery failures.
+          type: number
+          example: 0
         firstConsecutiveFailDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: null
+    TokenPermission:
+      type: object
+      properties:
+        idModel:
+          oneOf:
+          - $ref: '#/components/schemas/TrelloID'
+          - type: string
+            enum:
+            - '*'
+        modelType:
+          type: string
+          enum:
+          - board
+          - member
+          - organization
+          - enterprise
+        read:
+          type: boolean
+        write:
+          type: boolean
+    Token_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5da728c55235b443c5b97181
+        identifier:
+          type: string
+          example: App Name
+        idMember:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5589c3ea49b40cedc28cf70e
+        dateCreated:
           type: string
           format: date-time
-          description: The date of the first consecutive failure.
+          example: '2019-10-16T14:27:17.304Z'
+        dateExpires:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: null
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenPermission'
   securitySchemes:
     apiKey:
       type: apiKey
@@ -223,6 +746,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

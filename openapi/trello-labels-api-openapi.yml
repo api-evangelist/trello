@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Labels API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Labels API
+  version: '1.0'
+  description: 'Operations tagged Labels across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Labels
   description: Operations for creating, retrieving, updating, and deleting labels on boards and cards.
@@ -66,6 +59,12 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /labels/{id}:
     get:
       operationId: getLabel
@@ -86,6 +85,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Label not found.
+      security:
+      - apiKey: []
+        apiToken: []
     put:
       operationId: updateLabel
       summary: Update a Label
@@ -127,6 +129,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Label not found.
+      security:
+      - apiKey: []
+        apiToken: []
     delete:
       operationId: deleteLabel
       summary: Delete a Label
@@ -142,7 +147,67 @@ paths:
           description: Unauthorized.
         '404':
           description: Label not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    parameters:
+    - name: id
+      in: path
+      description: The ID of the Label
+      required: true
+      schema:
+        $ref: '#/components/schemas/TrelloID'
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /labels/{id}/{field}:
+    put:
+      tags:
+      - Labels
+      summary: Update a field on a label
+      description: Update a field on a label.
+      operationId: put-labels-id-field
+      security:
+      - OAuth2:
+        - read:board:trello
+        - write:board:trello
+      parameters:
+      - name: id
+        in: path
+        description: The id of the label
+        required: true
+        schema:
+          type: string
+      - name: field
+        in: path
+        description: The field on the Label to update.
+        required: true
+        schema:
+          type: string
+          enum:
+          - color
+          - name
+      - name: value
+        in: query
+        description: The new value for the field.
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+        required: true
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
 components:
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   schemas:
     Label:
       type: object
@@ -172,14 +237,25 @@ components:
           - pink
           - lime
           - null
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    Color:
+      type:
+      - string
+      - 'null'
+      enum:
+      - yellow
+      - purple
+      - blue
+      - red
+      - green
+      - orange
+      - black
+      - sky
+      - pink
+      - lime
   securitySchemes:
     apiKey:
       type: apiKey
@@ -191,6 +267,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

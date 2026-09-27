@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  title: Trello REST Applications API
+  version: 0.0.1
+servers:
+- url: https://api.trello.com/1
+security:
+- APIKey: []
+  APIToken: []
+tags:
+- name: Applications
+paths:
+  /applications/{key}/compliance:
+    parameters:
+    - name: key
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Applications
+      summary: Get Application's compliance data
+      description: ''
+      operationId: applications-key-compliance
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.

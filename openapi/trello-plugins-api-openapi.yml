@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Plugins API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Plugins API
+  version: '1.0'
+  description: 'Operations tagged Plugins across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Plugins
   description: Operations for managing Power-Up plugins, including listing, updating, and creating plugin marketplace listings.
@@ -37,6 +30,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Plugin not found.
+      security:
+      - apiKey: []
+        apiToken: []
     put:
       operationId: updatePlugin
       summary: Update a Plugin
@@ -56,6 +52,12 @@ paths:
           description: Unauthorized.
         '404':
           description: Plugin not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /plugins/{id}/listings:
     post:
       operationId: createPluginListing
@@ -91,7 +93,190 @@ paths:
           description: Unauthorized.
         '404':
           description: Plugin not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /plugins/{id}/:
+    get:
+      tags:
+      - Plugins
+      summary: Get a Plugin
+      description: Get plugins
+      operationId: get-plugins-id
+      security:
+      - OAuth2:
+        - read:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plugin_2'
+    put:
+      tags:
+      - Plugins
+      summary: Update a Plugin
+      operationId: put-plugins-id
+      security:
+      - OAuth2:
+        - read:organization:trello
+        - write:organization:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID or name of the organization
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plugin_2'
+    servers:
+    - url: https://api.trello.com/1
+  /plugins/{idPlugin}/listings:
+    post:
+      tags:
+      - Plugins
+      summary: Create a Listing for Plugin
+      description: Create a new listing for a given locale for your Power-Up
+      operationId: post-plugins-idplugin-listing
+      security:
+      - OAuth2:
+        - write:organization:trello
+      parameters:
+      - name: idPlugin
+        in: path
+        description: The ID of the Power-Up for which you are creating a new listing.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: The description to show for the given locale
+                locale:
+                  type: string
+                  description: The locale that this listing should be displayed for.
+                overview:
+                  type: string
+                  description: The overview to show for the given locale.
+                name:
+                  type: string
+                  description: The name to use for the given locale.
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginListing'
+    servers:
+    - url: https://api.trello.com/1
+  /plugins/{id}/compliance/memberPrivacy:
+    get:
+      tags:
+      - Plugins
+      summary: Get Plugin's Member privacy compliance
+      description: ''
+      operationId: get-plugins-id-compliance-memberprivacy
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Power-Up
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    servers:
+    - url: https://api.trello.com/1
+  /plugins/{idPlugin}/listings/{idListing}:
+    put:
+      tags:
+      - Plugins
+      summary: Updating Plugin's Listing
+      description: Update an existing listing for your Power-Up
+      operationId: put-plugins-idplugin-listings-idlisting
+      security:
+      - OAuth2:
+        - write:organization:trello
+      parameters:
+      - name: idPlugin
+        in: path
+        description: The ID of the Power-Up whose listing is being updated.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idListing
+        in: path
+        description: The ID of the existing listing for the Power-Up that is being updated.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: The description to show for the given locale
+                locale:
+                  type: string
+                  description: The locale that this listing should be displayed for.
+                overview:
+                  type: string
+                  description: The overview to show for the given locale.
+                name:
+                  type: string
+                  description: The name to use for the given locale.
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginListing'
+    servers:
+    - url: https://api.trello.com/1
 components:
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   schemas:
     Plugin:
       type: object
@@ -118,14 +303,33 @@ components:
         idOrganizationOwner:
           type: string
           description: The ID of the organization that owns the plugin.
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
+    Plugin_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    PluginListing:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5a7cd2f8f99c517f58da1579
+        name:
+          type: string
+          example: Attachment Section Example
+        locale:
+          type: string
+          example: en-US
+        description:
+          type: string
+          example: The [Glitch](https://glitch.com) Power-Up allows you to...
+        overview:
+          type: string
+          example: ''
   securitySchemes:
     apiKey:
       type: apiKey
@@ -137,6 +341,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

@@ -1,0 +1,120 @@
+openapi: 3.2.0
+info:
+  title: Trello REST Emoji API
+  version: 0.0.1
+servers:
+- url: https://api.trello.com/1
+security:
+- APIKey: []
+  APIToken: []
+tags:
+- name: Emoji
+paths:
+  /emoji:
+    get:
+      tags:
+      - Emoji
+      summary: List available Emoji
+      operationId: emoji
+      security:
+      - OAuth2: []
+      parameters:
+      - name: locale
+        in: query
+        description: The locale to return emoji descriptions and names in. Defaults to the logged in member's locale.
+        required: false
+        schema:
+          type: string
+      - name: spritesheets
+        in: query
+        description: '`true` to return spritesheet URLs in the response'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Emoji'
+components:
+  schemas:
+    Emoji:
+      type: object
+      properties:
+        trello:
+          type: array
+          items:
+            type: object
+            properties:
+              unified:
+                type: string
+                example: 1F600
+              name:
+                type: string
+                example: GRINNING FACE
+              native:
+                type: string
+                example: 😀
+              shortName:
+                type: string
+                example: grinning
+              shortNames:
+                type: array
+                items:
+                  type: string
+                  example: grinning"
+              text:
+                type: string
+                example: :)
+              texts:
+                type:
+                - string
+                - 'null'
+                example: null
+              category:
+                type: string
+                example: Smileys & People
+              sheetX:
+                type: number
+                example: 30
+              sheetY:
+                type: number
+                example: 24
+              tts:
+                type: string
+                example: grinning face
+              keywords:
+                type: array
+                items:
+                  type: string
+                  example: face
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.

@@ -1,18 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Trello REST Notifications API
-  description: The Trello REST API provides programmatic access to Trello boards, lists, cards, members, labels, checklists, and other resources that make up the Trello project management platform. Developers can create, read, update, and delete Trello objects, manage team collaboration workflows, and automate task management processes. The API uses key and token based authentication and returns JSON responses for all endpoints.
-  version: '1'
-  contact:
-    name: Atlassian Developer Support
-    url: https://developer.atlassian.com/support
-  termsOfService: https://www.atlassian.com/legal/cloud-terms-of-service
+  title: Trello Notifications API
+  version: '1.0'
+  description: 'Operations tagged Notifications across 2 of this provider''s published API definitions: trello-rest-api-openapi.yml, trello-rest-api-swagger-v3.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.trello.com/1
   description: Trello API v1 Production Server
-security:
-- apiKey: []
-  apiToken: []
 tags:
 - name: Notifications
   description: Operations for retrieving and managing member notifications about activity on boards, cards, and other Trello objects.
@@ -85,6 +78,12 @@ paths:
           description: Unauthorized.
         '404':
           description: Member not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /notifications/{id}:
     get:
       operationId: getNotification
@@ -105,6 +104,9 @@ paths:
           description: Unauthorized.
         '404':
           description: Notification not found.
+      security:
+      - apiKey: []
+        apiToken: []
     put:
       operationId: updateNotification
       summary: Update a Notification
@@ -125,6 +127,12 @@ paths:
           description: Unauthorized.
         '404':
           description: Notification not found.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
   /notifications/all/read:
     post:
       operationId: markAllNotificationsRead
@@ -137,7 +145,298 @@ paths:
           description: Successfully marked all notifications as read.
         '401':
           description: Unauthorized.
+      security:
+      - apiKey: []
+        apiToken: []
+    servers:
+    - url: https://api.trello.com/1
+      description: Trello API v1 Production Server
+  /notifications/{id}/{field}:
+    get:
+      tags:
+      - Notifications
+      summary: Get a field of a Notification
+      description: Get a specific property of a notification
+      operationId: get-notifications-id-field
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: field
+        in: path
+        description: A notification [field](/cloud/trello/guides/rest-api/object-definitions/)
+        required: true
+        schema:
+          $ref: '#/components/schemas/NotificationFields'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Notification_2'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/unread:
+    put:
+      tags:
+      - Notifications
+      summary: Update Notification's read status
+      operationId: put-notifications-id-unread
+      security:
+      - OAuth2:
+        - write:member:trello
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: value
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Notification_2'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/board:
+    get:
+      tags:
+      - Notifications
+      summary: Get the Board a Notification is on
+      description: Get the board a notification is associated with
+      operationId: get-notifications-id-board
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of board[fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        explode: false
+        style: form
+        required: false
+        schema:
+          $ref: '#/components/schemas/BoardFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Board'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/card:
+    get:
+      tags:
+      - Notifications
+      summary: Get the Card a Notification is on
+      description: Get the card a notification is associated with
+      operationId: get-notifications-id-card
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        explode: false
+        style: form
+        description: '`all` or a comma-separated list of card [fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        required: false
+        schema:
+          $ref: '#/components/schemas/CardFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Card'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/list:
+    get:
+      tags:
+      - Notifications
+      summary: Get the List a Notification is on
+      description: Get the list a notification is associated with
+      operationId: get-notifications-id-list
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of list [fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/TrelloList'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/member:
+    get:
+      tags:
+      - Notifications
+      summary: Get the Member a Notification is about (not the creator)
+      description: Get the member (not the creator) a notification is about
+      operationId: notificationsidmember
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        required: false
+        schema:
+          $ref: '#/components/schemas/MemberFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Member_2'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/memberCreator:
+    get:
+      tags:
+      - Notifications
+      summary: Get the Member who created the Notification
+      description: Get the member who created the notification
+      operationId: get-notifications-id-membercreator
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        required: false
+        explode: false
+        style: form
+        schema:
+          $ref: '#/components/schemas/MemberFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Member_2'
+    servers:
+    - url: https://api.trello.com/1
+  /notifications/{id}/organization:
+    get:
+      tags:
+      - Notifications
+      summary: Get a Notification's associated Organization
+      description: Get the organization a notification is associated with
+      operationId: get-notifications-id-organization
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the notification
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: '`all` or a comma-separated list of organization [fields](/cloud/trello/guides/rest-api/object-definitions/)'
+        required: false
+        explode: false
+        style: form
+        schema:
+          $ref: '#/components/schemas/OrganizationFields'
+          default: all
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Organization'
+    servers:
+    - url: https://api.trello.com/1
 components:
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   schemas:
     Member:
       type: object
@@ -236,14 +535,956 @@ components:
           description: The ID of the member who triggered the notification.
         memberCreator:
           $ref: '#/components/schemas/Member'
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    Board:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the board.
+          example: Trello Platform Changes
+        desc:
+          type: string
+          example: Track changes to Trello's Platform on this board.
+        descData:
+          type: string
+        closed:
+          type: boolean
+          example: false
+        idMemberCreator:
+          $ref: '#/components/schemas/TrelloID'
+        idOrganization:
+          $ref: '#/components/schemas/TrelloID'
+        pinned:
+          type: boolean
+          example: false
+        url:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ/trello-platform-changelog
+        shortUrl:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ
+        prefs:
+          $ref: '#/components/schemas/Prefs'
+        labelNames:
+          type: object
+          properties:
+            green:
+              type: string
+              example: Addition
+            yellow:
+              type: string
+              example: Update
+            orange:
+              type: string
+              example: Deprecation
+            red:
+              type: string
+              example: Deletion
+            purple:
+              type: string
+              example: Power-Ups
+            blue:
+              type: string
+              example: News
+            sky:
+              type: string
+              example: Announcement
+            lime:
+              type: string
+              example: Delight
+            pink:
+              type: string
+              example: REST API
+            black:
+              type: string
+              example: Capabilties
+        limits:
+          type: object
+          $ref: '#/components/schemas/Limits'
+        starred:
+          type: boolean
+        memberships:
+          type: string
+        shortLink:
+          type: string
+        subscribed:
+          type: boolean
+        powerUps:
+          type: string
+        dateLastActivity:
+          type: string
+          format: date
+        dateLastView:
+          type: string
+          format: date
+        idTags:
+          type: string
+        datePluginDisable:
+          type:
+          - string
+          - 'null'
+          format: date
+        creationMethod:
+          type:
+          - string
+          - 'null'
+        ixUpdate:
+          type: integer
+        templateGallery:
+          type:
+          - string
+          - 'null'
+        enterpriseOwned:
+          type: boolean
+    CardFields:
+      type: string
+      enum:
+      - id
+      - address
+      - badges
+      - checkItemStates
+      - closed
+      - coordinates
+      - creationMethod
+      - dueComplete
+      - dateLastActivity
+      - desc
+      - descData
+      - due
+      - dueReminder
+      - idBoard
+      - idChecklists
+      - idLabels
+      - idList
+      - idMembers
+      - idMembersVoted
+      - idShort
+      - idAttachmentCover
+      - labels
+      - limits
+      - locationName
+      - manualCoverAttachment
+      - name
+      - pos
+      - shortLink
+      - shortUrl
+      - subscribed
+      - url
+      - cover
+      - isTemplate
+      description: The fields on a Card.
+    TrelloList:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the list
+          example: Things to buy today
+        closed:
+          type: boolean
+        pos:
+          type: number
+        softLimit:
+          type: string
+        idBoard:
+          type: string
+        subscribed:
+          type: boolean
+        limits:
+          $ref: '#/components/schemas/Limits'
+    Organization:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+        displayName:
+          type: string
+          example: Organization Name
+        dateLastActivity:
+          type: string
+          format: date
+          example: '2018-10-17T19:10:14.808Z'
+        prefs:
+          $ref: '#/components/schemas/OrganizationPrefs'
+        idEnterprise:
+          $ref: '#/components/schemas/TrelloID'
+        offering:
+          type: string
+          example: trello.enterprise
+        url:
+          type: string
+          format: url
+          example: https://trello.com/w/<name>
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+    Card:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        address:
+          type:
+          - string
+          - 'null'
+        badges:
+          type: object
+          properties:
+            attachmentsByType:
+              type: object
+              properties:
+                trello:
+                  type: object
+                  properties:
+                    board:
+                      type: number
+                    card:
+                      type: number
+            location:
+              type: boolean
+            votes:
+              type: integer
+            viewingMemberVoted:
+              type: boolean
+              example: false
+            subscribed:
+              type: boolean
+              example: false
+            fogbugz:
+              type: string
+            checkItems:
+              type: integer
+              example: 0
+            checkItemsChecked:
+              type: integer
+              example: 0
+            comments:
+              type: integer
+              example: 0
+            attachments:
+              type: integer
+              example: 0
+            description:
+              type: boolean
+            due:
+              type:
+              - string
+              - 'null'
+              format: date
+            start:
+              type:
+              - string
+              - 'null'
+              format: date
+            dueComplete:
+              type: boolean
+        cardRole:
+          type:
+          - string
+          - 'null'
+          enum:
+          - separator
+          - board
+          - mirror
+          - link
+          example: mirror
+        checkItemStates:
+          type: array
+          items:
+            oneOf:
+            - type: string
+        closed:
+          type: boolean
+        coordinates:
+          type:
+          - string
+          - 'null'
+        creationMethod:
+          type:
+          - string
+          - 'null'
+        dateLastActivity:
+          type: string
+          format: date-time
+          example: '2019-09-16T16:19:17.156Z'
+        desc:
+          type: string
+          example: '👋Hey there,
+
+
+            Trello''s Platform team uses this board to keep developers up-to-date.'
+        descData:
+          type: object
+          properties:
+            emoji:
+              type: object
+        due:
+          type:
+          - string
+          - 'null'
+          format: date
+        dueReminder:
+          type:
+          - string
+          - 'null'
+        idBoard:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961414
+        idChecklists:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/Checklist'
+            - $ref: '#/components/schemas/TrelloID'
+        idLabels:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/Label'
+            - $ref: '#/components/schemas/TrelloID'
+        idList:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961415
+        idMembers:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/TrelloID'
+        idMembersVoted:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/TrelloID'
+        idShort:
+          type: integer
+        idAttachmentCover:
+          type:
+          - string
+          - 'null'
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961415
+        labels:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/TrelloID'
+        limits:
+          type: object
+          $ref: '#/components/schemas/Limits'
+        locationName:
+          type:
+          - string
+          - 'null'
+        manualCoverAttachment:
+          type: boolean
+          example: false
+        mirrorSourceId:
+          type:
+          - string
+          - 'null'
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          example: 👋 What? Why? How?
+        pos:
+          type: number
+          format: float
+          example: 65535
+        shortLink:
+          type: string
+          example: H0TZyzbK
+        shortUrl:
+          type: string
+          format: url
+          example: https://trello.com/c/H0TZyzbK
+        subscribed:
+          type: boolean
+          example: false
+        url:
+          type: string
+          format: url
+          example: https://trello.com/c/H0TZyzbK/4-%F0%9F%91%8B-what-why-how
+        cover:
+          type: object
+          properties:
+            idAttachment:
+              type:
+              - string
+              - 'null'
+              $ref: '#/components/schemas/TrelloID'
+            color:
+              $ref: '#/components/schemas/Color'
+            idUploadedBackground:
+              type:
+              - boolean
+              - 'null'
+            size:
+              type: string
+              enum:
+              - normal
+            brightness:
+              type: string
+              enum:
+              - light
+              - dark
+            isTemplate:
+              type: boolean
+              example: false
+    Limits:
+      type: object
+      properties:
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
+    OrganizationPrefs:
+      type: object
+      properties:
+        boardVisibilityRestrict:
+          type: object
+        boardDeleteRestrict:
+          type: object
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
+            enum:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+          - enterprise
+          - domain
+          example: private
+    Notification_2:
+      properties:
+        id:
+          type: string
+          example: 5dc591ac425f2a223aba0a8e
+        unread:
+          type: boolean
+          example: true
+        type:
+          type: string
+          enum:
+          - cardDueSoon
+          example: cardDueSoon
+        date:
+          type: string
+          example: '2019-11-08T16:02:52.763Z'
+        dateRead:
+          type: string
+          example: null
+        data:
+          type: string
+          example: null
+        card:
+          type: object
+          $ref: '#/components/schemas/Card'
+        board:
+          type: object
+          $ref: '#/components/schemas/Board'
+        idMemberCreator:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        idAction:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        reactions:
+          type: array
+          example: []
+    Prefs:
+      type: object
+      properties:
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - board
+        hideVotes:
+          type: boolean
+        voting:
+          type: string
+          enum:
+          - disabled
+          - enabled
+        comments:
+          type: string
+        invitations:
+          enum:
+          - admins
+          - members
+        selfJoin:
+          type: boolean
+        cardCovers:
+          type: boolean
+        isTemplate:
+          type: boolean
+        cardAging:
+          $ref: '#/components/schemas/CardAging'
+        calendarFeedEnabled:
+          type: boolean
+        background:
+          $ref: '#/components/schemas/TrelloID'
+        backgroundImage:
+          type: string
+          format: uri
+        backgroundImageScaled:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageDescriptor'
+        backgroundTile:
+          type: boolean
+        backgroundBrightness:
+          type: string
+          example: dark
+        backgroundBottomColor:
+          type: string
+          example: '#1e2e00'
+        backgroundTopColor:
+          type: string
+          example: '#ffffff'
+        canBePublic:
+          type: boolean
+        canBeEnterprise:
+          type: boolean
+        canBeOrg:
+          type: boolean
+        canBePrivate:
+          type: boolean
+        canInvite:
+          type: boolean
+    MemberFields:
+      type: string
+      enum:
+      - id
+    BoardFields:
+      type: string
+      enum:
+      - id
+      - name
+      - desc
+      - descData
+      - closed
+      - idMemberCreator
+      - idOrganization
+      - pinned
+      - url
+      - shortUrl
+      - prefs
+      - labelNames
+      - starred
+      - limits
+      - memberships
+      - enterpriseOwned
+    ListFields:
+      type: string
+      enum:
+      - id
+    NotificationFields:
+      type: string
+      enum:
+      - id
+      - unread
+      - type
+      - date
+      - dateRead
+      - data
+      - card
+      - board
+      - idMemberCreator
+      - idAction
+      - reactions
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    OrganizationFields:
+      type: string
+      enum:
+      - id
+      - name
+    Member_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        activityBlocked:
+          type: boolean
+          example: false
+        avatarHash:
+          type: string
+          example: fc8faaaee46666a4eb8b626c08933e16
+        avatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/fc8faaaee46666a4eb8b626c08933e16
+        bio:
+          type: string
+          example: 👋 I'm a developer advocate at Trello!
+        bioData:
+          type: object
+          properties:
+            emoji:
+              type: object
+        confirmed:
+          type: boolean
+          example: true
+        fullName:
+          type: string
+          example: Bentley Cook
+        idEnterprise:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idEnterprisesDeactivated:
+          type: array
+          items:
+            type: string
+        idMemberReferrer:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        idPremOrgsAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        initials:
+          type: string
+          example: BC
+        memberType:
+          type: string
+          enum:
+          - normal
+          - ghost
+          example: normal
+        nonPublic:
+          type: object
+          description: 'Profile data with restricted visibility. These fields are visible only to members of the
+
+            same organization. The values here (full name, for example) may differ from the values
+
+            at the top level of the response.
+
+            '
+          properties:
+            fullName:
+              type: string
+              example: Bentley Cook
+            initials:
+              type: string
+              example: BC
+            avatarUrl:
+              type: string
+              format: url
+              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
+              description: A URL that references the non-public avatar for the member
+            avatarHash:
+              type: string
+              example: db2adf80c2e6c26b76e1f10400eb4c45
+        nonPublicAvailable:
+          type: boolean
+          example: false
+          description: Whether the response contains non-public profile data for the member
+        products:
+          type: array
+          items:
+            type: integer
+        url:
+          type: string
+          format: url
+          example: https://trello.com/bentleycook
+        username:
+          type: string
+          example: bentleycook
+        status:
+          type: string
+          enum:
+          - disconnected
+          example: disconnected
+        aaEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+          example: null
+        aaEnrolledDate:
+          type:
+          - string
+          - 'null'
+          example: null
+        aaId:
+          type:
+          - string
+          - 'null'
+          example: null
+        avatarSource:
+          type: string
+          enum:
+          - gravatar
+          - upload
+          example: gravatar
+        email:
+          type: string
+          example: bcook@atlassian.com
+        gravatarHash:
+          type: string
+          example: 0a1e804f6e35a65ae5e1f7ef4c92471c
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idEnterprisesAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        limits:
+          $ref: '#/components/schemas/LimitsObject'
+        loginTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - password
+            - saml
+            example: password
+        marketingOptIn:
+          type: object
+          properties:
+            optedIn:
+              type: boolean
+              example: false
+            date:
+              type: string
+              format: date
+              example: '2018-04-26T17:03:25.155Z'
+        messagesDismissed:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ad-security-features
+            count:
+              type: string
+              example: 4
+            lastDismissed:
+              type: string
+              format: date
+              example: '2019-03-11T20:19:46.809Z'
+            _id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5995d44573d197eada632a32
+        oneTimeMessagesDismissed:
+          type: array
+          items:
+            type: string
+        prefs:
+          $ref: '#/components/schemas/MemberPrefs'
+        trophies:
+          type: array
+          items:
+            type: string
+        uploadedAvatarHash:
+          type: string
+          example: dac3ad49ff117829dd63a79bb2ea3426
+        uploadedAvatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/dac3ad49ff117829dd63a79bb2ea3426
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+        isAaMastered:
+          type: boolean
+          example: false
+        ixUpdate:
+          type: number
+          example: '48427'
+        idBoardsPinned:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrelloID'
+    Label:
+      type: object
+      properties:
+        id:
+          description: The ID of the label.
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idBoard:
+          type: string
+          description: The ID of the board the label is on.
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961414
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name displayed for the label.
+          example: Overdue
+          minLength: 0
+          maxLength: 16384
+        color:
+          type: string
+          $ref: '#/components/schemas/Color'
+          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
+    Checklist:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+    CardAging:
+      type: string
+      enum:
+      - pirate
+      - regular
+    Color:
+      type:
+      - string
+      - 'null'
+      enum:
+      - yellow
+      - purple
+      - blue
+      - red
+      - green
+      - orange
+      - black
+      - sky
+      - pink
+      - lime
+    ImageDescriptor:
+      type: object
+      properties:
+        width:
+          description: The width of the image.
+          type: integer
+          example: 100
+        height:
+          description: The height of the image.
+          type: integer
+          example: 64
+        url:
+          description: The URL of the image.
+          format: url
+          type: string
+          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
   securitySchemes:
     apiKey:
       type: apiKey
@@ -255,6 +1496,34 @@ components:
       in: query
       name: token
       description: A user token that grants access to Trello resources. Obtained by authorizing via the /1/authorize route or OAuth 1.0.
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
 externalDocs:
   description: Trello REST API Documentation
   url: https://developer.atlassian.com/cloud/trello/rest/
+x-refined-from:
+- trello-rest-api-openapi.yml
+- trello-rest-api-swagger-v3.json

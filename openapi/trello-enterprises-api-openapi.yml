@@ -1,0 +1,1978 @@
+openapi: 3.2.0
+info:
+  title: Trello REST Enterprises API
+  version: 0.0.1
+servers:
+- url: https://api.trello.com/1
+security:
+- APIKey: []
+  APIToken: []
+tags:
+- name: Enterprises
+paths:
+  /enterprises/{id}:
+    get:
+      tags:
+      - Enterprises
+      summary: Get an Enterprise
+      description: Get an enterprise by its ID.
+      operationId: get-enterprises-id
+      security:
+      - OAuth2:
+        - read:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: 'Comma-separated list of: `id`, `name`, `displayName`, `prefs`, `ssoActivationFailed`, `idAdmins`, `idMembers` (Note that the members array returned will be paginated if `members` is ''normal'' or ''admins''. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.), `idOrganizations`, `products`, `userTypes`, `idMembers`, `idOrganizations`'
+        required: false
+        schema:
+          type: string
+          default: all
+      - name: members
+        in: query
+        description: 'One of: `none`, `normal`, `admins`, `owners`, `all`'
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: member_fields
+        in: query
+        description: 'One of: `avatarHash`, `fullName`, `initials`, `username`'
+        required: false
+        schema:
+          type: string
+          default: avatarHash, fullName, initials, username
+      - name: member_filter
+        in: query
+        description: Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If any of the member_* args are set, the member array will be paginated.
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: member_sort
+        in: query
+        description: This parameter expects a SCIM-style sorting value prefixed by a `-` to sort descending. If no `-` is prefixed, it will be sorted ascending. Note that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.
+        required: false
+        schema:
+          type: string
+      - name: member_sortBy
+        in: query
+        description: 'Deprecated: Please use member_sort. This parameter expects a SCIM-style sorting value. Note that the members array returned will be paginated if `members` is `normal` or `admins`. Pagination can be controlled with `member_startIndex`, etc, and the API response''s header will contain the total count and pagination state.'
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: member_sortOrder
+        in: query
+        description: 'Deprecated: Please use member_sort. One of: `ascending`, `descending`, `asc`, `desc`'
+        required: false
+        schema:
+          type: string
+          default: id
+      - name: member_startIndex
+        in: query
+        description: Any integer between 0 and 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: '1'
+      - name: member_count
+        in: query
+        description: 0 to 100
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: '10'
+      - name: organizations
+        in: query
+        description: 'One of: `none`, `members`, `public`, `all`'
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: organization_fields
+        in: query
+        description: Any valid value that the [nested organization field resource]() accepts.
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: organization_paid_accounts
+        in: query
+        description: Whether or not to include paid account information in the returned workspace objects
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: organization_memberships
+        in: query
+        description: 'Comma-seperated list of: `me`, `normal`, `admin`, `active`, `deactivated`'
+        required: false
+        schema:
+          type: string
+          default: none
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enterprise'
+  /enterprises/{id}/auditlog:
+    get:
+      tags:
+      - Enterprises
+      summary: Get auditlog data for an Enterprise
+      description: 'Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise''s audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route.
+
+
+        NOTE: For enterprises that have opted in to user management via AdminHub, the auditlog will will contain actions taken in AdminHub, but may not contain the source for those actions.'
+      operationId: get-enterprises-id-auditlog
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnterpriseAuditLog'
+  /enterprises/{id}/admins:
+    get:
+      tags:
+      - Enterprises
+      summary: Get Enterprise admin Members
+      description: Get an enterprise's admin members.
+      operationId: get-enterprises-id-admins
+      security:
+      - OAuth2:
+        - read:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: Any valid value that the [nested member field resource]() accepts.
+        required: false
+        schema:
+          type: string
+          default: fullName, userName
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnterpriseAdmin'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/signupUrl:
+    get:
+      tags:
+      - Enterprises
+      summary: Get signupUrl for Enterprise
+      description: Get the signup URL for an enterprise.
+      operationId: get-enterprises-id-signupurl
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: authenticate
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: confirmationAccepted
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: returnUrl
+        in: query
+        description: Any valid URL.
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          format: url
+          default: null
+      - name: tosAccepted
+        in: query
+        description: Designates whether the user has seen/consented to the Trello ToS prior to being redirected to the enterprise signup page/their IdP.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signupUrl:
+                    type: string
+  /enterprises/{id}/members/query:
+    get:
+      tags:
+      - Enterprises
+      summary: Get Users of an Enterprise
+      description: Get an enterprise's users. You can choose to retrieve licensed members, board guests, etc. The response is paginated and will return 100 users at a time.
+      operationId: get-users-id
+      security:
+      - OAuth2: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: licensed
+        in: query
+        description: When true, returns members who possess a license for the corresponding Trello Enterprise; when false, returns members who do not. If unspecified, both licensed and unlicensed members will be returned.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: deactivated
+        in: query
+        description: When true, returns members who have been deactivated for the corresponding Trello Enterprise; when false, returns members who have not. If unspecified, both active and deactivated members will be returned.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: collaborator
+        in: query
+        description: When true, returns members who are guests on one or more boards in the corresponding Trello Enterprise (but do not possess a license); when false, returns members who are not. If unspecified, both guests and non-guests will be returned.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: managed
+        in: query
+        description: When true, returns members who are managed by the corresponding Trello Enterprise; when false, returns members who are not. If unspecified, both managed and unmanaged members will be returned.
+        required: false
+        schema:
+          type: boolean
+          default: none
+      - name: admin
+        in: query
+        description: When true, returns members who are administrators of the corresponding Trello Enterprise; when false, returns members who are not. If unspecified, both admin and non-admin members will be returned.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: activeSince
+        in: query
+        description: Returns only Trello users active since this date (inclusive).
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: inactiveSince
+        in: query
+        description: Returns only Trello users active since this date (inclusive).
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: search
+        in: query
+        description: Returns members with email address or full name that start with the search value.
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: cursor
+        in: query
+        description: Cursor to return next set of results, use cursor returned in the response to query the next batch.
+        required: false
+        schema:
+          type: string
+          default: none
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership'
+  /enterprises/{id}/members:
+    get:
+      tags:
+      - Enterprises
+      summary: Get Members of Enterprise
+      description: Get the members of an enterprise.
+      operationId: get-enterprises-id-members
+      security:
+      - OAuth2:
+        - read:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: A comma-seperated list of valid [member fields](/cloud/trello/guides/rest-api/object-definitions/#member-object).
+        schema:
+          type: string
+          default: avatarHash, fullName, initials, username
+      - name: filter
+        in: query
+        description: Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If any of the below member_* args are set, the member array will be paginated.
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: sort
+        in: query
+        description: This parameter expects a SCIM-style sorting value prefixed by a `-` to sort descending. If no `-` is prefixed, it will be sorted ascending. Note that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.
+        required: false
+        schema:
+          type: string
+      - name: sortBy
+        in: query
+        description: 'Deprecated: Please use `sort` instead. This parameter expects a SCIM-style sorting value. Note that the members array returned will be paginated if `members` is ''normal'' or ''admins''. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.'
+        required: false
+        schema:
+          type: string
+      - name: sortOrder
+        in: query
+        description: 'Deprecated: Please use `sort` instead. One of: `ascending`, `descending`, `asc`, `desc`.'
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          enum:
+          - ascending
+          - descending
+          - asc
+          - desc
+          - null
+          default: null
+      - name: startIndex
+        in: query
+        description: Any integer between 0 and 9999.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 9999
+      - name: count
+        in: query
+        description: SCIM-style filter.
+        required: false
+        schema:
+          type: string
+          default: none
+      - name: organization_fields
+        in: query
+        description: Any valid value that the [nested organization field resource](/cloud/trello/guides/rest-api/nested-resources/) accepts.
+        required: false
+        schema:
+          type: string
+          default: displayName
+      - name: board_fields
+        in: query
+        description: Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts.
+        required: false
+        schema:
+          type: string
+          default: name
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Member'
+  /enterprises/{id}/members/{idMember}:
+    get:
+      tags:
+      - Enterprises
+      summary: Get a Member of Enterprise
+      description: Get a specific member of an enterprise by ID.
+      operationId: get-enterprises-id-members-idmember
+      security:
+      - OAuth2:
+        - read:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: An ID of a member resource.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: A comma separated list of any valid values that the [nested member field resource]() accepts.
+        required: false
+        schema:
+          type: string
+          default: avatarHash, fullName, initials, username
+      - name: organization_fields
+        in: query
+        description: Any valid value that the [nested organization field resource](/cloud/trello/guides/rest-api/nested-resources/) accepts.
+        required: false
+        schema:
+          type: string
+          default: displayName
+      - name: board_fields
+        in: query
+        description: Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts.
+        required: false
+        schema:
+          type: string
+          default: name
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/transferrable/organization/{idOrganization}:
+    get:
+      tags:
+      - Enterprises
+      summary: Get whether an organization can be transferred to an enterprise
+      description: Get whether an organization can be transferred to an enterprise.
+      operationId: get-enterprises-id-transferrable-organization-idOrganization
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idOrganization
+        in: path
+        description: An ID of an Organization resource.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferrableOrganization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/transferrable/bulk/{idOrganizations}:
+    get:
+      tags:
+      - Enterprises
+      summary: Get a bulk list of organizations that can be transferred to an enterprise
+      description: Get a list of organizations that can be transferred to an enterprise when given a bulk list of organizations.
+      operationId: get-enterprises-id-transferrable-bulk-idOrganizations
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idOrganizations
+        in: path
+        description: An array of IDs of an Organization resource.
+        required: true
+        schema:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Organization'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: '#/components/schemas/TransferrableOrganization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/${id}/enterpriseJoinRequest/bulk:
+    put:
+      tags:
+      - Enterprises
+      summary: Decline enterpriseJoinRequests from one organization or a bulk list of…
+      description: Decline enterpriseJoinRequests from one organization or bulk amount of organizations
+      operationId: put-enterprises-id-enterpriseJoinRequest-bulk
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idOrganizations
+        in: query
+        description: An array of IDs of an Organization resource.
+        required: true
+        schema:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Organization'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/claimableOrganizations:
+    get:
+      tags:
+      - Enterprises
+      summary: Get ClaimableOrganizations of an Enterprise
+      description: Get the Workspaces that are claimable by the enterprise by ID. Can optionally query for workspaces based on activeness/ inactiveness.
+      operationId: get-enterprises-id-claimableOrganizations
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: limit
+        in: query
+        description: Limits the number of workspaces to be sorted
+        required: false
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Specifies the sort order to return matching documents
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Name of the enterprise to retrieve workspaces for
+        required: false
+        schema:
+          type: string
+      - name: activeSince
+        in: query
+        description: Date in YYYY-MM-DD format indicating the date to search up to for activeness of workspace
+        required: false
+        schema:
+          type: string
+      - name: inactiveSince
+        in: query
+        description: Date in YYYY-MM-DD format indicating the date to search up to for inactiveness of workspace
+        required: false
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimableOrganizations'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected erorr
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/pendingOrganizations:
+    get:
+      tags:
+      - Enterprises
+      summary: Get PendingOrganizations of an Enterprise
+      description: Get the Workspaces that are pending for the enterprise by ID.
+      operationId: get-enterprises-id-pendingOrganizations
+      security:
+      - OAuth2:
+        - read:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: activeSince
+        in: query
+        description: Date in YYYY-MM-DD format indicating the date to search up to for activeness of workspace
+        required: false
+        schema:
+          type: string
+      - name: inactiveSince
+        in: query
+        description: Date in YYYY-MM-DD format indicating the date to search up to for inactiveness of workspace
+        required: false
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PendingOrganizations'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected erorr
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/tokens:
+    post:
+      tags:
+      - Enterprises
+      summary: Create an auth Token for an Enterprise
+      description: Create an auth Token for an Enterprise.
+      operationId: post-enterprises-id-tokens
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: expiration
+        in: query
+        description: 'One of: `1hour`, `1day`, `30days`, `never`'
+        required: false
+        schema:
+          type: string
+          default: none
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+  /enterprises/{id}/organizations:
+    get:
+      tags:
+      - Enterprises
+      summary: Get Organizations of an Enterprise
+      description: Get the organizations of an enterprise.
+      operationId: get-enterprises-id-organizations
+      security:
+      - OAuth2:
+        - read:enterprise:trello
+      deprecated: false
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: fields
+        in: query
+        description: comma-separated list of organization [fields](/cloud/trello/guides/rest-api/object-definitions/)
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrganizationFields'
+          default: all
+      - name: filter
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          default: all
+      - name: startIndex
+        in: query
+        description: Any integer greater than and equal to 1.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 9999
+      - name: count
+        in: query
+        description: Any integer between 0 and 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+      - Enterprises
+      summary: Transfer an Organization to an Enterprise
+      description: 'Transfer an organization to an enterprise.
+
+
+        NOTE: For enterprises that have opted in to user management via AdminHub, this endpoint will result in the organization being added to the enterprise asynchronously. A 200 response only indicates receipt of the request, it does not indicate successful addition to the enterprise.'
+      operationId: put-enterprises-id-organizations
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idOrganization
+        in: query
+        description: ID of Organization to be transferred to Enterprise.
+        required: true
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: '#/components/schemas/Organization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /enterprises/{id}/members/{idMember}/licensed:
+    put:
+      summary: Update a Member's licensed status
+      description: 'This endpoint is used to update whether the provided Member should use one of the Enterprise''s available licenses or not. Revoking a license will deactivate a Member of an Enterprise.
+
+
+        NOTE: Revoking of licenses is not possible for enterprises that have opted in to user management via AdminHub.'
+      operationId: put-enterprises-id-members-idmember-licensed
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: The ID of the Member
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: value
+        in: query
+        description: Boolean value to determine whether the user should be given an Enterprise license (true) or not (false).
+        required: true
+        schema:
+          type: boolean
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Enterprises
+  /enterprises/{id}/members/{idMember}/deactivated:
+    put:
+      tags:
+      - Enterprises
+      summary: Deactivate a Member of an Enterprise
+      description: 'Deactivate a Member of an Enterprise.
+
+
+        NOTE: Deactivation is not possible for enterprises that have opted in to user management via AdminHub.'
+      operationId: enterprises-id-members-idMember-deactivated
+      security:
+      - OAuth2:
+        - write:enterprise:trello
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: ID of the Member to deactive.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: value
+        in: query
+        description: Determines whether the user is deactivated or not.
+        required: true
+        schema:
+          type: boolean
+      - name: fields
+        in: query
+        description: A comma separated list of any valid values that the [nested member field resource]() accepts.
+        required: false
+        explode: false
+        style: form
+        schema:
+          $ref: '#/components/schemas/MemberFields'
+          default: avatarHash, fullName, initials, username
+      - name: organization_fields
+        in: query
+        description: Any valid value that the [nested organization resource](/cloud/trello/guides/rest-api/nested-resources/) accepts.
+        required: false
+        explode: false
+        style: form
+        schema:
+          $ref: '#/components/schemas/OrganizationFields'
+          default: displayName
+      - name: board_fields
+        in: query
+        description: Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts.
+        required: false
+        schema:
+          $ref: '#/components/schemas/BoardFields'
+          default: name
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+  /enterprises/{id}/admins/{idMember}:
+    put:
+      tags:
+      - Enterprises
+      summary: Update Member to be admin of Enterprise
+      description: 'Make Member an admin of Enterprise.
+
+
+        NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.'
+      operationId: put-enterprises-id-admins-idmember
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: ID of member to be made an admin of enterprise.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+    delete:
+      tags:
+      - Enterprises
+      summary: Remove a Member as admin from Enterprise
+      description: 'Remove a member as admin from an enterprise.
+
+
+        NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.'
+      operationId: enterprises-id-organizations-idmember
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idMember
+        in: path
+        description: ID of the member to be removed as an admin from enterprise.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+  /enterprises/{id}/organizations/{idOrg}:
+    delete:
+      tags:
+      - Enterprises
+      summary: Delete an Organization from an Enterprise
+      description: Remove an organization from an enterprise.
+      operationId: delete-enterprises-id-organizations-idorg
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idOrg
+        in: path
+        description: ID of the organization to be removed from the enterprise.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+  /enterprises/{id}/organizations/bulk/{idOrganizations}:
+    get:
+      tags:
+      - Enterprises
+      summary: Bulk accept a set of organizations to an Enterprise
+      description: 'Accept an array of organizations to an enterprise.
+
+
+        NOTE: For enterprises that have opted in to user management via AdminHub, this endpoint will result in organizations being added to the enterprise asynchronously. A 200 response only indicates receipt of the request, it does not indicate successful addition to the enterprise.'
+      operationId: get-enterprises-id-organizations-bulk-idOrganizations
+      parameters:
+      - name: id
+        in: path
+        description: ID of the enterprise to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/TrelloID'
+      - name: idOrganizations
+        in: path
+        description: An array of IDs of the organizations to be removed from the enterprise.
+        required: true
+        schema:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Organization'
+      deprecated: false
+      responses:
+        '200':
+          description: Success
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    PendingOrganizations:
+      type: object
+      properties:
+        id:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+          example: 617ac9070293e6612650e0ca
+        idMember:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5589c3ea49b40cedc28cf70e
+        memberRequestor:
+          type: object
+          properties:
+            id:
+              type: string
+              $ref: '#/components/schemas/TrelloID'
+              example: 59cd149051aa57a706962996
+            fullName:
+              type: string
+              example: Bob Loblaw (Trello)
+        date:
+          type: string
+          format: date
+          example: '2018-10-17T19:10:14.808Z'
+        displayName:
+          type: string
+          example: Organization Name
+        membershipCount:
+          type: number
+          example: 2
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          example: null
+        transferability:
+          type: object
+          properties:
+            transferrable:
+              type: boolean
+              example: true
+            newBillableMembers:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f1091
+                  fullName:
+                    type: string
+                    example: Bob Loblaw
+                  username:
+                    type: string
+                    example: bobloblaw
+                  initials:
+                    type: string
+                    example: BL
+                  avatarHash:
+                    type: string
+                    example: fc8faaaee46666a4eb8b626c08933e16
+            restrictedMembers:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f1091
+                  fullName:
+                    type: string
+                    example: Bob Loblaw
+                  username:
+                    type: string
+                    example: bobloblaw
+                  initials:
+                    type: string
+                    example: BL
+                  avatarHash:
+                    type: string
+                    example: fc8faaaee46666a4eb8b626c08933e16
+    Enterprise:
+      type: object
+      properties:
+        id:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+          example: 59c15d19566e197b23665901
+        name:
+          type: string
+          example: bentley_test
+        displayName:
+          type: string
+          example: Bentley's Test Enterprise!
+        logoHash:
+          type:
+          - string
+          - 'null'
+          example: null
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          example: null
+        prefs:
+          type: object
+          properties:
+            ssoOnly:
+              type: boolean
+              example: false
+            signup:
+              type: object
+              properties:
+                banner:
+                  type: string
+                bannerHtml:
+                  type: string
+                  example: '<p>Hello</p>
+
+                    '
+            mandatoryTransferDate:
+              type:
+              - string
+              - 'null'
+              format: date
+              example: null
+            brandingColor:
+              type: string
+            autoJoinOrganizations:
+              type: boolean
+              example: false
+            notifications:
+              type: object
+            maxMembers:
+              type:
+              - number
+              - 'null'
+              example: null
+        organizationPrefs:
+          $ref: '#/components/schemas/OrganizationPrefs'
+        ssoActivationFailed:
+          type: boolean
+        idAdmins:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        enterpriseDomains:
+          type: array
+          items:
+            type: string
+            format: url
+        isRealEnterprise:
+          type: boolean
+          example: true
+        pluginWhitelistingEnabled:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        products:
+          type: array
+          items:
+            type: number
+            format: integer
+        licenses:
+          type: object
+          properties:
+            maxMembers:
+              type:
+              - number
+              - 'null'
+              format: integer
+              example: null
+            totalMembers:
+              type: number
+              format: integer
+              example: 5
+            relatedEnterprises:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: enterprise_name
+                  displayName:
+                    type: string
+                    example: My Test Enterprise!
+                  count:
+                    type: number
+                    example: 5
+                    format: integer
+        domains:
+          type: array
+          items:
+            type: string
+            format: url
+        dateOrganizationPrefsLastUpdated:
+          type: string
+          example: '2019-08-22T18:15:53.546Z'
+          format: date
+        idp:
+          type: object
+          properties:
+            requestSigned:
+              type: boolean
+              example: false
+            certificate:
+              type:
+              - string
+              - 'null'
+              example: null
+            loginUrl:
+              type:
+              - string
+              - 'null'
+              format: url
+              example: null
+    EnterpriseAuditLog:
+      type: object
+      properties:
+        idAction:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5dced8665015383ed5ca248c
+        type:
+          type: string
+          example: addOrganizationToEnterprise
+        date:
+          type: string
+          format: date
+          example: '2018-04-26T17:03:25.155Z'
+        memberCreator:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5bc79d4206526d2279c1e6ea
+            username:
+              type: string
+              example: bobloblaw
+            fullName:
+              type: string
+              example: Bob Loblaw (Trello)
+        organization:
+          type: object
+          properties:
+            enterpriseJoinRequest:
+              type:
+              - object
+              - 'null'
+              properties:
+                idEnterprise:
+                  $ref: '#/components/schemas/TrelloID'
+                  example: 617ac9070293e6612650e0ca
+                idMember:
+                  $ref: '#/components/schemas/TrelloID'
+                  example: 5bc79d4206526d2279c1e6ea
+                date:
+                  type: string
+                  format: date
+                  example: '2018-04-26T17:03:25.155Z'
+            id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 617ac9070293e6612650e0ca
+            name:
+              type: string
+              example: organization name
+        member:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5bc79d4206526d2279c1e6ea
+            username:
+              type: string
+              example: bentleycook
+            fullName:
+              type: string
+              example: Bentley Cook
+    Organization:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+        displayName:
+          type: string
+          example: Organization Name
+        dateLastActivity:
+          type: string
+          format: date
+          example: '2018-10-17T19:10:14.808Z'
+        prefs:
+          $ref: '#/components/schemas/OrganizationPrefs'
+        idEnterprise:
+          $ref: '#/components/schemas/TrelloID'
+        offering:
+          type: string
+          example: trello.enterprise
+        url:
+          type: string
+          format: url
+          example: https://trello.com/w/<name>
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+    OrganizationPrefs:
+      type: object
+      properties:
+        boardVisibilityRestrict:
+          type: object
+        boardDeleteRestrict:
+          type: object
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
+            enum:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+          - enterprise
+          - domain
+          example: private
+    EnterpriseAdmin:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5dced8665015383ed5ca248c
+        fullName:
+          type: string
+          example: Bob Loblaw
+        username:
+          type: string
+          example: bobloblaw
+    MemberFields:
+      type: string
+      enum:
+      - id
+    BoardFields:
+      type: string
+      enum:
+      - id
+      - name
+      - desc
+      - descData
+      - closed
+      - idMemberCreator
+      - idOrganization
+      - pinned
+      - url
+      - shortUrl
+      - prefs
+      - labelNames
+      - starred
+      - limits
+      - memberships
+      - enterpriseOwned
+    Membership:
+      type: object
+      properties:
+        managed:
+          type: boolean
+        licensed:
+          type: boolean
+        admin:
+          type: boolean
+        deactivated:
+          type: boolean
+        collaborator:
+          type: boolean
+        member:
+          type: object
+          properties:
+            id:
+              type: string
+            fullname:
+              type: string
+            username:
+              type: string
+            dateLastImpression:
+              type: string
+            email:
+              type: string
+            initials:
+              type: string
+            avatarURL:
+              type: string
+            memberType:
+              type: string
+            confirmed:
+              type: boolean
+          example:
+            id: 646e92a0a016198d3cf81e8a
+            fullname: Lex Math
+            username: amath
+            dateLastImpression: '2023-05-24T22:41:36.406Z'
+            email: amath@trello.com
+            initials: AM
+            avatarURL: trello.com/avatarURL
+            memberType: Admin
+            confirmed: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - code
+      - message
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    OrganizationFields:
+      type: string
+      enum:
+      - id
+      - name
+    Member:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        activityBlocked:
+          type: boolean
+          example: false
+        avatarHash:
+          type: string
+          example: fc8faaaee46666a4eb8b626c08933e16
+        avatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/fc8faaaee46666a4eb8b626c08933e16
+        bio:
+          type: string
+          example: 👋 I'm a developer advocate at Trello!
+        bioData:
+          type: object
+          properties:
+            emoji:
+              type: object
+        confirmed:
+          type: boolean
+          example: true
+        fullName:
+          type: string
+          example: Bentley Cook
+        idEnterprise:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idEnterprisesDeactivated:
+          type: array
+          items:
+            type: string
+        idMemberReferrer:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        idPremOrgsAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        initials:
+          type: string
+          example: BC
+        memberType:
+          type: string
+          enum:
+          - normal
+          - ghost
+          example: normal
+        nonPublic:
+          type: object
+          description: 'Profile data with restricted visibility. These fields are visible only to members of the
+
+            same organization. The values here (full name, for example) may differ from the values
+
+            at the top level of the response.
+
+            '
+          properties:
+            fullName:
+              type: string
+              example: Bentley Cook
+            initials:
+              type: string
+              example: BC
+            avatarUrl:
+              type: string
+              format: url
+              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
+              description: A URL that references the non-public avatar for the member
+            avatarHash:
+              type: string
+              example: db2adf80c2e6c26b76e1f10400eb4c45
+        nonPublicAvailable:
+          type: boolean
+          example: false
+          description: Whether the response contains non-public profile data for the member
+        products:
+          type: array
+          items:
+            type: integer
+        url:
+          type: string
+          format: url
+          example: https://trello.com/bentleycook
+        username:
+          type: string
+          example: bentleycook
+        status:
+          type: string
+          enum:
+          - disconnected
+          example: disconnected
+        aaEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+          example: null
+        aaEnrolledDate:
+          type:
+          - string
+          - 'null'
+          example: null
+        aaId:
+          type:
+          - string
+          - 'null'
+          example: null
+        avatarSource:
+          type: string
+          enum:
+          - gravatar
+          - upload
+          example: gravatar
+        email:
+          type: string
+          example: bcook@atlassian.com
+        gravatarHash:
+          type: string
+          example: 0a1e804f6e35a65ae5e1f7ef4c92471c
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idEnterprisesAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        limits:
+          $ref: '#/components/schemas/LimitsObject'
+        loginTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - password
+            - saml
+            example: password
+        marketingOptIn:
+          type: object
+          properties:
+            optedIn:
+              type: boolean
+              example: false
+            date:
+              type: string
+              format: date
+              example: '2018-04-26T17:03:25.155Z'
+        messagesDismissed:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ad-security-features
+            count:
+              type: string
+              example: 4
+            lastDismissed:
+              type: string
+              format: date
+              example: '2019-03-11T20:19:46.809Z'
+            _id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5995d44573d197eada632a32
+        oneTimeMessagesDismissed:
+          type: array
+          items:
+            type: string
+        prefs:
+          $ref: '#/components/schemas/MemberPrefs'
+        trophies:
+          type: array
+          items:
+            type: string
+        uploadedAvatarHash:
+          type: string
+          example: dac3ad49ff117829dd63a79bb2ea3426
+        uploadedAvatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/dac3ad49ff117829dd63a79bb2ea3426
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+        isAaMastered:
+          type: boolean
+          example: false
+        ixUpdate:
+          type: number
+          example: '48427'
+        idBoardsPinned:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrelloID'
+    TransferrableOrganization:
+      type: object
+      properties:
+        transferrable:
+          type: boolean
+          example: true
+        newBillableMembers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/TrelloID'
+                example: 5ab10be237846c43015f1091
+              fullName:
+                type: string
+                example: Bob Loblaw
+              username:
+                type: string
+                example: bobloblaw
+              initials:
+                type: string
+                example: BL
+              avatarHash:
+                type: string
+                example: fc8faaaee46666a4eb8b626c08933e16
+        restrictedMembers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/TrelloID'
+                example: 5ab10be237846c43015f1091
+              fullName:
+                type: string
+                example: Bob Loblaw
+              username:
+                type: string
+                example: bobloblaw
+              initials:
+                type: string
+                example: BL
+              avatarHash:
+                type: string
+                example: fc8faaaee46666a4eb8b626c08933e16
+    ClaimableOrganizations:
+      type: object
+      properties:
+        organizations:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: organization_name
+              displayName:
+                type: string
+                example: Organization Name
+              activeMembershipCount:
+                type: number
+                example: 5
+              idActiveAdmins:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrelloID'
+              products:
+                type: array
+                items:
+                  type: number
+                  format: integer
+              id:
+                type: string
+                $ref: '#/components/schemas/TrelloID'
+                example: 617abd5995eae45169a11059
+              logoUrl:
+                type:
+                - string
+                - 'null'
+                example: null
+              dateLastActive:
+                type:
+                - string
+                - 'null'
+                example: '2019-08-22T18:15:53.546Z'
+                format: date
+                description: The date of the most recent activity on any of the boards in the workspace. If the workspace has no boards, or the boards have no activity, this value will be null.
+        claimableCount:
+          type: number
+          example: 2
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: query
+      name: key
+    APIToken:
+      in: query
+      name: token
+      type: apiKey
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.atlassian.com/authorize
+          tokenUrl: https://auth.atlassian.com/authorize/oauth/token
+          scopes:
+            read:board:trello: Read cards, lists, and comments in boards.
+            write:board:trello: Create and update cards, lists, and comments in boards.
+            write:board:membership:trello: Add, remove, or modify memberships on boards.
+            read:organization:trello: Read workspaces.
+            write:organization:trello: Update workspaces.
+            write:organization:membership:trello: Add, remove, or modify memberships on workspaces.
+            read:member:trello: Read email address, public name, public avatar, and memberships of boards, workspaces, and enterprises.
+            write:member:trello: Upload custom emojis and stickers, star boards, and save searches.
+            read:enterprise:trello: Read enterprises.
+            write:enterprise:trello: Update and manage enterprises.
