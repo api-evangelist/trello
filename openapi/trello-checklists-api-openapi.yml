@@ -458,6 +458,14 @@ paths:
     servers:
     - url: https://api.trello.com/1
 components:
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   schemas:
     CheckItem:
       type: object
@@ -512,6 +520,10 @@ components:
           description: The check items in the checklist.
           items:
             $ref: '#/components/schemas/CheckItem'
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
     posStringOrNumber:
       oneOf:
       - type: string
@@ -521,18 +533,6 @@ components:
       - type: number
         format: float
         example: 1293.5
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

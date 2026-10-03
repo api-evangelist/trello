@@ -237,10 +237,6 @@ components:
           - pink
           - lime
           - null
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
     Color:
       type:
       - string
@@ -256,6 +252,10 @@ components:
       - sky
       - pink
       - lime
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
   securitySchemes:
     apiKey:
       type: apiKey

@@ -303,15 +303,6 @@ components:
         idOrganizationOwner:
           type: string
           description: The ID of the organization that owns the plugin.
-    Plugin_2:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
     PluginListing:
       type: object
       properties:
@@ -330,6 +321,15 @@ components:
         overview:
           type: string
           example: ''
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    Plugin_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
   securitySchemes:
     apiKey:
       type: apiKey

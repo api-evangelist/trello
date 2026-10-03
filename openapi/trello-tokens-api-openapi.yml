@@ -294,33 +294,6 @@ paths:
     - url: https://api.trello.com/1
 components:
   schemas:
-    Webhook:
-      type: object
-      description: Represents a webhook that delivers HTTP POST callbacks to a specified URL when changes occur on a watched Trello model.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the webhook.
-        description:
-          type: string
-          description: A description of the webhook.
-        idModel:
-          type: string
-          description: The ID of the model being watched.
-        callbackURL:
-          type: string
-          format: uri
-          description: The URL that will receive webhook callbacks.
-        active:
-          type: boolean
-          description: Whether the webhook is active.
-        consecutiveFailures:
-          type: integer
-          description: The number of consecutive delivery failures.
-        firstConsecutiveFailDate:
-          type: string
-          format: date-time
-          description: The date of the first consecutive failure.
     Token:
       type: object
       description: Represents an API token that grants access to Trello resources on behalf of a user.
@@ -360,6 +333,81 @@ components:
               write:
                 type: boolean
                 description: Whether write access is granted.
+    Webhook:
+      type: object
+      description: Represents a webhook that delivers HTTP POST callbacks to a specified URL when changes occur on a watched Trello model.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the webhook.
+        description:
+          type: string
+          description: A description of the webhook.
+        idModel:
+          type: string
+          description: The ID of the model being watched.
+        callbackURL:
+          type: string
+          format: uri
+          description: The URL that will receive webhook callbacks.
+        active:
+          type: boolean
+          description: Whether the webhook is active.
+        consecutiveFailures:
+          type: integer
+          description: The number of consecutive delivery failures.
+        firstConsecutiveFailDate:
+          type: string
+          format: date-time
+          description: The date of the first consecutive failure.
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    Token_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5da728c55235b443c5b97181
+        identifier:
+          type: string
+          example: App Name
+        idMember:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5589c3ea49b40cedc28cf70e
+        dateCreated:
+          type: string
+          format: date-time
+          example: '2019-10-16T14:27:17.304Z'
+        dateExpires:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: null
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenPermission'
+    TokenFields:
+      type: string
+      enum:
+      - identifier
+      - idMember
+      - dateCreated
+      - dateExpires
+      - permissions
     TrelloID:
       type: string
       pattern: ^[0-9a-fA-F]{24}$
@@ -430,28 +478,10 @@ components:
             needsNewBackups:
               type: boolean
               example: false
-    LimitsObject:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - ok
-          - warning
-        disableAt:
-          type: number
-          example: 36000
-        warnAt:
-          type: number
-          example: 32400
-    TokenFields:
+    MemberFields:
       type: string
       enum:
-      - identifier
-      - idMember
-      - dateCreated
-      - dateExpires
-      - permissions
+      - id
     Member:
       type: object
       properties:
@@ -657,10 +687,26 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/TrelloID'
-    MemberFields:
-      type: string
-      enum:
-      - id
+    TokenPermission:
+      type: object
+      properties:
+        idModel:
+          oneOf:
+          - $ref: '#/components/schemas/TrelloID'
+          - type: string
+            enum:
+            - '*'
+        modelType:
+          type: string
+          enum:
+          - board
+          - member
+          - organization
+          - enterprise
+        read:
+          type: boolean
+        write:
+          type: boolean
     Webhook_2:
       type: object
       properties:
@@ -689,52 +735,6 @@ components:
           - 'null'
           format: date
           example: null
-    TokenPermission:
-      type: object
-      properties:
-        idModel:
-          oneOf:
-          - $ref: '#/components/schemas/TrelloID'
-          - type: string
-            enum:
-            - '*'
-        modelType:
-          type: string
-          enum:
-          - board
-          - member
-          - organization
-          - enterprise
-        read:
-          type: boolean
-        write:
-          type: boolean
-    Token_2:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5da728c55235b443c5b97181
-        identifier:
-          type: string
-          example: App Name
-        idMember:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5589c3ea49b40cedc28cf70e
-        dateCreated:
-          type: string
-          format: date-time
-          example: '2019-10-16T14:27:17.304Z'
-        dateExpires:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: null
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenPermission'
   securitySchemes:
     apiKey:
       type: apiKey

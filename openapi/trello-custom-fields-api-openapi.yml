@@ -329,14 +329,6 @@ paths:
     servers:
     - url: https://api.trello.com/1
 components:
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
   schemas:
     CustomFieldItem:
       type: object
@@ -427,15 +419,10 @@ components:
                 type: string
               pos:
                 type: integer
-    posStringOrNumber:
-      oneOf:
-      - type: string
-        enum:
-        - top
-        - bottom
-      - type: number
-        format: float
-        example: 1293.5
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
     CustomField_2:
       type: object
       properties:
@@ -493,10 +480,23 @@ components:
         type:
           type: string
           example: list
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
+    posStringOrNumber:
+      oneOf:
+      - type: string
+        enum:
+        - top
+        - bottom
+      - type: number
+        format: float
+        example: 1293.5
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

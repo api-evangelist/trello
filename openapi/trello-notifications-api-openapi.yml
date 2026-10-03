@@ -535,6 +535,52 @@ components:
           description: The ID of the member who triggered the notification.
         memberCreator:
           $ref: '#/components/schemas/Member'
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    OrganizationFields:
+      type: string
+      enum:
+      - id
+      - name
+    MemberFields:
+      type: string
+      enum:
+      - id
+    BoardFields:
+      type: string
+      enum:
+      - id
+      - name
+      - desc
+      - descData
+      - closed
+      - idMemberCreator
+      - idOrganization
+      - pinned
+      - url
+      - shortUrl
+      - prefs
+      - labelNames
+      - starred
+      - limits
+      - memberships
+      - enterpriseOwned
+    NotificationFields:
+      type: string
+      enum:
+      - id
+      - unread
+      - type
+      - date
+      - dateRead
+      - data
+      - card
+      - board
+      - idMemberCreator
+      - idAction
+      - reactions
     LimitsObject:
       type: object
       properties:
@@ -549,6 +595,304 @@ components:
         warnAt:
           type: number
           example: 32400
+    OrganizationPrefs:
+      type: object
+      properties:
+        boardVisibilityRestrict:
+          type: object
+        boardDeleteRestrict:
+          type: object
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
+            enum:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+          - enterprise
+          - domain
+          example: private
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    Member_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        activityBlocked:
+          type: boolean
+          example: false
+        avatarHash:
+          type: string
+          example: fc8faaaee46666a4eb8b626c08933e16
+        avatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/fc8faaaee46666a4eb8b626c08933e16
+        bio:
+          type: string
+          example: 👋 I'm a developer advocate at Trello!
+        bioData:
+          type: object
+          properties:
+            emoji:
+              type: object
+        confirmed:
+          type: boolean
+          example: true
+        fullName:
+          type: string
+          example: Bentley Cook
+        idEnterprise:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idEnterprisesDeactivated:
+          type: array
+          items:
+            type: string
+        idMemberReferrer:
+          $ref: '#/components/schemas/TrelloID'
+          example: null
+        idPremOrgsAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        initials:
+          type: string
+          example: BC
+        memberType:
+          type: string
+          enum:
+          - normal
+          - ghost
+          example: normal
+        nonPublic:
+          type: object
+          description: 'Profile data with restricted visibility. These fields are visible only to members of the
+
+            same organization. The values here (full name, for example) may differ from the values
+
+            at the top level of the response.
+
+            '
+          properties:
+            fullName:
+              type: string
+              example: Bentley Cook
+            initials:
+              type: string
+              example: BC
+            avatarUrl:
+              type: string
+              format: url
+              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
+              description: A URL that references the non-public avatar for the member
+            avatarHash:
+              type: string
+              example: db2adf80c2e6c26b76e1f10400eb4c45
+        nonPublicAvailable:
+          type: boolean
+          example: false
+          description: Whether the response contains non-public profile data for the member
+        products:
+          type: array
+          items:
+            type: integer
+        url:
+          type: string
+          format: url
+          example: https://trello.com/bentleycook
+        username:
+          type: string
+          example: bentleycook
+        status:
+          type: string
+          enum:
+          - disconnected
+          example: disconnected
+        aaEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+          example: null
+        aaEnrolledDate:
+          type:
+          - string
+          - 'null'
+          example: null
+        aaId:
+          type:
+          - string
+          - 'null'
+          example: null
+        avatarSource:
+          type: string
+          enum:
+          - gravatar
+          - upload
+          example: gravatar
+        email:
+          type: string
+          example: bcook@atlassian.com
+        gravatarHash:
+          type: string
+          example: 0a1e804f6e35a65ae5e1f7ef4c92471c
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        idEnterprisesAdmin:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        limits:
+          $ref: '#/components/schemas/LimitsObject'
+        loginTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - password
+            - saml
+            example: password
+        marketingOptIn:
+          type: object
+          properties:
+            optedIn:
+              type: boolean
+              example: false
+            date:
+              type: string
+              format: date
+              example: '2018-04-26T17:03:25.155Z'
+        messagesDismissed:
+          type: object
+          properties:
+            name:
+              type: string
+              example: ad-security-features
+            count:
+              type: string
+              example: 4
+            lastDismissed:
+              type: string
+              format: date
+              example: '2019-03-11T20:19:46.809Z'
+            _id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5995d44573d197eada632a32
+        oneTimeMessagesDismissed:
+          type: array
+          items:
+            type: string
+        prefs:
+          $ref: '#/components/schemas/MemberPrefs'
+        trophies:
+          type: array
+          items:
+            type: string
+        uploadedAvatarHash:
+          type: string
+          example: dac3ad49ff117829dd63a79bb2ea3426
+        uploadedAvatarUrl:
+          type: string
+          format: url
+          example: https://trello-avatars.s3.amazonaws.com/dac3ad49ff117829dd63a79bb2ea3426
+        premiumFeatures:
+          type: array
+          items:
+            type: string
+        isAaMastered:
+          type: boolean
+          example: false
+        ixUpdate:
+          type: number
+          example: '48427'
+        idBoardsPinned:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TrelloID'
     Board:
       type: object
       required:
@@ -656,64 +1000,6 @@ components:
           - 'null'
         enterpriseOwned:
           type: boolean
-    CardFields:
-      type: string
-      enum:
-      - id
-      - address
-      - badges
-      - checkItemStates
-      - closed
-      - coordinates
-      - creationMethod
-      - dueComplete
-      - dateLastActivity
-      - desc
-      - descData
-      - due
-      - dueReminder
-      - idBoard
-      - idChecklists
-      - idLabels
-      - idList
-      - idMembers
-      - idMembersVoted
-      - idShort
-      - idAttachmentCover
-      - labels
-      - limits
-      - locationName
-      - manualCoverAttachment
-      - name
-      - pos
-      - shortLink
-      - shortUrl
-      - subscribed
-      - url
-      - cover
-      - isTemplate
-      description: The fields on a Card.
-    TrelloList:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-        name:
-          type: string
-          description: The name of the list
-          example: Things to buy today
-        closed:
-          type: boolean
-        pos:
-          type: number
-        softLimit:
-          type: string
-        idBoard:
-          type: string
-        subscribed:
-          type: boolean
-        limits:
-          $ref: '#/components/schemas/Limits'
     Organization:
       type: object
       properties:
@@ -751,6 +1037,56 @@ components:
           type: array
           items:
             type: string
+    Color:
+      type:
+      - string
+      - 'null'
+      enum:
+      - yellow
+      - purple
+      - blue
+      - red
+      - green
+      - orange
+      - black
+      - sky
+      - pink
+      - lime
+    TrelloList:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the list
+          example: Things to buy today
+        closed:
+          type: boolean
+        pos:
+          type: number
+        softLimit:
+          type: string
+        idBoard:
+          type: string
+        subscribed:
+          type: boolean
+        limits:
+          $ref: '#/components/schemas/Limits'
+    CardAging:
+      type: string
+      enum:
+      - pirate
+      - regular
+    Limits:
+      type: object
+      properties:
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
     Card:
       type: object
       properties:
@@ -965,42 +1301,15 @@ components:
             isTemplate:
               type: boolean
               example: false
-    Limits:
+    Checklist:
       type: object
       properties:
-        attachments:
-          type: object
-          properties:
-            perBoard:
-              type: object
-              $ref: '#/components/schemas/LimitsObject'
-    OrganizationPrefs:
-      type: object
-      properties:
-        boardVisibilityRestrict:
-          type: object
-        boardDeleteRestrict:
-          type: object
-        attachmentRestrictions:
-          type: array
-          items:
-            type: string
-            enum:
-            - computer
-            - trello
-            - google-drive
-            - box
-            - onedrive
-            - link
-        permissionLevel:
-          type: string
-          enum:
-          - org
-          - private
-          - public
-          - enterprise
-          - domain
-          example: private
+        id:
+          $ref: '#/components/schemas/TrelloID'
+    ListFields:
+      type: string
+      enum:
+      - id
     Notification_2:
       properties:
         id:
@@ -1038,6 +1347,43 @@ components:
         reactions:
           type: array
           example: []
+    CardFields:
+      type: string
+      enum:
+      - id
+      - address
+      - badges
+      - checkItemStates
+      - closed
+      - coordinates
+      - creationMethod
+      - dueComplete
+      - dateLastActivity
+      - desc
+      - descData
+      - due
+      - dueReminder
+      - idBoard
+      - idChecklists
+      - idLabels
+      - idList
+      - idMembers
+      - idMembersVoted
+      - idShort
+      - idAttachmentCover
+      - labels
+      - limits
+      - locationName
+      - manualCoverAttachment
+      - name
+      - pos
+      - shortLink
+      - shortUrl
+      - subscribed
+      - url
+      - cover
+      - isTemplate
+      description: The fields on a Card.
     Prefs:
       type: object
       properties:
@@ -1099,327 +1445,22 @@ components:
           type: boolean
         canInvite:
           type: boolean
-    MemberFields:
-      type: string
-      enum:
-      - id
-    BoardFields:
-      type: string
-      enum:
-      - id
-      - name
-      - desc
-      - descData
-      - closed
-      - idMemberCreator
-      - idOrganization
-      - pinned
-      - url
-      - shortUrl
-      - prefs
-      - labelNames
-      - starred
-      - limits
-      - memberships
-      - enterpriseOwned
-    ListFields:
-      type: string
-      enum:
-      - id
-    NotificationFields:
-      type: string
-      enum:
-      - id
-      - unread
-      - type
-      - date
-      - dateRead
-      - data
-      - card
-      - board
-      - idMemberCreator
-      - idAction
-      - reactions
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
-    MemberPrefs:
+    ImageDescriptor:
       type: object
       properties:
-        timezoneInfo:
-          type: object
-          properties:
-            offsetCurrent:
-              type: integer
-              example: 360
-            timezoneCurrent:
-              type: string
-              example: CST
-            offsetNext:
-              type: integer
-              example: 300
-            dateNext:
-              type: string
-              format: date
-              example: '2020-03-08T08:00:00.000Z'
-            timezoneNext:
-              type: string
-              example: CDT
-        privacy:
-          type: object
-          properties:
-            fullName:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-            avatar:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-        sendSummaries:
-          type: boolean
-          example: true
-        minutesBetweenSummaries:
+        width:
+          description: The width of the image.
           type: integer
-          example: 60
-        minutesBeforeDeadlineToNotify:
+          example: 100
+        height:
+          description: The height of the image.
           type: integer
-          example: 1440
-        colorBlind:
-          type: boolean
-          example: true
-        locale:
-          type: string
-          example: en-AU
-        timezone:
-          type: string
-          example: America/Chicago
-        twoFactor:
-          type: object
-          properties:
-            enabled:
-              type: boolean
-              example: true
-            needsNewBackups:
-              type: boolean
-              example: false
-    OrganizationFields:
-      type: string
-      enum:
-      - id
-      - name
-    Member_2:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-        activityBlocked:
-          type: boolean
-          example: false
-        avatarHash:
-          type: string
-          example: fc8faaaee46666a4eb8b626c08933e16
-        avatarUrl:
-          type: string
-          format: url
-          example: https://trello-avatars.s3.amazonaws.com/fc8faaaee46666a4eb8b626c08933e16
-        bio:
-          type: string
-          example: 👋 I'm a developer advocate at Trello!
-        bioData:
-          type: object
-          properties:
-            emoji:
-              type: object
-        confirmed:
-          type: boolean
-          example: true
-        fullName:
-          type: string
-          example: Bentley Cook
-        idEnterprise:
-          type: string
-          $ref: '#/components/schemas/TrelloID'
-        idEnterprisesDeactivated:
-          type: array
-          items:
-            type: string
-        idMemberReferrer:
-          $ref: '#/components/schemas/TrelloID'
-          example: null
-        idPremOrgsAdmin:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrelloID'
-        initials:
-          type: string
-          example: BC
-        memberType:
-          type: string
-          enum:
-          - normal
-          - ghost
-          example: normal
-        nonPublic:
-          type: object
-          description: 'Profile data with restricted visibility. These fields are visible only to members of the
-
-            same organization. The values here (full name, for example) may differ from the values
-
-            at the top level of the response.
-
-            '
-          properties:
-            fullName:
-              type: string
-              example: Bentley Cook
-            initials:
-              type: string
-              example: BC
-            avatarUrl:
-              type: string
-              format: url
-              example: https://trello-members.s3.amazonaws.com/5b02e7f4e1facdc393169f9d/db2adf80c2e6c26b76e1f10400eb4c45
-              description: A URL that references the non-public avatar for the member
-            avatarHash:
-              type: string
-              example: db2adf80c2e6c26b76e1f10400eb4c45
-        nonPublicAvailable:
-          type: boolean
-          example: false
-          description: Whether the response contains non-public profile data for the member
-        products:
-          type: array
-          items:
-            type: integer
+          example: 64
         url:
-          type: string
+          description: The URL of the image.
           format: url
-          example: https://trello.com/bentleycook
-        username:
           type: string
-          example: bentleycook
-        status:
-          type: string
-          enum:
-          - disconnected
-          example: disconnected
-        aaEmail:
-          type:
-          - string
-          - 'null'
-          format: email
-          example: null
-        aaEnrolledDate:
-          type:
-          - string
-          - 'null'
-          example: null
-        aaId:
-          type:
-          - string
-          - 'null'
-          example: null
-        avatarSource:
-          type: string
-          enum:
-          - gravatar
-          - upload
-          example: gravatar
-        email:
-          type: string
-          example: bcook@atlassian.com
-        gravatarHash:
-          type: string
-          example: 0a1e804f6e35a65ae5e1f7ef4c92471c
-        idBoards:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrelloID'
-        idOrganizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrelloID'
-        idEnterprisesAdmin:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrelloID'
-        limits:
-          $ref: '#/components/schemas/LimitsObject'
-        loginTypes:
-          type: array
-          items:
-            type: string
-            enum:
-            - password
-            - saml
-            example: password
-        marketingOptIn:
-          type: object
-          properties:
-            optedIn:
-              type: boolean
-              example: false
-            date:
-              type: string
-              format: date
-              example: '2018-04-26T17:03:25.155Z'
-        messagesDismissed:
-          type: object
-          properties:
-            name:
-              type: string
-              example: ad-security-features
-            count:
-              type: string
-              example: 4
-            lastDismissed:
-              type: string
-              format: date
-              example: '2019-03-11T20:19:46.809Z'
-            _id:
-              $ref: '#/components/schemas/TrelloID'
-              example: 5995d44573d197eada632a32
-        oneTimeMessagesDismissed:
-          type: array
-          items:
-            type: string
-        prefs:
-          $ref: '#/components/schemas/MemberPrefs'
-        trophies:
-          type: array
-          items:
-            type: string
-        uploadedAvatarHash:
-          type: string
-          example: dac3ad49ff117829dd63a79bb2ea3426
-        uploadedAvatarUrl:
-          type: string
-          format: url
-          example: https://trello-avatars.s3.amazonaws.com/dac3ad49ff117829dd63a79bb2ea3426
-        premiumFeatures:
-          type: array
-          items:
-            type: string
-        isAaMastered:
-          type: boolean
-          example: false
-        ixUpdate:
-          type: number
-          example: '48427'
-        idBoardsPinned:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TrelloID'
+          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
     Label:
       type: object
       properties:
@@ -1444,47 +1485,6 @@ components:
           type: string
           $ref: '#/components/schemas/Color'
           description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
-    Checklist:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-    CardAging:
-      type: string
-      enum:
-      - pirate
-      - regular
-    Color:
-      type:
-      - string
-      - 'null'
-      enum:
-      - yellow
-      - purple
-      - blue
-      - red
-      - green
-      - orange
-      - black
-      - sky
-      - pink
-      - lime
-    ImageDescriptor:
-      type: object
-      properties:
-        width:
-          description: The width of the image.
-          type: integer
-          example: 100
-        height:
-          description: The height of the image.
-          type: integer
-          example: 64
-        url:
-          description: The URL of the image.
-          format: url
-          type: string
-          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
   securitySchemes:
     apiKey:
       type: apiKey
