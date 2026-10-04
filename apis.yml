@@ -272,6 +272,8 @@ apis:
   humanURL: https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/
   baseURL: https://api.trello.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -379,6 +381,9 @@ apis:
   - type: Conventions
     url: conventions/trello-conventions.yml
 common:
+- type: CapabilityMap
+  url: capabilities/trello-capability-edges.yml
+  name: Trello Business Capability Map
 - type: Website
   url: https://trello.com/
 - type: DeveloperPortal
