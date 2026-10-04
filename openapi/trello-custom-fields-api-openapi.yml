@@ -330,38 +330,6 @@ paths:
     - url: https://api.trello.com/1
 components:
   schemas:
-    CustomFieldItem:
-      type: object
-      description: Represents a custom field value set on a specific card.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the custom field item.
-        idCustomField:
-          type: string
-          description: The ID of the custom field definition.
-        idModel:
-          type: string
-          description: The ID of the card.
-        modelType:
-          type: string
-          description: The type of model (card).
-        value:
-          type: object
-          description: The value of the custom field. Structure depends on the field type.
-          properties:
-            text:
-              type: string
-            number:
-              type: string
-            date:
-              type: string
-              format: date-time
-            checked:
-              type: string
-        idValue:
-          type: string
-          description: The ID of the selected option for list-type fields.
     CustomField:
       type: object
       description: Represents a custom field definition on a board that allows structured data to be added to cards.
@@ -419,10 +387,38 @@ components:
                 type: string
               pos:
                 type: integer
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
+    CustomFieldItem:
+      type: object
+      description: Represents a custom field value set on a specific card.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the custom field item.
+        idCustomField:
+          type: string
+          description: The ID of the custom field definition.
+        idModel:
+          type: string
+          description: The ID of the card.
+        modelType:
+          type: string
+          description: The type of model (card).
+        value:
+          type: object
+          description: The value of the custom field. Structure depends on the field type.
+          properties:
+            text:
+              type: string
+            number:
+              type: string
+            date:
+              type: string
+              format: date-time
+            checked:
+              type: string
+        idValue:
+          type: string
+          description: The ID of the selected option for list-type fields.
     CustomField_2:
       type: object
       properties:
@@ -489,6 +485,10 @@ components:
       - type: number
         format: float
         example: 1293.5
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
   parameters:
     idParam:
       name: id

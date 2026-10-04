@@ -401,6 +401,29 @@ paths:
     - url: https://api.trello.com/1
 components:
   schemas:
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
     TrelloList:
       type: object
       description: Represents a list on a Trello board. Lists are vertical columns that contain cards and represent stages in a workflow.
@@ -426,29 +449,6 @@ components:
         softLimit:
           type: string
           description: A soft limit for the number of cards in the list.
-    Membership:
-      type: object
-      description: Represents a membership record linking a member to a board or organization with a specific role.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the membership.
-        idMember:
-          type: string
-          description: The ID of the member.
-        memberType:
-          type: string
-          description: The type of membership.
-          enum:
-          - admin
-          - normal
-          - observer
-        unconfirmed:
-          type: boolean
-          description: Whether the membership is unconfirmed.
-        deactivated:
-          type: boolean
-          description: Whether the membership is deactivated.
     Member:
       type: object
       description: Represents a Trello user who can be a member of boards, organizations, and cards.
@@ -498,68 +498,6 @@ components:
           description: The IDs of boards the member has access to.
           items:
             type: string
-    Action:
-      type: object
-      description: Represents an activity event that occurred on a Trello object, such as creating a card, adding a comment, or moving a card between lists.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the action.
-        idMemberCreator:
-          type: string
-          description: The ID of the member who performed the action.
-        type:
-          type: string
-          description: The type of action that was performed.
-        date:
-          type: string
-          format: date-time
-          description: The date and time the action was performed.
-        data:
-          type: object
-          description: Context data about the action, including references to the objects involved.
-          properties:
-            text:
-              type: string
-              description: The text content of the action, if applicable.
-            board:
-              type: object
-              description: Reference to the board involved in the action.
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-                shortLink:
-                  type: string
-            card:
-              type: object
-              description: Reference to the card involved in the action.
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-                idShort:
-                  type: integer
-                shortLink:
-                  type: string
-            list:
-              type: object
-              description: Reference to the list involved in the action.
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-            old:
-              type: object
-              description: The previous values of fields that were changed.
-        display:
-          type: object
-          description: Display information for rendering the action.
-        memberCreator:
-          $ref: '#/components/schemas/Member'
     Board:
       type: object
       description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
@@ -674,6 +612,96 @@ components:
           type: string
           format: date-time
           description: The date and time the authenticated member last viewed the board.
+    Label:
+      type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the label.
+        idBoard:
+          type: string
+          description: The ID of the board the label belongs to.
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
+    Action:
+      type: object
+      description: Represents an activity event that occurred on a Trello object, such as creating a card, adding a comment, or moving a card between lists.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the action.
+        idMemberCreator:
+          type: string
+          description: The ID of the member who performed the action.
+        type:
+          type: string
+          description: The type of action that was performed.
+        date:
+          type: string
+          format: date-time
+          description: The date and time the action was performed.
+        data:
+          type: object
+          description: Context data about the action, including references to the objects involved.
+          properties:
+            text:
+              type: string
+              description: The text content of the action, if applicable.
+            board:
+              type: object
+              description: Reference to the board involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                shortLink:
+                  type: string
+            card:
+              type: object
+              description: Reference to the card involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                idShort:
+                  type: integer
+                shortLink:
+                  type: string
+            list:
+              type: object
+              description: Reference to the list involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            old:
+              type: object
+              description: The previous values of fields that were changed.
+        display:
+          type: object
+          description: Display information for rendering the action.
+        memberCreator:
+          $ref: '#/components/schemas/Member'
     Card:
       type: object
       description: Represents a Trello card, which is the fundamental unit of work on a board. Cards live within lists and can have members, labels, checklists, attachments, due dates, and comments.
@@ -796,34 +824,29 @@ components:
               type: boolean
             subscribed:
               type: boolean
-    Label:
+    Limits:
       type: object
-      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
       properties:
-        id:
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
+    LimitsObject:
+      type: object
+      properties:
+        status:
           type: string
-          description: The unique identifier for the label.
-        idBoard:
-          type: string
-          description: The ID of the board the label belongs to.
-        name:
-          type: string
-          description: The name of the label.
-        color:
-          type: string
-          description: The color of the label.
           enum:
-          - yellow
-          - purple
-          - blue
-          - red
-          - green
-          - orange
-          - black
-          - sky
-          - pink
-          - lime
-          - null
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
     Color:
       type:
       - string
@@ -839,33 +862,39 @@ components:
       - sky
       - pink
       - lime
-    LimitsObject:
+    Label_2:
       type: object
       properties:
-        status:
+        id:
+          description: The ID of the label.
           type: string
-          enum:
-          - ok
-          - warning
-        disableAt:
-          type: number
-          example: 36000
-        warnAt:
-          type: number
-          example: 32400
+          $ref: '#/components/schemas/TrelloID'
+        idBoard:
+          type: string
+          description: The ID of the board the label is on.
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961414
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name displayed for the label.
+          example: Overdue
+          minLength: 0
+          maxLength: 16384
+        color:
+          type: string
+          $ref: '#/components/schemas/Color'
+          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
+    Checklist:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
     TrelloID:
       type: string
       pattern: ^[0-9a-fA-F]{24}$
       example: 5abbe4b7ddc1b351ef961414
-    Limits:
-      type: object
-      properties:
-        attachments:
-          type: object
-          properties:
-            perBoard:
-              type: object
-              $ref: '#/components/schemas/LimitsObject'
     Card_2:
       type: object
       properties:
@@ -1080,35 +1109,6 @@ components:
             isTemplate:
               type: boolean
               example: false
-    Label_2:
-      type: object
-      properties:
-        id:
-          description: The ID of the label.
-          type: string
-          $ref: '#/components/schemas/TrelloID'
-        idBoard:
-          type: string
-          description: The ID of the board the label is on.
-          $ref: '#/components/schemas/TrelloID'
-          example: 5abbe4b7ddc1b351ef961414
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name displayed for the label.
-          example: Overdue
-          minLength: 0
-          maxLength: 16384
-        color:
-          type: string
-          $ref: '#/components/schemas/Color'
-          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
-    Checklist:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
   parameters:
     idParam:
       name: id

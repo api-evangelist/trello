@@ -446,6 +446,34 @@ components:
           type: string
           format: date-time
           description: The date and time the authenticated member last viewed the board.
+    Label:
+      type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the label.
+        idBoard:
+          type: string
+          description: The ID of the board the label belongs to.
+        name:
+          type: string
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
     Organization:
       type: object
       description: Represents a Trello organization (workspace), which is a group of members who share boards.
@@ -610,174 +638,22 @@ components:
               type: boolean
             subscribed:
               type: boolean
-    Label:
-      type: object
-      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the label.
-        idBoard:
-          type: string
-          description: The ID of the board the label belongs to.
-        name:
-          type: string
-          description: The name of the label.
-        color:
-          type: string
-          description: The color of the label.
-          enum:
-          - yellow
-          - purple
-          - blue
-          - red
-          - green
-          - orange
-          - black
-          - sky
-          - pink
-          - lime
-          - null
-    Color:
-      type:
-      - string
-      - 'null'
-      enum:
-      - yellow
-      - purple
-      - blue
-      - red
-      - green
-      - orange
-      - black
-      - sky
-      - pink
-      - lime
-    LimitsObject:
+    ImageDescriptor:
       type: object
       properties:
-        status:
-          type: string
-          enum:
-          - ok
-          - warning
-        disableAt:
-          type: number
-          example: 36000
-        warnAt:
-          type: number
-          example: 32400
-    CardAging:
-      type: string
-      enum:
-      - pirate
-      - regular
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
-    OrganizationPrefs:
-      type: object
-      properties:
-        boardVisibilityRestrict:
-          type: object
-        boardDeleteRestrict:
-          type: object
-        attachmentRestrictions:
-          type: array
-          items:
-            type: string
-            enum:
-            - computer
-            - trello
-            - google-drive
-            - box
-            - onedrive
-            - link
-        permissionLevel:
-          type: string
-          enum:
-          - org
-          - private
-          - public
-          - enterprise
-          - domain
-          example: private
-    MemberPrefs:
-      type: object
-      properties:
-        timezoneInfo:
-          type: object
-          properties:
-            offsetCurrent:
-              type: integer
-              example: 360
-            timezoneCurrent:
-              type: string
-              example: CST
-            offsetNext:
-              type: integer
-              example: 300
-            dateNext:
-              type: string
-              format: date
-              example: '2020-03-08T08:00:00.000Z'
-            timezoneNext:
-              type: string
-              example: CDT
-        privacy:
-          type: object
-          properties:
-            fullName:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-            avatar:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-        sendSummaries:
-          type: boolean
-          example: true
-        minutesBetweenSummaries:
+        width:
+          description: The width of the image.
           type: integer
-          example: 60
-        minutesBeforeDeadlineToNotify:
+          example: 100
+        height:
+          description: The height of the image.
           type: integer
-          example: 1440
-        colorBlind:
-          type: boolean
-          example: true
-        locale:
+          example: 64
+        url:
+          description: The URL of the image.
+          format: url
           type: string
-          example: en-AU
-        timezone:
-          type: string
-          example: America/Chicago
-        twoFactor:
-          type: object
-          properties:
-            enabled:
-              type: boolean
-              example: true
-            needsNewBackups:
-              type: boolean
-              example: false
-    Limits:
-      type: object
-      properties:
-        attachments:
-          type: object
-          properties:
-            perBoard:
-              type: object
-              $ref: '#/components/schemas/LimitsObject'
+          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
     Prefs:
       type: object
       properties:
@@ -838,6 +714,141 @@ components:
         canBePrivate:
           type: boolean
         canInvite:
+          type: boolean
+    Limits:
+      type: object
+      properties:
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    CardAging:
+      type: string
+      enum:
+      - pirate
+      - regular
+    Board_2:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the board.
+          example: Trello Platform Changes
+        desc:
+          type: string
+          example: Track changes to Trello's Platform on this board.
+        descData:
+          type: string
+        closed:
+          type: boolean
+          example: false
+        idMemberCreator:
+          $ref: '#/components/schemas/TrelloID'
+        idOrganization:
+          $ref: '#/components/schemas/TrelloID'
+        pinned:
+          type: boolean
+          example: false
+        url:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ/trello-platform-changelog
+        shortUrl:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ
+        prefs:
+          $ref: '#/components/schemas/Prefs'
+        labelNames:
+          type: object
+          properties:
+            green:
+              type: string
+              example: Addition
+            yellow:
+              type: string
+              example: Update
+            orange:
+              type: string
+              example: Deprecation
+            red:
+              type: string
+              example: Deletion
+            purple:
+              type: string
+              example: Power-Ups
+            blue:
+              type: string
+              example: News
+            sky:
+              type: string
+              example: Announcement
+            lime:
+              type: string
+              example: Delight
+            pink:
+              type: string
+              example: REST API
+            black:
+              type: string
+              example: Capabilties
+        limits:
+          type: object
+          $ref: '#/components/schemas/Limits'
+        starred:
+          type: boolean
+        memberships:
+          type: string
+        shortLink:
+          type: string
+        subscribed:
+          type: boolean
+        powerUps:
+          type: string
+        dateLastActivity:
+          type: string
+          format: date
+        dateLastView:
+          type: string
+          format: date
+        idTags:
+          type: string
+        datePluginDisable:
+          type:
+          - string
+          - 'null'
+          format: date
+        creationMethod:
+          type:
+          - string
+          - 'null'
+        ixUpdate:
+          type: integer
+        templateGallery:
+          type:
+          - string
+          - 'null'
+        enterpriseOwned:
           type: boolean
     Member_2:
       type: object
@@ -1044,113 +1055,147 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/TrelloID'
-    Board_2:
+    OrganizationPrefs:
       type: object
-      required:
-      - id
+      properties:
+        boardVisibilityRestrict:
+          type: object
+        boardDeleteRestrict:
+          type: object
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
+            enum:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - private
+          - public
+          - enterprise
+          - domain
+          example: private
+    Color:
+      type:
+      - string
+      - 'null'
+      enum:
+      - yellow
+      - purple
+      - blue
+      - red
+      - green
+      - orange
+      - black
+      - sky
+      - pink
+      - lime
+    Label_2:
+      type: object
+      properties:
+        id:
+          description: The ID of the label.
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idBoard:
+          type: string
+          description: The ID of the board the label is on.
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961414
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name displayed for the label.
+          example: Overdue
+          minLength: 0
+          maxLength: 16384
+        color:
+          type: string
+          $ref: '#/components/schemas/Color'
+          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    Checklist:
+      type: object
       properties:
         id:
           $ref: '#/components/schemas/TrelloID'
-        name:
-          type: string
-          description: The name of the board.
-          example: Trello Platform Changes
-        desc:
-          type: string
-          example: Track changes to Trello's Platform on this board.
-        descData:
-          type: string
-        closed:
-          type: boolean
-          example: false
-        idMemberCreator:
-          $ref: '#/components/schemas/TrelloID'
-        idOrganization:
-          $ref: '#/components/schemas/TrelloID'
-        pinned:
-          type: boolean
-          example: false
-        url:
-          type: string
-          format: url
-          example: https://trello.com/b/dQHqCohZ/trello-platform-changelog
-        shortUrl:
-          type: string
-          format: url
-          example: https://trello.com/b/dQHqCohZ
-        prefs:
-          $ref: '#/components/schemas/Prefs'
-        labelNames:
-          type: object
-          properties:
-            green:
-              type: string
-              example: Addition
-            yellow:
-              type: string
-              example: Update
-            orange:
-              type: string
-              example: Deprecation
-            red:
-              type: string
-              example: Deletion
-            purple:
-              type: string
-              example: Power-Ups
-            blue:
-              type: string
-              example: News
-            sky:
-              type: string
-              example: Announcement
-            lime:
-              type: string
-              example: Delight
-            pink:
-              type: string
-              example: REST API
-            black:
-              type: string
-              example: Capabilties
-        limits:
-          type: object
-          $ref: '#/components/schemas/Limits'
-        starred:
-          type: boolean
-        memberships:
-          type: string
-        shortLink:
-          type: string
-        subscribed:
-          type: boolean
-        powerUps:
-          type: string
-        dateLastActivity:
-          type: string
-          format: date
-        dateLastView:
-          type: string
-          format: date
-        idTags:
-          type: string
-        datePluginDisable:
-          type:
-          - string
-          - 'null'
-          format: date
-        creationMethod:
-          type:
-          - string
-          - 'null'
-        ixUpdate:
-          type: integer
-        templateGallery:
-          type:
-          - string
-          - 'null'
-        enterpriseOwned:
-          type: boolean
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
     Organization_2:
       type: object
       properties:
@@ -1402,51 +1447,6 @@ components:
             isTemplate:
               type: boolean
               example: false
-    Label_2:
-      type: object
-      properties:
-        id:
-          description: The ID of the label.
-          type: string
-          $ref: '#/components/schemas/TrelloID'
-        idBoard:
-          type: string
-          description: The ID of the board the label is on.
-          $ref: '#/components/schemas/TrelloID'
-          example: 5abbe4b7ddc1b351ef961414
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name displayed for the label.
-          example: Overdue
-          minLength: 0
-          maxLength: 16384
-        color:
-          type: string
-          $ref: '#/components/schemas/Color'
-          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
-    ImageDescriptor:
-      type: object
-      properties:
-        width:
-          description: The width of the image.
-          type: integer
-          example: 100
-        height:
-          description: The height of the image.
-          type: integer
-          example: 64
-        url:
-          description: The URL of the image.
-          format: url
-          type: string
-          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
-    Checklist:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
   securitySchemes:
     apiKey:
       type: apiKey

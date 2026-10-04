@@ -237,14 +237,6 @@ paths:
     servers:
     - url: https://api.trello.com/1
 components:
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
   schemas:
     Webhook:
       type: object
@@ -273,10 +265,6 @@ components:
           type: string
           format: date-time
           description: The date of the first consecutive failure.
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
     Webhook_2:
       type: object
       properties:
@@ -305,6 +293,18 @@ components:
           - 'null'
           format: date
           example: null
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

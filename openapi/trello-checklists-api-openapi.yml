@@ -458,15 +458,31 @@ paths:
     servers:
     - url: https://api.trello.com/1
 components:
-  parameters:
-    idParam:
-      name: id
-      in: path
-      required: true
-      description: The ID of the resource.
-      schema:
-        type: string
   schemas:
+    Checklist:
+      type: object
+      description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the checklist.
+        name:
+          type: string
+          description: The name of the checklist.
+        idBoard:
+          type: string
+          description: The ID of the board the checklist belongs to.
+        idCard:
+          type: string
+          description: The ID of the card the checklist is on.
+        pos:
+          type: number
+          description: The position of the checklist on the card.
+        checkItems:
+          type: array
+          description: The check items in the checklist.
+          items:
+            $ref: '#/components/schemas/CheckItem'
     CheckItem:
       type: object
       description: Represents a single item in a checklist that can be checked or unchecked.
@@ -496,34 +512,6 @@ components:
         idMember:
           type: string
           description: The ID of the member assigned to the check item.
-    Checklist:
-      type: object
-      description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the checklist.
-        name:
-          type: string
-          description: The name of the checklist.
-        idBoard:
-          type: string
-          description: The ID of the board the checklist belongs to.
-        idCard:
-          type: string
-          description: The ID of the card the checklist is on.
-        pos:
-          type: number
-          description: The position of the checklist on the card.
-        checkItems:
-          type: array
-          description: The check items in the checklist.
-          items:
-            $ref: '#/components/schemas/CheckItem'
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
     posStringOrNumber:
       oneOf:
       - type: string
@@ -533,6 +521,18 @@ components:
       - type: number
         format: float
         example: 1293.5
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+  parameters:
+    idParam:
+      name: id
+      in: path
+      required: true
+      description: The ID of the resource.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey
