@@ -1,0 +1,45 @@
+slug: trello
+provider: Trello
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Cards
+  spec_file: trello-cards-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.8
+  evidence: POST /cards  createCard  Create a Card; POST /cards/{id}/checklists  createCardChecklist  Create
+    a Checklist on a Card
+  reason: Cards are the task units of the kanban board, with comments, attachments, checklists and labels
+    — plainly project/task execution tracking and planning.
+- tag: Boards
+  spec_file: trello-boards-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.75
+  evidence: POST /boards  createBoard  Create a Board; GET /boards/{id}/cards  getBoardCards  Get Cards
+    on a Board
+  reason: Boards, lists and cards are the core work-tracking structures of a kanban tool that 'lets teams
+    organize tasks, projects and workflows'; this is project/task execution management rather than any
+    industry-specific capability.
+- tag: Checklists
+  spec_file: trello-checklists-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.7
+  evidence: POST /checklists/{id}/checkItems  createCheckItem  Create a Check Item on a Checklist
+  reason: Checklists and check items break cards into tracked sub-tasks within the work-management tool,
+    supporting project execution tracking; narrower than board/card management so confidence moderated.
