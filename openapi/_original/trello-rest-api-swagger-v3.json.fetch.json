@@ -1,0 +1,12 @@
+{
+ "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+ "requested_url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 275361,
+ "sha256": "b07c97d06e93f7caff661a307e86f2b58c1f97591614ac8179f8e31bda27334b",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
