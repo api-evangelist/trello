@@ -1,18 +1,24 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/trello-rest-api-openapi.yml
+source: openapi/trello-actions-api-openapi.yml, openapi/trello-boards-api-openapi.yml, openapi/trello-cards-api-openapi.yml,
+  openapi/trello-checklists-api-openapi.yml, openapi/trello-custom-fields-api-openapi.yml, openapi/trello-labels-api-openapi.yml,
+  openapi/trello-lists-api-openapi.yml, openapi/trello-members-api-openapi.yml, openapi/trello-notifications-api-openapi.yml,
+  openapi/trello-organizations-api-openapi.yml, openapi/trello-plugins-api-openapi.yml, openapi/trello-rest-api-openapi.json,
+  openapi/trello-search-api-openapi.yml, openapi/trello-tokens-api-openapi.yml, openapi/trello-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 101
+  operations: 362
   by_action_class:
-    connected: 48
-    acting: 53
+    connected: 177
+    acting: 185
   by_consequence:
-    read: 48
-    write: 53
-  human_in_the_loop_required: 0
+    read: 177
+    write: 182
+    physical: 2
+    safety-critical: 1
+  human_in_the_loop_required: 1
 operations:
 - path: /actions/{id}
   method: get
@@ -1212,6 +1218,3881 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /actions/{id}
+  method: get
+  operationId: get-actions-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}
+  method: put
+  operationId: put-actions-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /actions/{id}
+  method: delete
+  operationId: delete-actions-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /actions/{id}/{field}
+  method: get
+  operationId: get-actions-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/board
+  method: get
+  operationId: get-actions-id-board
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/card
+  method: get
+  operationId: get-actions-id-card
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/list
+  method: get
+  operationId: get-actions-id-list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/member
+  method: get
+  operationId: get-actions-id-member
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/memberCreator
+  method: get
+  operationId: get-actions-id-membercreator
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/organization
+  method: get
+  operationId: get-actions-id-organization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{id}/text
+  method: put
+  operationId: put-actions-id-text
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /actions/{idAction}/reactions
+  method: get
+  operationId: get-actions-idaction-reactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{idAction}/reactions
+  method: post
+  operationId: post-actions-idaction-reactions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /actions/{idAction}/reactions/{id}
+  method: get
+  operationId: get-actions-idaction-reactions-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /actions/{idAction}/reactions/{id}
+  method: delete
+  operationId: delete-actions-idaction-reactions-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /actions/{idAction}/reactionsSummary
+  method: get
+  operationId: get-actions-idaction-reactionsummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications/{key}/compliance
+  method: get
+  operationId: applications-key-compliance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /batch
+  method: get
+  operationId: get-batch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/memberships
+  method: get
+  operationId: get-boards-id-memberships
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}
+  method: get
+  operationId: get-boards-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}
+  method: put
+  operationId: put-boards-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}
+  method: delete
+  operationId: delete-boards-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/{field}
+  method: get
+  operationId: get-boards-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{boardId}/actions
+  method: get
+  operationId: get-boards-id-actions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{boardId}/boardStars
+  method: get
+  operationId: get-boards-id-boardstars
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/checklists
+  method: get
+  operationId: boards-id-checklists
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/cards
+  method: get
+  operationId: get-boards-id-cards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/cards/{filter}
+  method: get
+  operationId: get-boards-id-cards-filter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/customFields
+  method: get
+  operationId: get-boards-id-customfields
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/labels
+  method: get
+  operationId: get-boards-id-labels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/labels
+  method: post
+  operationId: post-boards-id-labels
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/lists
+  method: get
+  operationId: get-boards-id-lists
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/lists
+  method: post
+  operationId: post-boards-id-lists
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/lists/{filter}
+  method: get
+  operationId: get-boards-id-lists-filter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/members
+  method: get
+  operationId: get-boards-id-members
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/members
+  method: put
+  operationId: put-boards-id-members
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/members/{idMember}
+  method: put
+  operationId: put-boards-id-members-idmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/members/{idMember}
+  method: delete
+  operationId: boardsidmembersidmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/memberships/{idMembership}
+  method: put
+  operationId: put-boards-id-memberships-idmembership
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - write:board:membership:trello
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/myPrefs/emailPosition
+  method: put
+  operationId: put-boards-id-myprefs-emailposition
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/myPrefs/idEmailList
+  method: put
+  operationId: put-boards-id-myprefs-idemaillist
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/myPrefs/showSidebar
+  method: put
+  operationId: put-boards-id-myPrefs-showsidebar
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/myPrefs/showSidebarActivity
+  method: put
+  operationId: put-boards-id-myPrefs-showsidebaractivity
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/myPrefs/showSidebarBoardActions
+  method: put
+  operationId: put-boards-id-myPrefs-showsidebarboardactions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/myPrefs/showSidebarMembers
+  method: put
+  operationId: put-boards-id-myPrefs-showsidebarmembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/
+  method: post
+  operationId: post-boards
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/calendarKey/generate
+  method: post
+  operationId: post-boards-id-calendarkey-generate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/emailKey/generate
+  method: post
+  operationId: post-boards-id-emailkey-generate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/idTags
+  method: post
+  operationId: post-boards-id-idtags
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/markAsViewed
+  method: post
+  operationId: post-boards-id-markedasviewed
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/boardPlugins
+  method: get
+  operationId: get-boards-id-boardplugins
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/boardPlugins
+  method: post
+  operationId: post-boards-id-boardplugins
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/boardPlugins/{idPlugin}
+  method: delete
+  operationId: delete-boards-id-boardplugins
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /boards/{id}/plugins
+  method: get
+  operationId: get-board-id-plugins
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/exports
+  method: post
+  operationId: post-boards-id-exports
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/exports/{idExport}
+  method: get
+  operationId: get-boards-id-exports-idexport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/exports/{idExport}
+  method: delete
+  operationId: delete-boards-id-exports-idexport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /boards/{id}/exports/{idExport}/download
+  method: get
+  operationId: get-boards-id-exports-idexport-download
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /boards/{id}/exports/mostRecent
+  method: get
+  operationId: get-boards-id-exports-mostrecent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards
+  method: post
+  operationId: post-cards
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}
+  method: get
+  operationId: get-cards-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}
+  method: put
+  operationId: put-cards-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}
+  method: delete
+  operationId: delete-cards-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/{field}
+  method: get
+  operationId: get-cards-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/actions
+  method: get
+  operationId: get-cards-id-actions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/attachments
+  method: get
+  operationId: get-cards-id-attachments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/attachments
+  method: post
+  operationId: post-cards-id-attachments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/attachments/{idAttachment}
+  method: get
+  operationId: get-cards-id-attachments-idattachment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/attachments/{idAttachment}
+  method: delete
+  operationId: deleted-cards-id-attachments-idattachment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/board
+  method: get
+  operationId: get-cards-id-board
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/checkItemStates
+  method: get
+  operationId: get-cards-id-checkitemstates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/checklists
+  method: get
+  operationId: get-cards-id-checklists
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/checklists
+  method: post
+  operationId: post-cards-id-checklists
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/checkItem/{idCheckItem}
+  method: get
+  operationId: get-cards-id-checkitem-idcheckitem
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/checkItem/{idCheckItem}
+  method: put
+  operationId: put-cards-id-checkitem-idcheckitem
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/checkItem/{idCheckItem}
+  method: delete
+  operationId: delete-cards-id-checkitem-idcheckitem
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/list
+  method: get
+  operationId: get-cards-id-list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/members
+  method: get
+  operationId: get-cards-id-members
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/membersVoted
+  method: get
+  operationId: get-cards-id-membersvoted
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/membersVoted
+  method: post
+  operationId: cardsidmembersvoted-1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/pluginData
+  method: get
+  operationId: get-cards-id-plugindata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/stickers
+  method: get
+  operationId: get-cards-id-stickers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/stickers
+  method: post
+  operationId: post-cards-id-stickers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/stickers/{idSticker}
+  method: get
+  operationId: get-cards-id-stickers-idsticker
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/stickers/{idSticker}
+  method: delete
+  operationId: delete-cards-id-stickers-idsticker
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/stickers/{idSticker}
+  method: put
+  operationId: put-cards-id-stickers-idsticker
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/actions/{idAction}/comments
+  method: put
+  operationId: put-cards-id-actions-idaction-comments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/actions/{idAction}/comments
+  method: delete
+  operationId: delete-cards-id-actions-id-comments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{idCard}/customField/{idCustomField}/item
+  method: put
+  operationId: put-cards-idcard-customfield-idcustomfield-item
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{idCard}/customFields
+  method: put
+  operationId: put-cards-idcard-customfields
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/customFieldItems
+  method: get
+  operationId: get-cards-id-customfielditems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /cards/{id}/actions/comments
+  method: post
+  operationId: post-cards-id-actions-comments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/idLabels
+  method: post
+  operationId: post-cards-id-idlabels
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/idMembers
+  method: post
+  operationId: post-cards-id-idmembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/labels
+  method: post
+  operationId: post-cards-id-labels
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/markAssociatedNotificationsRead
+  method: post
+  operationId: post-cards-id-markassociatednotificationsread
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/idLabels/{idLabel}
+  method: delete
+  operationId: delete-cards-id-idlabels-idlabel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/idMembers/{idMember}
+  method: delete
+  operationId: delete-id-idmembers-idmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/membersVoted/{idMember}
+  method: delete
+  operationId: delete-cards-id-membersvoted-idmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{idCard}/checklist/{idChecklist}/checkItem/{idCheckItem}
+  method: put
+  operationId: put-cards-idcard-checklist-idchecklist-checkitem-idcheckitem
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /cards/{id}/checklists/{idChecklist}
+  method: delete
+  operationId: delete-cards-id-checklists-idchecklist
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checklists
+  method: post
+  operationId: post-checklists
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checklists/{id}
+  method: get
+  operationId: get-checklists-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checklists/{id}
+  method: put
+  operationId: put-checlists-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checklists/{id}
+  method: delete
+  operationId: delete-checklists-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checklists/{id}/{field}
+  method: get
+  operationId: get-checklists-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checklists/{id}/{field}
+  method: put
+  operationId: put-checklists-id-field
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checklists/{id}/board
+  method: get
+  operationId: get-checklists-id-board
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checklists/{id}/cards
+  method: get
+  operationId: get-checklists-id-cards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checklists/{id}/checkItems
+  method: get
+  operationId: get-checklists-id-checkitems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checklists/{id}/checkItems
+  method: post
+  operationId: post-checklists-id-checkitems
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checklists/{id}/checkItems/{idCheckItem}
+  method: get
+  operationId: get-checklists-id-checkitems-idcheckitem
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checklists/{id}/checkItems/{idCheckItem}
+  method: delete
+  operationId: delete-checklists-id-checkitems-idcheckitem
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /customFields
+  method: post
+  operationId: post-customfields
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /customFields/{id}
+  method: get
+  operationId: get-customfields-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /customFields/{id}
+  method: put
+  operationId: put-customfields-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /customFields/{id}
+  method: delete
+  operationId: delete-customfields-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /customFields/{id}/options
+  method: post
+  operationId: get-customfields-id-options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /customFields/{id}/options
+  method: get
+  operationId: post-customfields-id-options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /customFields/{id}/options/{idCustomFieldOption}
+  method: get
+  operationId: get-customfields-options-idcustomfieldoption
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /customFields/{id}/options/{idCustomFieldOption}
+  method: delete
+  operationId: delete-customfields-options-idcustomfieldoption
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /emoji
+  method: get
+  operationId: emoji
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}
+  method: get
+  operationId: get-enterprises-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/auditlog
+  method: get
+  operationId: get-enterprises-id-auditlog
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/admins
+  method: get
+  operationId: get-enterprises-id-admins
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/signupUrl
+  method: get
+  operationId: get-enterprises-id-signupurl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/members/query
+  method: get
+  operationId: get-users-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/members
+  method: get
+  operationId: get-enterprises-id-members
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/members/{idMember}
+  method: get
+  operationId: get-enterprises-id-members-idmember
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/transferrable/organization/{idOrganization}
+  method: get
+  operationId: get-enterprises-id-transferrable-organization-idOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/transferrable/bulk/{idOrganizations}
+  method: get
+  operationId: get-enterprises-id-transferrable-bulk-idOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/${id}/enterpriseJoinRequest/bulk
+  method: put
+  operationId: put-enterprises-id-enterpriseJoinRequest-bulk
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:enterprise:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/claimableOrganizations
+  method: get
+  operationId: get-enterprises-id-claimableOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - write:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/pendingOrganizations
+  method: get
+  operationId: get-enterprises-id-pendingOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/tokens
+  method: post
+  operationId: post-enterprises-id-tokens
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/organizations
+  method: get
+  operationId: get-enterprises-id-organizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:enterprise:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enterprises/{id}/organizations
+  method: put
+  operationId: put-enterprises-id-organizations
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - write:enterprise:trello
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/members/{idMember}/licensed
+  method: put
+  operationId: put-enterprises-id-members-idmember-licensed
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:enterprise:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/members/{idMember}/deactivated
+  method: put
+  operationId: enterprises-id-members-idMember-deactivated
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:enterprise:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/admins/{idMember}
+  method: put
+  operationId: put-enterprises-id-admins-idmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/admins/{idMember}
+  method: delete
+  operationId: enterprises-id-organizations-idmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/organizations/{idOrg}
+  method: delete
+  operationId: delete-enterprises-id-organizations-idorg
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enterprises/{id}/organizations/bulk/{idOrganizations}
+  method: get
+  operationId: get-enterprises-id-organizations-bulk-idOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /labels/{id}
+  method: get
+  operationId: get-labels-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /labels/{id}
+  method: put
+  operationId: put-labels-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /labels/{id}
+  method: delete
+  operationId: delete-labels-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /labels/{id}/{field}
+  method: put
+  operationId: put-labels-id-field
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /labels
+  method: post
+  operationId: post-labels
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}
+  method: get
+  operationId: get-lists-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lists/{id}
+  method: put
+  operationId: put-lists-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists
+  method: post
+  operationId: post-lists
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}/archiveAllCards
+  method: post
+  operationId: post-lists-id-archiveallcards
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}/moveAllCards
+  method: post
+  operationId: post-lists-id-moveallcards
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}/closed
+  method: put
+  operationId: put-lists-id-closed
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}/idBoard
+  method: put
+  operationId: put-id-idboard
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}/{field}
+  method: put
+  operationId: put-lists-id-field
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:board:trello
+    - write:board:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lists/{id}/actions
+  method: get
+  operationId: get-lists-id-actions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lists/{id}/board
+  method: get
+  operationId: get-lists-id-board
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lists/{id}/cards
+  method: get
+  operationId: get-lists-id-cards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}
+  method: get
+  operationId: get-members=id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}
+  method: put
+  operationId: put-members-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/{field}
+  method: get
+  operationId: get-members-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/actions
+  method: get
+  operationId: get-members-id-actions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/boardBackgrounds
+  method: get
+  operationId: get-members-id-boardbackgrounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/boardBackgrounds
+  method: post
+  operationId: post-members-id-boardbackgrounds-1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/boardBackgrounds/{idBackground}
+  method: get
+  operationId: get-members-id-boardbackgrounds-idbackground
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/boardBackgrounds/{idBackground}
+  method: put
+  operationId: put-members-id-boardbackgrounds-idbackground
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/boardBackgrounds/{idBackground}
+  method: delete
+  operationId: delete-members-id-boardbackgrounds-idbackground
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/boardStars
+  method: get
+  operationId: get-members-id-boardstars
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/boardStars
+  method: post
+  operationId: post-members-id-boardstars
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/boardStars/{idStar}
+  method: get
+  operationId: get-members-id-boardstars-idstar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/boardStars/{idStar}
+  method: put
+  operationId: put-members-id-boardstars-idstar
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/boardStars/{idStar}
+  method: delete
+  operationId: delete-members-id-boardstars-idstar
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/boards
+  method: get
+  operationId: get-members-id-boards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/boardsInvited
+  method: get
+  operationId: get-members-id-boardsinvited
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/cards
+  method: get
+  operationId: get-members-id-cards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customBoardBackgrounds
+  method: get
+  operationId: get-members-id-customboardbackgrounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customBoardBackgrounds
+  method: post
+  operationId: membersidcustomboardbackgrounds-1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/customBoardBackgrounds/{idBackground}
+  method: get
+  operationId: get-members-id-customboardbackgrounds-idbackground
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customBoardBackgrounds/{idBackground}
+  method: put
+  operationId: put-members-id-customboardbackgrounds-idbackground
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/customBoardBackgrounds/{idBackground}
+  method: delete
+  operationId: delete-members-id-customboardbackgrounds-idbackground
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/customEmoji
+  method: get
+  operationId: get-members-id-customemoji
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customEmoji
+  method: post
+  operationId: post-members-id-customemoji
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/customEmoji/{idEmoji}
+  method: get
+  operationId: membersidcustomemojiidemoji
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customStickers
+  method: get
+  operationId: get-members-id-customstickers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customStickers
+  method: post
+  operationId: post-members-id-customstickers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/customStickers/{idSticker}
+  method: get
+  operationId: get-members-id-customstickers-idsticker
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/customStickers/{idSticker}
+  method: delete
+  operationId: delete-members-id-customstickers-idsticker
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/notifications
+  method: get
+  operationId: get-members-id-notifications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/organizations
+  method: get
+  operationId: get-members-id-organizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/organizationsInvited
+  method: get
+  operationId: get-members-id-organizationsinvited
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/savedSearches
+  method: get
+  operationId: get-members-id-savedsearches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/savedSearches
+  method: post
+  operationId: post-members-id-savedsearches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/savedSearches/{idSearch}
+  method: get
+  operationId: get-members-id-savedsearches-idsearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/savedSearches/{idSearch}
+  method: put
+  operationId: put-members-id-savedsearches-idsearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/savedSearches/{idSearch}
+  method: delete
+  operationId: delete-members-id-savedsearches-idsearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/tokens
+  method: get
+  operationId: get-members-id-tokens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    - write:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/avatar
+  method: post
+  operationId: membersidavatar
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/oneTimeMessagesDismissed
+  method: post
+  operationId: post-members-id-onetimemessagesdismissed
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/notificationChannelSettings
+  method: get
+  operationId: get-members-id-notificationChannelSettings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/notificationChannelSettings
+  method: put
+  operationId: put-members-id-notificationChannelSettings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/notificationChannelSettings/{channel}
+  method: get
+  operationId: get-members-id-notificationChannelSettings-channel
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:member:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /members/{id}/notificationChannelSettings/{channel}
+  method: put
+  operationId: put-members-id-notificationChannelSettings-channel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /members/{id}/notificationChannelSettings/{channel}/{blockedKeys}
+  method: put
+  operationId: put-members-id-notificationChannelSettings-channel-blockedKeys
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /notifications/{id}
+  method: get
+  operationId: get-notifications-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/{id}
+  method: put
+  operationId: put-notifications-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /notifications/{id}/{field}
+  method: get
+  operationId: get-notifications-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/all/read
+  method: post
+  operationId: post-notifications-all-read
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /notifications/{id}/unread
+  method: put
+  operationId: put-notifications-id-unread
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:member:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /notifications/{id}/board
+  method: get
+  operationId: get-notifications-id-board
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/{id}/card
+  method: get
+  operationId: get-notifications-id-card
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/{id}/list
+  method: get
+  operationId: get-notifications-id-list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/{id}/member
+  method: get
+  operationId: notificationsidmember
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/{id}/memberCreator
+  method: get
+  operationId: get-notifications-id-membercreator
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /notifications/{id}/organization
+  method: get
+  operationId: get-notifications-id-organization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations
+  method: post
+  operationId: post-organizations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}
+  method: get
+  operationId: get-organizations-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}
+  method: put
+  operationId: put-organizations-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}
+  method: delete
+  operationId: delete-organizations-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/{field}
+  method: get
+  operationId: get-organizations-id-field
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/actions
+  method: get
+  operationId: get-organizations-id-actions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/boards
+  method: get
+  operationId: get-organizations-id-boards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/exports
+  method: post
+  operationId: post-organizations-id-exports
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/exports
+  method: get
+  operationId: get-organizations-id-exports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/members
+  method: get
+  operationId: get-organizations-id-members
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/members
+  method: put
+  operationId: put-organizations-id-members
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/memberships
+  method: get
+  operationId: get-organizations-id-memberships
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/memberships/{idMembership}
+  method: get
+  operationId: get-organizations-id-memberships-idmembership
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/pluginData
+  method: get
+  operationId: get-organizations-id-plugindata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/tags
+  method: get
+  operationId: get-organizations-id-tags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}/tags
+  method: post
+  operationId: post-organizations-id-tags
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/members/{idMember}
+  method: put
+  operationId: put-organizations-id-members-idmember
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/members/{idMember}
+  method: delete
+  operationId: delete-organizations-id-members
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/members/{idMember}/deactivated
+  method: put
+  operationId: put-organizations-id-members-idmember-deactivated
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/logo
+  method: post
+  operationId: post-organizations-id-logo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/logo
+  method: delete
+  operationId: delete-organizations-id-logo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/members/{idMember}/all
+  method: delete
+  operationId: organizations-id-members-idmember-all
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:membership:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/prefs/associatedDomain
+  method: delete
+  operationId: delete-organizations-id-prefs-associateddomain
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/prefs/orgInviteRestrict
+  method: delete
+  operationId: delete-organizations-id-prefs-orginviterestrict
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/tags/{idTag}
+  method: delete
+  operationId: delete-organizations-id-tags-idtag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}/newBillableGuests/{idBoard}
+  method: get
+  operationId: get-organizations-id-newbillableguests-idboard
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:board:trello
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /plugins/{id}/
+  method: get
+  operationId: get-plugins-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read:organization:trello
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /plugins/{id}/
+  method: put
+  operationId: put-plugins-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - read:organization:trello
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /plugins/{idPlugin}/listings
+  method: post
+  operationId: post-plugins-idplugin-listing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /plugins/{id}/compliance/memberPrivacy
+  method: get
+  operationId: get-plugins-id-compliance-memberprivacy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /plugins/{idPlugin}/listings/{idListing}
+  method: put
+  operationId: put-plugins-idplugin-listings-idlisting
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write:organization:trello
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /search
+  method: get
+  operationId: get-search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /search/members/
+  method: get
+  operationId: get-search-members
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{token}
+  method: get
+  operationId: get-tokens-token
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{token}/member
+  method: get
+  operationId: get-tokens-token-member
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{token}/webhooks
+  method: get
+  operationId: get-tokens-token-webhooks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{token}/webhooks
+  method: post
+  operationId: post-tokens-token-webhooks
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tokens/{token}/webhooks/{idWebhook}
+  method: get
+  operationId: get-tokens-token-webhooks-idwebhook
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{token}/webhooks/{idWebhook}
+  method: delete
+  operationId: delete-tokens-token-webhooks-idwebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tokens/{token}/webhooks/{idWebhook}
+  method: put
+  operationId: tokenstokenwebhooks-1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tokens/{token}/
+  method: delete
+  operationId: delete-token
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/
+  method: post
+  operationId: post-webhooks
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/{id}
+  method: get
+  operationId: get-webhooks-id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /webhooks/{id}
+  method: put
+  operationId: put-webhooks-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/{id}
+  method: delete
+  operationId: delete-webhooks-id
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks/{id}/{field}
+  method: get
+  operationId: webhooksidfield
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /search
   method: get
   operationId: search
