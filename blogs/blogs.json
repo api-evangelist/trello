@@ -2,20 +2,19 @@
   "repo": "trello",
   "feeds": [
     {
-      "source": "https://community.developer.atlassian.com/c/trello/",
-      "feed_url": "https://community.developer.atlassian.com/posts.rss",
+      "source": "https://www.atlassian.com/blog/trello",
+      "feed_url": "https://www.atlassian.com/blog/comments/feed",
       "title": "",
-      "saved": 0,
+      "saved": 3,
       "method": "discovered"
     },
     {
       "source": "https://community.developer.atlassian.com/posts.rss",
-      "feed_url": "https://community.developer.atlassian.com/posts.rss",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "feed"
+      "skipped": "community-shaped; a vendor feed already saved this run (roadmap#239)"
     }
   ],
-  "post_count": 66,
-  "fetched": "2026-10-03T12:30:02Z"
+  "post_count": 84,
+  "fetched": "2026-10-10T13:15:00Z"
 }
