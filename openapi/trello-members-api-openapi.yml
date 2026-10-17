@@ -1558,262 +1558,6 @@ paths:
     - url: https://api.trello.com/1
 components:
   schemas:
-    Membership:
-      type: object
-      description: Represents a membership record linking a member to a board or organization with a specific role.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the membership.
-        idMember:
-          type: string
-          description: The ID of the member.
-        memberType:
-          type: string
-          description: The type of membership.
-          enum:
-          - admin
-          - normal
-          - observer
-        unconfirmed:
-          type: boolean
-          description: Whether the membership is unconfirmed.
-        deactivated:
-          type: boolean
-          description: Whether the membership is deactivated.
-    Member:
-      type: object
-      description: Represents a Trello user who can be a member of boards, organizations, and cards.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the member.
-        username:
-          type: string
-          description: The username of the member.
-        fullName:
-          type: string
-          description: The full name of the member.
-        initials:
-          type: string
-          description: The initials of the member.
-        bio:
-          type: string
-          description: The biography of the member.
-        avatarHash:
-          type: string
-          description: The hash of the member's avatar image.
-        avatarUrl:
-          type: string
-          format: uri
-          description: The URL of the member's avatar image.
-        url:
-          type: string
-          format: uri
-          description: The URL of the member's Trello profile.
-        confirmed:
-          type: boolean
-          description: Whether the member's email has been confirmed.
-        memberType:
-          type: string
-          description: The type of member account.
-        status:
-          type: string
-          description: The activity status of the member.
-        idOrganizations:
-          type: array
-          description: The IDs of organizations the member belongs to.
-          items:
-            type: string
-        idBoards:
-          type: array
-          description: The IDs of boards the member has access to.
-          items:
-            type: string
-    Board:
-      type: object
-      description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the board.
-        name:
-          type: string
-          description: The name of the board.
-        desc:
-          type: string
-          description: The description of the board.
-        descData:
-          type: object
-          description: Additional description data.
-        closed:
-          type: boolean
-          description: Whether the board is closed (archived).
-        idMemberCreator:
-          type: string
-          description: The ID of the member who created the board.
-        idOrganization:
-          type: string
-          description: The ID of the organization the board belongs to.
-        pinned:
-          type: boolean
-          description: Whether the board is pinned.
-        url:
-          type: string
-          format: uri
-          description: The full URL of the board.
-        shortUrl:
-          type: string
-          format: uri
-          description: The short URL of the board.
-        shortLink:
-          type: string
-          description: The short link identifier for the board.
-        prefs:
-          type: object
-          description: Board preferences and settings.
-          properties:
-            permissionLevel:
-              type: string
-              enum:
-              - org
-              - private
-              - public
-            hideVotes:
-              type: boolean
-            voting:
-              type: string
-            comments:
-              type: string
-            selfJoin:
-              type: boolean
-            cardCovers:
-              type: boolean
-            cardAging:
-              type: string
-              enum:
-              - pirate
-              - regular
-            background:
-              type: string
-            backgroundColor:
-              type: string
-            backgroundImage:
-              type: string
-            backgroundTile:
-              type: boolean
-            backgroundBrightness:
-              type: string
-        labelNames:
-          type: object
-          description: The names assigned to each label color on the board.
-          properties:
-            green:
-              type: string
-            yellow:
-              type: string
-            orange:
-              type: string
-            red:
-              type: string
-            purple:
-              type: string
-            blue:
-              type: string
-            sky:
-              type: string
-            lime:
-              type: string
-            pink:
-              type: string
-            black:
-              type: string
-        starred:
-          type: boolean
-          description: Whether the authenticated member has starred the board.
-        memberships:
-          type: array
-          description: The board's membership records.
-          items:
-            $ref: '#/components/schemas/Membership'
-        dateLastActivity:
-          type: string
-          format: date-time
-          description: The date and time of the last activity on the board.
-        dateLastView:
-          type: string
-          format: date-time
-          description: The date and time the authenticated member last viewed the board.
-    Label:
-      type: object
-      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the label.
-        idBoard:
-          type: string
-          description: The ID of the board the label belongs to.
-        name:
-          type: string
-          description: The name of the label.
-        color:
-          type: string
-          description: The color of the label.
-          enum:
-          - yellow
-          - purple
-          - blue
-          - red
-          - green
-          - orange
-          - black
-          - sky
-          - pink
-          - lime
-          - null
-    Organization:
-      type: object
-      description: Represents a Trello organization (workspace), which is a group of members who share boards.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the organization.
-        name:
-          type: string
-          description: The short name (URL-friendly slug) of the organization.
-        displayName:
-          type: string
-          description: The display name of the organization.
-        desc:
-          type: string
-          description: The description of the organization.
-        url:
-          type: string
-          format: uri
-          description: The URL of the organization.
-        website:
-          type: string
-          format: uri
-          description: The website of the organization.
-        logoHash:
-          type: string
-          description: The hash of the organization's logo.
-        products:
-          type: array
-          description: The product IDs associated with the organization.
-          items:
-            type: integer
-        idBoards:
-          type: array
-          description: The IDs of boards in the organization.
-          items:
-            type: string
-        memberships:
-          type: array
-          description: The membership records for the organization.
-          items:
-            $ref: '#/components/schemas/Membership'
     Card:
       type: object
       description: Represents a Trello card, which is the fundamental unit of work on a board. Cards live within lists and can have members, labels, checklists, attachments, due dates, and comments.
@@ -1936,277 +1680,262 @@ components:
               type: boolean
             subscribed:
               type: boolean
-    posStringOrNumber:
-      oneOf:
-      - type: string
-        enum:
-        - top
-        - bottom
-      - type: number
-        format: float
-        example: 1293.5
-    CardAging:
-      type: string
-      enum:
-      - pirate
-      - regular
-    Token:
+    Label:
       type: object
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
       properties:
         id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5da728c55235b443c5b97181
-        identifier:
           type: string
-          example: App Name
-        idMember:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5589c3ea49b40cedc28cf70e
-        dateCreated:
+          description: The unique identifier for the label.
+        idBoard:
           type: string
-          format: date-time
-          example: '2019-10-16T14:27:17.304Z'
-        dateExpires:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: null
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenPermission'
-    Channel:
-      type: string
-      enum:
-      - email
-      example: email
-    Organization_2:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
+          description: The ID of the board the label belongs to.
         name:
           type: string
-        displayName:
+          description: The name of the label.
+        color:
           type: string
-          example: Organization Name
-        dateLastActivity:
+          description: The color of the label.
+          enum:
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
+    Member:
+      type: object
+      description: Represents a Trello user who can be a member of boards, organizations, and cards.
+      properties:
+        id:
           type: string
-          format: date
-          example: '2018-10-17T19:10:14.808Z'
-        prefs:
-          $ref: '#/components/schemas/OrganizationPrefs'
-        idEnterprise:
-          $ref: '#/components/schemas/TrelloID'
-        offering:
+          description: The unique identifier for the member.
+        username:
           type: string
-          example: trello.enterprise
+          description: The username of the member.
+        fullName:
+          type: string
+          description: The full name of the member.
+        initials:
+          type: string
+          description: The initials of the member.
+        bio:
+          type: string
+          description: The biography of the member.
+        avatarHash:
+          type: string
+          description: The hash of the member's avatar image.
+        avatarUrl:
+          type: string
+          format: uri
+          description: The URL of the member's avatar image.
         url:
           type: string
-          format: url
-          example: https://trello.com/w/<name>
-        idBoards:
+          format: uri
+          description: The URL of the member's Trello profile.
+        confirmed:
+          type: boolean
+          description: Whether the member's email has been confirmed.
+        memberType:
+          type: string
+          description: The type of member account.
+        status:
+          type: string
+          description: The activity status of the member.
+        idOrganizations:
           type: array
-          items:
-            $ref: '#/components/schemas/TrelloID'
-        memberships:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrelloID'
-        premiumFeatures:
-          type: array
+          description: The IDs of organizations the member belongs to.
           items:
             type: string
-    CustomEmoji:
+        idBoards:
+          type: array
+          description: The IDs of boards the member has access to.
+          items:
+            type: string
+    Membership:
       type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
       properties:
         id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5900ac11ed55d6d2c355c5d6
-        url:
           type: string
-          format: url
-          example: https://trello-emoji.s3.amazonaws.com/5589c3ea49b40cedc28cf70e/b40d9925f4e75495104b5e560881d8e4/chorizo.png
-        name:
+          description: The unique identifier for the membership.
+        idMember:
           type: string
-          example: chorizo
-    Board_2:
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
+    Board:
       type: object
-      required:
-      - id
+      description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
       properties:
         id:
-          $ref: '#/components/schemas/TrelloID'
+          type: string
+          description: The unique identifier for the board.
         name:
           type: string
           description: The name of the board.
-          example: Trello Platform Changes
         desc:
           type: string
-          example: Track changes to Trello's Platform on this board.
+          description: The description of the board.
         descData:
-          type: string
+          type: object
+          description: Additional description data.
         closed:
           type: boolean
-          example: false
+          description: Whether the board is closed (archived).
         idMemberCreator:
-          $ref: '#/components/schemas/TrelloID'
+          type: string
+          description: The ID of the member who created the board.
         idOrganization:
-          $ref: '#/components/schemas/TrelloID'
+          type: string
+          description: The ID of the organization the board belongs to.
         pinned:
           type: boolean
-          example: false
+          description: Whether the board is pinned.
         url:
           type: string
-          format: url
-          example: https://trello.com/b/dQHqCohZ/trello-platform-changelog
+          format: uri
+          description: The full URL of the board.
         shortUrl:
           type: string
-          format: url
-          example: https://trello.com/b/dQHqCohZ
+          format: uri
+          description: The short URL of the board.
+        shortLink:
+          type: string
+          description: The short link identifier for the board.
         prefs:
-          $ref: '#/components/schemas/Prefs'
+          type: object
+          description: Board preferences and settings.
+          properties:
+            permissionLevel:
+              type: string
+              enum:
+              - org
+              - private
+              - public
+            hideVotes:
+              type: boolean
+            voting:
+              type: string
+            comments:
+              type: string
+            selfJoin:
+              type: boolean
+            cardCovers:
+              type: boolean
+            cardAging:
+              type: string
+              enum:
+              - pirate
+              - regular
+            background:
+              type: string
+            backgroundColor:
+              type: string
+            backgroundImage:
+              type: string
+            backgroundTile:
+              type: boolean
+            backgroundBrightness:
+              type: string
         labelNames:
           type: object
+          description: The names assigned to each label color on the board.
           properties:
             green:
               type: string
-              example: Addition
             yellow:
               type: string
-              example: Update
             orange:
               type: string
-              example: Deprecation
             red:
               type: string
-              example: Deletion
             purple:
               type: string
-              example: Power-Ups
             blue:
               type: string
-              example: News
             sky:
               type: string
-              example: Announcement
             lime:
               type: string
-              example: Delight
             pink:
               type: string
-              example: REST API
             black:
               type: string
-              example: Capabilties
-        limits:
-          type: object
-          $ref: '#/components/schemas/Limits'
         starred:
           type: boolean
+          description: Whether the authenticated member has starred the board.
         memberships:
-          type: string
-        shortLink:
-          type: string
-        subscribed:
-          type: boolean
-        powerUps:
-          type: string
+          type: array
+          description: The board's membership records.
+          items:
+            $ref: '#/components/schemas/Membership'
         dateLastActivity:
           type: string
-          format: date
+          format: date-time
+          description: The date and time of the last activity on the board.
         dateLastView:
           type: string
-          format: date
-        idTags:
-          type: string
-        datePluginDisable:
-          type:
-          - string
-          - 'null'
-          format: date
-        creationMethod:
-          type:
-          - string
-          - 'null'
-        ixUpdate:
-          type: integer
-        templateGallery:
-          type:
-          - string
-          - 'null'
-        enterpriseOwned:
-          type: boolean
-    NotificationChannelSettings:
-      properties:
-        id:
-          type: string
-          example: 5dc591ac425f2a223aba0a8e
-        idMember:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5589c3ea49b40cedc28cf70e
-        blockedKeys:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlockedKey'
-        channel:
-          $ref: '#/components/schemas/Channel'
-    CustomSticker:
+          format: date-time
+          description: The date and time the authenticated member last viewed the board.
+    Organization:
       type: object
+      description: Represents a Trello organization (workspace), which is a group of members who share boards.
       properties:
         id:
-          $ref: '#/components/schemas/TrelloID'
+          type: string
+          description: The unique identifier for the organization.
+        name:
+          type: string
+          description: The short name (URL-friendly slug) of the organization.
+        displayName:
+          type: string
+          description: The display name of the organization.
+        desc:
+          type: string
+          description: The description of the organization.
         url:
           type: string
-          format: url
-        scaled:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/TrelloID'
-    BoardFields:
-      type: string
-      enum:
-      - id
-      - name
-      - desc
-      - descData
-      - closed
-      - idMemberCreator
-      - idOrganization
-      - pinned
-      - url
-      - shortUrl
-      - prefs
-      - labelNames
-      - starred
-      - limits
-      - memberships
-      - enterpriseOwned
-    ImageDescriptor:
-      type: object
-      properties:
-        width:
-          description: The width of the image.
-          type: integer
-          example: 100
-        height:
-          description: The height of the image.
-          type: integer
-          example: 64
-        url:
-          description: The URL of the image.
-          format: url
+          format: uri
+          description: The URL of the organization.
+        website:
           type: string
-          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
-    BoardBackground:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
+          format: uri
+          description: The website of the organization.
+        logoHash:
+          type: string
+          description: The hash of the organization's logo.
+        products:
+          type: array
+          description: The product IDs associated with the organization.
+          items:
+            type: integer
+        idBoards:
+          type: array
+          description: The IDs of boards in the organization.
+          items:
+            type: string
+        memberships:
+          type: array
+          description: The membership records for the organization.
+          items:
+            $ref: '#/components/schemas/Membership'
     Notification:
       properties:
         id:
@@ -2244,6 +1973,148 @@ components:
         reactions:
           type: array
           example: []
+    BoardFields:
+      type: string
+      enum:
+      - id
+      - name
+      - desc
+      - descData
+      - closed
+      - idMemberCreator
+      - idOrganization
+      - pinned
+      - url
+      - shortUrl
+      - prefs
+      - labelNames
+      - starred
+      - limits
+      - memberships
+      - enterpriseOwned
+    MemberFields:
+      type: string
+      enum:
+      - id
+    OrganizationFields:
+      type: string
+      enum:
+      - id
+      - name
+    Color:
+      type:
+      - string
+      - 'null'
+      enum:
+      - yellow
+      - purple
+      - blue
+      - red
+      - green
+      - orange
+      - black
+      - sky
+      - pink
+      - lime
+    TokenPermission:
+      type: object
+      properties:
+        idModel:
+          oneOf:
+          - $ref: '#/components/schemas/TrelloID'
+          - type: string
+            enum:
+            - '*'
+        modelType:
+          type: string
+          enum:
+          - board
+          - member
+          - organization
+          - enterprise
+        read:
+          type: boolean
+        write:
+          type: boolean
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    CustomEmoji:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5900ac11ed55d6d2c355c5d6
+        url:
+          type: string
+          format: url
+          example: https://trello-emoji.s3.amazonaws.com/5589c3ea49b40cedc28cf70e/b40d9925f4e75495104b5e560881d8e4/chorizo.png
+        name:
+          type: string
+          example: chorizo
     Prefs:
       type: object
       properties:
@@ -2319,48 +2190,131 @@ components:
         warnAt:
           type: number
           example: 32400
-    OrganizationPrefs:
+    Channel:
+      type: string
+      enum:
+      - email
+      example: email
+    BoardBackground:
       type: object
       properties:
-        boardVisibilityRestrict:
-          type: object
-        boardDeleteRestrict:
-          type: object
-        attachmentRestrictions:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+    Token:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5da728c55235b443c5b97181
+        identifier:
+          type: string
+          example: App Name
+        idMember:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5589c3ea49b40cedc28cf70e
+        dateCreated:
+          type: string
+          format: date-time
+          example: '2019-10-16T14:27:17.304Z'
+        dateExpires:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: null
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenPermission'
+    Label_2:
+      type: object
+      properties:
+        id:
+          description: The ID of the label.
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idBoard:
+          type: string
+          description: The ID of the board the label is on.
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961414
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name displayed for the label.
+          example: Overdue
+          minLength: 0
+          maxLength: 16384
+        color:
+          type: string
+          $ref: '#/components/schemas/Color'
+          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
+    CustomSticker:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        url:
+          type: string
+          format: url
+        scaled:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/TrelloID'
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    Organization_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+        displayName:
+          type: string
+          example: Organization Name
+        dateLastActivity:
+          type: string
+          format: date
+          example: '2018-10-17T19:10:14.808Z'
+        prefs:
+          $ref: '#/components/schemas/OrganizationPrefs'
+        idEnterprise:
+          $ref: '#/components/schemas/TrelloID'
+        offering:
+          type: string
+          example: trello.enterprise
+        url:
+          type: string
+          format: url
+          example: https://trello.com/w/<name>
+        idBoards:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrelloID'
+        premiumFeatures:
           type: array
           items:
             type: string
-            enum:
-            - computer
-            - trello
-            - google-drive
-            - box
-            - onedrive
-            - link
-        permissionLevel:
-          type: string
-          enum:
-          - org
-          - private
-          - public
-          - enterprise
-          - domain
-          example: private
-    Color:
-      type:
-      - string
-      - 'null'
-      enum:
-      - yellow
-      - purple
-      - blue
-      - red
-      - green
-      - orange
-      - black
-      - sky
-      - pink
-      - lime
+    posStringOrNumber:
+      oneOf:
+      - type: string
+        enum:
+        - top
+        - bottom
+      - type: number
+        format: float
+        example: 1293.5
     SavedSearch:
       type: object
       properties:
@@ -2376,45 +2330,15 @@ components:
         pos:
           $ref: '#/components/schemas/posStringOrNumber'
           example: 1638
-    BoardStars:
+    Limits:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 585063850027165010be15a8
-        idBoard:
-          $ref: '#/components/schemas/TrelloID'
-          example: 57f7df684f1ca8c2877162e0
-        pos:
-          type: integer
-          example: 32768
-    MemberFields:
-      type: string
-      enum:
-      - id
-    Checklist:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
-    BlockedKey:
-      type: string
-      enum:
-      - notification_comment_card
-      - notification_added_a_due_date
-      - notification_changed_due_date
-      - notification_card_due_soon
-      - notification_removed_from_card
-      - notification_added_attachment_to_card
-      - notification_created_card
-      - notification_moved_card
-      - notification_archived_card
-      - notification_unarchived_card
-      example: notification_comment_card
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
     Card_2:
       type: object
       properties:
@@ -2629,15 +2553,160 @@ components:
             isTemplate:
               type: boolean
               example: false
-    Limits:
+    BoardStars:
       type: object
       properties:
-        attachments:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 585063850027165010be15a8
+        idBoard:
+          $ref: '#/components/schemas/TrelloID'
+          example: 57f7df684f1ca8c2877162e0
+        pos:
+          type: integer
+          example: 32768
+    CardAging:
+      type: string
+      enum:
+      - pirate
+      - regular
+    BlockedKey:
+      type: string
+      enum:
+      - notification_comment_card
+      - notification_added_a_due_date
+      - notification_changed_due_date
+      - notification_card_due_soon
+      - notification_removed_from_card
+      - notification_added_attachment_to_card
+      - notification_created_card
+      - notification_moved_card
+      - notification_archived_card
+      - notification_unarchived_card
+      example: notification_comment_card
+    ImageDescriptor:
+      type: object
+      properties:
+        width:
+          description: The width of the image.
+          type: integer
+          example: 100
+        height:
+          description: The height of the image.
+          type: integer
+          example: 64
+        url:
+          description: The URL of the image.
+          format: url
+          type: string
+          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
+    Board_2:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the board.
+          example: Trello Platform Changes
+        desc:
+          type: string
+          example: Track changes to Trello's Platform on this board.
+        descData:
+          type: string
+        closed:
+          type: boolean
+          example: false
+        idMemberCreator:
+          $ref: '#/components/schemas/TrelloID'
+        idOrganization:
+          $ref: '#/components/schemas/TrelloID'
+        pinned:
+          type: boolean
+          example: false
+        url:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ/trello-platform-changelog
+        shortUrl:
+          type: string
+          format: url
+          example: https://trello.com/b/dQHqCohZ
+        prefs:
+          $ref: '#/components/schemas/Prefs'
+        labelNames:
           type: object
           properties:
-            perBoard:
-              type: object
-              $ref: '#/components/schemas/LimitsObject'
+            green:
+              type: string
+              example: Addition
+            yellow:
+              type: string
+              example: Update
+            orange:
+              type: string
+              example: Deprecation
+            red:
+              type: string
+              example: Deletion
+            purple:
+              type: string
+              example: Power-Ups
+            blue:
+              type: string
+              example: News
+            sky:
+              type: string
+              example: Announcement
+            lime:
+              type: string
+              example: Delight
+            pink:
+              type: string
+              example: REST API
+            black:
+              type: string
+              example: Capabilties
+        limits:
+          type: object
+          $ref: '#/components/schemas/Limits'
+        starred:
+          type: boolean
+        memberships:
+          type: string
+        shortLink:
+          type: string
+        subscribed:
+          type: boolean
+        powerUps:
+          type: string
+        dateLastActivity:
+          type: string
+          format: date
+        dateLastView:
+          type: string
+          format: date
+        idTags:
+          type: string
+        datePluginDisable:
+          type:
+          - string
+          - 'null'
+          format: date
+        creationMethod:
+          type:
+          - string
+          - 'null'
+        ixUpdate:
+          type: integer
+        templateGallery:
+          type:
+          - string
+          - 'null'
+        enterpriseOwned:
+          type: boolean
     Member_2:
       type: object
       properties:
@@ -2843,121 +2912,52 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/TrelloID'
-    TokenPermission:
+    OrganizationPrefs:
       type: object
       properties:
-        idModel:
-          oneOf:
-          - $ref: '#/components/schemas/TrelloID'
-          - type: string
+        boardVisibilityRestrict:
+          type: object
+        boardDeleteRestrict:
+          type: object
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
             enum:
-            - '*'
-        modelType:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
           type: string
           enum:
-          - board
-          - member
-          - organization
+          - org
+          - private
+          - public
           - enterprise
-        read:
-          type: boolean
-        write:
-          type: boolean
-    OrganizationFields:
-      type: string
-      enum:
-      - id
-      - name
-    Label_2:
+          - domain
+          example: private
+    NotificationChannelSettings:
+      properties:
+        id:
+          type: string
+          example: 5dc591ac425f2a223aba0a8e
+        idMember:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5589c3ea49b40cedc28cf70e
+        blockedKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlockedKey'
+        channel:
+          $ref: '#/components/schemas/Channel'
+    Checklist:
       type: object
       properties:
         id:
-          description: The ID of the label.
-          type: string
           $ref: '#/components/schemas/TrelloID'
-        idBoard:
-          type: string
-          description: The ID of the board the label is on.
-          $ref: '#/components/schemas/TrelloID'
-          example: 5abbe4b7ddc1b351ef961414
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name displayed for the label.
-          example: Overdue
-          minLength: 0
-          maxLength: 16384
-        color:
-          type: string
-          $ref: '#/components/schemas/Color'
-          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
-    MemberPrefs:
-      type: object
-      properties:
-        timezoneInfo:
-          type: object
-          properties:
-            offsetCurrent:
-              type: integer
-              example: 360
-            timezoneCurrent:
-              type: string
-              example: CST
-            offsetNext:
-              type: integer
-              example: 300
-            dateNext:
-              type: string
-              format: date
-              example: '2020-03-08T08:00:00.000Z'
-            timezoneNext:
-              type: string
-              example: CDT
-        privacy:
-          type: object
-          properties:
-            fullName:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-            avatar:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-        sendSummaries:
-          type: boolean
-          example: true
-        minutesBetweenSummaries:
-          type: integer
-          example: 60
-        minutesBeforeDeadlineToNotify:
-          type: integer
-          example: 1440
-        colorBlind:
-          type: boolean
-          example: true
-        locale:
-          type: string
-          example: en-AU
-        timezone:
-          type: string
-          example: America/Chicago
-        twoFactor:
-          type: object
-          properties:
-            enabled:
-              type: boolean
-              example: true
-            needsNewBackups:
-              type: boolean
-              example: false
   parameters:
     idParam:
       name: id

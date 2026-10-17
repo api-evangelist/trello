@@ -2019,29 +2019,34 @@ components:
               type: boolean
             subscribed:
               type: boolean
-    Membership:
+    Label:
       type: object
-      description: Represents a membership record linking a member to a board or organization with a specific role.
+      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
       properties:
         id:
           type: string
-          description: The unique identifier for the membership.
-        idMember:
+          description: The unique identifier for the label.
+        idBoard:
           type: string
-          description: The ID of the member.
-        memberType:
+          description: The ID of the board the label belongs to.
+        name:
           type: string
-          description: The type of membership.
+          description: The name of the label.
+        color:
+          type: string
+          description: The color of the label.
           enum:
-          - admin
-          - normal
-          - observer
-        unconfirmed:
-          type: boolean
-          description: Whether the membership is unconfirmed.
-        deactivated:
-          type: boolean
-          description: Whether the membership is deactivated.
+          - yellow
+          - purple
+          - blue
+          - red
+          - green
+          - orange
+          - black
+          - sky
+          - pink
+          - lime
+          - null
     TrelloList:
       type: object
       description: Represents a list on a Trello board. Lists are vertical columns that contain cards and represent stages in a workflow.
@@ -2067,6 +2072,35 @@ components:
         softLimit:
           type: string
           description: A soft limit for the number of cards in the list.
+    CheckItem:
+      type: object
+      description: Represents a single item in a checklist that can be checked or unchecked.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the check item.
+        name:
+          type: string
+          description: The name of the check item.
+        state:
+          type: string
+          description: The completion state of the check item.
+          enum:
+          - complete
+          - incomplete
+        idChecklist:
+          type: string
+          description: The ID of the checklist the check item belongs to.
+        pos:
+          type: number
+          description: The position of the check item in the checklist.
+        due:
+          type: string
+          format: date-time
+          description: The due date for the check item.
+        idMember:
+          type: string
+          description: The ID of the member assigned to the check item.
     Member:
       type: object
       description: Represents a Trello user who can be a member of boards, organizations, and cards.
@@ -2116,6 +2150,91 @@ components:
           description: The IDs of boards the member has access to.
           items:
             type: string
+    Membership:
+      type: object
+      description: Represents a membership record linking a member to a board or organization with a specific role.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the membership.
+        idMember:
+          type: string
+          description: The ID of the member.
+        memberType:
+          type: string
+          description: The type of membership.
+          enum:
+          - admin
+          - normal
+          - observer
+        unconfirmed:
+          type: boolean
+          description: Whether the membership is unconfirmed.
+        deactivated:
+          type: boolean
+          description: Whether the membership is deactivated.
+    Action:
+      type: object
+      description: Represents an activity event that occurred on a Trello object, such as creating a card, adding a comment, or moving a card between lists.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the action.
+        idMemberCreator:
+          type: string
+          description: The ID of the member who performed the action.
+        type:
+          type: string
+          description: The type of action that was performed.
+        date:
+          type: string
+          format: date-time
+          description: The date and time the action was performed.
+        data:
+          type: object
+          description: Context data about the action, including references to the objects involved.
+          properties:
+            text:
+              type: string
+              description: The text content of the action, if applicable.
+            board:
+              type: object
+              description: Reference to the board involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                shortLink:
+                  type: string
+            card:
+              type: object
+              description: Reference to the card involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                idShort:
+                  type: integer
+                shortLink:
+                  type: string
+            list:
+              type: object
+              description: Reference to the list involved in the action.
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+            old:
+              type: object
+              description: The previous values of fields that were changed.
+        display:
+          type: object
+          description: Display information for rendering the action.
+        memberCreator:
+          $ref: '#/components/schemas/Member'
     Board:
       type: object
       description: Represents a Trello board, which is the primary organizational unit containing lists and cards.
@@ -2230,96 +2349,6 @@ components:
           type: string
           format: date-time
           description: The date and time the authenticated member last viewed the board.
-    Label:
-      type: object
-      description: Represents a color-coded label that can be applied to cards for categorization and filtering.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the label.
-        idBoard:
-          type: string
-          description: The ID of the board the label belongs to.
-        name:
-          type: string
-          description: The name of the label.
-        color:
-          type: string
-          description: The color of the label.
-          enum:
-          - yellow
-          - purple
-          - blue
-          - red
-          - green
-          - orange
-          - black
-          - sky
-          - pink
-          - lime
-          - null
-    Action:
-      type: object
-      description: Represents an activity event that occurred on a Trello object, such as creating a card, adding a comment, or moving a card between lists.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the action.
-        idMemberCreator:
-          type: string
-          description: The ID of the member who performed the action.
-        type:
-          type: string
-          description: The type of action that was performed.
-        date:
-          type: string
-          format: date-time
-          description: The date and time the action was performed.
-        data:
-          type: object
-          description: Context data about the action, including references to the objects involved.
-          properties:
-            text:
-              type: string
-              description: The text content of the action, if applicable.
-            board:
-              type: object
-              description: Reference to the board involved in the action.
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-                shortLink:
-                  type: string
-            card:
-              type: object
-              description: Reference to the card involved in the action.
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-                idShort:
-                  type: integer
-                shortLink:
-                  type: string
-            list:
-              type: object
-              description: Reference to the list involved in the action.
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-            old:
-              type: object
-              description: The previous values of fields that were changed.
-        display:
-          type: object
-          description: Display information for rendering the action.
-        memberCreator:
-          $ref: '#/components/schemas/Member'
     Checklist:
       type: object
       description: Represents a checklist on a card, containing a list of check items that can be marked as complete or incomplete.
@@ -2344,42 +2373,183 @@ components:
           description: The check items in the checklist.
           items:
             $ref: '#/components/schemas/CheckItem'
-    CheckItem:
+    Plugin:
       type: object
-      description: Represents a single item in a checklist that can be checked or unchecked.
       properties:
         id:
-          type: string
-          description: The unique identifier for the check item.
-        name:
-          type: string
-          description: The name of the check item.
-        state:
-          type: string
-          description: The completion state of the check item.
-          enum:
-          - complete
-          - incomplete
-        idChecklist:
-          type: string
-          description: The ID of the checklist the check item belongs to.
-        pos:
-          type: number
-          description: The position of the check item in the checklist.
-        due:
-          type: string
-          format: date-time
-          description: The due date for the check item.
-        idMember:
-          type: string
-          description: The ID of the member assigned to the check item.
-    ViewFilter:
+          $ref: '#/components/schemas/TrelloID'
+    MemberFields:
       type: string
       enum:
-      - all
-      - closed
-      - none
-      - open
+      - id
+    TrelloList_2:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+        name:
+          type: string
+          description: The name of the list
+          example: Things to buy today
+        closed:
+          type: boolean
+        pos:
+          type: number
+        softLimit:
+          type: string
+        idBoard:
+          type: string
+        subscribed:
+          type: boolean
+        limits:
+          $ref: '#/components/schemas/Limits'
+    Color:
+      type:
+      - string
+      - 'null'
+      enum:
+      - yellow
+      - purple
+      - blue
+      - red
+      - green
+      - orange
+      - black
+      - sky
+      - pink
+      - lime
+    Prefs:
+      type: object
+      properties:
+        permissionLevel:
+          type: string
+          enum:
+          - org
+          - board
+        hideVotes:
+          type: boolean
+        voting:
+          type: string
+          enum:
+          - disabled
+          - enabled
+        comments:
+          type: string
+        invitations:
+          enum:
+          - admins
+          - members
+        selfJoin:
+          type: boolean
+        cardCovers:
+          type: boolean
+        isTemplate:
+          type: boolean
+        cardAging:
+          $ref: '#/components/schemas/CardAging'
+        calendarFeedEnabled:
+          type: boolean
+        background:
+          $ref: '#/components/schemas/TrelloID'
+        backgroundImage:
+          type: string
+          format: uri
+        backgroundImageScaled:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageDescriptor'
+        backgroundTile:
+          type: boolean
+        backgroundBrightness:
+          type: string
+          example: dark
+        backgroundBottomColor:
+          type: string
+          example: '#1e2e00'
+        backgroundTopColor:
+          type: string
+          example: '#ffffff'
+        canBePublic:
+          type: boolean
+        canBeEnterprise:
+          type: boolean
+        canBeOrg:
+          type: boolean
+        canBePrivate:
+          type: boolean
+        canInvite:
+          type: boolean
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
+    CustomField:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5ab10be237846c43015f108e
+        idModel:
+          type: string
+          example: 586e8f681d4fe9b06a928307
+        modelType:
+          type: string
+          enum:
+          - card
+          - board
+          - member
+          example: board
+        fieldGroup:
+          type: string
+          example: f6177ba6839d6fff0f73922c1cea105e793fda8a1433d466104dacc0b7c56955
+        display:
+          type: object
+          properties:
+            cardFront:
+              type: boolean
+              example: true
+            name:
+              type: string
+              example: Priority 🏔
+            pos:
+              type: string
+              example: 98304,
+            options:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f1091
+                  idCustomField:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f108e
+                  value:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        example: High
+                  color:
+                    type: string
+                    example: red
+                  pos:
+                    type: number
+                    example: 16384
+        type:
+          type: string
+          example: list
     Error:
       type: object
       properties:
@@ -2390,49 +2560,76 @@ components:
       required:
       - code
       - message
-    Memberships:
+    Label_2:
       type: object
-      description: ''
+      properties:
+        id:
+          description: The ID of the label.
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+        idBoard:
+          type: string
+          description: The ID of the board the label is on.
+          $ref: '#/components/schemas/TrelloID'
+          example: 5abbe4b7ddc1b351ef961414
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name displayed for the label.
+          example: Overdue
+          minLength: 0
+          maxLength: 16384
+        color:
+          type: string
+          $ref: '#/components/schemas/Color'
+          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
+    Limits:
+      type: object
+      properties:
+        attachments:
+          type: object
+          properties:
+            perBoard:
+              type: object
+              $ref: '#/components/schemas/LimitsObject'
+    BoardStars:
+      type: object
       properties:
         id:
           $ref: '#/components/schemas/TrelloID'
+          example: 585063850027165010be15a8
+        idBoard:
+          $ref: '#/components/schemas/TrelloID'
+          example: 57f7df684f1ca8c2877162e0
+        pos:
+          type: integer
+          example: 32768
     CardAging:
       type: string
       enum:
       - pirate
       - regular
-    Export:
+    ImageDescriptor:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5dced8665015383ed5ca248c
-        status:
-          type: object
-          properties:
-            attempts:
-              type: number
-              example: 0
-            finished:
-              type: boolean
-              example: false
-            stage:
-              type: string
-              example: Export_queued
-        startedAt:
+        width:
+          description: The width of the image.
+          type: integer
+          example: 100
+        height:
+          description: The height of the image.
+          type: integer
+          example: 64
+        url:
+          description: The URL of the image.
+          format: url
           type: string
-          format: date-time
-          example: '2019-11-15T16:55:02.000Z'
-        size:
-          type:
-          - string
-          - 'null'
-          example: null
-        exportUrl:
-          type:
-          - string
-          - 'null'
-          example: null
+          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
     Board_2:
       type: object
       required:
@@ -2540,243 +2737,45 @@ components:
           - 'null'
         enterpriseOwned:
           type: boolean
-    ImageDescriptor:
-      type: object
-      properties:
-        width:
-          description: The width of the image.
-          type: integer
-          example: 100
-        height:
-          description: The height of the image.
-          type: integer
-          example: 64
-        url:
-          description: The URL of the image.
-          format: url
-          type: string
-          example: https://trello-backgrounds.s3.amazonaws.com/SharedBackground/100x64/abc/photo-123.jpg
-    CustomField:
+    ViewFilter:
+      type: string
+      enum:
+      - all
+      - closed
+      - none
+      - open
+    Export:
       type: object
       properties:
         id:
           $ref: '#/components/schemas/TrelloID'
-          example: 5ab10be237846c43015f108e
-        idModel:
-          type: string
-          example: 586e8f681d4fe9b06a928307
-        modelType:
-          type: string
-          enum:
-          - card
-          - board
-          - member
-          example: board
-        fieldGroup:
-          type: string
-          example: f6177ba6839d6fff0f73922c1cea105e793fda8a1433d466104dacc0b7c56955
-        display:
-          type: object
-          properties:
-            cardFront:
-              type: boolean
-              example: true
-            name:
-              type: string
-              example: Priority 🏔
-            pos:
-              type: string
-              example: 98304,
-            options:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    $ref: '#/components/schemas/TrelloID'
-                    example: 5ab10be237846c43015f1091
-                  idCustomField:
-                    $ref: '#/components/schemas/TrelloID'
-                    example: 5ab10be237846c43015f108e
-                  value:
-                    type: object
-                    properties:
-                      text:
-                        type: string
-                        example: High
-                  color:
-                    type: string
-                    example: red
-                  pos:
-                    type: number
-                    example: 16384
-        type:
-          type: string
-          example: list
-    Prefs:
-      type: object
-      properties:
-        permissionLevel:
-          type: string
-          enum:
-          - org
-          - board
-        hideVotes:
-          type: boolean
-        voting:
-          type: string
-          enum:
-          - disabled
-          - enabled
-        comments:
-          type: string
-        invitations:
-          enum:
-          - admins
-          - members
-        selfJoin:
-          type: boolean
-        cardCovers:
-          type: boolean
-        isTemplate:
-          type: boolean
-        cardAging:
-          $ref: '#/components/schemas/CardAging'
-        calendarFeedEnabled:
-          type: boolean
-        background:
-          $ref: '#/components/schemas/TrelloID'
-        backgroundImage:
-          type: string
-          format: uri
-        backgroundImageScaled:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageDescriptor'
-        backgroundTile:
-          type: boolean
-        backgroundBrightness:
-          type: string
-          example: dark
-        backgroundBottomColor:
-          type: string
-          example: '#1e2e00'
-        backgroundTopColor:
-          type: string
-          example: '#ffffff'
-        canBePublic:
-          type: boolean
-        canBeEnterprise:
-          type: boolean
-        canBeOrg:
-          type: boolean
-        canBePrivate:
-          type: boolean
-        canInvite:
-          type: boolean
-    LimitsObject:
-      type: object
-      properties:
+          example: 5dced8665015383ed5ca248c
         status:
-          type: string
-          enum:
-          - ok
-          - warning
-        disableAt:
-          type: number
-          example: 36000
-        warnAt:
-          type: number
-          example: 32400
-    Color:
-      type:
-      - string
-      - 'null'
-      enum:
-      - yellow
-      - purple
-      - blue
-      - red
-      - green
-      - orange
-      - black
-      - sky
-      - pink
-      - lime
-    BoardStars:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 585063850027165010be15a8
-        idBoard:
-          $ref: '#/components/schemas/TrelloID'
-          example: 57f7df684f1ca8c2877162e0
-        pos:
-          type: integer
-          example: 32768
-    MemberFields:
-      type: string
-      enum:
-      - id
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
-    Limits:
-      type: object
-      properties:
-        attachments:
           type: object
           properties:
-            perBoard:
-              type: object
-              $ref: '#/components/schemas/LimitsObject'
-    TrelloList_2:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-        name:
+            attempts:
+              type: number
+              example: 0
+            finished:
+              type: boolean
+              example: false
+            stage:
+              type: string
+              example: Export_queued
+        startedAt:
           type: string
-          description: The name of the list
-          example: Things to buy today
-        closed:
-          type: boolean
-        pos:
-          type: number
-        softLimit:
-          type: string
-        idBoard:
-          type: string
-        subscribed:
-          type: boolean
-        limits:
-          $ref: '#/components/schemas/Limits'
-    Label_2:
-      type: object
-      properties:
-        id:
-          description: The ID of the label.
-          type: string
-          $ref: '#/components/schemas/TrelloID'
-        idBoard:
-          type: string
-          description: The ID of the board the label is on.
-          $ref: '#/components/schemas/TrelloID'
-          example: 5abbe4b7ddc1b351ef961414
-        name:
+          format: date-time
+          example: '2019-11-15T16:55:02.000Z'
+        size:
           type:
           - string
           - 'null'
-          description: The name displayed for the label.
-          example: Overdue
-          minLength: 0
-          maxLength: 16384
-        color:
-          type: string
-          $ref: '#/components/schemas/Color'
-          description: The color of the label. Null means no color and the label will not be shown on the front of Cards.
+          example: null
+        exportUrl:
+          type:
+          - string
+          - 'null'
+          example: null
     Action_2:
       type: object
       properties:
@@ -2960,8 +2959,9 @@ components:
             username:
               type: string
               example: bobloblaw
-    Plugin:
+    Memberships:
       type: object
+      description: ''
       properties:
         id:
           $ref: '#/components/schemas/TrelloID'

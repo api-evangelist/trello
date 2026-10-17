@@ -1117,6 +1117,187 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    EnterpriseAuditLog:
+      type: object
+      properties:
+        idAction:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5dced8665015383ed5ca248c
+        type:
+          type: string
+          example: addOrganizationToEnterprise
+        date:
+          type: string
+          format: date
+          example: '2018-04-26T17:03:25.155Z'
+        memberCreator:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5bc79d4206526d2279c1e6ea
+            username:
+              type: string
+              example: bobloblaw
+            fullName:
+              type: string
+              example: Bob Loblaw (Trello)
+        organization:
+          type: object
+          properties:
+            enterpriseJoinRequest:
+              type:
+              - object
+              - 'null'
+              properties:
+                idEnterprise:
+                  $ref: '#/components/schemas/TrelloID'
+                  example: 617ac9070293e6612650e0ca
+                idMember:
+                  $ref: '#/components/schemas/TrelloID'
+                  example: 5bc79d4206526d2279c1e6ea
+                date:
+                  type: string
+                  format: date
+                  example: '2018-04-26T17:03:25.155Z'
+            id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 617ac9070293e6612650e0ca
+            name:
+              type: string
+              example: organization name
+        member:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TrelloID'
+              example: 5bc79d4206526d2279c1e6ea
+            username:
+              type: string
+              example: bentleycook
+            fullName:
+              type: string
+              example: Bentley Cook
+    BoardFields:
+      type: string
+      enum:
+      - id
+      - name
+      - desc
+      - descData
+      - closed
+      - idMemberCreator
+      - idOrganization
+      - pinned
+      - url
+      - shortUrl
+      - prefs
+      - labelNames
+      - starred
+      - limits
+      - memberships
+      - enterpriseOwned
+    MemberFields:
+      type: string
+      enum:
+      - id
+    OrganizationFields:
+      type: string
+      enum:
+      - id
+      - name
+    EnterpriseAdmin:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5dced8665015383ed5ca248c
+        fullName:
+          type: string
+          example: Bob Loblaw
+        username:
+          type: string
+          example: bobloblaw
+    MemberPrefs:
+      type: object
+      properties:
+        timezoneInfo:
+          type: object
+          properties:
+            offsetCurrent:
+              type: integer
+              example: 360
+            timezoneCurrent:
+              type: string
+              example: CST
+            offsetNext:
+              type: integer
+              example: 300
+            dateNext:
+              type: string
+              format: date
+              example: '2020-03-08T08:00:00.000Z'
+            timezoneNext:
+              type: string
+              example: CDT
+        privacy:
+          type: object
+          properties:
+            fullName:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+            avatar:
+              type: string
+              enum:
+              - public
+              - private
+              - collaborator
+              example: public
+        sendSummaries:
+          type: boolean
+          example: true
+        minutesBetweenSummaries:
+          type: integer
+          example: 60
+        minutesBeforeDeadlineToNotify:
+          type: integer
+          example: 1440
+        colorBlind:
+          type: boolean
+          example: true
+        locale:
+          type: string
+          example: en-AU
+        timezone:
+          type: string
+          example: America/Chicago
+        twoFactor:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            needsNewBackups:
+              type: boolean
+              example: false
+    LimitsObject:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - warning
+        disableAt:
+          type: number
+          example: 36000
+        warnAt:
+          type: number
+          example: 32400
     ClaimableOrganizations:
       type: object
       properties:
@@ -1162,6 +1343,87 @@ components:
         claimableCount:
           type: number
           example: 2
+    PendingOrganizations:
+      type: object
+      properties:
+        id:
+          type: string
+          $ref: '#/components/schemas/TrelloID'
+          example: 617ac9070293e6612650e0ca
+        idMember:
+          $ref: '#/components/schemas/TrelloID'
+          example: 5589c3ea49b40cedc28cf70e
+        memberRequestor:
+          type: object
+          properties:
+            id:
+              type: string
+              $ref: '#/components/schemas/TrelloID'
+              example: 59cd149051aa57a706962996
+            fullName:
+              type: string
+              example: Bob Loblaw (Trello)
+        date:
+          type: string
+          format: date
+          example: '2018-10-17T19:10:14.808Z'
+        displayName:
+          type: string
+          example: Organization Name
+        membershipCount:
+          type: number
+          example: 2
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          example: null
+        transferability:
+          type: object
+          properties:
+            transferrable:
+              type: boolean
+              example: true
+            newBillableMembers:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f1091
+                  fullName:
+                    type: string
+                    example: Bob Loblaw
+                  username:
+                    type: string
+                    example: bobloblaw
+                  initials:
+                    type: string
+                    example: BL
+                  avatarHash:
+                    type: string
+                    example: fc8faaaee46666a4eb8b626c08933e16
+            restrictedMembers:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/TrelloID'
+                    example: 5ab10be237846c43015f1091
+                  fullName:
+                    type: string
+                    example: Bob Loblaw
+                  username:
+                    type: string
+                    example: bobloblaw
+                  initials:
+                    type: string
+                    example: BL
+                  avatarHash:
+                    type: string
+                    example: fc8faaaee46666a4eb8b626c08933e16
     Error:
       type: object
       properties:
@@ -1172,52 +1434,6 @@ components:
       required:
       - code
       - message
-    TransferrableOrganization:
-      type: object
-      properties:
-        transferrable:
-          type: boolean
-          example: true
-        newBillableMembers:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/TrelloID'
-                example: 5ab10be237846c43015f1091
-              fullName:
-                type: string
-                example: Bob Loblaw
-              username:
-                type: string
-                example: bobloblaw
-              initials:
-                type: string
-                example: BL
-              avatarHash:
-                type: string
-                example: fc8faaaee46666a4eb8b626c08933e16
-        restrictedMembers:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/TrelloID'
-                example: 5ab10be237846c43015f1091
-              fullName:
-                type: string
-                example: Bob Loblaw
-              username:
-                type: string
-                example: bobloblaw
-              initials:
-                type: string
-                example: BL
-              avatarHash:
-                type: string
-                example: fc8faaaee46666a4eb8b626c08933e16
     Organization:
       type: object
       properties:
@@ -1395,39 +1611,10 @@ components:
               - 'null'
               format: url
               example: null
-    BoardFields:
+    TrelloID:
       type: string
-      enum:
-      - id
-      - name
-      - desc
-      - descData
-      - closed
-      - idMemberCreator
-      - idOrganization
-      - pinned
-      - url
-      - shortUrl
-      - prefs
-      - labelNames
-      - starred
-      - limits
-      - memberships
-      - enterpriseOwned
-    LimitsObject:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - ok
-          - warning
-        disableAt:
-          type: number
-          example: 36000
-        warnAt:
-          type: number
-          example: 32400
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
     Membership:
       type: object
       properties:
@@ -1472,102 +1659,52 @@ components:
             avatarURL: trello.com/avatarURL
             memberType: Admin
             confirmed: true
-    EnterpriseAuditLog:
+    TransferrableOrganization:
       type: object
       properties:
-        idAction:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5dced8665015383ed5ca248c
-        type:
-          type: string
-          example: addOrganizationToEnterprise
-        date:
-          type: string
-          format: date
-          example: '2018-04-26T17:03:25.155Z'
-        memberCreator:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/TrelloID'
-              example: 5bc79d4206526d2279c1e6ea
-            username:
-              type: string
-              example: bobloblaw
-            fullName:
-              type: string
-              example: Bob Loblaw (Trello)
-        organization:
-          type: object
-          properties:
-            enterpriseJoinRequest:
-              type:
-              - object
-              - 'null'
-              properties:
-                idEnterprise:
-                  $ref: '#/components/schemas/TrelloID'
-                  example: 617ac9070293e6612650e0ca
-                idMember:
-                  $ref: '#/components/schemas/TrelloID'
-                  example: 5bc79d4206526d2279c1e6ea
-                date:
-                  type: string
-                  format: date
-                  example: '2018-04-26T17:03:25.155Z'
-            id:
-              $ref: '#/components/schemas/TrelloID'
-              example: 617ac9070293e6612650e0ca
-            name:
-              type: string
-              example: organization name
-        member:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/TrelloID'
-              example: 5bc79d4206526d2279c1e6ea
-            username:
-              type: string
-              example: bentleycook
-            fullName:
-              type: string
-              example: Bentley Cook
-    OrganizationPrefs:
-      type: object
-      properties:
-        boardVisibilityRestrict:
-          type: object
-        boardDeleteRestrict:
-          type: object
-        attachmentRestrictions:
+        transferrable:
+          type: boolean
+          example: true
+        newBillableMembers:
           type: array
           items:
-            type: string
-            enum:
-            - computer
-            - trello
-            - google-drive
-            - box
-            - onedrive
-            - link
-        permissionLevel:
-          type: string
-          enum:
-          - org
-          - private
-          - public
-          - enterprise
-          - domain
-          example: private
-    MemberFields:
-      type: string
-      enum:
-      - id
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/TrelloID'
+                example: 5ab10be237846c43015f1091
+              fullName:
+                type: string
+                example: Bob Loblaw
+              username:
+                type: string
+                example: bobloblaw
+              initials:
+                type: string
+                example: BL
+              avatarHash:
+                type: string
+                example: fc8faaaee46666a4eb8b626c08933e16
+        restrictedMembers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/TrelloID'
+                example: 5ab10be237846c43015f1091
+              fullName:
+                type: string
+                example: Bob Loblaw
+              username:
+                type: string
+                example: bobloblaw
+              initials:
+                type: string
+                example: BL
+              avatarHash:
+                type: string
+                example: fc8faaaee46666a4eb8b626c08933e16
     Member:
       type: object
       properties:
@@ -1773,170 +1910,33 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/TrelloID'
-    OrganizationFields:
-      type: string
-      enum:
-      - id
-      - name
-    MemberPrefs:
+    OrganizationPrefs:
       type: object
       properties:
-        timezoneInfo:
+        boardVisibilityRestrict:
           type: object
-          properties:
-            offsetCurrent:
-              type: integer
-              example: 360
-            timezoneCurrent:
-              type: string
-              example: CST
-            offsetNext:
-              type: integer
-              example: 300
-            dateNext:
-              type: string
-              format: date
-              example: '2020-03-08T08:00:00.000Z'
-            timezoneNext:
-              type: string
-              example: CDT
-        privacy:
+        boardDeleteRestrict:
           type: object
-          properties:
-            fullName:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-            avatar:
-              type: string
-              enum:
-              - public
-              - private
-              - collaborator
-              example: public
-        sendSummaries:
-          type: boolean
-          example: true
-        minutesBetweenSummaries:
-          type: integer
-          example: 60
-        minutesBeforeDeadlineToNotify:
-          type: integer
-          example: 1440
-        colorBlind:
-          type: boolean
-          example: true
-        locale:
+        attachmentRestrictions:
+          type: array
+          items:
+            type: string
+            enum:
+            - computer
+            - trello
+            - google-drive
+            - box
+            - onedrive
+            - link
+        permissionLevel:
           type: string
-          example: en-AU
-        timezone:
-          type: string
-          example: America/Chicago
-        twoFactor:
-          type: object
-          properties:
-            enabled:
-              type: boolean
-              example: true
-            needsNewBackups:
-              type: boolean
-              example: false
-    PendingOrganizations:
-      type: object
-      properties:
-        id:
-          type: string
-          $ref: '#/components/schemas/TrelloID'
-          example: 617ac9070293e6612650e0ca
-        idMember:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5589c3ea49b40cedc28cf70e
-        memberRequestor:
-          type: object
-          properties:
-            id:
-              type: string
-              $ref: '#/components/schemas/TrelloID'
-              example: 59cd149051aa57a706962996
-            fullName:
-              type: string
-              example: Bob Loblaw (Trello)
-        date:
-          type: string
-          format: date
-          example: '2018-10-17T19:10:14.808Z'
-        displayName:
-          type: string
-          example: Organization Name
-        membershipCount:
-          type: number
-          example: 2
-        logoUrl:
-          type:
-          - string
-          - 'null'
-          example: null
-        transferability:
-          type: object
-          properties:
-            transferrable:
-              type: boolean
-              example: true
-            newBillableMembers:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    $ref: '#/components/schemas/TrelloID'
-                    example: 5ab10be237846c43015f1091
-                  fullName:
-                    type: string
-                    example: Bob Loblaw
-                  username:
-                    type: string
-                    example: bobloblaw
-                  initials:
-                    type: string
-                    example: BL
-                  avatarHash:
-                    type: string
-                    example: fc8faaaee46666a4eb8b626c08933e16
-            restrictedMembers:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    $ref: '#/components/schemas/TrelloID'
-                    example: 5ab10be237846c43015f1091
-                  fullName:
-                    type: string
-                    example: Bob Loblaw
-                  username:
-                    type: string
-                    example: bobloblaw
-                  initials:
-                    type: string
-                    example: BL
-                  avatarHash:
-                    type: string
-                    example: fc8faaaee46666a4eb8b626c08933e16
-    EnterpriseAdmin:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TrelloID'
-          example: 5dced8665015383ed5ca248c
-        fullName:
-          type: string
-          example: Bob Loblaw
-        username:
-          type: string
-          example: bobloblaw
+          enum:
+          - org
+          - private
+          - public
+          - enterprise
+          - domain
+          example: private
   responses:
     Unauthorized:
       description: Unauthorized

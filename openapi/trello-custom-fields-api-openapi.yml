@@ -476,6 +476,10 @@ components:
         type:
           type: string
           example: list
+    TrelloID:
+      type: string
+      pattern: ^[0-9a-fA-F]{24}$
+      example: 5abbe4b7ddc1b351ef961414
     posStringOrNumber:
       oneOf:
       - type: string
@@ -485,10 +489,6 @@ components:
       - type: number
         format: float
         example: 1293.5
-    TrelloID:
-      type: string
-      pattern: ^[0-9a-fA-F]{24}$
-      example: 5abbe4b7ddc1b351ef961414
   parameters:
     idParam:
       name: id
