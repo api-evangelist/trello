@@ -129,7 +129,7 @@
     - connectors/applications/trello
     vendor_link: https://trello.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: trello-google-workspace-own
   label: Google Workspace (own)
