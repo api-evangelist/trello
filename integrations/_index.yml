@@ -232,3 +232,45 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: trello-apis-guru-openapi-directory
+  label: APIs.guru OpenAPI Directory
+  partner: apis-guru
+  partner_name: APIs.guru OpenAPI Directory
+  category: API definition directory listing (OpenAPI)
+  type: register
+  channel: standard-directory
+  evidence: https://apis.guru/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: APIs.guru OpenAPI Directory
+    spec_file: null
+    standard: APIs.guru OpenAPI Directory
+    role: listed-in-directory
+    directory_provider: trello.com
+    matched_domain: trello.com
+    matched_by: domain
+    apis_listed: 1
+    version_count: 1
+    first_added: '2015-11-16'
+    last_updated: '2021-06-21'
+    origin_publisher_hosted: false
+    origin_hosts:
+    - raw.githubusercontent.com
+    categories:
+    - collaboration
+    own_openapi_files: 18
+    listings:
+    - key: trello.com
+      title: Trello
+      preferred: '1.0'
+      versions: 1
+      swagger_url: https://api.apis.guru/v2/specs/trello.com/1.0/openapi.json
+      origin_url: https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/trello.com/1.0/swagger.yaml
+      openapi_version: 3.0.0
+    signal_note: 'participation only: a community directory listing (APIs.guru collects definitions; the provider
+      did not file them). Signals: version_count, apis_listed, origin_publisher_hosted.'
+    detected_by: sweep-openapi-directory-apis-guru.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
