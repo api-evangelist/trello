@@ -1962,3 +1962,9 @@ externalDocs:
 x-refined-from:
 - trello-rest-api-openapi.yml
 - trello-rest-api-swagger-v3.json
+x-provenance:
+  method: harvested
+  publisher: Trello
+  source: https://developer.atlassian.com/cloud/trello/swagger.v3.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
