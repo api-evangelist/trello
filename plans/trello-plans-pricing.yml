@@ -1,0 +1,100 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://trello.com/pricing
+sources:
+- https://trello.com/pricing
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T120612
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+  managed_tier: Standard
+published: true
+note: Trello plan pricing page; per-seat tiers. Notes Atlassian Guard is a separate subscription starting
+  at $4/month/user. Cloud-only, no on-premises version.
+plan_count: 4
+currency: USD
+plans:
+- name: Free
+  price_text: $ 0 USD
+  price: 0
+  currency: USD
+  period: month
+  unit: per user
+  included_quota: Free for up to 10 collaborators per Workspace; Unlimited cards; Up to 10 boards per
+    Workspace; 250 Workspace command runs per month; Unlimited storage (10MB/file)
+- name: Standard
+  price_text: $ 5 USD
+  price: 5
+  currency: USD
+  period: month
+  unit: Per user/month if billed annually ($6 billed monthly)
+  included_quota: Everything in Free, plus unlimited boards, AI, 1,000 Workspace command runs per month,
+    unlimited storage (250MB/file)
+- name: Premium
+  price_text: $ 10 USD
+  price: 10
+  currency: USD
+  period: month
+  unit: Per user/month if billed annually ($12.50 billed monthly)
+  included_quota: Everything in Standard, plus views, admin and security features, unlimited Workspace
+    command runs
+- name: Enterprise
+  price_text: $ 17.50 USD
+  price: 17.5
+  currency: USD
+  period: month
+  unit: Per user/month - billed annually ($210.00 annual price per user)
+  included_quota: Everything in Premium, plus unlimited Workspaces, Atlassian Guard Standard, 24/7 Enterprise
+    Admin support
+rate_limit_statements:
+- 250 Workspace command runs per month
+- 1,000 Workspace command runs per month
+- Unlimited Workspace command runs
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units:
+  - seat
+  plans:
+  - name: Free
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Standard
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Premium
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
