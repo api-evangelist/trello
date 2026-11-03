@@ -58,7 +58,7 @@ rate_limit_statements:
 - 1,000 Workspace command runs per month
 - Unlimited Workspace command runs
 x-canonical:
-  generated: '2026-11-01'
+  generated: '2026-11-02'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - free
