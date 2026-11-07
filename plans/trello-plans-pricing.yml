@@ -58,11 +58,11 @@ rate_limit_statements:
 - 1,000 Workspace command runs per month
 - Unlimited Workspace command runs
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - free
-  - subscription
+  - seat
   units:
   - seat
   plans:
@@ -76,25 +76,25 @@ x-canonical:
     - month
   - name: Standard
     access: other
-    model: subscription
+    model: seat
     model_how: derived
     units:
-    - other
+    - seat
     periods:
     - month
   - name: Premium
     access: other
-    model: subscription
+    model: seat
     model_how: derived
     units:
-    - other
+    - seat
     periods:
     - month
   - name: Enterprise
     access: other
-    model: subscription
+    model: seat
     model_how: derived
     units:
-    - other
+    - seat
     periods:
     - month
